@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 958a9785edcd5ed41a398ef780ddb102, type: 3}
+  m_Name: SpeedyBoy
+  m_EditorClassIdentifier: 
+  speed: 20.9
+  maxSightDistance: 10
+  angle: 30
+  height: 1
+  meshColor: {r: 0.36078432, g: 0, b: 1, a: 1}
+  stoppingDistance: 3

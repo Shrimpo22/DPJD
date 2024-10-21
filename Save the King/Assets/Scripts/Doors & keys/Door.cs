@@ -40,13 +40,15 @@ public class Door : MonoBehaviour{
             textClear();
         }else if(isLocked){
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            //GameObject.FindGameObjectsWithTag("Inventory").GetComponent<Inventory>().ClearSlot);
-            if(player.GetComponent<PlayerEventItens>().listOfKeys.Contains(getKeyType())){
+            GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
+            if(player.GetComponent<PlayerEventItens>().listOfKeys.Count>0 && player.GetComponent<PlayerEventItens>().listOfKeys.Contains(getKeyType())){
                 audioSource.clip = unlockedOpenSound;
                 audioSource.Play();
                 isLocked = false;
                 player.GetComponent<PlayerEventItens>().RemoveKey(getKeyType());
+                inventory.GetComponent<Inventory>().DropItemByName(getKeyType().ToString());
                 openDoor();
+                
             }else{
             audioSource.clip = lockedSound;
             audioSource.Play();

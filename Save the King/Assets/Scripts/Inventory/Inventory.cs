@@ -17,7 +17,6 @@ public class Inventory : MonoBehaviour
 
     public GameObject ItemPanelGrid;
     public Mouse mouse;
-
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
     [Space]
@@ -46,13 +45,9 @@ public class Inventory : MonoBehaviour
         }
         itemsInDictionary += ".";
         Debug.Log(itemsInDictionary);
-
-        //Add Items for testing
-        AddItem("Wood", 20);
-        AddItem("Stone", 3);
         
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -74,6 +69,7 @@ public class Inventory : MonoBehaviour
 
     public void RefreshInventory()
     {
+        Debug.Log("Refrescando");
         existingPanels = ItemPanelGrid.GetComponentsInChildren<ItemPanel>().ToList();
 
         if(existingPanels.Count < InventorySize)
@@ -147,7 +143,6 @@ public class Inventory : MonoBehaviour
         //Find Item to add
         Item item = null;
         allItemsDictionary.TryGetValue(itemName, out item);
-
         //Exit method if no Item was found
         if (item == null)
         {
@@ -170,7 +165,8 @@ public class Inventory : MonoBehaviour
                     else
                     {
                         i.stacks += amount;
-                        if (InventoryMenu.activeSelf) RefreshInventory();
+                        //if (InventoryMenu.activeSelf)
+                         RefreshInventory();
                         return 0;
                     }
                 }
@@ -189,15 +185,17 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
+                    
                     i.item = item;
                     i.stacks = amount;
-                    if (InventoryMenu.activeSelf) RefreshInventory();
+                    //if (InventoryMenu.activeSelf) 
+                    RefreshInventory();
                     return 0;
                 }
             }
         }
         //No space in Inventory, return remainder items
-        Debug.Log("No space in Inventory for: " + item.GiveName());
+        Debug.Log("No space in Inventory for: " + item.getNameWithSpaces());
         if (InventoryMenu.activeSelf) RefreshInventory();
         return amount;
     }

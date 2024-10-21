@@ -37,6 +37,8 @@ public class EnemyDetection : MonoBehaviour
             } 
             else if (agent.currentState == AiStateId.LookForPlayer) {
                 OnLook4Player?.Invoke(this);
+            }else if(agent.currentState == AiStateId.Death){
+                OnLosePlayer?.Invoke(this);
             }
 
         // Update the previous state tracker

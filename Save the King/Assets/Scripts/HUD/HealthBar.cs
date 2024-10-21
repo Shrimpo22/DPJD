@@ -7,12 +7,16 @@ public class HealthBar : MonoBehaviour
 {
     public Slider healthSlider;
     public Slider bonusHealthSlider;
-    public float maxHealth = 100f;
+    public float maxHealth;
     public float health;
+
+    private PlayerHealth player;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        maxHealth = player.maxHealth;
         health = maxHealth;
         bonusHealthSlider.value = 0f;
     }
@@ -20,6 +24,7 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        health = player.currentHealth; 
         if(health >= maxHealth){
             healthSlider.value = maxHealth;
             bonusHealthSlider.value = health - maxHealth;
@@ -38,7 +43,7 @@ public class HealthBar : MonoBehaviour
         }
     }
 
-    void takeDamage(float damage)
+    public void takeDamage(float damage)
     {
         health -= damage;
         if(health <= 0){
@@ -46,7 +51,7 @@ public class HealthBar : MonoBehaviour
         }
     }
 
-    void healLife(float heal)
+    public void healLife(float heal)
     {
         health += heal;
         if(health >= maxHealth*2){

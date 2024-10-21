@@ -14,7 +14,9 @@ public class AiLookForPlayerState : AiState
     private float lookDirection = 1.0f;    // Direction to rotate (-1 for left, 1 for right)
     private float lookChangeInterval = 4.0f; // Time between switching look directions
     private float lookChangeTimer = 4.0f;     // Timer for changing look direction
-    private Vector3 randomOffset;          // Small random offset for movement
+    private Vector3 randomOffset;
+    private Quaternion targetRotation;
+    private bool hasRotated;          // Small random offset for movement
    
      public void Enter(AiAgent agent)
     {
@@ -54,24 +56,24 @@ public class AiLookForPlayerState : AiState
 
     private void LookAround(AiAgent agent)
     {
-        
-        // Rotate back and forth to simulate looking around
         if (lookChangeTimer >= lookChangeInterval)
-        {
+        {                
             lookDirection *= -1;  // Switch direction
             lookChangeTimer = 0f; // Reset timer
+            float targetAngle = lookDirection * lookAroundAngle;
+            if(hasRotated){
+                targetAngle *= 2;
+            }
+            targetRotation = agent.transform.rotation * Quaternion.Euler(0, targetAngle, 0);
+            hasRotated = true;
         }
-
-        // Calculate the target rotation angle (based on the look direction)
-        float targetAngle = lookDirection * lookAroundAngle;
-        Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0);
-
-        // Smoothly rotate towards the target angle
-        agent.transform.rotation = Quaternion.Slerp(
+        if(hasRotated){
+            agent.transform.rotation = Quaternion.Slerp(
             agent.transform.rotation, 
-            targetRotation * Quaternion.Euler(0, 0, 0), 
+            targetRotation * Quaternion.Euler(0,0,0), 
             Time.deltaTime * lookAroundSpeed
-        );
+            );
+        }
         lookChangeTimer += Time.deltaTime;
     }
 
@@ -87,5 +89,7 @@ public class AiLookForPlayerState : AiState
         // Move the agent slightly by adjusting its position
         Vector3 newPos = agent.transform.position + randomOffset;
         agent.navMeshAgent.SetDestination(newPos);  // Use the NavMeshAgent to move
+        hasRotated = false;
+        lookChangeTimer = 0f;
     }
 }

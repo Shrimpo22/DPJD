@@ -379,6 +379,7 @@
 "Assets/Scripts/Enemy/DetectArrowHUD.cs"
 "Assets/Scripts/Enemy/DetectionEnemyHUD.cs"
 "Assets/Scripts/Enemy/NavGizmos.cs"
+"Assets/Scripts/Enemy/PatrolPointGizmos.cs"
 "Assets/Scripts/Enemy/States/AiChasePlayerState.cs"
 "Assets/Scripts/Enemy/States/AiDeathState.cs"
 "Assets/Scripts/Enemy/States/AiIdleState.cs"

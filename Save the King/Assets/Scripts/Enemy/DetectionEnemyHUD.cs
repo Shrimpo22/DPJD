@@ -22,12 +22,10 @@ public class EnemyDetection : MonoBehaviour
     {
         // Notify if detection status changes
         if (agent.alertState > 0.0f && !playerDetected){
-            Debug.Log("Detected arrow!");
             OnDetectPlayer?.Invoke(this);
             playerDetected = true;  // Set the detection flag
             playerLost = false;  // Reset the lost flag  // Enemy starts detecting the player
         }else if (agent.alertState <= 0.0f && !playerLost ){
-            Debug.Log("Lost!");
             playerDetected = false;  // Reset the detection flag
             playerLost = true;  // Set the lost flag
             OnLosePlayer?.Invoke(this);  // Enemy stops detecting the player

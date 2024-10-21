@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isTrapped = false;
     public bool isCrouching = false;
+    private bool isSprinting = false;
 
 
     PlayerControls controls;
@@ -47,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Gameplay.Movement.canceled += ctx => moveInput = Vector2.zero;
         controls.Gameplay.Crouch.performed += ctx => {isCrouching = !isCrouching; animator.SetBool("isCrouching", isCrouching);};
+        controls.Gameplay.Sprint.performed += ctx => { isSprinting = true; targetSpeed = 10f;};
+        controls.Gameplay.Sprint.canceled += ctx => { isSprinting = false; targetSpeed = 6f;};
     }
 
     void OnEnable(){
@@ -91,16 +94,22 @@ public class PlayerMovement : MonoBehaviour
 
     void handleMovement(){
 
+        Debug.Log("isGrounded: " + controller.isGrounded);
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        if ((stateInfo.IsName("hit1") || stateInfo.IsName("hit2") || stateInfo.IsName("hit3")) && stateInfo.normalizedTime <= 1f){
-            targetSpeed = 0f;    
-        }else
-            targetSpeed = 6f;
-
-        if (isGrounded && velocity.y < 0)
+        if ((stateInfo.IsName("hit1") || stateInfo.IsName("hit2") || stateInfo.IsName("hit3")) && stateInfo.normalizedTime <= 1f)
         {
-            velocity.y = -2f;  
+            targetSpeed = 0f;
+        }
+        else if (!isSprinting && !isCrouching)
+            targetSpeed = 6f;
+        else if (isCrouching)
+            targetSpeed = 3f;
+
+        if (!isGrounded && velocity.y < 0)
+        {
+            Debug.Log("Estou a cair???");
+            velocity.y = -9.81f;  
         }
         else velocity.y += gravity * Time.deltaTime;
 
@@ -129,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
         
         animator.SetBool("isMoving", direction.magnitude > 0f);
 
-        if(controls.Gameplay.LightAttack.triggered)
+        if(controls.Gameplay.LightAttack.triggered && controller.isGrounded)
         {
             isCrouching = false;
             animator.SetTrigger("attack");

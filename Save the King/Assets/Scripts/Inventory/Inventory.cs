@@ -21,7 +21,7 @@ public class Inventory : MonoBehaviour
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
     [Space]
 
-    public int InventorySize = 15;
+    public int InventorySize = 12;
      void Start()
     {
         for (int i = 0; i < InventorySize; i++)
@@ -45,10 +45,10 @@ public class Inventory : MonoBehaviour
         }
         itemsInDictionary += ".";
         Debug.Log(itemsInDictionary);
-        
+        RefreshInventory();
     }
     
-    // Update is called once per frame
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.I))

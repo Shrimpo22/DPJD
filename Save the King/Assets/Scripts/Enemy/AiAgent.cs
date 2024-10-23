@@ -69,6 +69,11 @@ public class AiAgent : MonoBehaviour
 
     void Update()
     {
+        // if(animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyGetHit"))
+        //     Debug.Log("Hit");
+        // if(animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        //     Debug.Log("Attack");
+
         stateMachine.Update();
         if(navMeshAgent.hasPath){
             targetSpeed = navMeshAgent.speed;
@@ -115,7 +120,7 @@ public class AiAgent : MonoBehaviour
 
         if(currentHealth > 0){
             animator.Play("EnemyGetHit",0,0f);
-            SetAlertState(1f);
+            SetAlertState(1.2f);
             stateMachine.ChangeState(AiStateId.ChasePlayer);
         }
         if(currentHealth <= 0.0f){

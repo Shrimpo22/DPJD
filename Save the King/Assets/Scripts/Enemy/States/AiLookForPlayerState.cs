@@ -20,6 +20,8 @@ public class AiLookForPlayerState : AiState
    
      public void Enter(AiAgent agent)
     {
+        lookChangeTimer = 0f;
+        searchTimer = 0f;
     }
 
     public void Exit(AiAgent agent)

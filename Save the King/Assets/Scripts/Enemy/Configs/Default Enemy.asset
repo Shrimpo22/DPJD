@@ -22,4 +22,4 @@ MonoBehaviour:
   powerAmount: 0.3
   maxHealth: 100
   patrolInterval: 20
-  patrolSpeed: 4
+  patrolSpeed: 2

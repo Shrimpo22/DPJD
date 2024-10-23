@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.EventSystems;
-
+using Cinemachine;
 public class Inventory : MonoBehaviour
 {
     [SerializeReference] public List<ItemSlotInfo> items = new List<ItemSlotInfo>();
@@ -19,11 +19,15 @@ public class Inventory : MonoBehaviour
     public Mouse mouse;
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
+
+    private CinemachineFreeLook freeLookCamera;
     [Space]
 
     public int InventorySize = 12;
      void Start()
     {
+        freeLookCamera = FindObjectOfType<CinemachineFreeLook>();
+        
         for (int i = 0; i < InventorySize; i++)
         {
             items.Add(new ItemSlotInfo(null, 0));
@@ -46,6 +50,8 @@ public class Inventory : MonoBehaviour
         itemsInDictionary += ".";
         Debug.Log(itemsInDictionary);
         RefreshInventory();
+        
+        
     }
     
 
@@ -56,12 +62,26 @@ public class Inventory : MonoBehaviour
             if(InventoryMenu.activeSelf)
             {
                 InventoryMenu.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false; 
+                if (freeLookCamera != null)
+                {
+                    freeLookCamera.enabled = true; 
+                }
+                Time.timeScale = 1; 
             }
             else
             {
-                InventoryMenu.SetActive(true);
-                Cursor.lockState = CursorLockMode.Confined;
+                InventoryMenu.SetActive(true); 
+                Cursor.lockState = CursorLockMode.None; 
+                Cursor.visible = true; 
+                if (freeLookCamera != null)
+                {
+                    freeLookCamera.enabled = false; 
+                }
+                Time.timeScale = 0;
+
+
+
             }
         }
         
@@ -69,7 +89,6 @@ public class Inventory : MonoBehaviour
 
     public void RefreshInventory()
     {
-        Debug.Log("Refrescando");
         existingPanels = ItemPanelGrid.GetComponentsInChildren<ItemPanel>().ToList();
 
         if(existingPanels.Count < InventorySize)

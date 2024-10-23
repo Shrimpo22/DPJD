@@ -53,7 +53,16 @@
                 {
                     "name": "Sprint",
                     "type": "Button",
-                    "id": "f3d4ee1c-2a4d-49a1-8719-00cf8791d501",
+                    "id": "2ccdc3bf-232c-467d-9abc-8a00a2fab57b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "29d6ffad-2114-4126-ab61-946d8148e3f7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -217,7 +226,7 @@
                 },
                 {
                     "name": "",
-                    "id": "1de3f082-3809-47e4-a488-de4b02892701",
+                    "id": "6ea3a664-2e2e-42aa-9bd7-9b64af38076e",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
@@ -228,12 +237,34 @@
                 },
                 {
                     "name": "",
-                    "id": "01d1a4ca-46b2-4172-a6fa-03afe87d8d4d",
+                    "id": "4a94f11b-e548-44b2-8f1f-63cb32bce95f",
                     "path": "<Gamepad>/leftStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3700c3e0-59f8-4b52-a5db-4230d2089be5",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f3fcf349-be5b-4fd9-8bd8-2ea453daebb7",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

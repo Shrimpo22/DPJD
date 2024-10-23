@@ -92,21 +92,6 @@ public class DetectionArrow : MonoBehaviour
             }
         }
     }
-    
-
-    public void OnDrawGizmos(){
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.position + finalDir);
-                Gizmos.color = Color.red;
-
-        Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.position + new Vector3(0,0,finalDir.z));
-
-                Gizmos.color = Color.green;
-
-        Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.position + new Vector3(finalDir.x,0,0));
-        //Gizmos.color = Color.yellow;
-        //Gizmos.DrawSphere(arrowRectTransform.position, 5f);
-    }
 
     // Event handler: Called when an enemy starts detecting the player
     private void HandleEnemyDetectingPlayer(EnemyDetection enemy)

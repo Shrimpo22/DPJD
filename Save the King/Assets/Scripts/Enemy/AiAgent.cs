@@ -15,19 +15,21 @@ public class AiAgent : MonoBehaviour
     public Transform playerTransform;
     public AiStateId currentState;
     public AiSensor sensor;
+
+    public Weapons weapon;
     public float alertState = 0;
     public float alertRate = 0;
     public float maxHealth;
     public float currentHealth;
     public Transform[] patrolPoints;  // Array of waypoints 
     public bool drawPatrol;
-    private float targetSpeed;
-    private float currentSpeed;
+    public float targetSpeed;
+    public float currentSpeed;
 
 
     CinemachineImpulseSource screenShake;
     float powerAmount;
-    Animator animator;
+    public Animator animator;
     Collider collid;
 
     public bool canChangeState = true;
@@ -46,9 +48,10 @@ public class AiAgent : MonoBehaviour
         animator = GetComponent<Animator>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         navMeshAgent.speed = config.speed;
-        navMeshAgent.stoppingDistance = config.stoppingDistance;
+        navMeshAgent.stoppingDistance = 0;
         alertRate = config.alertRate;
         powerAmount = config.powerAmount;
+        weapon = GetComponentInChildren<Weapons>();
 
         screenShake = GetComponent<CinemachineImpulseSource>();
         collid = GetComponent<Collider>();
@@ -59,12 +62,18 @@ public class AiAgent : MonoBehaviour
         stateMachine.RegisterState(new AiDeathState());
         stateMachine.RegisterState(new AiIdleState());
         stateMachine.RegisterState(new AiLookForPlayerState());
+        stateMachine.RegisterState(new AiAttackState());
         stateMachine.ChangeState(initialState);
         
     }
 
     void Update()
     {
+        // if(animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyGetHit"))
+        //     Debug.Log("Hit");
+        // if(animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        //     Debug.Log("Attack");
+
         stateMachine.Update();
         if(navMeshAgent.hasPath){
             targetSpeed = navMeshAgent.speed;
@@ -80,7 +89,9 @@ public class AiAgent : MonoBehaviour
     public void IncreaseAlertState(){
         if(alertState < 1){
             float distanceToPlayer = Vector3.Distance(playerTransform.position, transform.position);
-            float distanceFactor = (config.maxSightDistance/3)/distanceToPlayer;
+            float distanceFactor = Mathf.Log(1/distanceToPlayer + 1) * 8;
+            if(playerTransform.GetComponent<PlayerMovement>().isCrouching)
+                distanceFactor /= 2;
             alertState += alertRate * Time.deltaTime * distanceFactor;
         }else{
             if(canChangeState){
@@ -88,7 +99,10 @@ public class AiAgent : MonoBehaviour
                 stateMachine.ChangeState(AiStateId.ChasePlayer);
             }
         }
+    }
 
+    public void SetAlertState(float amount){
+        alertState = amount;
     }
     public void ScreenShake(Vector3 dir){
         Debug.Log("ScreenShake made?");
@@ -105,7 +119,10 @@ public class AiAgent : MonoBehaviour
         healthBar.SetHealthBarPercentage(currentHealth/maxHealth);
 
         if(currentHealth > 0){
-            animator.Play("EnemyGetHit",0,0f);        }
+            animator.Play("EnemyGetHit",0,0f);
+            SetAlertState(1.2f);
+            stateMachine.ChangeState(AiStateId.ChasePlayer);
+        }
         if(currentHealth <= 0.0f){
             animator.Play("FallingDeath");
             healthBar.gameObject.SetActive(false);
@@ -113,6 +130,17 @@ public class AiAgent : MonoBehaviour
             sensor.enabled = false;
             stateMachine.ChangeState(AiStateId.Death);
         }
+    }
+    
+    public void EnableCollider(){
+        weapon.EnableCollider();
+    }
+    public void DisableCollider(){
+        weapon.DisableCollider();
+    }
+
+    public void ClearHits(){
+        weapon.RemoveHitTargets();
     }
 
     void OnDrawGizmos(){

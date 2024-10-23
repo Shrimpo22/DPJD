@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isTrapped = false;
     public bool isCrouching = false;
-    private bool isSprinting = false;
 
 
     PlayerControls controls;
@@ -33,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private bool isGrounded;
     private float targetSpeed;
+    private bool isSprinting;
 
     void Start()
     {
@@ -94,21 +94,17 @@ public class PlayerMovement : MonoBehaviour
 
     void handleMovement(){
 
-        Debug.Log("isGrounded: " + controller.isGrounded);
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        if ((stateInfo.IsName("hit1") || stateInfo.IsName("hit2") || stateInfo.IsName("hit3")) && stateInfo.normalizedTime <= 1f)
-        {
-            targetSpeed = 0f;
-        }
-        else if (!isSprinting && !isCrouching)
+        if ((stateInfo.IsName("hit1") || stateInfo.IsName("hit2") || stateInfo.IsName("hit3")) && stateInfo.normalizedTime <= 1f){
+            targetSpeed = 0f;    
+        }else if (!isSprinting && !isCrouching)
             targetSpeed = 6f;
         else if (isCrouching)
             targetSpeed = 3f;
 
         if (!isGrounded && velocity.y < 0)
         {
-            Debug.Log("Estou a cair???");
             velocity.y = -9.81f;  
         }
         else velocity.y += gravity * Time.deltaTime;
@@ -116,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
 
         // Only move if there's input
-        if (direction.magnitude > 0f)
+        if (direction.magnitude > 0f && !stateInfo.IsName("hit1"))
         {
             // Get the angle from the camera's forward direction
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camTransform.eulerAngles.y;
@@ -129,8 +125,10 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move((moveDir.normalized * speed + velocity) * Time.deltaTime);
         }else{
-            targetSpeed = 0f;
-            controller.Move(velocity * Time.deltaTime);
+            if(!stateInfo.IsName("hit1")){
+                targetSpeed = 0f;
+                controller.Move(velocity * Time.deltaTime);
+            }
         }
 
         speed = Mathf.Lerp(speed, targetSpeed, Time.deltaTime * 4f);
@@ -141,6 +139,7 @@ public class PlayerMovement : MonoBehaviour
         if(controls.Gameplay.LightAttack.triggered && controller.isGrounded)
         {
             isCrouching = false;
+            speed = 0;
             animator.SetTrigger("attack");
             animator.SetBool("isCrouching", isCrouching);            
 

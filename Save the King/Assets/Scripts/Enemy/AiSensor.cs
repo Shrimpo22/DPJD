@@ -70,7 +70,7 @@ public class AiSensor : MonoBehaviour
         Vector3 dest = obj.transform.position;
         Vector3 direction = dest - origin;
         
-        if (Mathf.Abs(direction.y) < 0.01f) {
+        if (Mathf.Abs(direction.y) < 0.1f) {
             direction.y = 0f;
         }
 

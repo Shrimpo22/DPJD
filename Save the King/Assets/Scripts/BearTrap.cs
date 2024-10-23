@@ -24,7 +24,6 @@ public class BearTrap : MonoBehaviour
 
             // Set the trap as triggered to prevent retriggering
             isTriggered = true;
-             Debug.Log("inside if");
         }
     }
 }

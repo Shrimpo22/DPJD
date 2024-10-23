@@ -1,8 +1,10 @@
 using System;
 using Cinemachine;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,6 +18,19 @@ public class PlayerMovement : MonoBehaviour
     public bool isTrapped = false;
     public bool isCrouching = false;
 
+    // Interaction variables
+    private int interactionCount = 0;
+    private int interactionGoal = 20;
+    public float barDecreaseSpeed = 10.0f;
+    public Image interactionProgressBar;  // Reference to the circular progress bar UI
+     public TextMeshProUGUI interactionText;  // Reference to the TextMeshPro for interaction info
+
+    private float interactionProgress = 0f;
+
+    
+    public string trappedLoopAnimation = "AttemptEscape";
+    private float interactionCooldown = 2.0f;  // Timer for 5 seconds of inactivity
+    private float inactivityTimer = 0f;  // Tracks the time player is inactive
 
     PlayerControls controls;
     [SerializeField] Vector2 moveInput;
@@ -35,6 +50,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        // Initially hide the UI elements
+        interactionProgressBar.gameObject.SetActive(false);
+        interactionText.gameObject.SetActive(false);
+
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         playerAttack = GetComponentInChildren<PlayerAttack>();
@@ -76,17 +95,82 @@ public class PlayerMovement : MonoBehaviour
 
     private void handleInteraction()
     {
-        if (isTrapped && controls.Gameplay.Interaction.triggered)
+        if (isTrapped)
         {
-            isTrapped = false;
-            animator.SetBool("isHurt", false);
-        }
-        else if (isTrapped)
-        {
+            animator.SetBool("isHurt", true);
+
+            // Show the UI elements (Progress bar and Text) when trapped
+            interactionProgressBar.gameObject.SetActive(true);
+            interactionText.gameObject.SetActive(true);
+
             speed = 0f;
             animator.SetFloat("movementSpeed", speed);
-            animator.SetBool("isHurt", true);
+
+            if (controls.Gameplay.Interaction.triggered)
+            {
+                // Trigger the infinite animation when trapped
+                animator.SetBool(trappedLoopAnimation, true);
+
+                interactionCount++;  // Increase the interaction count
+                
+                // update the progress bar
+                interactionProgress = (float)interactionCount / interactionGoal;
+                interactionProgressBar.fillAmount = interactionProgress;
+
+                inactivityTimer = 0f;  // Reset the inactivity timer since player interacted
+
+                // Check if interaction count reached the goal
+                if (interactionCount >= interactionGoal)
+                {
+                    isTrapped = false;
+                    ResetInteraction();  // Reset interaction-related variables
+                }
+            }
+
+             // Increment the inactivity timer when no interaction happens
+            inactivityTimer += Time.deltaTime;
+
+            // Check if the player has been inactive in the interaction
+            if (inactivityTimer >= interactionCooldown)
+            {
+
+                DecreaseProgressBar();
+
+                animator.SetBool("isHurt", true);  // Trigger "isHurt" animation
+                animator.SetBool(trappedLoopAnimation, false);  // Stop the looping escape animation
+                inactivityTimer = 0f;  // Reset the timer
+            }
+
         }
+    }
+
+    // If the player stops interacting, decrease the progress bar slowly
+     private void DecreaseProgressBar()
+    {
+        
+            interactionProgress -= barDecreaseSpeed * Time.deltaTime; //alterar pois o Time.deltatime esta a fazer com que fique muito lento o decrease
+            interactionProgressBar.fillAmount = interactionProgress;
+
+            // Reset interaction count when progress bar reaches 0
+            if (interactionProgress <= 0f)
+            {
+                interactionCount = 0;
+                interactionProgress = 0f;
+            }
+    }
+
+    private void ResetInteraction()
+    {
+        interactionCount = 0;
+        interactionProgress = 0f;
+        interactionProgressBar.fillAmount = 0f;  // Reset the progress bar
+
+        animator.SetBool("isHurt", false);
+        animator.SetBool(trappedLoopAnimation, false);
+
+        // Hide the UI elements (Progress bar and Text) once the trap is released
+        interactionProgressBar.gameObject.SetActive(false);
+        interactionText.gameObject.SetActive(false);
     }
 
     void handleMovement(){

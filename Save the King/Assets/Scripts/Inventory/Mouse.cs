@@ -40,6 +40,7 @@ public class Mouse : MonoBehaviour
             {
                 opcoes.gameObject.SetActive(false);
                 optionsDisplayed = false;
+                item = null;
             }
         }
 

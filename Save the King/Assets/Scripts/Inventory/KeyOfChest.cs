@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System;
 public class KeyOfChest : Item
 {
     public override string GiveName()
@@ -13,7 +13,11 @@ public class KeyOfChest : Item
     }
     public override int MaxStacks()
     {
-        return 1;
+        return 5;
+    }
+    public override int Stats()
+    {
+        return 0;
     }
     public override Sprite GiveItemImage()
     {
@@ -22,6 +26,14 @@ public class KeyOfChest : Item
 
     public override string GiveDiscresp()
     {
-        return "Uma chave misteriosa";
+        return "Chest Key";
+    }
+    public override Action UseFunc()
+    {
+        return () =>
+        {
+            Debug.Log("Chest Key");
+            
+        };
     }
 }

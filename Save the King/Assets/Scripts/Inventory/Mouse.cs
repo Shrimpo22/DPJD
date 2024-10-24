@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
 
 public class Mouse : MonoBehaviour
 {
@@ -12,8 +13,10 @@ public class Mouse : MonoBehaviour
     public GameObject InspectManager;
     public Image imagemItem; 
     public TextMeshProUGUI descricaoItem;
-    public Button opcoes;
+    
+    public GameObject opcoes;
 
+    public Button inspect;
     public GameObject inventory;
     public Button fechar;
     
@@ -46,7 +49,7 @@ public class Mouse : MonoBehaviour
 
         if (opcoes.gameObject.activeSelf && Input.GetMouseButtonDown(0))
         {
-            if (RectTransformUtility.RectangleContainsScreenPoint(opcoes.GetComponent<RectTransform>(), Input.mousePosition))
+            if (RectTransformUtility.RectangleContainsScreenPoint(inspect.GetComponent<RectTransform>(), Input.mousePosition))
             {
                 OnClick();
                 opcoes.gameObject.SetActive(false);
@@ -74,7 +77,7 @@ public class Mouse : MonoBehaviour
         if (item != null)
         {
             Sprite itemSprite = item.GiveItemImage();
-            Debug.Log("Imagem do item: " + itemSprite);
+            
 
             descricaoItem.text = item.GiveDiscresp(); 
 
@@ -100,5 +103,14 @@ public class Mouse : MonoBehaviour
     {
         InspectManager.SetActive(false);
         item = null;
+    }
+
+    public void UseFunction()
+    {
+        Action useAction = item.UseFunc(); 
+        useAction?.Invoke(); 
+
+        item = null;
+        opcoes.SetActive(false);
     }
 }

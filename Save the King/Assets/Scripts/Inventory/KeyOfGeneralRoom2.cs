@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System;
 public class KeyOfGeneralRoom2 : Item
 {
      public override string GiveName()
@@ -15,6 +15,10 @@ public class KeyOfGeneralRoom2 : Item
     {
         return 1;
     }
+    public override int Stats()
+    {
+        return 0;
+    }
     public override Sprite GiveItemImage()
     {
         return Resources.Load<Sprite>("UI/Item Images/KeyOfGeneralRoom2");
@@ -22,6 +26,14 @@ public class KeyOfGeneralRoom2 : Item
 
     public override string GiveDiscresp()
     {
-        return "Uma chave misteriosa";
+        return "General Room Key";
+    }
+    public override Action UseFunc()
+    {
+        return () =>
+        {
+            Debug.Log("General Room Key");
+            
+        };
     }
 }

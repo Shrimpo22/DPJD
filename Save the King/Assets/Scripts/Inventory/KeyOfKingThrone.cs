@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System;
 public class KeyOfKingThrone  : Item
 {
     public override string GiveName()
@@ -15,6 +15,10 @@ public class KeyOfKingThrone  : Item
     {
         return 1;
     }
+    public override int Stats()
+    {
+        return 0;
+    }
     public override Sprite GiveItemImage()
     {
         return Resources.Load<Sprite>("UI/Item Images/KeyOfKingThrone");
@@ -22,6 +26,14 @@ public class KeyOfKingThrone  : Item
 
     public override string GiveDiscresp()
     {
-        return "Uma chave misteriosa";
+        return "Throne Key";
+    }
+    public override Action UseFunc()
+    {
+        return () =>
+        {
+            Debug.Log("Throne Key");
+            
+        };
     }
 }

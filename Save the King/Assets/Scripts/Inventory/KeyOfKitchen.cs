@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System;
 public class KeyOfKitchen : Item
 {
     public override string GiveName()
@@ -15,6 +15,10 @@ public class KeyOfKitchen : Item
     {
         return 1;
     }
+    public override int Stats()
+    {
+        return 0;
+    }
     public override Sprite GiveItemImage()
     {
         return Resources.Load<Sprite>("UI/Item Images/KeyOfKitchen");
@@ -22,6 +26,14 @@ public class KeyOfKitchen : Item
 
     public override string GiveDiscresp()
     {
-        return "Uma chave misteriosa";
+        return "Kitchen Key";
+    }
+    public override Action UseFunc()
+    {
+        return () =>
+        {
+            Debug.Log("Kitchen Key");
+            
+        };
     }
 }

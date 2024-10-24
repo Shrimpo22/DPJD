@@ -398,6 +398,8 @@
 "Assets/Scripts/Inventory/KeyOfKingThrone.cs"
 "Assets/Scripts/Inventory/KeyOfKitchen.cs"
 "Assets/Scripts/Inventory/Mouse.cs"
+"Assets/Scripts/Inventory/Potions.cs"
+"Assets/Scripts/Inventory/Sword.cs"
 "Assets/Scripts/Player/PlayerAttack.cs"
 "Assets/Scripts/Player/PlayerMovement.cs"
 "Assets/Scripts/Player/ResetComboHehaviour.cs"

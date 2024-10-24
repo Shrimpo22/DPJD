@@ -26,6 +26,10 @@ public class Inventory : MonoBehaviour
     public int InventorySize = 12;
      void Start()
     {
+        if(InventoryMenu.activeSelf)
+        {
+            InventoryMenu.SetActive(false);
+        }
         freeLookCamera = FindObjectOfType<CinemachineFreeLook>();
         
         for (int i = 0; i < InventorySize; i++)
@@ -49,6 +53,7 @@ public class Inventory : MonoBehaviour
         }
         itemsInDictionary += ".";
         Debug.Log(itemsInDictionary);
+        AddItem("Potions",6);
         RefreshInventory();
         
         

@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System;
 public class KeyOfCell : Item
 {
     public override string GiveName()
@@ -15,6 +15,11 @@ public class KeyOfCell : Item
     {
         return 1;
     }
+
+    public override int Stats()
+    {
+        return 0;
+    }
     public override Sprite GiveItemImage()
     {
         return Resources.Load<Sprite>("UI/Item Images/KeyOfCell");
@@ -22,6 +27,15 @@ public class KeyOfCell : Item
 
     public override string GiveDiscresp()
     {
-        return "Uma chave misteriosa";
+        return "Cell Key";
+    }
+
+    public override Action UseFunc()
+    {
+        return () =>
+        {
+            Debug.Log("Cell Key");
+            
+        };
     }
 }

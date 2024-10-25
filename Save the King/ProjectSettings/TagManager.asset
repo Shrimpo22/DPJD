@@ -7,6 +7,10 @@ TagManager:
   - Weapon
   - Target
   - Ground
+  - Key
+  - Door
+  - Inventory
+  - Chest
   layers:
   - Default
   - TransparentFX

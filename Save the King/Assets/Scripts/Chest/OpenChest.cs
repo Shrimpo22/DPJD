@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OpenChest : MonoBehaviour
 {
@@ -8,7 +10,7 @@ public class OpenChest : MonoBehaviour
     public Vector3 rotationAxis = Vector3.up;
     public float rotationSpeed = 1f;
     public float rayDistance = 5f;
-
+    public TMP_Text textChest;
     private bool open = false;
 
     private Camera playerCamera;
@@ -21,23 +23,26 @@ public class OpenChest : MonoBehaviour
         playerCamera = Camera.main;
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && !isRotating)
-        {
-            Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, rayDistance))
-            {
-                if (hit.transform == transform && open == false)
-                {
-                    StartCoroutine(RotateObject());
-                }
-            }
+    public void openChest(){
+        if(!open && !isRotating){
+        textActivate();
+         if (Input.GetKeyDown(KeyCode.E)){
+            textClear();
+            StartCoroutine(RotateObject());
+         }
         }
     }
 
+    public void textActivate(){
+      textChest.text  = "(E) Open Chest";
+      textChest.gameObject.SetActive(true);  
+    }
+    public void textClear(){
+      textChest.gameObject.SetActive(false);  
+    }
+    private void OnTriggerExit(Collider other){
+        textClear();
+    }
     IEnumerator RotateObject()
     {
         isRotating = true;

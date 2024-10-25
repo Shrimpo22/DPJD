@@ -26,7 +26,7 @@ public class KeyOfFeastRoom : Item
 
     public override string GiveDiscresp()
     {
-        return "Feast Key";
+        return "An ornate brass key, beautifully crafted, that unlocks a lavish dining room.";
     }
     public override Action UseFunc()
     {

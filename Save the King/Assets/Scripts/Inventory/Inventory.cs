@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     [SerializeReference] public List<ItemSlotInfo> items = new List<ItemSlotInfo>();
 
     [Space]
-    [Header("Inventory Menu Components0")]
+    [Header("Inventory Menu Components")]
 
     public GameObject InventoryMenu;
 

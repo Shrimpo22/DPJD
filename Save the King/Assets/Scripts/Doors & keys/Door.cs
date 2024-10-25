@@ -18,6 +18,7 @@ public class Door : MonoBehaviour{
      [SerializeField] Key.KeyType keyType;
     
     void Start(){ audioSource = GetComponent<AudioSource>();
+        textDoor.color = Color.black;
         if (audioSource == null){
             audioSource = gameObject.AddComponent<AudioSource>();
         }
@@ -34,20 +35,20 @@ public class Door : MonoBehaviour{
     public void textClear(){
       textDoor.gameObject.SetActive(false);  
     }
-    public void openDoor() {
+    public void openDoor(GameObject player) {
         if ( !isLocked && isClosed){
             targetRotation=90f;
+            audioSource.clip = unlockedOpenSound;
+            audioSource.Play();
             textClear();
+            player.GetComponent<PlayerEventItens>().isNearDoor = false;
         }else if(isLocked){
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
             GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
             if(player.GetComponent<PlayerEventItens>().listOfKeys.Count>0 && player.GetComponent<PlayerEventItens>().listOfKeys.Contains(getKeyType())){
-                audioSource.clip = unlockedOpenSound;
-                audioSource.Play();
                 isLocked = false;
                 player.GetComponent<PlayerEventItens>().RemoveKey(getKeyType());
                 inventory.GetComponent<Inventory>().DropItemByName(getKeyType().ToString());
-                openDoor();
+                openDoor(player);
                 
             }else{
             audioSource.clip = lockedSound;
@@ -60,6 +61,8 @@ public class Door : MonoBehaviour{
 
     public void OnTriggerExit(Collider other){
         textClear();
+        GameObject player =  GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<PlayerEventItens>().isNearDoor = false;
     }
 
     public void Update(){

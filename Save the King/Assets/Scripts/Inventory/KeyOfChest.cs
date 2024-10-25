@@ -26,7 +26,7 @@ public class KeyOfChest : Item
 
     public override string GiveDiscresp()
     {
-        return "Chest Key";
+        return "A small and mysterious key, ready to unlock hidden treasures.";
     }
     public override Action UseFunc()
     {

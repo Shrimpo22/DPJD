@@ -26,7 +26,7 @@ public class KeyOfKitchen : Item
 
     public override string GiveDiscresp()
     {
-        return "Kitchen Key";
+        return "A sturdy, rustic key that symbolizes the heart of the home, where all meals are made.";
     }
     public override Action UseFunc()
     {

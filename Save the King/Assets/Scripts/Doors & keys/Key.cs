@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
-    [SerializeField] public TMP_Text textKey;
+    public TMP_Text textKey;
     [SerializeField] KeyType keyType;
     private AudioSource audioSource;
     public enum KeyType{
@@ -22,6 +22,7 @@ public class Key : MonoBehaviour
     }
 
     void Start(){
+        textKey.color = Color.black;
         audioSource = GetComponent<AudioSource>();
     }
     
@@ -39,13 +40,9 @@ public class Key : MonoBehaviour
       textKey.gameObject.SetActive(false);  
     }
 
-    private TMP_Text textOfKey;
     public void grabKey(GameObject player) {
-        Debug.Log("Im in the key");
         if (Input.GetKeyDown(KeyCode.E)){
             player.GetComponent<PlayerEventItens>().AddKey(keyType);
-            
-            player.GetComponent<PlayerEventItens>().isNearKey = false;
             GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
             inventory.GetComponent<Inventory>().AddItem(keyType.ToString(),1);
             Destroy(this.gameObject);

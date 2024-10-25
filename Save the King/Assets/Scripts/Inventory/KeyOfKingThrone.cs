@@ -26,7 +26,7 @@ public class KeyOfKingThrone  : Item
 
     public override string GiveDiscresp()
     {
-        return "Throne Key";
+        return "An elegantly crafted key adorned with regal motifs, embodying authority and significance.";
     }
     public override Action UseFunc()
     {

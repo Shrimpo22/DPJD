@@ -26,7 +26,7 @@ public class KeyOfGeneralRoom2 : Item
 
     public override string GiveDiscresp()
     {
-        return "General Room Key";
+        return "A heavy brass key with intricate engravings and a sturdy grip";
     }
     public override Action UseFunc()
     {

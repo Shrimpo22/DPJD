@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using TMPro;
 using UnityEditor.VersionControl;
 using UnityEngine;
@@ -8,16 +9,17 @@ using UnityEngine.Video;
 
 public class PlayerEventItens : MonoBehaviour
 {   
-    // Start is called before the first frame update
     public bool isNearDoor = false;
-    public bool isNearKey = false;
+    public int rayCount = 2; 
+    public float rayDistance = 3f; 
+    public float spacing = 0.5f; 
     public List<Key.KeyType> listOfKeys;
     private Door door;
     private Key key;
     private PlayerControls controls;
 
     void Awake()
-    {
+    {   
         controls = new PlayerControls();
     }
     void OnEnable(){
@@ -27,27 +29,6 @@ public class PlayerEventItens : MonoBehaviour
     void OnDisable(){
         controls.Gameplay.Disable();
     }
-     private void OnTriggerEnter(Collider other) {
-            if(other.tag == "Door"){
-                isNearDoor=true;
-                door = other.gameObject.GetComponent<Door>();
-                if(door.isClosed)door.textActivate();
-            }else if(other.tag == "Key"){
-                isNearKey=true;
-                key = other.gameObject.GetComponent<Key>();
-                key.textActivate();
-            }
-    }
-
-    private void OnTriggerExit(Collider other){
-        if (other.tag == "Door") {
-            isNearDoor = false;        
-            door = null;        
-        }else if (other.tag == "Key") {
-            isNearKey = false;        
-            key = null;        
-        }
-    }
     public void AddKey(Key.KeyType keytype){
         listOfKeys.Add(keytype);
     }
@@ -55,22 +36,62 @@ public class PlayerEventItens : MonoBehaviour
     public void RemoveKey(Key.KeyType keytype){
         listOfKeys.Remove(keytype);
     }
-    void Update(){
-        if (controls.Gameplay.Interaction.triggered ){
-            if(isNearDoor){
-                door.openDoor();
-            }else if(isNearKey){
-                key.grabKey(this.gameObject);
+
+     private void OnTriggerEnter(Collider other) {
+        if(other.tag == "Door"){ 
+            Debug.Log("Collided Door");
+            door = other.gameObject.GetComponent<Door>();
+                if(door.isClosed){
+                    door.textActivate();
+                    isNearDoor = true;
+                }}
+    }
+    void Update()  {
+        if(isNearDoor && Input.GetKeyDown(KeyCode.E)){ door.openDoor(this.gameObject);
+        }else{
+        // Set the base position for raycasting
+        Vector3 basePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        
+        for (int x = -rayCount/2; x <= rayCount/2; x++)
+        {
+            for (int z = -rayCount; z <= rayCount; z++)
+            {   
+                Vector3 rayOrigin = basePosition + new Vector3(x * spacing, 1.5f, z * spacing);
+
+                
+                RaycastHit hit;
+                Debug.DrawRay(rayOrigin, Vector3.down * rayDistance, Color.magenta);
+                if (Physics.Raycast(rayOrigin, Vector3.down, out hit, rayDistance))
+                {
+                    Debug.Log("Hit: " + hit.collider.tag); // Log what was hit
+                    HandleHit(hit.collider);
+                    
+                }
             }
         }
+        }
     }
+    private void HandleHit(Collider hit){
 
-    
-    
+            Debug.Log("Hit " + hit.tag);
 
-    
+            if (hit.tag == "Key"){
+                key = hit.gameObject.GetComponent<Key>();
+                key.textActivate();
+                if(Input.GetKeyDown(KeyCode.E)) key.grabKey(this.gameObject);
+            
+            }else {
+                Debug.Log("No hit detected");
+            }
 
-    
-
-
+    }
 }
+
+    
+    
+
+    
+
+    
+
+

@@ -27,7 +27,7 @@ public class KeyOfCell : Item
 
     public override string GiveDiscresp()
     {
-        return "Cell Key";
+        return "A cold, corroded metal key, heavy with the despair of countless prisoners.";
     }
 
     public override Action UseFunc()

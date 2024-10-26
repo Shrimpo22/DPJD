@@ -3,8 +3,11 @@ using System;
 
 [System.Serializable]
 
+
 public abstract class Item 
 {
+
+   
    public abstract string GiveName();
    public abstract string getNameWithSpaces();
    public abstract int Stats();

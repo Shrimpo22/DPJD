@@ -4,6 +4,7 @@ using System;
 public class Potions : Item
 {
     
+    public AudioSource audioSource;
     public override string GiveName()
     {
         return "Potions";
@@ -37,8 +38,18 @@ public class Potions : Item
     {
         return () =>
         {
+            AudioClip clip = Resources.Load<AudioClip>("Sounds/PotionAudio");
+            if (clip != null)
+            {
+                AudioSource audioSource = new GameObject("PotionAudioSource").AddComponent<AudioSource>();
+                audioSource.clip = clip;
+                audioSource.Play();
+                
+                
+                
+               
+            }
             Debug.Log("Potions");
-            
         };
     }
 }

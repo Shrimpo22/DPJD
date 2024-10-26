@@ -15,8 +15,10 @@ public class Mouse : MonoBehaviour
     public TextMeshProUGUI descricaoItem;
     
     public GameObject opcoes;
-
+    public AudioSource audioSource;
     public Button inspect;
+
+    public GameObject use; 
     public GameObject inventory;
     public Button fechar;
     
@@ -60,14 +62,27 @@ public class Mouse : MonoBehaviour
 
     public void ShowOpcoes()
     {
-        opcoes.gameObject.SetActive(true);
-        opcoes.transform.position = Input.mousePosition;
+        if (item.GiveName().StartsWith("Key"))
+        {
+            audioSource.Play();
+            opcoes.gameObject.SetActive(true);
+            opcoes.transform.position = Input.mousePosition;
+            use.gameObject.SetActive(false);
+        }
+        else
+        {
+            audioSource.Play();
+            opcoes.gameObject.SetActive(true);
+            opcoes.transform.position = Input.mousePosition;
+            use.gameObject.SetActive(true);
+        }
     }
 
     public void OnClick()
     {
         if (item != null)
         {
+            audioSource.Play();
             InspectManager.SetActive(true);
         }
     }
@@ -101,12 +116,15 @@ public class Mouse : MonoBehaviour
 
     public void FecharInspectManager() 
     {
+        audioSource.Play();
+
         InspectManager.SetActive(false);
         item = null;
     }
 
     public void UseFunction()
     {
+        audioSource.Play();
         Action useAction = item.UseFunc(); 
         useAction?.Invoke(); 
 

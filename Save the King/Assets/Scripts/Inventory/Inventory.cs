@@ -15,6 +15,7 @@ public class Inventory : MonoBehaviour
 
     public GameObject ItemPanel;
 
+    public AudioSource audioSource;
     public GameObject ItemPanelGrid;
     public Mouse mouse;
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
@@ -24,7 +25,7 @@ public class Inventory : MonoBehaviour
     [Space]
 
     public int InventorySize = 12;
-     void Start()
+    void Start()
     {
         if(InventoryMenu.activeSelf)
         {
@@ -66,16 +67,20 @@ public class Inventory : MonoBehaviour
         {
             if(InventoryMenu.activeSelf)
             {
+                
                 InventoryMenu.SetActive(false);
                 Cursor.visible = false; 
                 if (freeLookCamera != null)
                 {
                     freeLookCamera.enabled = true; 
                 }
+                audioSource.Play();
                 Time.timeScale = 1; 
+                
             }
             else
             {
+                
                 InventoryMenu.SetActive(true); 
                 Cursor.lockState = CursorLockMode.None; 
                 Cursor.visible = true; 
@@ -84,7 +89,7 @@ public class Inventory : MonoBehaviour
                     freeLookCamera.enabled = false; 
                 }
                 Time.timeScale = 0;
-
+                audioSource.Play();
 
 
             }

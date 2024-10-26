@@ -3,9 +3,12 @@ using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.TextCore.Text;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private float initialHeight;
+    private Vector3 initialCenter;
     public bool drawGizmos = false;
     public float speed = 6.0f;
     public float gravity = -9.81f;
@@ -40,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         playerAttack = GetComponentInChildren<PlayerAttack>();
         isGrounded = controller.isGrounded;
+        initialHeight = controller.height;
+        initialCenter = controller.center;
     }
 
     void Awake()
@@ -47,9 +52,10 @@ public class PlayerMovement : MonoBehaviour
         controls = new PlayerControls();
         controls.Gameplay.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Gameplay.Movement.canceled += ctx => moveInput = Vector2.zero;
-        controls.Gameplay.Crouch.performed += ctx => {isCrouching = !isCrouching; animator.SetBool("isCrouching", isCrouching);};
+        controls.Gameplay.Crouch.performed += ctx => HandleCrouch();
         controls.Gameplay.Sprint.performed += ctx => { isSprinting = true; targetSpeed = 10f;};
         controls.Gameplay.Sprint.canceled += ctx => { isSprinting = false; targetSpeed = 6f;};
+
     }
 
     void OnEnable(){
@@ -75,6 +81,18 @@ public class PlayerMovement : MonoBehaviour
         handleInteraction();
         if(!isTrapped)
             handleMovement();
+    }
+
+    private void HandleCrouch(){
+        isCrouching = !isCrouching; 
+        animator.SetBool("isCrouching", isCrouching);
+        if(isCrouching){
+           controller.height /=2; 
+           controller.center /=2; 
+        }else{
+           controller.height = initialHeight; 
+           controller.center = initialCenter; 
+        }
     }
 
     private void handleInteraction()

@@ -26,6 +26,10 @@ public class DetectionArrow : MonoBehaviour
     // Dictionary to keep track of arrows associated with each detecting enemy
     private Dictionary<EnemyDetection, GameObject> activeArrows = new Dictionary<EnemyDetection, GameObject>();
 
+    void Start(){
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        arrowParent = this.transform;
+    }
     void OnEnable()
     {
         // Subscribe to detection events

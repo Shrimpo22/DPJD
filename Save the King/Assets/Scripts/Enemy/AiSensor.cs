@@ -65,35 +65,45 @@ public class AiSensor : MonoBehaviour
         }
     }
 
-    public bool IsInSight(GameObject obj){
-        Vector3 origin = transform.position;
-        Vector3 dest = obj.transform.position;
-        Vector3 direction = dest - origin;
-        
-        if (Mathf.Abs(direction.y) < 0.1f) {
-            direction.y = 0f;
-        }
+    public bool IsInSight(GameObject obj) {
+    if (!obj.CompareTag("Player")) return false;
 
-        
-        if(direction.y<0f || direction.y > height){
-            return false;
-        }
-            
-        direction.y = 0;
-        float deltaAngle = Vector3.Angle(direction, transform.forward);
-        if(deltaAngle > angle){
+    CharacterController characterController = obj.GetComponent<CharacterController>();
+    if (characterController == null) return false;
 
-            return false;
-        }
+    // Get the center, top, and bottom points of the CharacterController's capsule
+    Vector3 playerCenter = obj.transform.position + characterController.center;
+    Vector3 topPoint = playerCenter + Vector3.up * (characterController.height / 2 - characterController.radius);
+    Vector3 bottomPoint = playerCenter - Vector3.up * (characterController.height / 2 - characterController.radius);
 
-        origin.y += height /2;
-        dest.y = origin.y;
-        if(Physics.Linecast(origin, dest, occlusionLayers)){
+    // Define check points for the line of sight check
+    Vector3[] checkPoints = new Vector3[5];
+    checkPoints[0] = bottomPoint; // Bottom center
+    checkPoints[1] = playerCenter; // Center
+    checkPoints[2] = topPoint;     // Top center
+    checkPoints[3] = bottomPoint + obj.transform.right * characterController.radius; // Bottom side
+    checkPoints[4] = topPoint + obj.transform.right * characterController.radius; // Top side
 
-            return false;
+    Vector3 origin = transform.position;
+    origin.y += height / 2; // Adjust to enemy's eye level
+
+    bool isPlayerInSight = false;
+
+    foreach (var point in checkPoints) {
+        // Check if there's a clear line of sight to each point
+        bool isVisible = !Physics.Linecast(origin, point, occlusionLayers);
+
+        // Draw the line with a color indicating visibility (green = visible, red = obstructed)
+        //Debug.DrawLine(origin, point, isVisible ? Color.green : Color.red);
+
+        // If any of the points is visible, set the flag to true
+        if (isVisible) {
+            isPlayerInSight = true;
         }
-        return true;
     }
+
+    return isPlayerInSight;
+}
 
     Mesh CreateWedgeMesh(){
         Mesh mesh = new Mesh();

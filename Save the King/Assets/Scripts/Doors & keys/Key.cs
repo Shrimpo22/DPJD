@@ -41,13 +41,11 @@ public class Key : MonoBehaviour
     }
 
     public void grabKey(GameObject player) {
-        if (Input.GetKeyDown(KeyCode.E)){
             player.GetComponent<PlayerEventItens>().AddKey(keyType);
             GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
             inventory.GetComponent<Inventory>().AddItem(keyType.ToString(),1);
             Destroy(this.gameObject);
-
-        }   
+   
     }
 
     private void OnTriggerExit(Collider other){

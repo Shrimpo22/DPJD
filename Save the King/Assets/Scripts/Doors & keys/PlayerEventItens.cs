@@ -18,6 +18,7 @@ public class PlayerEventItens : MonoBehaviour
     private Key key;
     private PlayerControls controls;
 
+
     void Awake()
     {   
         controls = new PlayerControls();
@@ -82,6 +83,9 @@ public class PlayerEventItens : MonoBehaviour
             
             }else if(hit.tag== "Chest") {
                 hit.gameObject.GetComponent<OpenChest>().openChest();
+            }else if(hit.tag == "Lock"  &&hit.gameObject.GetComponent<LockCombination>().isLooking==false){
+               hit.gameObject.GetComponent<LockCombination>().textActivate();
+               if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<LockCombination>().seeLock();
             }
 
     }

@@ -11,6 +11,7 @@ TagManager:
   - Door
   - Inventory
   - Chest
+  - Lock
   layers:
   - Default
   - TransparentFX

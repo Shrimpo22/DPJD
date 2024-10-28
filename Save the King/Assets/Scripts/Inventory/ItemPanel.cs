@@ -15,14 +15,13 @@ public class ItemPanel : MonoBehaviour, IPointerClickHandler
 
     private Mouse mouse; // Referência ao Mouse
 
-    // Este método será chamado automaticamente quando o painel for clicado
+    
     public void OnPointerClick(PointerEventData eventData)
     {
         if (inventory != null)
         {
-            mouse = inventory.mouse; // Atribui o mouse a partir do inventário
+            mouse = inventory.mouse; 
 
-            // Verifica se o clique foi com o botão esquerdo e se o painel tem um item
             if (eventData.button == PointerEventData.InputButton.Left && itemSlot.item != null)
             {   
                 

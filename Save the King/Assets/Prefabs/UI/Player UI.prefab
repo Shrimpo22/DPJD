@@ -89,15 +89,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261dbc084c2e1d74eb1b31d36e3fff42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseItemUI: {fileID: 4905889349560926601}
   mouseCursor: {fileID: 376356289506092799}
-  itemSlot:
-    name: 
-    stacks: 0
-  itemImage: {fileID: 1729406157759075805}
-  stacksText: {fileID: 9006430779383520940}
-  sourceItemPanel: {fileID: 0}
-  splitSize: 0
+  InspectManager: {fileID: 0}
+  imagemItem: {fileID: 0}
+  descricaoItem: {fileID: 0}
+  opcoes: {fileID: 0}
+  fechar: {fileID: 0}
 --- !u!1 &2077177733825636250
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +130,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 23, y: -161}
+  m_AnchoredPosition: {x: 23, y: -39}
   m_SizeDelta: {x: 550, y: 350}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1061048662194083736
@@ -574,6 +571,7 @@ MonoBehaviour:
   ItemPanel: {fileID: 693802907633563351, guid: 9a497762c8617b24c9a3d2946a5a3269, type: 3}
   ItemPanelGrid: {fileID: 5495489684268760903}
   mouse: {fileID: 3798170276729017681}
+  listOfKeys: 
   InventorySize: 15
   references:
     version: 2
@@ -614,7 +612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 197, y: 8.2}
+  m_AnchoredPosition: {x: 204, y: 8.2}
   m_SizeDelta: {x: 200, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6538829838668666987
@@ -768,35 +766,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a497762c8617b24c9a3d2946a5a3269, type: 3}
---- !u!114 &1729406157759075805 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6176071109407433347, guid: 9a497762c8617b24c9a3d2946a5a3269, type: 3}
-  m_PrefabInstance: {fileID: 5599621746661668702}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &4905889349560926601 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 693802907633563351, guid: 9a497762c8617b24c9a3d2946a5a3269, type: 3}
-  m_PrefabInstance: {fileID: 5599621746661668702}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8767548161762952089 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3754116249539359943, guid: 9a497762c8617b24c9a3d2946a5a3269, type: 3}
   m_PrefabInstance: {fileID: 5599621746661668702}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9006430779383520940 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3551263524155992562, guid: 9a497762c8617b24c9a3d2946a5a3269, type: 3}
-  m_PrefabInstance: {fileID: 5599621746661668702}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

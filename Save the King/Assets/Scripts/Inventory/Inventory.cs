@@ -3,28 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.EventSystems;
-
+using Cinemachine;
 public class Inventory : MonoBehaviour
 {
     [SerializeReference] public List<ItemSlotInfo> items = new List<ItemSlotInfo>();
 
     [Space]
-    [Header("Inventory Menu Components0")]
+    [Header("Inventory Menu Components")]
 
     public GameObject InventoryMenu;
 
     public GameObject ItemPanel;
 
+    public AudioSource audioSource;
     public GameObject ItemPanelGrid;
     public Mouse mouse;
-
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
+
+    private CinemachineFreeLook freeLookCamera;
     [Space]
 
-    public int InventorySize = 15;
-     void Start()
+    public int InventorySize = 12;
+    void Start()
     {
+        if(InventoryMenu.activeSelf)
+        {
+            InventoryMenu.SetActive(false);
+        }
+        freeLookCamera = FindObjectOfType<CinemachineFreeLook>();
+        
         for (int i = 0; i < InventorySize; i++)
         {
             items.Add(new ItemSlotInfo(null, 0));
@@ -46,27 +54,44 @@ public class Inventory : MonoBehaviour
         }
         itemsInDictionary += ".";
         Debug.Log(itemsInDictionary);
-
-        //Add Items for testing
-        AddItem("Wood", 20);
-        AddItem("Stone", 3);
+        AddItem("Potions",6);
+        RefreshInventory();
+        
         
     }
+    
 
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.I))
         {
             if(InventoryMenu.activeSelf)
             {
+                
                 InventoryMenu.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false; 
+                if (freeLookCamera != null)
+                {
+                    freeLookCamera.enabled = true; 
+                }
+                audioSource.Play();
+                Time.timeScale = 1; 
+                
             }
             else
             {
-                InventoryMenu.SetActive(true);
-                Cursor.lockState = CursorLockMode.Confined;
+                
+                InventoryMenu.SetActive(true); 
+                Cursor.lockState = CursorLockMode.None; 
+                Cursor.visible = true; 
+                if (freeLookCamera != null)
+                {
+                    freeLookCamera.enabled = false; 
+                }
+                Time.timeScale = 0;
+                audioSource.Play();
+
+
             }
         }
         
@@ -147,7 +172,6 @@ public class Inventory : MonoBehaviour
         //Find Item to add
         Item item = null;
         allItemsDictionary.TryGetValue(itemName, out item);
-
         //Exit method if no Item was found
         if (item == null)
         {
@@ -170,7 +194,8 @@ public class Inventory : MonoBehaviour
                     else
                     {
                         i.stacks += amount;
-                        if (InventoryMenu.activeSelf) RefreshInventory();
+                        //if (InventoryMenu.activeSelf)
+                         RefreshInventory();
                         return 0;
                     }
                 }
@@ -189,15 +214,17 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
+                    
                     i.item = item;
                     i.stacks = amount;
-                    if (InventoryMenu.activeSelf) RefreshInventory();
+                    //if (InventoryMenu.activeSelf) 
+                    RefreshInventory();
                     return 0;
                 }
             }
         }
         //No space in Inventory, return remainder items
-        Debug.Log("No space in Inventory for: " + item.GiveName());
+        Debug.Log("No space in Inventory for: " + item.getNameWithSpaces());
         if (InventoryMenu.activeSelf) RefreshInventory();
         return amount;
     }

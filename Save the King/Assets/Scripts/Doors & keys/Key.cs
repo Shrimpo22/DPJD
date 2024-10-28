@@ -1,28 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Key : MonoBehaviour//Item
+public class Key : MonoBehaviour
 {
-    [SerializeField] public TMP_Text textKey;
+    public TMP_Text textKey;
     [SerializeField] KeyType keyType;
     private AudioSource audioSource;
     public enum KeyType{
         None,
-        keyOfCell,
-        keyOfKingThrone,
-        keyOfGeneralRoom2,
-        keyOfFeastRoom,
+        KeyOfCell,
+        KeyOfKingThrone,
+        KeyOfGeneralRoom2,
+        KeyOfFeastRoom,
+        KeyOfChest,
+        KeyOfKitchen,
 
     }
 
     void Start(){
+        textKey.color = Color.black;
         audioSource = GetComponent<AudioSource>();
     }
     
-   
+    private Key.KeyType getKeyType(){
+        return keyType;
+    }
+
 
     public void textActivate(){
       textKey.text  = "(E) Grab Key";
@@ -32,26 +39,13 @@ public class Key : MonoBehaviour//Item
     public void textClear(){
       textKey.gameObject.SetActive(false);  
     }
-    /*public override string GiveName()
-    {
-        return nameOfKey;
-    }
 
-    public override Sprite GiveItemImage()
-    {
-        return Resources.Load<Sprite>("UI/Item Images/nameOfKey Icon");
-    }*/
-
-    private TMP_Text textOfKey;
     public void grabKey(GameObject player) {
-        
-        if (Input.GetKeyDown(KeyCode.E)){
-            //grabbed
-            //GameObject.FindGameObjectsWithTag("Inventory").GetComponent<Inventory>().AddItem(keyType.ToString,1,GiveItemImage());
             player.GetComponent<PlayerEventItens>().AddKey(keyType);
-            audioSource.Play();
-            Destroy(this.gameObject, audioSource.clip.length);
-        }   
+            GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
+            inventory.GetComponent<Inventory>().AddItem(keyType.ToString(),1);
+            Destroy(this.gameObject);
+   
     }
 
     private void OnTriggerExit(Collider other){

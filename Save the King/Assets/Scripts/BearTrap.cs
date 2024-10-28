@@ -5,8 +5,17 @@ using UnityEngine;
 public class BearTrap : MonoBehaviour
 {
     public Animator trapAnimator;  // Reference to the Animator component
+    public AudioSource trapSound;  // Reference to the AudioSource component
     private bool isTriggered = false;  // Prevents the trap from being triggered multiple times
 
+    void Start()
+    {
+        // Ensure the AudioSource component is assigned
+        if (trapSound == null)
+        {
+            trapSound = GetComponent<AudioSource>();
+        }
+    }
     void OnTriggerEnter(Collider other)
     {
 
@@ -16,6 +25,9 @@ public class BearTrap : MonoBehaviour
         {
             // Trigger the "CloseTrap" animation
             trapAnimator.SetTrigger("CloseTrap");
+
+            // Play the sound
+            trapSound.Play();
 
             //other.hp -= x , onde hp é o hp do player e x é o damage da trap.
 

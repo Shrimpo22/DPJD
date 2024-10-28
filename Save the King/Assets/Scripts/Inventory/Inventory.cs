@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
     public GameObject InventoryMenu;
 
     public GameObject ItemPanel;
-
+    private PlayerControls controls;
     public AudioSource audioSource;
     public GameObject ItemPanelGrid;
     public Mouse mouse;
@@ -27,6 +27,7 @@ public class Inventory : MonoBehaviour
     public int InventorySize = 12;
     void Start()
     {
+        controls = new PlayerControls();
         if(InventoryMenu.activeSelf)
         {
             InventoryMenu.SetActive(false);
@@ -75,8 +76,10 @@ public class Inventory : MonoBehaviour
                     freeLookCamera.enabled = true; 
                 }
                 audioSource.Play();
-                Time.timeScale = 1; 
-                
+                //Time.timeScale = 1; 
+                controls.Gameplay.Camera.Enable();
+
+
             }
             else
             {
@@ -88,7 +91,8 @@ public class Inventory : MonoBehaviour
                 {
                     freeLookCamera.enabled = false; 
                 }
-                Time.timeScale = 0;
+                controls.Gameplay.Camera.Disable();
+                //Time.timeScale = 0;
                 audioSource.Play();
 
 

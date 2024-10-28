@@ -26,6 +26,10 @@ public class DetectionArrow : MonoBehaviour
     // Dictionary to keep track of arrows associated with each detecting enemy
     private Dictionary<EnemyDetection, GameObject> activeArrows = new Dictionary<EnemyDetection, GameObject>();
 
+    void Start(){
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        arrowParent = this.transform;
+    }
     void OnEnable()
     {
         // Subscribe to detection events
@@ -91,21 +95,6 @@ public class DetectionArrow : MonoBehaviour
                 arrow.SetActive(false);  // Hide the arrow if the enemy is too far
             }
         }
-    }
-    
-
-    public void OnDrawGizmos(){
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.position + finalDir);
-                Gizmos.color = Color.red;
-
-        Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.position + new Vector3(0,0,finalDir.z));
-
-                Gizmos.color = Color.green;
-
-        Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.position + new Vector3(finalDir.x,0,0));
-        //Gizmos.color = Color.yellow;
-        //Gizmos.DrawSphere(arrowRectTransform.position, 5f);
     }
 
     // Event handler: Called when an enemy starts detecting the player

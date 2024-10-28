@@ -7,6 +7,8 @@ TagManager:
   - Weapon
   - Target
   - Ground
+  - Door
+  - Key
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
+  - Occlusion
   - 
   - 
   - 

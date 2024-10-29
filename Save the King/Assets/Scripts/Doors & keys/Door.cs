@@ -18,7 +18,7 @@ public class Door : MonoBehaviour{
      [SerializeField] Key.KeyType keyType;
     
     void Start(){ audioSource = GetComponent<AudioSource>();
-        textDoor.color = Color.black;
+        textDoor.color = Color.white;
         if (audioSource == null){
             audioSource = gameObject.AddComponent<AudioSource>();
         }

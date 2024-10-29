@@ -21,5 +21,5 @@ MonoBehaviour:
   alertRate: 0.2
   powerAmount: 0.3
   maxHealth: 100
-  patrolInterval: 20
+  patrolInterval: 10
   patrolSpeed: 2

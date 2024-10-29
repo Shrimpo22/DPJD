@@ -55,7 +55,7 @@ public class Inventory : MonoBehaviour
         }
         itemsInDictionary += ".";
         Debug.Log(itemsInDictionary);
-        AddItem("Potions",6);
+        //AddItem("Potions",6);
         RefreshInventory();
         
         

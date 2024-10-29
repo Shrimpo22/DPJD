@@ -116,7 +116,7 @@ public class AiSensor : MonoBehaviour
         bool isVisible = !Physics.Linecast(origin, point, occlusionLayers);
 
         // Draw the line with a color indicating visibility (green = visible, red = obstructed)
-        //Debug.DrawLine(origin, point, isVisible ? Color.green : Color.red);
+        Debug.DrawLine(origin, point, isVisible ? Color.green : Color.red);
 
         // If any of the points is visible, set the flag to true
         if (isVisible) {

@@ -76,8 +76,8 @@ public class Inventory : MonoBehaviour
                     freeLookCamera.enabled = true; 
                 }
                 audioSource.Play();
-                //Time.timeScale = 1; 
-                controls.Gameplay.Camera.Enable();
+                Time.timeScale = 1; 
+                //controls.Gameplay.Camera.Enable();
 
 
             }
@@ -91,8 +91,8 @@ public class Inventory : MonoBehaviour
                 {
                     freeLookCamera.enabled = false; 
                 }
-                controls.Gameplay.Camera.Disable();
-                //Time.timeScale = 0;
+              // controls.Gameplay.Camera.Disable();
+                Time.timeScale = 0;
                 audioSource.Play();
 
 

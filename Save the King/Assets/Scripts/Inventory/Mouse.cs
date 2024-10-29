@@ -21,7 +21,7 @@ public class Mouse : MonoBehaviour
     public GameObject use; 
     public GameObject inventory;
     public Button fechar;
-    
+    public TMP_Text titulo;
     private bool optionsDisplayed = false;
 
     void Update()
@@ -93,7 +93,7 @@ public class Mouse : MonoBehaviour
         {
             Sprite itemSprite = item.GiveItemImage();
             
-
+            titulo.text = item.getNameWithSpaces();
             descricaoItem.text = item.GiveDiscresp(); 
 
             if (itemSprite != null)

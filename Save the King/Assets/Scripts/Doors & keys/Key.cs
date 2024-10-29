@@ -18,6 +18,7 @@ public class Key : MonoBehaviour
         KeyOfFeastRoom,
         KeyOfChest,
         KeyOfKitchen,
+        KeyOfDungeon,
 
     }
 

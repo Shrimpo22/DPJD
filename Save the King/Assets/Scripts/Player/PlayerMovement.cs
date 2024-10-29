@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private float initialHeight;
     private Vector3 initialCenter;
     public bool drawGizmos = false;
-    public float speed = 6.0f;
+    public float speed = 4.25f;
     public float gravity = -9.81f;
     public float jumpHeight = 1.5f;
     private Vector3 velocity;
@@ -53,8 +53,8 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Gameplay.Movement.canceled += ctx => moveInput = Vector2.zero;
         controls.Gameplay.Crouch.performed += ctx => HandleCrouch();
-        controls.Gameplay.Sprint.performed += ctx => { isSprinting = true; targetSpeed = 10f;};
-        controls.Gameplay.Sprint.canceled += ctx => { isSprinting = false; targetSpeed = 6f;};
+        controls.Gameplay.Sprint.performed += ctx => { isSprinting = true; targetSpeed = 6f;};
+        controls.Gameplay.Sprint.canceled += ctx => { isSprinting = false; targetSpeed = 4.25f;};
 
     }
 
@@ -117,9 +117,9 @@ public class PlayerMovement : MonoBehaviour
         if ((stateInfo.IsName("hit1") || stateInfo.IsName("hit2") || stateInfo.IsName("hit3")) && stateInfo.normalizedTime <= 1f){
             targetSpeed = 0f;    
         }else if (!isSprinting && !isCrouching)
-            targetSpeed = 6f;
+            targetSpeed = 4.25f;
         else if (isCrouching)
-            targetSpeed = 3f;
+            targetSpeed = 2f;
 
         if (!isGrounded && velocity.y < 0)
         {

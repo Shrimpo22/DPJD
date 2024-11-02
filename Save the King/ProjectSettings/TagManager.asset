@@ -11,6 +11,7 @@ TagManager:
   - Key
   - Chest
   - Inventory
+  - Player Collider
   layers:
   - Default
   - TransparentFX

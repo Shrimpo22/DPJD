@@ -67,6 +67,7 @@ public class AiSensor : MonoBehaviour
 
     public bool IsInSight(GameObject obj) {
     if (!obj.CompareTag("Player")) return false;
+
         Vector3 origin = transform.position;
         Vector3 dest = obj.transform.position;
         Vector3 direction = dest - origin;
@@ -90,7 +91,7 @@ public class AiSensor : MonoBehaviour
             return false;
         }
 
-        CapsuleCollider characterController = obj.GetComponent<CapsuleCollider>();
+    CharacterController characterController = obj.GetComponent<CharacterController>();
     if (characterController == null) return false;
 
     // Get the center, top, and bottom points of the CharacterController's capsule

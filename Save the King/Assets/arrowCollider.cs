@@ -30,7 +30,7 @@ public class Arrow : MonoBehaviour
 
             // Set the flag to true to prevent further collisions
             hasHit = true;
-            if(collision.gameObject.CompareTag("Player")){
+            if(collision.gameObject.CompareTag("Player Collider")){
                 collision.gameObject.GetComponentInParent<PlayerHealth>().TakeDamage(10f);
             };
             Destroy(gameObject, 10f);

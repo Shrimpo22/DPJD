@@ -9,6 +9,9 @@ TagManager:
   - Ground
   - Door
   - Key
+  - Inventory
+  - Chest
+  - Weapon In Ground
   layers:
   - Default
   - TransparentFX

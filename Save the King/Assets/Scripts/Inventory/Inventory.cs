@@ -20,7 +20,7 @@ public class Inventory : MonoBehaviour
     public Mouse mouse;
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
-
+    
     private CinemachineFreeLook freeLookCamera;
     [Space]
 
@@ -64,26 +64,26 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.I))
+        if(InventoryMenu.activeSelf)
         {
-            if(InventoryMenu.activeSelf)
+            if(Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
             {
-                
-                InventoryMenu.SetActive(false);
-                Cursor.visible = false; 
-                if (freeLookCamera != null)
-                {
-                    freeLookCamera.enabled = true; 
-                }
-                audioSource.Play();
-                Time.timeScale = 1; 
-                //controls.Gameplay.Camera.Enable();
-
+                    InventoryMenu.SetActive(false);
+                    Cursor.visible = false; 
+                    if (freeLookCamera != null)
+                    {
+                        freeLookCamera.enabled = true; 
+                    }
+                    audioSource.Play();
+                    Time.timeScale = 1; 
+                    //controls.Gameplay.Camera.Enable();
 
             }
-            else
-            {
-                
+        }
+        else
+        {
+            if(Input.GetKeyDown(KeyCode.I))
+            {    
                 InventoryMenu.SetActive(true); 
                 Cursor.lockState = CursorLockMode.None; 
                 Cursor.visible = true; 
@@ -94,10 +94,10 @@ public class Inventory : MonoBehaviour
               // controls.Gameplay.Camera.Disable();
                 Time.timeScale = 0;
                 audioSource.Play();
-
-
             }
+
         }
+        
         
     }
 
@@ -197,6 +197,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
+                        
                         i.stacks += amount;
                         //if (InventoryMenu.activeSelf)
                          RefreshInventory();

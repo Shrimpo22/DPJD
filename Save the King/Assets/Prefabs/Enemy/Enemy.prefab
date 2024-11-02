@@ -856,7 +856,7 @@ MonoBehaviour:
   drawAlertState: 0
   initialState: 2
   navMeshAgent: {fileID: 0}
-  config: {fileID: 11400000, guid: 81f0051aca196de4889b7c5562dff99c, type: 2}
+  config: {fileID: 11400000, guid: 5cb65e5f4f555f8419c117135cd247d0, type: 2}
   playerTransform: {fileID: 0}
   currentState: 0
   sensor: {fileID: 0}

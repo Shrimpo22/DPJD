@@ -64,7 +64,7 @@ public class PlayerEventItens : MonoBehaviour
                 Debug.DrawRay(rayOrigin, Vector3.down * rayDistance, Color.magenta);
                 if (Physics.Raycast(rayOrigin, Vector3.down, out hit, rayDistance))
                 {
-                    Debug.Log("Hit: " + hit.collider.tag); // Log what was hit
+                    //Debug.Log("Hit: " + hit.collider.tag); // Log what was hit
                     HandleHit(hit.collider);
                     
                 }
@@ -74,7 +74,7 @@ public class PlayerEventItens : MonoBehaviour
     }
     private void HandleHit(Collider hit){
 
-            Debug.Log("Hit " + hit.tag);
+            //Debug.Log("Hit " + hit.tag);
 
             if (hit.tag == "Key"){
                 key = hit.gameObject.GetComponent<Key>();

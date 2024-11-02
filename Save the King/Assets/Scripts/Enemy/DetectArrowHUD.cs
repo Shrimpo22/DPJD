@@ -83,12 +83,21 @@ public class DetectionArrow : MonoBehaviour
                 // Smooth the rotation of the arrow
                 arrowRectTransform.rotation = Quaternion.Slerp(arrowRectTransform.rotation, targetRotation, Time.deltaTime * smoothingFactor);
 
-                Image img = arrow.GetComponentInChildren<Image>();
-                img.fillAmount = enemy.agent.alertState;
+                Transform childTransform = arrow.transform.Find("DetectionArrow"); // Replace "ChildName" with the actual name of the child
+                if (childTransform != null)
+                {
+                    Image img = childTransform.GetComponent<Image>();
+                    if (img != null)
+                    {
+                        img.fillAmount = enemy.agent.alertState;
+                    }
 
-                if(img.fillAmount < 1f){
-                    img.color = Color.white;
+                    if(img.fillAmount < 1f){
+                        img.color = Color.white;
+                    }
                 }
+
+                
             }
             else
             {
@@ -122,16 +131,30 @@ public class DetectionArrow : MonoBehaviour
     private void HandleEnemyChasePlayer(EnemyDetection enemy){
         if (activeArrows.ContainsKey(enemy))
         {
-            Image img = activeArrows[enemy].GetComponentInChildren<Image>();
-            img.color = Color.red;
+            Transform childTransform = activeArrows[enemy].transform.Find("DetectionArrow"); // Replace "ChildName" with the actual name of the child
+            if (childTransform != null)
+            {
+                Image img = childTransform.GetComponent<Image>();
+                if (img != null)
+                {
+                    img.color = Color.red;
+                }
+            }
         }
     }
 
     private void HandleEnemyLookForPlayer(EnemyDetection enemy){
         if (activeArrows.ContainsKey(enemy))
         {
-            Image img = activeArrows[enemy].GetComponentInChildren<Image>();
-            img.color = Color.yellow;
+            Transform childTransform = activeArrows[enemy].transform.Find("DetectionArrow"); // Replace "ChildName" with the actual name of the child
+            if (childTransform != null)
+            {
+                Image img = childTransform.GetComponent<Image>();
+                if (img != null)
+                {
+                    img.color = Color.yellow;
+                }
+            }
         }
     }
 

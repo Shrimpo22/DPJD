@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 958a9785edcd5ed41a398ef780ddb102, type: 3}
-  m_Name: Slow Gremlin
+  m_Name: Short Range Enemy
   m_EditorClassIdentifier: 
-  speed: 2
-  maxSightDistance: 8
-  angle: 60
+  speed: 6
+  maxSightDistance: 15
+  angle: 80
   height: 2
   meshColor: {r: 0.94509804, g: 0.08627451, b: 0.015686275, a: 0.6862745}
-  stoppingDistance: 0
-  alertRate: 0.2
+  stoppingDistance: 6
+  alertRate: 0.4
   powerAmount: 0.3
-  maxHealth: 100
-  patrolInterval: 20
-  patrolSpeed: 4
+  maxHealth: 60
+  patrolInterval: 10
+  patrolSpeed: 2

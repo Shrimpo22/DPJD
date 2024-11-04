@@ -44,7 +44,8 @@ public class Potions : Item
                 AudioSource audioSource = new GameObject("PotionAudioSource").AddComponent<AudioSource>();
                 audioSource.clip = clip;
                 audioSource.Play();
-                
+                GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
+                inventory.GetComponent<Inventory>().DropItemByName(GiveName());
                 
                 
                

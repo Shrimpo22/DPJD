@@ -22,7 +22,7 @@ public class Mouse : MonoBehaviour
     public GameObject inventory;
     public Button fechar;
     public TMP_Text titulo;
-    private bool optionsDisplayed = false;
+    public bool optionsDisplayed = false;
 
     void Update()
     {
@@ -30,7 +30,8 @@ public class Mouse : MonoBehaviour
 
         if (!inventory.activeSelf)
         {
-            FecharInspectManager();
+            opcoes.gameObject.SetActive(false);
+            InspectManager.gameObject.SetActive(false);
         }
 
         if (item != null && !InspectManager.activeSelf && !optionsDisplayed)
@@ -130,5 +131,6 @@ public class Mouse : MonoBehaviour
 
         item = null;
         opcoes.SetActive(false);
+        optionsDisplayed = false;
     }
 }

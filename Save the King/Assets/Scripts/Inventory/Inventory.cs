@@ -81,9 +81,15 @@ public class Inventory : MonoBehaviour
                     {
                         freeLookCamera.enabled = true; 
                     }
+
                     audioSource.Play();
                     Time.timeScale = 1; 
                     //controls.Gameplay.Camera.Enable();
+                    if (mouse != null)
+                    {
+                        mouse.optionsDisplayed = false;
+                        mouse.opcoes.SetActive(false); // Assegura que o menu é fechado
+                    }
                 }
 
         }

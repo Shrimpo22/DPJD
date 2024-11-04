@@ -12,7 +12,16 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "2ccdc3bf-232c-467d-9abc-8a00a2fab57b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Camera",
@@ -45,15 +54,6 @@
                     "name": "Interaction",
                     "type": "Button",
                     "id": "8213b5e4-7841-49c6-910a-16876c2e72e3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Sprint",
-                    "type": "Button",
-                    "id": "2ccdc3bf-232c-467d-9abc-8a00a2fab57b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -244,28 +244,6 @@
                 },
                 {
                     "name": "",
-                    "id": "6ea3a664-2e2e-42aa-9bd7-9b64af38076e",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4a94f11b-e548-44b2-8f1f-63cb32bce95f",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "3700c3e0-59f8-4b52-a5db-4230d2089be5",
                     "path": "<Keyboard>/i",
                     "interactions": "",
@@ -327,6 +305,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dodging",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6ea3a664-2e2e-42aa-9bd7-9b64af38076e",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4a94f11b-e548-44b2-8f1f-63cb32bce95f",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

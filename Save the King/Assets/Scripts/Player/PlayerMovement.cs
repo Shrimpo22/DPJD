@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Crouch.performed += ctx => HandleCrouch();
         controls.Gameplay.Sprint.performed += ctx => { isSprinting = true; targetSpeed = 6f;};
         controls.Gameplay.Sprint.canceled += ctx => { isSprinting = false; targetSpeed = 4.25f;};
-        controls.Gameplay.Dodging.performed += ctx => HandleDodge();
+        controls.Gameplay.Dodging.performed += ctx => animator.SetTrigger("Dodge");
     }
 
     void OnEnable(){
@@ -108,15 +108,33 @@ public class PlayerMovement : MonoBehaviour
         playerAttack.DisabeSwordCollider();
     }
 
+    public void EnableInvincibility()
+    {
+        this.tag = "Untagged";
+    }
+
+    public void DisableInvincibility()
+    {
+        this.tag = "Player";
+    }
     void Update()
     {
         handleInteraction();
         if(!isTrapped)
             handleMovement();
-        if (!animator.GetBool("isDodging"))
-        {
-            ResetDodge();
-        }
+    }
+
+
+    public void EnableMovement()
+    {
+        controls.Gameplay.Movement.Enable();
+        controls.Gameplay.Sprint.Enable();
+    }
+
+    public void DisableMovement()
+    {
+        controls.Gameplay.Movement.Disable();
+        controls.Gameplay.Sprint.Disable();
     }
 
     private void HandleCrouch(){
@@ -131,21 +149,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void ResetDodge()
-    {
-        animator.avatar = null;
-        isDodging = false;
-        animator.applyRootMotion = isDodging;
-    }
-
-    private void HandleDodge()
-    {
-        animator.avatar = avatar;
-        Debug.Log("Tou aqui");
-        isDodging = !isDodging;
-        animator.applyRootMotion = isDodging;
-        animator.SetBool("isDodging", true);
-    }
     private void handleInteraction()
     {
         if (isTrapped)

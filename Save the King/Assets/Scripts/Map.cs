@@ -48,9 +48,9 @@ public class Map : MonoBehaviour
         isLooking = true;
         mainCamera.gameObject.SetActive(false);
         myCamera.gameObject.SetActive(true);
-         textEvent.color = Color.black;
+        textEvent.color = Color.black;
         textEvent.text  = "(E) Add Piece ; (ESC) Exit";
-        isLooking=true;
+        inventory.GetComponent<Inventory>().isLookingAtMap = true;
 
     }
 
@@ -78,7 +78,8 @@ public class Map : MonoBehaviour
             mainCamera.gameObject.SetActive(true);
             myCamera.gameObject.SetActive(false);
             isLooking = false;
-           
+            inventory.GetComponent<Inventory>().isLookingAtMap = false;
+
            
         }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
                 inventory.GetComponent<Inventory>().OpenIt();

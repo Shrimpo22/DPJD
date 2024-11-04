@@ -1,0 +1,89 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class Map : MonoBehaviour
+{
+
+    public TMP_Text textEvent;
+
+    public int nrOfPiecesOn;
+    private int totalPieces = 5;
+    private bool isComplete = false;
+
+    public bool isLooking = false;
+    GameObject inventory;
+
+    GameObject player;
+    public Camera myCamera;
+    private Camera mainCamera;
+    private string finalAnswer;
+
+    [SerializeField] public GameObject[] allPieces;
+    
+    // Start is called before the first frame update
+    void Start()
+    {
+       nrOfPiecesOn =0 ;
+       player = GameObject.FindGameObjectWithTag("Player");
+       inventory = GameObject.FindGameObjectWithTag("Inventory");
+       mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+    }
+
+    public void getTextFinalAnswer (string number){
+        finalAnswer = number;
+    }
+    public void textActivate(){
+      textEvent.text  = "(E) Interact";
+      textEvent.gameObject.SetActive(true);  
+    }
+    public void textClear(){
+      textEvent.gameObject.SetActive(false);  
+    }
+    public void seeObject() {
+        mainCamera.tag="Untagged";
+        myCamera.tag="MainCamera";
+        player.SetActive(false);
+        isLooking = true;
+        mainCamera.gameObject.SetActive(false);
+        myCamera.gameObject.SetActive(true);
+         textEvent.color = Color.black;
+        textEvent.text  = "(E) Add Piece ; (ESC) Exit";
+        isLooking=true;
+
+    }
+
+    private void showFinalMap(){
+        textEvent.text = "(ESC) Exit";
+        Debug.Log(finalAnswer);
+    }
+
+    public void addPiece(){
+       inventory.GetComponent<Inventory>().DropItemByName("MapPiece");
+       allPieces[nrOfPiecesOn].SetActive(false);
+       nrOfPiecesOn++;
+    }
+    void Update()
+    {
+       if(nrOfPiecesOn == totalPieces && !isComplete) {
+            showFinalMap();
+       }
+
+       if(Input.GetKeyDown(KeyCode.Escape) && isLooking){
+            player.SetActive(true);
+            textClear();
+            mainCamera.tag = "MainCamera";
+            myCamera.tag="Untagged";
+            mainCamera.gameObject.SetActive(true);
+            myCamera.gameObject.SetActive(false);
+            isLooking = false;
+           
+           
+        }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
+                inventory.GetComponent<Inventory>().OpenIt();
+                
+        }
+    }
+    
+}

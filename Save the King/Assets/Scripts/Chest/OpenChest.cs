@@ -33,6 +33,10 @@ public class OpenChest : MonoBehaviour
         }
     }
 
+    public void openChestByLock(){
+        StartCoroutine(RotateObject());
+    }
+
     public void textActivate(){
       textChest.text  = "(E) Open Chest";
       textChest.gameObject.SetActive(true);  

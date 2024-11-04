@@ -9,6 +9,11 @@ TagManager:
   - Ground
   - Door
   - Key
+  - Chest
+  - Inventory
+  - Lock
+  - Map
+  - MapPiece
   layers:
   - Default
   - TransparentFX

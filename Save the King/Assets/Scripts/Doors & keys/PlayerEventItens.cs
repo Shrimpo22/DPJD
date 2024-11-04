@@ -12,7 +12,7 @@ public class PlayerEventItens : MonoBehaviour
     public bool isNearDoor = false;
     public int rayCount = 2; 
     public float rayDistance = 3f; 
-    public float spacing = 0.5f; 
+    public float spacing = 1f; 
     public List<Key.KeyType> listOfKeys;
     private Door door;
     private Key key;
@@ -79,13 +79,24 @@ public class PlayerEventItens : MonoBehaviour
             if (hit.tag == "Key"){
                 key = hit.gameObject.GetComponent<Key>();
                 key.textActivate();
-                if(Input.GetKeyDown(KeyCode.E)) key.grabKey(this.gameObject);
+                if(Input.GetKeyDown(KeyCode.E)){
+                    key.grabKey(this.gameObject);}
             
             }else if(hit.tag== "Chest") {
                 hit.gameObject.GetComponent<OpenChest>().openChest();
             }else if(hit.tag == "Lock"  &&hit.gameObject.GetComponent<LockCombination>().isLooking==false){
                hit.gameObject.GetComponent<LockCombination>().textActivate();
-               if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<LockCombination>().seeLock();
+               if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<LockCombination>().seeObject();
+            }else if(hit.tag == "Map"  &&hit.gameObject.GetComponent<Map>().isLooking==false){
+               hit.gameObject.GetComponent<Map>().textActivate();
+               if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<Map>().seeObject();
+
+            }
+            else if(hit.tag == "MapPiece"){
+               hit.gameObject.GetComponent<MapPieceGrab>().textActivate();
+             if(Input.GetKeyDown(KeyCode.E)){
+                    hit.gameObject.GetComponent<MapPieceGrab>().grabItem(this.gameObject);}
+
             }
 
     }

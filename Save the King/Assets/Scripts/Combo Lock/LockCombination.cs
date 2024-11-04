@@ -16,6 +16,8 @@ public class LockCombination : MonoBehaviour
     public bool isLooking = true;
     [SerializeField] Transform shackle; 
 
+    public GameObject chestLocked;
+
     void Awake() {
        player = GameObject.FindGameObjectWithTag("Player");
        textEvent.gameObject.SetActive(false);
@@ -46,10 +48,10 @@ public class LockCombination : MonoBehaviour
             }
         }
         combinationCorrect = string.Join("", combinationNew);
-       
+        GameObject.FindGameObjectWithTag("Map").GetComponent<Map>().getTextFinalAnswer(combinationCorrect);
     }
 
-    public void seeLock() {
+    public void seeObject() {
         gameObject.GetComponent<BoxCollider>().enabled = false;
         mainCamera.tag="Untagged";
         myCamera.tag="MainCamera";
@@ -74,6 +76,7 @@ public class LockCombination : MonoBehaviour
             mainCamera.gameObject.SetActive(true);
             myCamera.gameObject.SetActive(false);
             gameObject.GetComponent<BoxCollider>().enabled = true;
+            chestLocked.GetComponent<OpenChest>().openChestByLock();
              Destroy(this.gameObject);
             
         }

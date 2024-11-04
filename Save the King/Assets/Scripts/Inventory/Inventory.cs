@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
     [Header("Inventory Menu Components")]
 
     public GameObject InventoryMenu;
-
+    private bool wasOpenByOtherEvent = false;
     public GameObject ItemPanel;
     private PlayerControls controls;
     public AudioSource audioSource;
@@ -55,17 +55,22 @@ public class Inventory : MonoBehaviour
         }
         itemsInDictionary += ".";
         Debug.Log(itemsInDictionary);
-        //AddItem("Potions",6);
+        
+        AddItem("Potions",3);
         RefreshInventory();
         
         
+    }
+    public void OpenIt(){
+        wasOpenByOtherEvent = true;
     }
     
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.I))
+        if(Input.GetKeyDown(KeyCode.I) || wasOpenByOtherEvent)
         {
+            wasOpenByOtherEvent = false;
             if(InventoryMenu.activeSelf)
             {
                 
@@ -235,8 +240,12 @@ public class Inventory : MonoBehaviour
    
     public void ClearSlot(ItemSlotInfo slot)
     {
+        if(slot.stacks>1){
+        slot.stacks = slot.stacks - 1;
+        }else{
         slot.item = null;
         slot.stacks = 0;
+        }
     }
 
     IEnumerable<Item> GetAllItems()

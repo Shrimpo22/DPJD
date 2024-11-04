@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Cinemachine;
 using TMPro;
 using Unity.VisualScripting;
@@ -21,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isTrapped = false;
     public bool isCrouching = false;
-
+    public bool isDodging = false;
     public bool isSwordEquipped = false;
 
 
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float interactionProgress = 0f;
 
+    [SerializeField] Avatar avatar;
 
     public string trappedLoopAnimation = "AttemptEscape";
     private float interactionCooldown = 2.0f;  // Timer for 5 seconds of inactivity
@@ -56,6 +58,12 @@ public class PlayerMovement : MonoBehaviour
     private float targetSpeed;
     private bool isSprinting;
 
+    public float rollSpeed = 10f;
+    public float dodgeDuration = 0.5f;
+    public float dodgeCooldown = 1.5f;
+    private float dodgeTimer = 0f;
+    
+
     void Start()
     {
         // Initially hide the UI elements
@@ -68,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = controller.isGrounded;
         initialHeight = controller.height;
         initialCenter = controller.center;
+        
     }
 
     void Awake()
@@ -78,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Crouch.performed += ctx => HandleCrouch();
         controls.Gameplay.Sprint.performed += ctx => { isSprinting = true; targetSpeed = 6f;};
         controls.Gameplay.Sprint.canceled += ctx => { isSprinting = false; targetSpeed = 4.25f;};
-
+        controls.Gameplay.Dodging.performed += ctx => HandleDodge();
     }
 
     void OnEnable(){
@@ -104,20 +113,39 @@ public class PlayerMovement : MonoBehaviour
         handleInteraction();
         if(!isTrapped)
             handleMovement();
+        if (!animator.GetBool("isDodging"))
+        {
+            ResetDodge();
+        }
     }
 
     private void HandleCrouch(){
         isCrouching = !isCrouching; 
         animator.SetBool("isCrouching", isCrouching);
         if(isCrouching){
-           controller.height /=2; 
-           controller.center /=2; 
+           controller.height /=2;
+           controller.center /=2;
         }else{
            controller.height = initialHeight; 
            controller.center = initialCenter; 
         }
     }
 
+    public void ResetDodge()
+    {
+        animator.avatar = null;
+        isDodging = false;
+        animator.applyRootMotion = isDodging;
+    }
+
+    private void HandleDodge()
+    {
+        animator.avatar = avatar;
+        Debug.Log("Tou aqui");
+        isDodging = !isDodging;
+        animator.applyRootMotion = isDodging;
+        animator.SetBool("isDodging", true);
+    }
     private void handleInteraction()
     {
         if (isTrapped)
@@ -300,4 +328,3 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
-

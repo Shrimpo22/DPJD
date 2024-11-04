@@ -98,6 +98,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dodging"",
+                    ""type"": ""Button"",
+                    ""id"": ""60cef7bf-2fac-4dfd-900c-1a942b1a6a10"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -320,6 +329,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""HeavyAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""708f6bf1-08d4-4530-a2ce-0bd6e8050baf"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodging"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0822fda4-310e-4898-b640-70b6b911d784"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodging"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -336,6 +367,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_Sprint = m_Gameplay.FindAction("Sprint", throwIfNotFound: true);
         m_Gameplay_Inventory = m_Gameplay.FindAction("Inventory", throwIfNotFound: true);
         m_Gameplay_HeavyAttack = m_Gameplay.FindAction("HeavyAttack", throwIfNotFound: true);
+        m_Gameplay_Dodging = m_Gameplay.FindAction("Dodging", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -405,6 +437,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Sprint;
     private readonly InputAction m_Gameplay_Inventory;
     private readonly InputAction m_Gameplay_HeavyAttack;
+    private readonly InputAction m_Gameplay_Dodging;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -417,6 +450,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Gameplay_Sprint;
         public InputAction @Inventory => m_Wrapper.m_Gameplay_Inventory;
         public InputAction @HeavyAttack => m_Wrapper.m_Gameplay_HeavyAttack;
+        public InputAction @Dodging => m_Wrapper.m_Gameplay_Dodging;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -450,6 +484,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @HeavyAttack.started += instance.OnHeavyAttack;
             @HeavyAttack.performed += instance.OnHeavyAttack;
             @HeavyAttack.canceled += instance.OnHeavyAttack;
+            @Dodging.started += instance.OnDodging;
+            @Dodging.performed += instance.OnDodging;
+            @Dodging.canceled += instance.OnDodging;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -478,6 +515,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @HeavyAttack.started -= instance.OnHeavyAttack;
             @HeavyAttack.performed -= instance.OnHeavyAttack;
             @HeavyAttack.canceled -= instance.OnHeavyAttack;
+            @Dodging.started -= instance.OnDodging;
+            @Dodging.performed -= instance.OnDodging;
+            @Dodging.canceled -= instance.OnDodging;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -505,5 +545,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
+        void OnDodging(InputAction.CallbackContext context);
     }
 }

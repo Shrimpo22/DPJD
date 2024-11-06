@@ -22,7 +22,6 @@ public class Map : MonoBehaviour
 
     [SerializeField] public GameObject[] allPieces;
     
-    // Start is called before the first frame update
     void Start()
     {
        nrOfPiecesOn =0 ;
@@ -85,7 +84,8 @@ public class Map : MonoBehaviour
             mainCamera.gameObject.SetActive(true);
             myCamera.gameObject.SetActive(false);
             isLooking = false;
-           
+            inventory.GetComponent<Inventory>().isLookingAtMap = false;
+
            
         }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
                 inventory.GetComponent<Inventory>().OpenIt();

@@ -28,11 +28,11 @@ public class Mouse : MonoBehaviour
     {
         mouseCursor.transform.position = Input.mousePosition;
 
-        if (!inventory.activeSelf)
+       /* if (!inventory.activeSelf)
         {
             FecharInspectManager();
         }
-
+        */
         if (item != null && !InspectManager.activeSelf && !optionsDisplayed)
         {
             ShowOpcoes();

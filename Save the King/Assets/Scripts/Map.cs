@@ -49,13 +49,16 @@ public class Map : MonoBehaviour
         mainCamera.gameObject.SetActive(false);
         myCamera.gameObject.SetActive(true);
          textEvent.color = Color.black;
+         if(!isComplete){
         textEvent.text  = "(E) Add Piece ; (ESC) Exit";
+       } else{
+        textEvent.text = "(ESC) Exit";}
         isLooking=true;
 
     }
 
     private void showFinalMap(){
-        textEvent.text = "(ESC) Exit";
+        isComplete=true;
         Debug.Log(finalAnswer);
     }
 
@@ -64,9 +67,13 @@ public class Map : MonoBehaviour
        allPieces[nrOfPiecesOn].SetActive(false);
        nrOfPiecesOn++;
     }
+    private void OnTriggerExit(Collider other){
+        textClear();
+    }
     void Update()
     {
        if(nrOfPiecesOn == totalPieces && !isComplete) {
+            textEvent.text = "(ESC) Exit";
             showFinalMap();
        }
 

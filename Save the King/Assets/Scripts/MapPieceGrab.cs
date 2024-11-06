@@ -11,6 +11,7 @@ public class MapPieceGrab : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
         textMapPiece.color = Color.black;
+        textClear();
         audioSource = GetComponent<AudioSource>();
     }
     

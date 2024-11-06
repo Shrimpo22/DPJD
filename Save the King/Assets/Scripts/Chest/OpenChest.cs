@@ -21,6 +21,7 @@ public class OpenChest : MonoBehaviour
     void Start()
     {
         playerCamera = Camera.main;
+        textClear();
     }
 
     public void openChest(){
@@ -76,5 +77,6 @@ public class OpenChest : MonoBehaviour
         isRotating = false;
 
         open = true;
+        this.GetComponent<BoxCollider>().enabled = false;
     }
 }

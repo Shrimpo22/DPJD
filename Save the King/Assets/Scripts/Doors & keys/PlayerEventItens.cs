@@ -21,7 +21,8 @@ public class PlayerEventItens : MonoBehaviour
 
     void Awake()
     {   
-        controls = new PlayerControls();
+        controls = InputManager.inputActions;
+        controls.Gameplay.Interaction.performed += ctx => HandleInteraction();
     }
     void OnEnable(){
         controls.Gameplay.Enable();
@@ -38,7 +39,7 @@ public class PlayerEventItens : MonoBehaviour
         listOfKeys.Remove(keytype);
     }
 
-     private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other) {
         if(other.tag == "Door"){ 
             Debug.Log("Collided Door");
             door = other.gameObject.GetComponent<Door>();
@@ -47,8 +48,9 @@ public class PlayerEventItens : MonoBehaviour
                     isNearDoor = true;
                 }}
     }
-    void Update()  {
-        if(isNearDoor && Input.GetKeyDown(KeyCode.E)){ door.openDoor(this.gameObject);
+    void HandleInteraction()  {
+        if(isNearDoor){ 
+            door.openDoor(this.gameObject);
         }else{
         // Set the base position for raycasting
         Vector3 basePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -79,13 +81,13 @@ public class PlayerEventItens : MonoBehaviour
             if (hit.tag == "Key"){
                 key = hit.gameObject.GetComponent<Key>();
                 key.textActivate();
-                if(Input.GetKeyDown(KeyCode.E)) key.grabKey(this.gameObject);
+                key.grabKey(this.gameObject);
             
             }else if(hit.tag== "Chest") {
                 hit.gameObject.GetComponent<OpenChest>().openChest();
             }else if(hit.tag == "Lock"  &&hit.gameObject.GetComponent<LockCombination>().isLooking==false){
                hit.gameObject.GetComponent<LockCombination>().textActivate();
-               if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<LockCombination>().seeLock();
+               hit.gameObject.GetComponent<LockCombination>().seeLock();
             }
 
     }

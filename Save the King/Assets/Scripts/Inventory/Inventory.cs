@@ -27,7 +27,6 @@ public class Inventory : MonoBehaviour
     public int InventorySize = 12;
     void Start()
     {
-        controls = new PlayerControls();
         if(InventoryMenu.activeSelf)
         {
             InventoryMenu.SetActive(false);
@@ -60,45 +59,41 @@ public class Inventory : MonoBehaviour
         
         
     }
+
+    void Awake()
+    {
+        controls = InputManager.inputActions;
+        controls.Gameplay.Inventory.performed += ctx => HandleInventory();
+    }
     
 
-    void Update()
+    void HandleInventory()
     {
         if(InventoryMenu.activeSelf)
         {
-            if(Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
+            InventoryMenu.SetActive(false);
+            Cursor.visible = false; 
+            if (freeLookCamera != null)
             {
-                    InventoryMenu.SetActive(false);
-                    Cursor.visible = false; 
-                    if (freeLookCamera != null)
-                    {
-                        freeLookCamera.enabled = true; 
-                    }
-                    audioSource.Play();
-                    Time.timeScale = 1; 
-                    //controls.Gameplay.Camera.Enable();
-
+                freeLookCamera.enabled = true; 
             }
+            audioSource.Play();
+            Time.timeScale = 1; 
+            //controls.Gameplay.Camera.Enable();
         }
         else
-        {
-            if(Input.GetKeyDown(KeyCode.I))
-            {    
-                InventoryMenu.SetActive(true); 
-                Cursor.lockState = CursorLockMode.None; 
-                Cursor.visible = true; 
-                if (freeLookCamera != null)
-                {
-                    freeLookCamera.enabled = false; 
-                }
-              // controls.Gameplay.Camera.Disable();
-                Time.timeScale = 0;
-                audioSource.Play();
+        {  
+            InventoryMenu.SetActive(true); 
+            Cursor.lockState = CursorLockMode.None; 
+            Cursor.visible = true; 
+            if (freeLookCamera != null)
+            {
+                freeLookCamera.enabled = false; 
             }
-
+            // controls.Gameplay.Camera.Disable();
+            Time.timeScale = 0;
+            audioSource.Play();
         }
-        
-        
     }
 
     public void RefreshInventory()

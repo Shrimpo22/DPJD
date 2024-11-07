@@ -25,20 +25,19 @@ public class OpenChest : MonoBehaviour
 
     public void openChest(){
         if(!open && !isRotating){
-        textActivate();
-         if (Input.GetKeyDown(KeyCode.E)){
+            textActivate();
             textClear();
             StartCoroutine(RotateObject());
-         }
+            
         }
     }
 
     public void textActivate(){
-      textChest.text  = "(E) Open Chest";
-      textChest.gameObject.SetActive(true);  
+        textChest.text  = "(E) Open Chest";
+        textChest.gameObject.SetActive(true);  
     }
     public void textClear(){
-      textChest.gameObject.SetActive(false);  
+        textChest.gameObject.SetActive(false);  
     }
     private void OnTriggerExit(Collider other){
         textClear();

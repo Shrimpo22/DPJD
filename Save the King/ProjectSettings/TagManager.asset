@@ -14,6 +14,9 @@ TagManager:
   - Lock
   - Map
   - MapPiece
+  - Food
+  - CookItems
+  - a
   layers:
   - Default
   - TransparentFX

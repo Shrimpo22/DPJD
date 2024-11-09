@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -93,14 +94,30 @@ public class PlayerEventItens : MonoBehaviour
 
             }
             else if(hit.tag == "MapPiece"){
-               hit.gameObject.GetComponent<MapPieceGrab>().textActivate();
-             if(Input.GetKeyDown(KeyCode.E)){
+                hit.gameObject.GetComponent<MapPieceGrab>().textActivate();
+                if(Input.GetKeyDown(KeyCode.E)){
                     hit.gameObject.GetComponent<MapPieceGrab>().grabItem(this.gameObject);}
-
             }
+            else if (hit.tag == "Food"){
+                hit.gameObject.GetComponent<Food>().textActivate();
+                if(Input.GetKeyDown(KeyCode.E)){
+                    hit.gameObject.GetComponent<Food>().grabItem(this.gameObject);
+                    }
+            }
+            else if (hit.tag == "CookItems"){
+                Debug.Log("Detected CookItems"); // Verifica se a tag CookItems foi encontrada
 
-    }
+                hit.gameObject.GetComponent<CookItems>().textActivate();
+                if(Input.GetKeyDown(KeyCode.E)){
+                    hit.gameObject.GetComponent<CookItems>().grabItem(this.gameObject);
+                    }
+            }
+                
+        }
 }
+
+
+
 
     
     

@@ -20,11 +20,8 @@ public class MirrorPiece : MonoBehaviour
 
     public void grabMirrorPiece()
     {
-        Debug.Log("ASDDDDDDDDDDsAAAAAAAAA");
         GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
-        Debug.Log("AAAAAAAAA" + inventory);
-        inventory.GetComponent<Inventory>().AddItem("Glass Shard", 1);
-        Debug.Log("BBBBB");
-        this.gameObject.SetActive(false);
+        inventory.GetComponent<Inventory>().AddItem("GlassShard", 1);
+        gameObject.transform.parent.gameObject.SetActive(false);
     }
 }

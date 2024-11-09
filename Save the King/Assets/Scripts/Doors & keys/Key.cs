@@ -19,11 +19,12 @@ public class Key : MonoBehaviour
         KeyOfChest,
         KeyOfKitchen,
         KeyOfDungeon,
+        KeyOfWardrobe
 
     }
 
     void Start(){
-        textKey.color = Color.black;
+        textKey.color = Color.white;
         audioSource = GetComponent<AudioSource>();
     }
     

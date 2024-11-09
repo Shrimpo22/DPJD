@@ -66,7 +66,6 @@ public class Door : MonoBehaviour{
     }
 
     public void Update(){
-       
         if (!isLocked && isClosed && currentRotation < targetRotation) {
             float rotationThisFrame = rotationSpeed * Time.deltaTime;  
             transform.Rotate(new Vector3(0, -rotationThisFrame, 0), Space.Self);  

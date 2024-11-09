@@ -64,7 +64,7 @@ public class PlayerEventItens : MonoBehaviour
                 Debug.DrawRay(rayOrigin, Vector3.down * rayDistance, Color.magenta);
                 if (Physics.Raycast(rayOrigin, Vector3.down, out hit, rayDistance))
                 {
-                    Debug.Log("Hit: " + hit.collider.tag); // Log what was hit
+                    //Debug.Log("Hit: " + hit.collider.tag); // Log what was hit
                     HandleHit(hit.collider);
                     
                 }
@@ -86,6 +86,10 @@ public class PlayerEventItens : MonoBehaviour
             }else if(hit.tag == "Lock"  &&hit.gameObject.GetComponent<LockCombination>().isLooking==false){
                hit.gameObject.GetComponent<LockCombination>().textActivate();
                if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<LockCombination>().seeLock();
+            }else if(hit.tag == "MirrorPiece"){
+                MirrorPiece mirrorPiece = hit.gameObject.GetComponent<MirrorPiece>();
+                mirrorPiece.textActivate();
+                if(Input.GetKeyDown(KeyCode.E)) mirrorPiece.grabMirrorPiece();
             }
 
     }

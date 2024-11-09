@@ -173,6 +173,7 @@ public class Inventory : MonoBehaviour
 
     public int AddItem(string itemName, int amount)
     {
+        Debug.Log("Adding... " + itemName + " " + amount);
         //Find Item to add
         Item item = null;
         allItemsDictionary.TryGetValue(itemName, out item);

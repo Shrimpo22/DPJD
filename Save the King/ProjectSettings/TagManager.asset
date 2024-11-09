@@ -9,6 +9,8 @@ TagManager:
   - Ground
   - Door
   - Key
+  - Chest
+  - MirrorPiece
   layers:
   - Default
   - TransparentFX

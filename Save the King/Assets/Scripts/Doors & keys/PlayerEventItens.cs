@@ -104,9 +104,7 @@ public class PlayerEventItens : MonoBehaviour
                     hit.gameObject.GetComponent<Food>().grabItem(this.gameObject);
                     }
             }
-            else if (hit.tag == "CookItems"){
-                Debug.Log("Detected CookItems"); // Verifica se a tag CookItems foi encontrada
-
+            else if (hit.tag == "Cookitems"){
                 hit.gameObject.GetComponent<CookItems>().textActivate();
                 if(Input.GetKeyDown(KeyCode.E)){
                     hit.gameObject.GetComponent<CookItems>().grabItem(this.gameObject);

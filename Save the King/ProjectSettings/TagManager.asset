@@ -16,7 +16,7 @@ TagManager:
   - MapPiece
   - Food
   - CookItems
-  - a
+  - Cookitems
   layers:
   - Default
   - TransparentFX

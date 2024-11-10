@@ -15,12 +15,18 @@ public class PauseMenu : MonoBehaviour
     public GameObject settingsMenuUI;
 
     public Slider xAxis, yAxis;
-    public CinemachineFreeLook camera;
+    public CinemachineFreeLook cam;
+
+    private PlayerControls controls;
+
+    public static bool isPaused(){
+        return GameIsPaused;
+    }
 
     // Update is called once per frame
-    void Update()
+    void HandleBack()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)){
+        if(!Inventory.isInInventory()){
             if (GameIsPaused){
                 if (inSettings){
                     Pause();
@@ -31,6 +37,12 @@ public class PauseMenu : MonoBehaviour
                 Pause();
             }
         }
+    }
+
+    void Awake()
+    {
+        controls = InputManager.inputActions;
+        controls.Gameplay.Back.performed += ctx => HandleBack();
     }
 
     public void Resume (){
@@ -54,11 +66,11 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void ChangeXAxis(){
-        camera.m_XAxis.m_MaxSpeed = xAxis.value;
+        cam.m_XAxis.m_MaxSpeed = xAxis.value;
     }
 
     public void ChangeYAxis(){
-        camera.m_YAxis.m_MaxSpeed = yAxis.value;
+        cam.m_YAxis.m_MaxSpeed = yAxis.value;
     }
 
     public void ExitGame (){
@@ -67,9 +79,9 @@ public class PauseMenu : MonoBehaviour
 
     public void ResetAllBindings()
     {
-        camera.m_XAxis.m_MaxSpeed = 300f;
+        cam.m_XAxis.m_MaxSpeed = 300f;
         xAxis.value = 300f;
-        camera.m_YAxis.m_MaxSpeed = 2f;
+        cam.m_YAxis.m_MaxSpeed = 2f;
         yAxis.value = 2f;
     }
 }

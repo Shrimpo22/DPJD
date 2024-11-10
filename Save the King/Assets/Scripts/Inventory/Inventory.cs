@@ -25,6 +25,12 @@ public class Inventory : MonoBehaviour
     [Space]
 
     public int InventorySize = 12;
+
+    private static bool inInventory = false;
+
+    public static bool isInInventory(){
+        return inInventory;
+    }
     void Start()
     {
         if(InventoryMenu.activeSelf)
@@ -64,36 +70,54 @@ public class Inventory : MonoBehaviour
     {
         controls = InputManager.inputActions;
         controls.Gameplay.Inventory.performed += ctx => HandleInventory();
+        controls.Gameplay.Back.performed += ctx => HandleClosing();
+    }
+
+    void HandleClosing(){
+        if(!PauseMenu.isPaused()){
+            if(InventoryMenu.activeSelf)
+            {
+                closeInventory();
+            }
+        }
     }
     
 
     void HandleInventory()
     {
-        if(InventoryMenu.activeSelf)
+        if(!PauseMenu.isPaused()){
+            if(InventoryMenu.activeSelf)
+            {
+                closeInventory();
+            }
+            else
+            {  
+                InventoryMenu.SetActive(true); 
+                inInventory = true;
+                Cursor.lockState = CursorLockMode.None; 
+                Cursor.visible = true; 
+                if (freeLookCamera != null)
+                {
+                    freeLookCamera.enabled = false; 
+                }
+                // controls.Gameplay.Camera.Disable();
+                Time.timeScale = 0;
+                audioSource.Play();
+            }
+        }
+    }
+
+    void closeInventory(){
+        InventoryMenu.SetActive(false);
+        inInventory = false;
+        Cursor.visible = false; 
+        if (freeLookCamera != null)
         {
-            InventoryMenu.SetActive(false);
-            Cursor.visible = false; 
-            if (freeLookCamera != null)
-            {
-                freeLookCamera.enabled = true; 
-            }
-            audioSource.Play();
-            Time.timeScale = 1; 
-            //controls.Gameplay.Camera.Enable();
+            freeLookCamera.enabled = true; 
         }
-        else
-        {  
-            InventoryMenu.SetActive(true); 
-            Cursor.lockState = CursorLockMode.None; 
-            Cursor.visible = true; 
-            if (freeLookCamera != null)
-            {
-                freeLookCamera.enabled = false; 
-            }
-            // controls.Gameplay.Camera.Disable();
-            Time.timeScale = 0;
-            audioSource.Play();
-        }
+        audioSource.Play();
+        Time.timeScale = 1; 
+        //controls.Gameplay.Camera.Enable();
     }
 
     public void RefreshInventory()

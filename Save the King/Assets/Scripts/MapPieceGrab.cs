@@ -7,6 +7,8 @@ public class MapPieceGrab : MonoBehaviour
 {
     public TMP_Text textMapPiece;
      
+    private bool hasBeenGrabbed = false;
+    public AudioClip grabSound;
     private AudioSource audioSource;
     // Start is called before the first frame update
     void Start(){
@@ -27,10 +29,15 @@ public class MapPieceGrab : MonoBehaviour
     }
 
     public void grabItem(GameObject player) {
+      if(!hasBeenGrabbed){
+            textClear();
+            hasBeenGrabbed=true;
+            audioSource.clip = grabSound;
+            audioSource.Play();
             GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
             inventory.GetComponent<Inventory>().AddItem("MapPiece",1);
-            Destroy(this.gameObject);
-   
+            Destroy(this.gameObject,grabSound.length);
+      }
     }
 
     private void OnTriggerExit(Collider other){

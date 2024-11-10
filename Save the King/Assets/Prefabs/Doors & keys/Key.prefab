@@ -253,6 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textKey: {fileID: 9109898221192604452}
   keyType: 0
+  grabSound: {fileID: 8300000, guid: 4daaf434b6a774f4988fa2b96db77ae4, type: 3}
 --- !u!65 &2134793482174179069
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -284,8 +285,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 4daaf434b6a774f4988fa2b96db77ae4, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

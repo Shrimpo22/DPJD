@@ -30,12 +30,14 @@ public class OpenChest : MonoBehaviour
          if (Input.GetKeyDown(KeyCode.E)){
             textClear();
             StartCoroutine(RotateObject());
+            this.GetComponent<Collider>().enabled = false;
          }
         }
     }
 
     public void openChestByLock(){
         StartCoroutine(RotateObject());
+        this.GetComponent<Collider>().enabled = false;
     }
 
     public void textActivate(){

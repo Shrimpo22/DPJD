@@ -28,12 +28,12 @@ public class Mouse : MonoBehaviour
     {
         mouseCursor.transform.position = Input.mousePosition;
 
-       /* if (!inventory.activeSelf)
+       if (!inventory.activeSelf)
         {
             opcoes.gameObject.SetActive(false);
             InspectManager.gameObject.SetActive(false);
         }
-        */
+        
         if (item != null && !InspectManager.activeSelf && !optionsDisplayed)
         {
             ShowOpcoes();
@@ -66,7 +66,7 @@ public class Mouse : MonoBehaviour
         
         if (item.GiveName().StartsWith("Key") || (item.GiveName().StartsWith("MapPiece") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtMap == false))
         {
-            Debug.Log("entrei no 1");
+            
             audioSource.Play();
             opcoes.gameObject.SetActive(true);
             opcoes.transform.position = Input.mousePosition;
@@ -74,7 +74,7 @@ public class Mouse : MonoBehaviour
         }
         else
         {
-            Debug.Log("entrei no 2");
+            
             audioSource.Play();
             opcoes.gameObject.SetActive(true);
             opcoes.transform.position = Input.mousePosition;

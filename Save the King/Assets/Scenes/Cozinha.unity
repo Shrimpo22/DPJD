@@ -2057,11 +2057,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.31650326
+      value: 0.3165033
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.16170016
+      value: -0.16170017
       objectReference: {fileID: 0}
     - target: {fileID: 169741066844414161, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_Name
@@ -2173,11 +2173,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.31265035
+      value: 0.31265032
       objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.1690297
+      value: -0.16902967
       objectReference: {fileID: 0}
     - target: {fileID: 6473281512777178405, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2874,6 +2874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMapPiece: {fileID: 1211269176}
+  foodPrefab: {fileID: 1717244652}
 --- !u!65 &926323583
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4421,6 +4422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMapPiece: {fileID: 1038827079}
+  foodPrefab: {fileID: 1299405843}
 --- !u!65 &1234934401
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5351,6 +5353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMapPiece: {fileID: 0}
+  foodPrefab: {fileID: 0}
 --- !u!4 &1518345593 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 422836, guid: c5308136cd1fd58439b140a96fa2206c, type: 3}
@@ -5392,6 +5395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMapPiece: {fileID: 400889842}
+  foodPrefab: {fileID: 590157872}
 --- !u!65 &1621301354
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5594,6 +5598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMapPiece: {fileID: 0}
+  foodPrefab: {fileID: 0}
 --- !u!1 &1723485541
 GameObject:
   m_ObjectHideFlags: 0
@@ -5783,6 +5788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMapPiece: {fileID: 0}
+  foodPrefab: {fileID: 0}
 --- !u!1001 &1791179297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6036,6 +6042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMapPiece: {fileID: 1723485543}
+  foodPrefab: {fileID: 1492509962}
 --- !u!65 &1903596733
 BoxCollider:
   m_ObjectHideFlags: 0

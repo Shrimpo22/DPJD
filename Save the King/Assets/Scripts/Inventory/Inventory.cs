@@ -18,12 +18,14 @@ public class Inventory : MonoBehaviour
     public AudioSource audioSource;
     public GameObject ItemPanelGrid;
     public Mouse mouse;
+    public bool isLookingAtMap = false;
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
     
     private CinemachineFreeLook freeLookCamera;
     [Space]
 
+    private bool wasOpenByOtherEvent = false;
     public int InventorySize = 12;
     void Start()
     {
@@ -62,6 +64,9 @@ public class Inventory : MonoBehaviour
     }
     
 
+    public void OpenIt(){
+        wasOpenByOtherEvent = true;
+    }
     void Update()
     {
         if(InventoryMenu.activeSelf)
@@ -82,8 +87,9 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            if(Input.GetKeyDown(KeyCode.I))
+            if(Input.GetKeyDown(KeyCode.I) || wasOpenByOtherEvent)
             {    
+                wasOpenByOtherEvent = false;
                 InventoryMenu.SetActive(true); 
                 Cursor.lockState = CursorLockMode.None; 
                 Cursor.visible = true; 
@@ -237,8 +243,12 @@ public class Inventory : MonoBehaviour
    
     public void ClearSlot(ItemSlotInfo slot)
     {
+        if(slot.stacks>1){
+        slot.stacks = slot.stacks - 1;
+        }else{
         slot.item = null;
         slot.stacks = 0;
+        }
     }
 
     IEnumerable<Item> GetAllItems()

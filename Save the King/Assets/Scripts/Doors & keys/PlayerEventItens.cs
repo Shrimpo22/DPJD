@@ -14,7 +14,7 @@ public class PlayerEventItens : MonoBehaviour
     public float rayDistance = 3f; 
     public float spacing = 0.5f; 
     public List<Key.KeyType> listOfKeys;
-    private Door door;
+    private IDoor door;
     private Key key;
     private PlayerControls controls;
 
@@ -42,13 +42,14 @@ public class PlayerEventItens : MonoBehaviour
         if(other.tag == "Door"){ 
             Debug.Log("Collided Door");
             door = other.gameObject.GetComponent<Door>();
-                if(door.isClosed){
-                    door.textActivate();
+            door = door != null ? door : other.gameObject.GetComponent<DoubleDoor>();
+                if(door.IsClosed){
+                    door.TextActivate();
                     isNearDoor = true;
                 }}
     }
     void Update()  {
-        if(isNearDoor && Input.GetKeyDown(KeyCode.E)){ door.openDoor(this.gameObject);
+        if(isNearDoor && Input.GetKeyDown(KeyCode.E)){ door.OpenDoor(this.gameObject);
         }else{
         // Set the base position for raycasting
         Vector3 basePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -90,6 +91,12 @@ public class PlayerEventItens : MonoBehaviour
                 MirrorPiece mirrorPiece = hit.gameObject.GetComponent<MirrorPiece>();
                 mirrorPiece.textActivate();
                 if(Input.GetKeyDown(KeyCode.E)) mirrorPiece.grabMirrorPiece();
+            }else if(hit.tag == "Candelabra" && hit.gameObject.GetComponent<CandelabraCam>().isLooking == false){
+                hit.gameObject.GetComponent<CandelabraCam>().textActivate();
+                if(Input.GetKeyDown(KeyCode.E))hit.gameObject.GetComponent<CandelabraCam>().seeObject();
+            }else if(hit.tag == "MirrorTable" && hit.gameObject.GetComponent<MirrorTableCam>().isLooking == false){
+                hit.gameObject.GetComponent<MirrorTableCam>().textActivate();
+                if(Input.GetKeyDown(KeyCode.E))hit.gameObject.GetComponent<MirrorTableCam>().seeObject();
             }
 
     }

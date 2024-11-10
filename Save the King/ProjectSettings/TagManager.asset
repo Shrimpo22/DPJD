@@ -11,6 +11,9 @@ TagManager:
   - Key
   - Chest
   - MirrorPiece
+  - Inventory
+  - Candelabra
+  - MirrorTable
   layers:
   - Default
   - TransparentFX

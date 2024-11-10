@@ -27,14 +27,13 @@ public class GlassShard : Item
 
     public override string GiveDiscresp()
     {
-        return "A shard of glass. Through its fractured surface, you almost think you see... another world. I wonder from where it is...";
+        return "A shard of glass, you almost think you see... another world reflected. I wonder from where it is...";
     }
     public override Action UseFunc()
     {
         return () =>
         {
-            Debug.Log("Mirror Piece");
-            
+            GameObject.FindGameObjectWithTag("MirrorTable").GetComponent<MirrorTableCam>().addPiece();
         };
     }
 }

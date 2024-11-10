@@ -63,6 +63,7 @@ public class Inventory : MonoBehaviour
         
     }
     public void OpenIt(){
+        isLookingAtMap = true;
         wasOpenByOtherEvent = true;
     }
     
@@ -72,9 +73,9 @@ public class Inventory : MonoBehaviour
        
         if(InventoryMenu.activeSelf)
         {
-                if(Input.GetKeyDown(KeyCode.I)  || Input.GetKeyDown(KeyCode.Escape))
+                if(Input.GetKeyDown(KeyCode.I)  || Input.GetKeyDown(KeyCode.Escape) || wasOpenByOtherEvent )
                 {
-                
+                     wasOpenByOtherEvent = false;
                     InventoryMenu.SetActive(false);
                     Cursor.visible = false; 
                     if (freeLookCamera != null)

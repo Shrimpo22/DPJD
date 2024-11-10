@@ -63,8 +63,10 @@ public class Mouse : MonoBehaviour
 
     public void ShowOpcoes()
     {
+        
         if (item.GiveName().StartsWith("Key") || (item.GiveName().StartsWith("MapPiece") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtMap == false))
         {
+            Debug.Log("entrei no 1");
             audioSource.Play();
             opcoes.gameObject.SetActive(true);
             opcoes.transform.position = Input.mousePosition;
@@ -72,6 +74,7 @@ public class Mouse : MonoBehaviour
         }
         else
         {
+            Debug.Log("entrei no 2");
             audioSource.Play();
             opcoes.gameObject.SetActive(true);
             opcoes.transform.position = Input.mousePosition;

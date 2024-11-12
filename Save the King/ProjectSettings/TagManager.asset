@@ -10,6 +10,10 @@ TagManager:
   - Door
   - Key
   - Chest
+  - MirrorPiece
+  - Inventory
+  - Candelabra
+  - MirrorTable
   - Inventory
   - Lock
   - Map
@@ -19,6 +23,7 @@ TagManager:
   - Cookitems
   - CozinhaCamara
   - furnalha
+
   layers:
   - Default
   - TransparentFX

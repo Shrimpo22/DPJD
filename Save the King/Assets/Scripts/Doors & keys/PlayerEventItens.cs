@@ -15,7 +15,7 @@ public class PlayerEventItens : MonoBehaviour
     public float rayDistance = 3f; 
     public float spacing = 1f; 
     public List<Key.KeyType> listOfKeys;
-    private Door door;
+    private IDoor door;
     private Key key;
     private PlayerControls controls;
 
@@ -43,13 +43,14 @@ public class PlayerEventItens : MonoBehaviour
         if(other.tag == "Door"){ 
             Debug.Log("Collided Door");
             door = other.gameObject.GetComponent<Door>();
-                if(door.isClosed){
-                    door.textActivate();
+            door = door != null ? door : other.gameObject.GetComponent<DoubleDoor>();
+                if(door.IsClosed){
+                    door.TextActivate();
                     isNearDoor = true;
                 }}
     }
     void Update()  {
-        if(isNearDoor && Input.GetKeyDown(KeyCode.E)){ door.openDoor(this.gameObject);
+        if(isNearDoor && Input.GetKeyDown(KeyCode.E)){ door.OpenDoor(this.gameObject);
         }else{
         // Set the base position for raycasting
         Vector3 basePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -65,7 +66,7 @@ public class PlayerEventItens : MonoBehaviour
                 Debug.DrawRay(rayOrigin, Vector3.down * rayDistance, Color.magenta);
                 if (Physics.Raycast(rayOrigin, Vector3.down, out hit, rayDistance))
                 {
-                    Debug.Log("Hit: " + hit.collider.tag); // Log what was hit
+                    //Debug.Log("Hit: " + hit.collider.tag); // Log what was hit
                     HandleHit(hit.collider);
                     
                 }
@@ -87,10 +88,23 @@ public class PlayerEventItens : MonoBehaviour
                 hit.gameObject.GetComponent<OpenChest>().openChest();
             }else if(hit.tag == "Lock"  &&hit.gameObject.GetComponent<LockCombination>().isLooking==false){
                hit.gameObject.GetComponent<LockCombination>().textActivate();
+
                if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<LockCombination>().seeObject();
+            }else if(hit.tag == "MirrorPiece"){
+                MirrorPiece mirrorPiece = hit.gameObject.GetComponent<MirrorPiece>();
+                mirrorPiece.textActivate();
+                if(Input.GetKeyDown(KeyCode.E)) mirrorPiece.grabMirrorPiece();
+            }else if(hit.tag == "Candelabra" && hit.gameObject.GetComponent<CandelabraCam>().isLooking == false){
+                hit.gameObject.GetComponent<CandelabraCam>().textActivate();
+                if(Input.GetKeyDown(KeyCode.E))hit.gameObject.GetComponent<CandelabraCam>().seeObject();
+            }else if(hit.tag == "MirrorTable" && hit.gameObject.GetComponent<MirrorTableCam>().isLooking == false){
+                hit.gameObject.GetComponent<MirrorTableCam>().textActivate();
+                if(Input.GetKeyDown(KeyCode.E))hit.gameObject.GetComponent<MirrorTableCam>().seeObject();
+           
             }else if(hit.tag == "Map"  &&hit.gameObject.GetComponent<Map>().isLooking==false){
                hit.gameObject.GetComponent<Map>().textActivate();
                if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<Map>().seeObject();
+
 
             }
             else if(hit.tag == "MapPiece"){

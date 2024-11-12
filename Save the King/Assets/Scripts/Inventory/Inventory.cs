@@ -19,7 +19,6 @@ public class Inventory : MonoBehaviour
     public GameObject ItemPanelGrid;
     public Mouse mouse;
     public bool isLookingAtMap = false;
-
     public bool isLookingAtCook = false;
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
@@ -27,6 +26,7 @@ public class Inventory : MonoBehaviour
     private CinemachineFreeLook freeLookCamera;
     [Space]
 
+    private bool wasOpenByOtherEvent = false;
     public int InventorySize = 12;
     void Start()
     {
@@ -74,6 +74,9 @@ public class Inventory : MonoBehaviour
         wasOpenByOtherEvent = true;
     }
 
+    public void OpenIt(){
+        wasOpenByOtherEvent = true;
+    }
     void Update()
     {
 
@@ -105,8 +108,8 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-                if(Input.GetKeyDown(KeyCode.I) || wasOpenByOtherEvent )
 
+            if(Input.GetKeyDown(KeyCode.I) || wasOpenByOtherEvent )
                 {
                     wasOpenByOtherEvent = false;
                     InventoryMenu.SetActive(true); 
@@ -200,6 +203,7 @@ public class Inventory : MonoBehaviour
 
     public int AddItem(string itemName, int amount)
     {
+        Debug.Log("Adding... " + itemName + " " + amount);
         //Find Item to add
         Item item = null;
         allItemsDictionary.TryGetValue(itemName, out item);

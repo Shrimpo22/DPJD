@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 public class CozinharScript : MonoBehaviour
 {
     public TMP_Text textEvent;
@@ -13,7 +14,6 @@ public class CozinharScript : MonoBehaviour
 
     public Camera myCamera;
     private Camera mainCamera;
-    
     public List<string> comidaCorreta = new List<string>();
     public List<string> comidaTentativa = new List<string>();
     private string finalAnswer;
@@ -32,17 +32,32 @@ public class CozinharScript : MonoBehaviour
 
     void Update()
     {
-        if(comidaCorreta.Count == comidaTentativa.Count) {
+        if(comidaCorreta.Count == comidaTentativa.Count && !isComplete) {
             textEvent.text = "(ESC) Exit";
             isComplete=true;
             finalAnswer = string.Join(", ", comidaTentativa); 
-            if (comidaCorreta == comidaTentativa){
+            
+            if (comidaCorreta.SequenceEqual(comidaTentativa)){
+                Debug.Log("Acertou");
                 inventory.GetComponent<Inventory>().AddItem("Potions",2);
                 inventory.GetComponent<Inventory>().AddItem("KeyOfKitchen",1);
             }else{
-                //Meter o codigo para meter o inimigo a mexer
+                player.SetActive(true);
+                GameObject targetObject = GameObject.FindGameObjectWithTag("Target");
+
+                if (targetObject != null)
+                {
+                    // Obtém todos os componentes de MonoBehaviour (scripts) no GameObject
+                    MonoBehaviour[] scripts = targetObject.GetComponents<MonoBehaviour>();
+
+                    // Ativa cada script
+                    foreach (MonoBehaviour script in scripts)
+                    {
+                        script.enabled = true;
+                    }
+                }
             }
-        }
+        }    
         if(Input.GetKeyDown(KeyCode.Escape) && isLooking){
             player.SetActive(true);
             textClear();
@@ -58,8 +73,8 @@ public class CozinharScript : MonoBehaviour
                 inventory.GetComponent<Inventory>().OpenItCozinha();
                 
         }
+    
     }
-
 
     public void textActivate(){
       textEvent.text  = "(E) Interact";
@@ -84,4 +99,5 @@ public class CozinharScript : MonoBehaviour
     public void textClear(){
       textEvent.gameObject.SetActive(false);  
     }
+    
 }

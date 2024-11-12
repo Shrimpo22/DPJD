@@ -6,24 +6,30 @@ using UnityEngine;
 public class Food : MonoBehaviour
 {
     private bool hasBeenGrabed = false; 
-    public TMP_Text textMapPiece;
+    public TMP_Text foodText;
    
     public GameObject foodPrefab; 
 
     private int healingAmount;
     void Start(){
-        textMapPiece.color = Color.black;
+        
+        if (foodText == null) {
+          foodText = GetComponentInChildren<TMP_Text>(); 
+        }
+
+        foodText.color = Color.black;
+    
         textClear();
         SetHealingAmount();
     }
     
     public void textActivate(){
-      textMapPiece.text  = "(E) Eat Food";
-      textMapPiece.gameObject.SetActive(true);  
+      foodText.text  = "(E) Eat Food";
+      foodText.gameObject.SetActive(true);  
     }
 
     public void textClear(){
-      textMapPiece.gameObject.SetActive(false);  
+      foodText.gameObject.SetActive(false);  
     }
 
 

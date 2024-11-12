@@ -36,7 +36,17 @@ public class GreenItem : Item
     {
         return () =>
         {
-            Debug.Log("Green Item");
+            CozinharScript cozinharScript = GameObject.FindGameObjectWithTag("furnalha").GetComponent<CozinharScript>();
+            GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().DropItemByName(GiveName());
+            if (cozinharScript != null)
+            {
+                cozinharScript.comidaTentativa.Add(GiveName());
+                Debug.Log(GiveName() + " added to tentativa list.");
+            }
+            else
+            {
+                Debug.LogWarning("CozinharScript not found.");
+            }
             
         };
     }

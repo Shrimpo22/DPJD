@@ -19,6 +19,8 @@ public class Inventory : MonoBehaviour
     public GameObject ItemPanelGrid;
     public Mouse mouse;
     public bool isLookingAtMap = false;
+
+    public bool isLookingAtCook = false;
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
 
@@ -58,6 +60,7 @@ public class Inventory : MonoBehaviour
         Debug.Log(itemsInDictionary);
         
         AddItem("Potions",3);
+        AddItem("RedItem",1);
         RefreshInventory();
         
         
@@ -66,7 +69,10 @@ public class Inventory : MonoBehaviour
         isLookingAtMap = true;
         wasOpenByOtherEvent = true;
     }
-    
+    public void OpenItCozinha(){
+        isLookingAtCook = true;
+        wasOpenByOtherEvent = true;
+    }
 
     void Update()
     {
@@ -75,7 +81,7 @@ public class Inventory : MonoBehaviour
         {
                 if(Input.GetKeyDown(KeyCode.I)  || Input.GetKeyDown(KeyCode.Escape) || wasOpenByOtherEvent )
                 {
-                     wasOpenByOtherEvent = false;
+                    wasOpenByOtherEvent = false;
                     InventoryMenu.SetActive(false);
                     Cursor.visible = false; 
                     if (freeLookCamera != null)

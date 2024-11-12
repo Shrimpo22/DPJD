@@ -110,6 +110,10 @@ public class PlayerEventItens : MonoBehaviour
                     hit.gameObject.GetComponent<CookItems>().grabItem(this.gameObject);
                     }
             }
+            else if (hit.tag == "furnalha" && hit.gameObject.GetComponent<CozinharScript>().isLooking==false){
+                hit.gameObject.GetComponent<CozinharScript>().textActivate();
+                if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<CozinharScript>().seeObject();
+            }
                 
         }
 }

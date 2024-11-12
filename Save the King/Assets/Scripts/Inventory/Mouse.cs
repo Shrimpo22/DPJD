@@ -64,7 +64,10 @@ public class Mouse : MonoBehaviour
     public void ShowOpcoes()
     {
         
-        if (item.GiveName().StartsWith("Key") || (item.GiveName().StartsWith("MapPiece") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtMap == false))
+        if (item.GiveName().StartsWith("Key") || 
+        (item.GiveName().StartsWith("MapPiece") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtMap == false) ||
+        (item.GiveName().Contains("Item") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtCook == false)
+        )
         {
             
             audioSource.Play();

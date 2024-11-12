@@ -17,6 +17,8 @@ TagManager:
   - Food
   - CookItems
   - Cookitems
+  - CozinhaCamara
+  - furnalha
   layers:
   - Default
   - TransparentFX

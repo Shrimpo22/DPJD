@@ -23,7 +23,7 @@ public class Inventory : MonoBehaviour
     public bool isLookingAtCook = false;
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
-
+    
     private CinemachineFreeLook freeLookCamera;
     [Space]
 
@@ -76,18 +76,21 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
+
        
         if(InventoryMenu.activeSelf)
         {
                 if(Input.GetKeyDown(KeyCode.I)  || Input.GetKeyDown(KeyCode.Escape) || wasOpenByOtherEvent )
                 {
                     wasOpenByOtherEvent = false;
+
                     InventoryMenu.SetActive(false);
                     Cursor.visible = false; 
                     if (freeLookCamera != null)
                     {
                         freeLookCamera.enabled = true; 
                     }
+
 
                     audioSource.Play();
                     Time.timeScale = 1; 
@@ -103,6 +106,7 @@ public class Inventory : MonoBehaviour
         else
         {
                 if(Input.GetKeyDown(KeyCode.I) || wasOpenByOtherEvent )
+
                 {
                     wasOpenByOtherEvent = false;
                     InventoryMenu.SetActive(true); 
@@ -117,7 +121,9 @@ public class Inventory : MonoBehaviour
                     audioSource.Play();
                 }
 
+
         }
+
     }
         
     
@@ -218,6 +224,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
+                        
                         i.stacks += amount;
                         //if (InventoryMenu.activeSelf)
                          RefreshInventory();

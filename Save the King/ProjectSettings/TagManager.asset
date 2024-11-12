@@ -9,6 +9,16 @@ TagManager:
   - Ground
   - Door
   - Key
+  - Chest
+  - Inventory
+  - Lock
+  - Map
+  - MapPiece
+  - Food
+  - CookItems
+  - Cookitems
+  - CozinhaCamara
+  - furnalha
   layers:
   - Default
   - TransparentFX

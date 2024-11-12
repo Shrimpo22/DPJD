@@ -26,8 +26,7 @@ public class Inventory : MonoBehaviour
     private CinemachineFreeLook freeLookCamera;
     [Space]
 
-    private bool wasOpenByOtherEvent = false;
-    public int InventorySize = 12;
+        public int InventorySize = 12;
     void Start()
     {
         controls = new PlayerControls();
@@ -74,9 +73,7 @@ public class Inventory : MonoBehaviour
         wasOpenByOtherEvent = true;
     }
 
-    public void OpenIt(){
-        wasOpenByOtherEvent = true;
-    }
+   
     void Update()
     {
 

@@ -12,13 +12,14 @@ public class Inventory : MonoBehaviour
     [Header("Inventory Menu Components")]
 
     public GameObject InventoryMenu;
-
+    private bool wasOpenByOtherEvent = false;
     public GameObject ItemPanel;
     private PlayerControls controls;
     public AudioSource audioSource;
     public GameObject ItemPanelGrid;
     public Mouse mouse;
     public bool isLookingAtMap = false;
+    public bool isLookingAtCook = false;
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
     
@@ -57,55 +58,78 @@ public class Inventory : MonoBehaviour
         }
         itemsInDictionary += ".";
         Debug.Log(itemsInDictionary);
-        //AddItem("Potions",6);
+        
+        AddItem("Potions",3);
+        
         RefreshInventory();
         
         
     }
-    
+    public void OpenIt(){
+        isLookingAtMap = true;
+        wasOpenByOtherEvent = true;
+    }
+    public void OpenItCozinha(){
+        isLookingAtCook = true;
+        wasOpenByOtherEvent = true;
+    }
 
     public void OpenIt(){
         wasOpenByOtherEvent = true;
     }
     void Update()
     {
+
+       
         if(InventoryMenu.activeSelf)
         {
-            if(Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
-            {
+                if(Input.GetKeyDown(KeyCode.I)  || Input.GetKeyDown(KeyCode.Escape) || wasOpenByOtherEvent )
+                {
+                    wasOpenByOtherEvent = false;
+
                     InventoryMenu.SetActive(false);
                     Cursor.visible = false; 
                     if (freeLookCamera != null)
                     {
                         freeLookCamera.enabled = true; 
                     }
+
+
                     audioSource.Play();
                     Time.timeScale = 1; 
                     //controls.Gameplay.Camera.Enable();
+                    if (mouse != null)
+                    {
+                        mouse.optionsDisplayed = false;
+                        mouse.opcoes.SetActive(false); // Assegura que o menu é fechado
+                    }
+                }
 
-            }
         }
         else
         {
-            if(Input.GetKeyDown(KeyCode.I) || wasOpenByOtherEvent)
-            {    
-                wasOpenByOtherEvent = false;
-                InventoryMenu.SetActive(true); 
-                Cursor.lockState = CursorLockMode.None; 
-                Cursor.visible = true; 
-                if (freeLookCamera != null)
+
+            if(Input.GetKeyDown(KeyCode.I) || wasOpenByOtherEvent )
                 {
-                    freeLookCamera.enabled = false; 
+                    wasOpenByOtherEvent = false;
+                    InventoryMenu.SetActive(true); 
+                    Cursor.lockState = CursorLockMode.None; 
+                    Cursor.visible = true; 
+                    if (freeLookCamera != null)
+                    {
+                        freeLookCamera.enabled = false; 
+                    }
+                    // controls.Gameplay.Camera.Disable();
+                    Time.timeScale = 0;
+                    audioSource.Play();
                 }
-              // controls.Gameplay.Camera.Disable();
-                Time.timeScale = 0;
-                audioSource.Play();
-            }
+
 
         }
-        
-        
+
     }
+        
+    
 
     public void RefreshInventory()
     {

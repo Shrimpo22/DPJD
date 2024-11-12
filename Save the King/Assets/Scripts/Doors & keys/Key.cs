@@ -8,7 +8,9 @@ using UnityEngine;
 public class Key : MonoBehaviour
 {
     public TMP_Text textKey;
+    private bool hasBeenGrabbed = false;
     [SerializeField] KeyType keyType;
+    public AudioClip grabSound;
     private AudioSource audioSource;
     public enum KeyType{
         None,
@@ -43,10 +45,16 @@ public class Key : MonoBehaviour
     }
 
     public void grabKey(GameObject player) {
+        if(!hasBeenGrabbed){
+            textClear();
+            hasBeenGrabbed=true;
+            audioSource.clip = grabSound;
+            audioSource.Play();
             player.GetComponent<PlayerEventItens>().AddKey(keyType);
             GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
             inventory.GetComponent<Inventory>().AddItem(keyType.ToString(),1);
-            Destroy(this.gameObject);
+            Destroy(transform.parent.gameObject,grabSound.length);
+        }
    
     }
 

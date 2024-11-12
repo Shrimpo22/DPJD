@@ -22,17 +22,18 @@ public class Mouse : MonoBehaviour
     public GameObject inventory;
     public Button fechar;
     public TMP_Text titulo;
-    private bool optionsDisplayed = false;
+    public bool optionsDisplayed = false;
 
     void Update()
     {
         mouseCursor.transform.position = Input.mousePosition;
 
-        if (!inventory.activeSelf)
+       if (!inventory.activeSelf)
         {
-            FecharInspectManager();
+            opcoes.gameObject.SetActive(false);
+            InspectManager.gameObject.SetActive(false);
         }
-
+        
         if (item != null && !InspectManager.activeSelf && !optionsDisplayed)
         {
             ShowOpcoes();
@@ -62,8 +63,13 @@ public class Mouse : MonoBehaviour
 
     public void ShowOpcoes()
     {
-        if (item.GiveName().StartsWith("Key"))
+        
+        if (item.GiveName().StartsWith("Key") || 
+        (item.GiveName().StartsWith("MapPiece") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtMap == false) ||
+        (item.GiveName().Contains("Item") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtCook == false)
+        )
         {
+            
             audioSource.Play();
             opcoes.gameObject.SetActive(true);
             opcoes.transform.position = Input.mousePosition;
@@ -71,6 +77,7 @@ public class Mouse : MonoBehaviour
         }
         else
         {
+            
             audioSource.Play();
             opcoes.gameObject.SetActive(true);
             opcoes.transform.position = Input.mousePosition;
@@ -130,5 +137,6 @@ public class Mouse : MonoBehaviour
 
         item = null;
         opcoes.SetActive(false);
+        optionsDisplayed = false;
     }
 }

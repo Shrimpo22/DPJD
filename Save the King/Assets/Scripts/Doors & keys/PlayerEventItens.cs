@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,7 +13,7 @@ public class PlayerEventItens : MonoBehaviour
     public bool isNearDoor = false;
     public int rayCount = 2; 
     public float rayDistance = 3f; 
-    public float spacing = 0.5f; 
+    public float spacing = 1f; 
     public List<Key.KeyType> listOfKeys;
     private IDoor door;
     private Key key;
@@ -80,13 +81,15 @@ public class PlayerEventItens : MonoBehaviour
             if (hit.tag == "Key"){
                 key = hit.gameObject.GetComponent<Key>();
                 key.textActivate();
-                if(Input.GetKeyDown(KeyCode.E)) key.grabKey(this.gameObject);
+                if(Input.GetKeyDown(KeyCode.E)){
+                    key.grabKey(this.gameObject);}
             
             }else if(hit.tag== "Chest") {
                 hit.gameObject.GetComponent<OpenChest>().openChest();
             }else if(hit.tag == "Lock"  &&hit.gameObject.GetComponent<LockCombination>().isLooking==false){
                hit.gameObject.GetComponent<LockCombination>().textActivate();
-               if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<LockCombination>().seeLock();
+
+               if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<LockCombination>().seeObject();
             }else if(hit.tag == "MirrorPiece"){
                 MirrorPiece mirrorPiece = hit.gameObject.GetComponent<MirrorPiece>();
                 mirrorPiece.textActivate();
@@ -97,10 +100,40 @@ public class PlayerEventItens : MonoBehaviour
             }else if(hit.tag == "MirrorTable" && hit.gameObject.GetComponent<MirrorTableCam>().isLooking == false){
                 hit.gameObject.GetComponent<MirrorTableCam>().textActivate();
                 if(Input.GetKeyDown(KeyCode.E))hit.gameObject.GetComponent<MirrorTableCam>().seeObject();
-            }
+           
+            }else if(hit.tag == "Map"  &&hit.gameObject.GetComponent<Map>().isLooking==false){
+               hit.gameObject.GetComponent<Map>().textActivate();
+               if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<Map>().seeObject();
 
-    }
+
+            }
+            else if(hit.tag == "MapPiece"){
+                hit.gameObject.GetComponent<MapPieceGrab>().textActivate();
+                if(Input.GetKeyDown(KeyCode.E)){
+                    hit.gameObject.GetComponent<MapPieceGrab>().grabItem(this.gameObject);}
+            }
+            else if (hit.tag == "Food"){
+                hit.gameObject.GetComponent<Food>().textActivate();
+                if(Input.GetKeyDown(KeyCode.E)){
+                    hit.gameObject.GetComponent<Food>().grabItem(this.gameObject);
+                    }
+            }
+            else if (hit.tag == "Cookitems"){
+                hit.gameObject.GetComponent<CookItems>().textActivate();
+                if(Input.GetKeyDown(KeyCode.E)){
+                    hit.gameObject.GetComponent<CookItems>().grabItem(this.gameObject);
+                    }
+            }
+            else if (hit.tag == "furnalha" && hit.gameObject.GetComponent<CozinharScript>().isLooking==false){
+                hit.gameObject.GetComponent<CozinharScript>().textActivate();
+                if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<CozinharScript>().seeObject();
+            }
+                
+        }
 }
+
+
+
 
     
     

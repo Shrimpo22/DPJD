@@ -20,6 +20,7 @@ public class Inventory : MonoBehaviour
     public Mouse mouse;
     public bool isLookingAtMap = false;
     public bool isLookingAtCook = false;
+    public bool isLookingAtMirror = false;
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
     
@@ -59,6 +60,7 @@ public class Inventory : MonoBehaviour
         Debug.Log(itemsInDictionary);
         
         AddItem("Potions",3);
+        AddItem("GlassShard",4);
         
         RefreshInventory();
         
@@ -70,6 +72,11 @@ public class Inventory : MonoBehaviour
     }
     public void OpenItCozinha(){
         isLookingAtCook = true;
+        wasOpenByOtherEvent = true;
+    }
+
+    public void OpenItMirror(){
+        isLookingAtMirror = true;
         wasOpenByOtherEvent = true;
     }
 

@@ -25,6 +25,8 @@ public class MirrorTableCam : MonoBehaviour
 
     public GameObject mirror;
     public GameObject painting;
+
+    public AudioClip clip;
     
     void Start()
     {
@@ -71,6 +73,9 @@ public class MirrorTableCam : MonoBehaviour
     }
 
     public void addPiece(){
+       AudioSource ad = gameObject.AddComponent<AudioSource>();
+       ad.clip = clip;
+       ad.Play(); 
        inventory.GetComponent<Inventory>().DropItemByName("GlassShard");
        allPieces[nrOfPiecesOn].SetActive(true);
        nrOfPiecesOn++;
@@ -93,11 +98,11 @@ public class MirrorTableCam : MonoBehaviour
             mainCamera.gameObject.SetActive(true);
             myCamera.gameObject.SetActive(false);
             isLooking = false;
-            inventory.GetComponent<Inventory>().isLookingAtMap = false;
+            inventory.GetComponent<Inventory>().isLookingAtMirror = false;
 
            
         }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
-                inventory.GetComponent<Inventory>().OpenIt();
+                inventory.GetComponent<Inventory>().OpenItMirror();
                 
         }
     }

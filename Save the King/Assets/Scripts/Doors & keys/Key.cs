@@ -12,6 +12,7 @@ public class Key : MonoBehaviour
     [SerializeField] KeyType keyType;
     public AudioClip grabSound;
     private AudioSource audioSource;
+    public  GameObject player;
     public enum KeyType{
         None,
         KeyOfCell,
@@ -63,6 +64,6 @@ public class Key : MonoBehaviour
     }
 
     public void OnMouseDown(){
-        grabKey(GameObject.FindGameObjectWithTag("Player"));
+        grabKey(player);
     }
 }

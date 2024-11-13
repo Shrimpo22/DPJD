@@ -63,10 +63,10 @@ public class Mouse : MonoBehaviour
 
     public void ShowOpcoes()
     {
-        
+        Inventory inv = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         if (item.GiveName().StartsWith("Key") || 
-        (item.GiveName().StartsWith("MapPiece") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtMap == false) ||
-        (item.GiveName().Contains("Item") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtCook == false)
+        (item.GiveName().StartsWith("GlassShard") && inv.isLookingAtMirror == false)|| (item.GiveName().StartsWith("MapPiece") && inv.isLookingAtMap == false) ||
+        (item.GiveName().Contains("Item") && inv.isLookingAtCook == false)
         )
         {
             

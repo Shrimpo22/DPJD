@@ -17,6 +17,8 @@ public class PaintingCam : MonoBehaviour
 
     public GameObject Key;
     Rigidbody rb;    
+    AudioSource ad;
+    public AudioClip clip;
     void Start()
     {
        player = GameObject.FindGameObjectWithTag("Player");
@@ -66,6 +68,9 @@ public class PaintingCam : MonoBehaviour
 
     public void OnMouseDown(){
         if(active && isLooking){
+            ad = gameObject.AddComponent<AudioSource>();
+            ad.clip = clip;
+            ad.Play();
             rb.isKinematic = false;
             rb.AddExplosionForce(500f, transform.position, 2f, 0f);
             Vector3 forwardForce = Vector3.Cross(transform.forward, transform.right) * 15f;

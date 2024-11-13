@@ -26,19 +26,17 @@ TagManager:
   - Painting
   - Inventory
   - Player Collider
+  - Weapon In Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Occlusion
   - Water
   - UI
+  - Player
   - 
   - 
-  -
-  - Occlusion
-  - Player Ignore
-  - Arrow
   - 
   - 
   - 

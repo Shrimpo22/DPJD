@@ -3,15 +3,17 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using System.Collections;
+using JetBrains.Annotations;
 
 public class DetectionArrow : MonoBehaviour
 {
     public Transform player;  // Reference to the player's transform
+    public PlayerMovement playerMovement;
     public GameObject detectionArrowPrefab;  // Prefab for the detection arrow UI
     public Transform arrowParent;  // The parent object to hold arrows (inside a Canvas)
     public float detectionDistance = 15f;  // Max distance to display arrows
 
-     public float arrowDistanceFromCenter = 200f;  // How far from the center the arrow should be
+    public float arrowDistanceFromCenter = 200f;  // How far from the center the arrow should be
     public Vector2 arrowScale = new Vector2(1.5f, 1.5f);  // Scale for the arrow to make it larger
 
     public Vector2 arrowOffset = new Vector2(0, -10);
@@ -22,13 +24,15 @@ public class DetectionArrow : MonoBehaviour
     public Vector3 finalDir;    
     public RectTransform arrowRectTransform;
 
-
+    private int counter;
     // Dictionary to keep track of arrows associated with each detecting enemy
     private Dictionary<EnemyDetection, GameObject> activeArrows = new Dictionary<EnemyDetection, GameObject>();
 
     void Start(){
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         arrowParent = this.transform;
+        counter = 0;
     }
     void OnEnable()
     {
@@ -96,8 +100,6 @@ public class DetectionArrow : MonoBehaviour
                         img.color = Color.white;
                     }
                 }
-
-                
             }
             else
             {
@@ -135,11 +137,18 @@ public class DetectionArrow : MonoBehaviour
             if (childTransform != null)
             {
                 Image img = childTransform.GetComponent<Image>();
+                
+                if (!playerMovement.IsDetected())
+                    playerMovement.Detected();
                 if (img != null)
                 {
+                    if (img.color != Color.red)
+                        counter++;
+                    Debug.Log("Counter Enemy chase ->" + counter);
                     img.color = Color.red;
                 }
             }
+   
         }
     }
 
@@ -150,6 +159,10 @@ public class DetectionArrow : MonoBehaviour
             if (childTransform != null)
             {
                 Image img = childTransform.GetComponent<Image>();
+                counter--;
+                Debug.Log("Counter Look For player ->" +  counter);
+                if(counter <= 0)
+                    playerMovement.NotDetected();
                 if (img != null)
                 {
                     img.color = Color.yellow;

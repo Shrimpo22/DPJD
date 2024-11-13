@@ -337,8 +337,16 @@ PrefabInstance:
       value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 2820365292808699851, guid: 33f5f9a901f77f741b9f94803f155ddc, type: 3}
+      propertyPath: layers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820365292808699851, guid: 33f5f9a901f77f741b9f94803f155ddc, type: 3}
       propertyPath: maxSightDistance
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820365292808699851, guid: 33f5f9a901f77f741b9f94803f155ddc, type: 3}
+      propertyPath: occlusionLayers.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2876501318712240554, guid: 33f5f9a901f77f741b9f94803f155ddc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

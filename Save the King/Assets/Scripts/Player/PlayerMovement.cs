@@ -57,12 +57,11 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private float targetSpeed;
     private bool isSprinting;
-
-    public float rollSpeed = 10f;
-    public float dodgeDuration = 0.5f;
-    public float dodgeCooldown = 1.5f;
-    private float dodgeTimer = 0f;
+    private bool isDetected;
     
+    public Transform handTransform;
+
+
 
     void Start()
     {
@@ -268,9 +267,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (controls.Gameplay.LightAttack.triggered && controller.isGrounded && isSwordEquipped)
+        if (controls.Gameplay.LightAttack.triggered && controller.isGrounded && isSwordEquipped && !isCrouching)
         {
-            isCrouching = false;
+            
             animator.SetTrigger("attack");
             animator.SetBool("isCrouching", isCrouching);
 
@@ -281,9 +280,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (controls.Gameplay.HeavyAttack.triggered && controller.isGrounded && isSwordEquipped)
+        if (controls.Gameplay.HeavyAttack.triggered && controller.isGrounded && isSwordEquipped && !isCrouching)
         {
-            isCrouching = false;
             animator.SetTrigger("heavy");
             animator.SetBool("isCrouching", isCrouching);
 
@@ -293,15 +291,38 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+
+
         speed = Mathf.Lerp(speed, targetSpeed, Time.deltaTime * 4f);
         animator.SetFloat("movementSpeed", speed);
         
         animator.SetBool("isMoving", direction.magnitude > 0f);
-
-       
-
     }
 
+
+    public void stealthAttack()
+    {
+        if (controls.Gameplay.LightAttack.triggered && isSwordEquipped && !isDetected)
+        {
+            animator.Play("stabbing");
+        }
+    }
+
+    public void Detected()
+    {
+        Debug.Log("Nahh fui visto");
+        isDetected = true;
+    }
+
+    public void NotDetected()
+    {
+        Debug.Log("Estou no escuro");
+        isDetected = false;
+    }
+
+    public bool IsDetected() {
+        return isDetected;
+    }
     void OnDrawGizmos(){
         if(drawGizmos){
         Vector3 forward = camTransform.forward;

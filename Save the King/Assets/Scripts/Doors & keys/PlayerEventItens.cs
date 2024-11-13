@@ -65,7 +65,7 @@ public class PlayerEventItens : MonoBehaviour
         {
             for (int z = -rayCount; z <= rayCount; z++)
             {   
-                Vector3 rayOrigin = basePosition + new Vector3(x * spacing, 1.5f, z * spacing);
+                Vector3 rayOrigin = basePosition + new Vector3(x * spacing, 3f, z * spacing);
 
                 
                 RaycastHit hit;
@@ -145,6 +145,12 @@ public class PlayerEventItens : MonoBehaviour
                     weapons.Add(hit.gameObject);
                     hit.gameObject.GetComponent<PlayerAttack>().grabSword();
 
+                }
+            }else if (gameObject.GetComponent<PlayerMovement>().isCrouching)
+            {
+                if(hit.tag == "Target")
+                {
+                    gameObject.GetComponent<PlayerMovement>().stealthAttack();
                 }
             }
     }

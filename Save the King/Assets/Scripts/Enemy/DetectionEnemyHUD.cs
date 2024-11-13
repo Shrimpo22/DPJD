@@ -32,7 +32,7 @@ public class EnemyDetection : MonoBehaviour
         }
         if (agent.currentState != previousState) {
             // State has changed, check which event to trigger
-            if (agent.currentState == AiStateId.ChasePlayer && playerLost) {
+            if (agent.currentState == AiStateId.ChasePlayer) {
                 OnChasePlayer?.Invoke(this);
             } 
             else if (agent.currentState == AiStateId.LookForPlayer) {

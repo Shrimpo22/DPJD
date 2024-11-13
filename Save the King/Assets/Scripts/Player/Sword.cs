@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     public Collider swordCollider;
     public int lightAttack = 10;
     public int heavyAttack = 20;
+    public int stealthAttack = 10000;
     List<Collider> ignoreColliders = new List<Collider>();
     private HashSet<Collider> hitTargets = new HashSet<Collider>();
     private Animator animator;
@@ -22,6 +23,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
+        handTransform = player.handTransform;
         IgnoreMyOwnColliders();
         swordCollider = GetComponent<Collider>();
         swordCollider.gameObject.SetActive(true);
@@ -64,6 +66,10 @@ public class PlayerAttack : MonoBehaviour
                 Debug.Log("HEAVYYYYY");
                 target.TakeDamage(heavyAttack);
                 hitTargets.Add(other);
+            }
+            else if (target != null && player.animator.GetCurrentAnimatorStateInfo(0).IsName("stabbing"))
+            {
+                target.TakeDamage(stealthAttack);
             }
         }
     }

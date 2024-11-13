@@ -917,10 +917,10 @@ MonoBehaviour:
   scanFrequency: 30
   layers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 64
   occlusionLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 8
 --- !u!114 &4356956814652227570
 MonoBehaviour:
   m_ObjectHideFlags: 0

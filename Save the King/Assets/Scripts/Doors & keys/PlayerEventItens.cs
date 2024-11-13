@@ -16,8 +16,13 @@ public class PlayerEventItens : MonoBehaviour
     public float spacing = 1f; 
     public List<Key.KeyType> listOfKeys;
     private IDoor door;
+    public List<GameObject> weapons;
     private Key key;
     private PlayerControls controls;
+
+    public bool hasSwordOn = false;
+
+    public GameObject swordOn = null;
 
 
     void Awake()
@@ -47,7 +52,8 @@ public class PlayerEventItens : MonoBehaviour
                 if(door.IsClosed){
                     door.TextActivate();
                     isNearDoor = true;
-                }}
+                }       
+        }
     }
     void Update()  {
         if(isNearDoor && Input.GetKeyDown(KeyCode.E)){ door.OpenDoor(this.gameObject);
@@ -68,7 +74,6 @@ public class PlayerEventItens : MonoBehaviour
                 {
                     //Debug.Log("Hit: " + hit.collider.tag); // Log what was hit
                     Debug.Log("Hit " + hit.collider.tag + " " + hit.collider.gameObject.name);
-
                     HandleHit(hit.collider);
                     
                 }
@@ -78,7 +83,7 @@ public class PlayerEventItens : MonoBehaviour
     }
     private void HandleHit(Collider hit){
 
-            Debug.Log("Hit " + hit.tag);
+        //Debug.Log("Hit " + hit.tag);
 
             if (hit.tag == "Key"){
                 key = hit.gameObject.GetComponent<Key>();
@@ -130,8 +135,51 @@ public class PlayerEventItens : MonoBehaviour
                 hit.gameObject.GetComponent<CozinharScript>().textActivate();
                 if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<CozinharScript>().seeObject();
             }
-                
+            else if (hit.tag == "Weapon In Ground")
+            {
+
+                hit.gameObject.GetComponent<PlayerAttack>().textActivate();
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    Debug.Log("Al�oooo");
+                    weapons.Add(hit.gameObject);
+                    hit.gameObject.GetComponent<PlayerAttack>().grabSword();
+
+                }
+            }
+    }
+
+    public void DeactivateSword(GameObject inventory)
+    {
+        inventory.GetComponent<Inventory>().AddItem(swordOn.name,1);
+        string nameOfObj = swordOn.name;
+        GameObject.Find(nameOfObj).SetActive(false);
+        swordOn = null;
+    }
+
+    public void InstantiateSword(string str)
+    {
+        GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
+        if(hasSwordOn)
+        {
+            DeactivateSword(inventory);
         }
+        foreach (GameObject obj in weapons)
+        {
+            if (obj.name == str) // Check if the name matches
+            {
+                Instantiate(obj); // Instantiate the matching GameObject
+                Debug.Log("Instantiated object: " + name);
+                obj.GetComponent<PlayerAttack>().EquipSword();
+                hasSwordOn = true;
+                swordOn = obj;
+
+                inventory.GetComponent<Inventory>().DropItemByName(str);
+
+                return;
+            }
+        }
+    }
 }
 
 

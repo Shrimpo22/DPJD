@@ -91,7 +91,7 @@ public class AiSensor : MonoBehaviour
             return false;
         }
 
-        CharacterController characterController = obj.GetComponent<CharacterController>();
+    CharacterController characterController = obj.GetComponent<CharacterController>();
     if (characterController == null) return false;
 
     // Get the center, top, and bottom points of the CharacterController's capsule

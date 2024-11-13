@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Cinemachine;
 using TMPro;
 using Unity.VisualScripting;
@@ -21,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isTrapped = false;
     public bool isCrouching = false;
+    public bool isDodging = false;
+    public bool isSwordEquipped = false;
 
 
     // Interaction variables
@@ -32,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float interactionProgress = 0f;
 
+    [SerializeField] Avatar avatar;
 
     public string trappedLoopAnimation = "AttemptEscape";
     private float interactionCooldown = 2.0f;  // Timer for 5 seconds of inactivity
@@ -41,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Vector2 moveInput;
     [SerializeField] Transform camTransform;
 
-    private Animator animator;
+    public Animator animator;
     public Collider swordColider;
     public PlayerAttack playerAttack;
 
@@ -53,6 +57,12 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private float targetSpeed;
     private bool isSprinting;
+
+    public float rollSpeed = 10f;
+    public float dodgeDuration = 0.5f;
+    public float dodgeCooldown = 1.5f;
+    private float dodgeTimer = 0f;
+    
 
     void Start()
     {
@@ -66,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = controller.isGrounded;
         initialHeight = controller.height;
         initialCenter = controller.center;
+        
     }
 
     void Awake()
@@ -76,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Crouch.performed += ctx => HandleCrouch();
         controls.Gameplay.Sprint.performed += ctx => { isSprinting = true; targetSpeed = 6f;};
         controls.Gameplay.Sprint.canceled += ctx => { isSprinting = false; targetSpeed = 4.25f;};
-
+        controls.Gameplay.Dodging.performed += ctx => animator.SetTrigger("Dodge");
     }
 
     void OnEnable(){
@@ -97,6 +108,15 @@ public class PlayerMovement : MonoBehaviour
         playerAttack.DisabeSwordCollider();
     }
 
+    public void EnableInvincibility()
+    {
+        this.tag = "Untagged";
+    }
+
+    public void DisableInvincibility()
+    {
+        this.tag = "Player";
+    }
     void Update()
     {
         handleInteraction();
@@ -104,12 +124,25 @@ public class PlayerMovement : MonoBehaviour
             handleMovement();
     }
 
+
+    public void EnableMovement()
+    {
+        controls.Gameplay.Movement.Enable();
+        controls.Gameplay.Sprint.Enable();
+    }
+
+    public void DisableMovement()
+    {
+        controls.Gameplay.Movement.Disable();
+        controls.Gameplay.Sprint.Disable();
+    }
+
     private void HandleCrouch(){
         isCrouching = !isCrouching; 
         animator.SetBool("isCrouching", isCrouching);
         if(isCrouching){
-           controller.height /=2; 
-           controller.center /=2; 
+           controller.height /=2;
+           controller.center /=2;
         }else{
            controller.height = initialHeight; 
            controller.center = initialCenter; 
@@ -200,7 +233,7 @@ public class PlayerMovement : MonoBehaviour
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        if ((stateInfo.IsName("hit1") || stateInfo.IsName("hit2") || stateInfo.IsName("hit3")) && stateInfo.normalizedTime <= 1f){
+        if ((stateInfo.IsName("hit1") || stateInfo.IsName("hit2") || stateInfo.IsName("hit3") || stateInfo.IsName("heavy1") || stateInfo.IsName("heavy2") && stateInfo.normalizedTime <= 1f)){
             targetSpeed = 0f;    
         }else if (!isSprinting && !isCrouching)
             targetSpeed = 4.25f;
@@ -235,24 +268,38 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (controls.Gameplay.LightAttack.triggered && controller.isGrounded && isSwordEquipped)
+        {
+            isCrouching = false;
+            animator.SetTrigger("attack");
+            animator.SetBool("isCrouching", isCrouching);
+
+
+            if (playerAttack != null)
+            {
+                playerAttack.PerformAttack();
+            }
+        }
+
+        if (controls.Gameplay.HeavyAttack.triggered && controller.isGrounded && isSwordEquipped)
+        {
+            isCrouching = false;
+            animator.SetTrigger("heavy");
+            animator.SetBool("isCrouching", isCrouching);
+
+            if (playerAttack != null)
+            {
+                playerAttack.PerformAttack();
+            }
+        }
+
         speed = Mathf.Lerp(speed, targetSpeed, Time.deltaTime * 4f);
         animator.SetFloat("movementSpeed", speed);
         
         animator.SetBool("isMoving", direction.magnitude > 0f);
 
-        if(controls.Gameplay.LightAttack.triggered && controller.isGrounded)
-        {
-            isCrouching = false;
-            speed = 0;
-            animator.SetTrigger("attack");
-            animator.SetBool("isCrouching", isCrouching);            
+       
 
-
-            if (playerAttack != null)
-            {
-                playerAttack.PerformAttack(); 
-            }
-        }
     }
 
     void OnDrawGizmos(){
@@ -284,4 +331,3 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
-

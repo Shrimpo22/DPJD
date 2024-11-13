@@ -13,7 +13,8 @@ public class CandelabraCam : MonoBehaviour
 
     GameObject player;
     public Camera myCamera;
-    private Camera mainCamera;    
+    private Camera mainCamera;
+    public bool active = true;    
     void Start()
     {
        player = GameObject.FindGameObjectWithTag("Player");
@@ -43,19 +44,27 @@ public class CandelabraCam : MonoBehaviour
     private void OnTriggerExit(Collider other){
         textClear();
     }
+
+    public void exitCam(){
+        player.SetActive(true);
+        textEvent.enabled = false;
+        mainCamera.tag = "MainCamera";
+        myCamera.tag="Untagged";
+        mainCamera.gameObject.SetActive(true);
+        myCamera.gameObject.SetActive(false);
+        isLooking = false;
+        inventory.GetComponent<Inventory>().isLookingAtMap = false;
+    }
+
+    public void exitCamAndDisable(){
+        exitCam();
+        active = false;
+    }
+
     void Update()
     {
        if(Input.GetKeyDown(KeyCode.Escape) && isLooking){
-            player.SetActive(true);
-            textEvent.enabled = true;
-            mainCamera.tag = "MainCamera";
-            myCamera.tag="Untagged";
-            mainCamera.gameObject.SetActive(true);
-            myCamera.gameObject.SetActive(false);
-            isLooking = false;
-            inventory.GetComponent<Inventory>().isLookingAtMap = false;
-
-           
+           exitCam(); 
         }
     }
     

@@ -11,6 +11,7 @@ public class MirrorTableCam : MonoBehaviour
     public int nrOfPiecesOn;
     private int totalPieces = 4;
     private bool isComplete = false;
+    public PaintingCam paintingCam;
 
     public bool isLooking = false;
     GameObject inventory;
@@ -21,9 +22,14 @@ public class MirrorTableCam : MonoBehaviour
     private string finalAnswer;
 
     [SerializeField] public GameObject[] allPieces;
+
+    public GameObject mirror;
+    public GameObject painting;
     
     void Start()
     {
+       mirror.SetActive(true);
+       painting.SetActive(false);
        nrOfPiecesOn =0 ;
        player = GameObject.FindGameObjectWithTag("Player");
        inventory = GameObject.FindGameObjectWithTag("Inventory");
@@ -59,6 +65,9 @@ public class MirrorTableCam : MonoBehaviour
     private void showFinalMap(){
         isComplete=true;
         Debug.Log(finalAnswer);
+        mirror.SetActive(true);
+        painting.SetActive(true);
+        paintingCam.active = true;
     }
 
     public void addPiece(){

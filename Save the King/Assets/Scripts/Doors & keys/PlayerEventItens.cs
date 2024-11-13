@@ -67,6 +67,8 @@ public class PlayerEventItens : MonoBehaviour
                 if (Physics.Raycast(rayOrigin, Vector3.down, out hit, rayDistance))
                 {
                     //Debug.Log("Hit: " + hit.collider.tag); // Log what was hit
+                    Debug.Log("Hit " + hit.collider.tag + " " + hit.collider.gameObject.name);
+
                     HandleHit(hit.collider);
                     
                 }
@@ -94,18 +96,18 @@ public class PlayerEventItens : MonoBehaviour
                 MirrorPiece mirrorPiece = hit.gameObject.GetComponent<MirrorPiece>();
                 mirrorPiece.textActivate();
                 if(Input.GetKeyDown(KeyCode.E)) mirrorPiece.grabMirrorPiece();
-            }else if(hit.tag == "Candelabra" && hit.gameObject.GetComponent<CandelabraCam>().isLooking == false){
+            }else if(hit.tag == "Candelabra" && hit.gameObject.GetComponent<CandelabraCam>().active && hit.gameObject.GetComponent<CandelabraCam>().isLooking == false){
                 hit.gameObject.GetComponent<CandelabraCam>().textActivate();
                 if(Input.GetKeyDown(KeyCode.E))hit.gameObject.GetComponent<CandelabraCam>().seeObject();
             }else if(hit.tag == "MirrorTable" && hit.gameObject.GetComponent<MirrorTableCam>().isLooking == false){
                 hit.gameObject.GetComponent<MirrorTableCam>().textActivate();
                 if(Input.GetKeyDown(KeyCode.E))hit.gameObject.GetComponent<MirrorTableCam>().seeObject();
-           
+            }else if (hit.tag == "Painting" && hit.gameObject.GetComponent<PaintingCam>().isLooking==false){
+                hit.gameObject.GetComponent<PaintingCam>().textActivate();
+                if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<PaintingCam>().seeObject();
             }else if(hit.tag == "Map"  &&hit.gameObject.GetComponent<Map>().isLooking==false){
                hit.gameObject.GetComponent<Map>().textActivate();
                if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<Map>().seeObject();
-
-
             }
             else if(hit.tag == "MapPiece"){
                 hit.gameObject.GetComponent<MapPieceGrab>().textActivate();

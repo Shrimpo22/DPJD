@@ -23,15 +23,15 @@ TagManager:
   - Cookitems
   - CozinhaCamara
   - furnalha
-
+  - Painting
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
-  - Occlusion
+  - 
   - 
   - 
   - 

@@ -27,6 +27,11 @@ TagManager:
   - Inventory
   - Player Collider
   - Weapon In Ground
+  - Chalice
+  - Torch
+  - MusicSheet
+  - Candle
+  - Book
   layers:
   - Default
   - TransparentFX

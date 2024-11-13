@@ -90,7 +90,6 @@ public class PlayerEventItens : MonoBehaviour
                 key.textActivate();
                 if(Input.GetKeyDown(KeyCode.E)){
                     key.grabKey(this.gameObject);}
-            
             }else if(hit.tag== "Chest") {
                 hit.gameObject.GetComponent<OpenChest>().openChest();
             }else if(hit.tag == "Lock"  &&hit.gameObject.GetComponent<LockCombination>().isLooking==false){

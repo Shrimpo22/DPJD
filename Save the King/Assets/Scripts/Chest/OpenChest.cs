@@ -59,22 +59,20 @@ public class OpenChest : MonoBehaviour
             audioSource.Play();
         }
 
-        Transform parentTransform = transform.parent;
-
-        Quaternion startRotation = parentTransform.rotation;
-        Quaternion endRotation = parentTransform.rotation * Quaternion.Euler(rotationAxis * rotationAmount);
+        Quaternion startRotation = transform.rotation;
+        Quaternion endRotation = transform.rotation * Quaternion.Euler(rotationAxis * rotationAmount);
 
         float timeElapsed = 0f;
 
         while (timeElapsed < 1f)
         {
-            parentTransform.rotation = Quaternion.Slerp(startRotation, endRotation, timeElapsed);
+            transform.rotation = Quaternion.Slerp(startRotation, endRotation, timeElapsed);
             timeElapsed += Time.deltaTime * rotationSpeed;
 
             yield return null;
         }
 
-        parentTransform.rotation = endRotation;
+        transform.rotation = endRotation;
 
         isRotating = false;
 

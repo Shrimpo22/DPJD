@@ -132,7 +132,6 @@ public class PlayerEventItens : MonoBehaviour
             }
             else if (hit.tag == "Weapon In Ground")
             {
-
                 hit.gameObject.GetComponent<PlayerAttack>().textActivate();
                 weapons.Add(hit.gameObject);
                 hit.gameObject.GetComponent<PlayerAttack>().grabSword();
@@ -140,6 +139,7 @@ public class PlayerEventItens : MonoBehaviour
             {
                 if(hit.tag == "Target")
                 {
+                    Debug.Log("AAAAAAA");
                     gameObject.GetComponent<PlayerMovement>().stealthAttack();
                 }
             }

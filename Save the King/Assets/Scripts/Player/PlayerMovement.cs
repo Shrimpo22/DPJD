@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        controls = new PlayerControls();
+        controls = InputManager.inputActions;
         controls.Gameplay.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Gameplay.Movement.canceled += ctx => moveInput = Vector2.zero;
         controls.Gameplay.Crouch.performed += ctx => HandleCrouch();

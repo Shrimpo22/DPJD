@@ -135,7 +135,13 @@ public class PlayerEventItens : MonoBehaviour
                 hit.gameObject.GetComponent<PlayerAttack>().textActivate();
                 weapons.Add(hit.gameObject);
                 hit.gameObject.GetComponent<PlayerAttack>().grabSword();
-            }else if (gameObject.GetComponent<PlayerMovement>().isCrouching)
+            }
+            else if (hit.tag == "Target")
+            {
+                hit.gameObject.GetComponent<Interaction>().textActivate();
+                hit.gameObject.GetComponent<Interaction>().seeObject();
+            }
+            else if (gameObject.GetComponent<PlayerMovement>().isCrouching)
             {
                 if(hit.tag == "Target")
                 {

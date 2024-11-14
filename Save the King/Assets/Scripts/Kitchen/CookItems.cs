@@ -9,13 +9,14 @@ public class CookItems : MonoBehaviour
     private bool hasBeenGrabed = false; 
     public TMP_Text CookText;
     void Start(){
-        CookText.color = Color.black;
+        CookText.color = Color.white;
         textClear();
     }
     
     public void textActivate(){
       CookText.text  = "(E) Grab Vase";
       CookText.gameObject.SetActive(true);  
+      
     }
 
     public void textClear(){

@@ -228,7 +228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2098636477124275472
 RectTransform:
   m_ObjectHideFlags: 0
@@ -904,11 +904,14 @@ MonoBehaviour:
   items: []
   InventoryMenu: {fileID: 472862541223116787}
   ItemPanel: {fileID: 693802907633563351, guid: 9a497762c8617b24c9a3d2946a5a3269, type: 3}
+  Mouse: {fileID: 931951601767791010}
   audioSource: {fileID: 5043447425193855576}
   ItemPanelGrid: {fileID: 7826443382663147690}
   mouse: {fileID: 5330453976504818887}
   isLookingAtMap: 0
+  isLookingAtCook: 0
   InventorySize: 12
+  inInventory: 0
   references:
     version: 2
     RefIds: []

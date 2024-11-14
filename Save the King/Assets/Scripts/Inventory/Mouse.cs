@@ -66,7 +66,8 @@ public class Mouse : MonoBehaviour
         
         if (item.GiveName().StartsWith("Key") || 
         (item.GiveName().StartsWith("MapPiece") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtMap == false) ||
-        (item.GiveName().Contains("Item") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtCook == false)
+        (item.GiveName().Contains("Item") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtCook == false) ||
+        (item.GiveName().StartsWith("Plate") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtCook == false)
         )
         {
             

@@ -17,7 +17,7 @@ public class Food : MonoBehaviour
           foodText = GetComponentInChildren<TMP_Text>(); 
         }
 
-        foodText.color = Color.black;
+        foodText.color = Color.white;
     
         textClear();
         SetHealingAmount();
@@ -25,6 +25,7 @@ public class Food : MonoBehaviour
     
     public void textActivate(){
       foodText.text  = "(E) Eat Food";
+      Debug.Log("AAAAAAA");
       foodText.gameObject.SetActive(true);  
     }
 

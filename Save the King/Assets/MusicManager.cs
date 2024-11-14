@@ -12,7 +12,7 @@ public class MusicManager : MonoBehaviour
     private AudioSource currentMusic;
     private Coroutine transitionCoroutine;
     
-    public enum GameState { Puzzle, Combat, Exploration }
+    public enum GameState { Puzzle, Combat, Exploration, Capel, Boss, Dungeon, Menu }
     public GameState currentState;
     public GameState auxState;
 

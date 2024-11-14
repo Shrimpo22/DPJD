@@ -26,9 +26,11 @@ public class PlayerEventItens : MonoBehaviour
 
 
     void Awake()
-    {   
-        controls = new PlayerControls();
+    {
+        controls = InputManager.inputActions;
+        controls.Gameplay.Interaction.performed += ctx => HandleInteraction();
     }
+
     void OnEnable(){
         controls.Gameplay.Enable();
     }
@@ -55,8 +57,9 @@ public class PlayerEventItens : MonoBehaviour
                 }       
         }
     }
-    void Update()  {
-        if(isNearDoor && Input.GetKeyDown(KeyCode.E)){ door.OpenDoor(this.gameObject);
+    void HandleInteraction()  {
+        if(isNearDoor){ 
+            door.OpenDoor(this.gameObject);
         }else{
         // Set the base position for raycasting
         Vector3 basePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -88,63 +91,51 @@ public class PlayerEventItens : MonoBehaviour
             if (hit.tag == "Key"){
                 key = hit.gameObject.GetComponent<Key>();
                 key.textActivate();
-                if(Input.GetKeyDown(KeyCode.E)){
-                    key.grabKey(this.gameObject);}
+                key.grabKey(this.gameObject);
             }else if(hit.tag== "Chest") {
                 hit.gameObject.GetComponent<OpenChest>().openChest();
             }else if(hit.tag == "Lock"  &&hit.gameObject.GetComponent<LockCombination>().isLooking==false){
                hit.gameObject.GetComponent<LockCombination>().textActivate();
-
-               if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<LockCombination>().seeObject();
+               hit.gameObject.GetComponent<LockCombination>().seeObject();
             }else if(hit.tag == "MirrorPiece"){
                 MirrorPiece mirrorPiece = hit.gameObject.GetComponent<MirrorPiece>();
                 mirrorPiece.textActivate();
-                if(Input.GetKeyDown(KeyCode.E)) mirrorPiece.grabMirrorPiece();
+                mirrorPiece.grabMirrorPiece();
             }else if(hit.tag == "Candelabra" && hit.gameObject.GetComponent<CandelabraCam>().active && hit.gameObject.GetComponent<CandelabraCam>().isLooking == false){
                 hit.gameObject.GetComponent<CandelabraCam>().textActivate();
-                if(Input.GetKeyDown(KeyCode.E))hit.gameObject.GetComponent<CandelabraCam>().seeObject();
+                hit.gameObject.GetComponent<CandelabraCam>().seeObject();
             }else if(hit.tag == "MirrorTable" && hit.gameObject.GetComponent<MirrorTableCam>().isLooking == false){
                 hit.gameObject.GetComponent<MirrorTableCam>().textActivate();
-                if(Input.GetKeyDown(KeyCode.E))hit.gameObject.GetComponent<MirrorTableCam>().seeObject();
+                hit.gameObject.GetComponent<MirrorTableCam>().seeObject();
             }else if (hit.tag == "Painting" && hit.gameObject.GetComponent<PaintingCam>().isLooking==false){
                 hit.gameObject.GetComponent<PaintingCam>().textActivate();
-                if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<PaintingCam>().seeObject();
+                hit.gameObject.GetComponent<PaintingCam>().seeObject();
             }else if(hit.tag == "Map"  &&hit.gameObject.GetComponent<Map>().isLooking==false){
                hit.gameObject.GetComponent<Map>().textActivate();
-               if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<Map>().seeObject();
+               hit.gameObject.GetComponent<Map>().seeObject();
             }
             else if(hit.tag == "MapPiece"){
                 hit.gameObject.GetComponent<MapPieceGrab>().textActivate();
-                if(Input.GetKeyDown(KeyCode.E)){
-                    hit.gameObject.GetComponent<MapPieceGrab>().grabItem(this.gameObject);}
+                hit.gameObject.GetComponent<MapPieceGrab>().grabItem(this.gameObject);
             }
             else if (hit.tag == "Food"){
                 hit.gameObject.GetComponent<Food>().textActivate();
-                if(Input.GetKeyDown(KeyCode.E)){
-                    hit.gameObject.GetComponent<Food>().grabItem(this.gameObject);
-                    }
+                hit.gameObject.GetComponent<Food>().grabItem(this.gameObject);
             }
             else if (hit.tag == "Cookitems"){
                 hit.gameObject.GetComponent<CookItems>().textActivate();
-                if(Input.GetKeyDown(KeyCode.E)){
-                    hit.gameObject.GetComponent<CookItems>().grabItem(this.gameObject);
-                    }
+                hit.gameObject.GetComponent<CookItems>().grabItem(this.gameObject);
             }
             else if (hit.tag == "furnalha" && hit.gameObject.GetComponent<CozinharScript>().isLooking==false){
                 hit.gameObject.GetComponent<CozinharScript>().textActivate();
-                if(Input.GetKeyDown(KeyCode.E)) hit.gameObject.GetComponent<CozinharScript>().seeObject();
+                hit.gameObject.GetComponent<CozinharScript>().seeObject();
             }
             else if (hit.tag == "Weapon In Ground")
             {
 
                 hit.gameObject.GetComponent<PlayerAttack>().textActivate();
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    Debug.Log("Al�oooo");
-                    weapons.Add(hit.gameObject);
-                    hit.gameObject.GetComponent<PlayerAttack>().grabSword();
-
-                }
+                weapons.Add(hit.gameObject);
+                hit.gameObject.GetComponent<PlayerAttack>().grabSword();
             }else if (gameObject.GetComponent<PlayerMovement>().isCrouching)
             {
                 if(hit.tag == "Target")

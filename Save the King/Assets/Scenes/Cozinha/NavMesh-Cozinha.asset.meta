@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Save the King/Assets/Scenes/Cozinha/NavMesh-Cozinha.asset.meta
 guid: 2809f58dd2ea00b4c9afc38a242e45d8
 NativeFormatImporter:
+========
+guid: c7b41ab0b86adc642ad7c3a322d47551
+DefaultImporter:
+>>>>>>>> Desespero:Save the King/Assets/Scenes/Pause Menu.unity.meta
   externalObjects: {}
   mainObjectFileID: 23800000
   userData: 

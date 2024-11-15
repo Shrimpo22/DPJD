@@ -13,6 +13,8 @@ public class Statues : MonoBehaviour
     private bool isEmpty = true;
     private bool isComplete = false;
 
+    OpenSecretDoor secretDoor;
+
     public bool isLooking = false;
     GameObject inventory;
 
@@ -50,18 +52,22 @@ public class Statues : MonoBehaviour
         } else if(!isRightPiece && !isEmpty) {
             textEvent.text  = "(E) Remove Piece ; (ESC) Exit";
         } else{
-        textEvent.text = "(ESC) Exit";}
+        textEvent.text = "(ESC) Exit";
+        }
         isLooking=true;
 
     }
 
     private void showFinalMap(){
         isComplete=true;
-        isRightPiece=true;
     }
 
     public void addPiece(string name){
        inventory.GetComponent<Inventory>().DropItemByName(name);
+       if (name == correctPiece){
+        isRightPiece=true;
+        secretDoor.rightPieces += 1;
+       }
 
     }
     private void OnTriggerExit(Collider other){
@@ -71,7 +77,6 @@ public class Statues : MonoBehaviour
     {
        if(isRightPiece) {
             textEvent.text = "(ESC) Exit";
-            showFinalMap();
        }
 
        if(Input.GetKeyDown(KeyCode.Escape) && isLooking){

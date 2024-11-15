@@ -118,6 +118,37 @@ public class PlayerEventItens : MonoBehaviour
                 hit.gameObject.GetComponent<MapPieceGrab>().textActivate();
                 hit.gameObject.GetComponent<MapPieceGrab>().grabItem(this.gameObject);
             }
+            else if(hit.tag == "Torch"){
+                hit.gameObject.GetComponent<Torches>().textActivate();
+                hit.gameObject.GetComponent<Torches>().grabMirrorPiece();
+            }
+            else if(hit.tag == "Chalice"){
+                hit.gameObject.GetComponent<ChaliceObj>().textActivate();
+                hit.gameObject.GetComponent<ChaliceObj>().grabMirrorPiece();
+            }else if(hit.tag == "Candle"){
+                hit.gameObject.GetComponent<Candles>().textActivate();
+                hit.gameObject.GetComponent<Candles>().grabMirrorPiece();
+            }
+            else if (hit.tag == "Statue" && hit.gameObject.GetComponent<Statues>().isLooking==false){
+                hit.gameObject.GetComponent<Statues>().textActivate();
+                hit.gameObject.GetComponent<Statues>().seeObject();
+            }
+            else if (hit.tag == "Organ" && hit.gameObject.GetComponent<Organ>().isLooking==false){
+                hit.gameObject.GetComponent<Organ>().textActivate();
+                hit.gameObject.GetComponent<Organ>().seeObject();
+            }
+            else if (hit.tag == "MusicSheet"){
+                hit.gameObject.GetComponent<Music>().textActivate();
+                hit.gameObject.GetComponent<Music>().grabMirrorPiece();
+            }
+            else if (hit.tag == "CandleHolder" && hit.gameObject.GetComponent<Organ>().isLooking==false){
+                hit.gameObject.GetComponent<CandleHolder>().textActivate();
+                hit.gameObject.GetComponent<CandleHolder>().seeObject();
+            }
+            //else if (hit.tag == "Book" && hit.gameObject.GetComponent<BookOpening>().isLooking==false){
+            //    hit.gameObject.GetComponent<BookOpening>().textActivate();
+            //    hit.gameObject.GetComponent<BookOpening>().seeObject();
+            //}
             else if (hit.tag == "Food"){
                 hit.gameObject.GetComponent<Food>().textActivate();
                 hit.gameObject.GetComponent<Food>().grabItem(this.gameObject);

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class OpenSecretDoor : MonoBehaviour
 {
+
+    public int rightPieces;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +16,8 @@ public class OpenSecretDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (rightPieces == 1){
+            Debug.Log("open door");
+        }
     }
 }

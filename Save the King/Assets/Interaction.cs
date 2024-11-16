@@ -21,6 +21,11 @@ public class Interaction : MonoBehaviour
     private CinemachineFreeLook freeLookComponent;
     private bool wrong = false;
 
+    public GameObject texto;
+    public TMP_Text textInteraction;
+    private int textoInteracaoCount=1;
+    private int count = 0;
+
     void Start()
     {
         inventory = GameObject.FindGameObjectWithTag("Inventory");
@@ -54,32 +59,38 @@ public class Interaction : MonoBehaviour
             isTalkingToNpc = false;
             inventory.GetComponent<Inventory>().isLookingAtCook = false;
             inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
-            
+            textoInteracaoCount+=1;
             if (freeLookComponent != null)
             {
                 freeLookComponent.enabled = true;
             }
-
-            if (!wrong){
-                if (targetObject != null)
-                {
-                    MonoBehaviour[] scripts = targetObject.GetComponents<MonoBehaviour>();
-
-                    foreach (MonoBehaviour script in scripts)
+            if(usedItem){
+               if (!wrong){
+                    if (targetObject != null)
                     {
-                        script.enabled = true;
-                        fighting = true;
+                        MonoBehaviour[] scripts = targetObject.GetComponents<MonoBehaviour>();
+
+                        foreach (MonoBehaviour script in scripts)
+                        {
+                            script.enabled = true;
+                            fighting = true;
+                        }
+                        textClear();
                     }
-                    textClear();
-                }
+                } 
             }
+            
             
         
         }
-        else if(Input.GetKeyDown(KeyCode.E) && isTalkingToNpc){
+        if(textoInteracaoCount != 1){
+            Debug.Log("Entrei");
+            if(Input.GetKeyDown(KeyCode.E) && isTalkingToNpc){
                 inventory.GetComponent<Inventory>().OpenItCozinha();
-                
+                            
+            }
         }
+        
 
 
 
@@ -101,12 +112,20 @@ public class Interaction : MonoBehaviour
         isTalkingToNpc = true;
         mainCamera.gameObject.SetActive(false);
         myCamera.gameObject.SetActive(true);
-        textEvent.color = Color.black;
+        textEvent.color = Color.white;
     }
 
     public void textActivate(){
       textEvent.text  = "(ESQ) EXIT";
       textEvent.gameObject.SetActive(true);  
+    }
+    public void InteracaText(){
+        if(textoInteracaoCount == 1){
+            textInteraction.text = "I want you to make me a plate (1) , if you do it successfully you will recive a reward and the key, if you dont good luck ";
+            texto.gameObject.SetActive(true);
+            
+        }
+        
     }
     
     public void useItem(){
@@ -114,5 +133,6 @@ public class Interaction : MonoBehaviour
     }
     public void textClear(){
       textEvent.gameObject.SetActive(false);  
+      texto.gameObject.SetActive(false);
     }
 }

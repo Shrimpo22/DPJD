@@ -33,6 +33,7 @@ TagManager:
   - Candle
   - Book
   - NPCVIBES
+  - book
   layers:
   - Default
   - TransparentFX

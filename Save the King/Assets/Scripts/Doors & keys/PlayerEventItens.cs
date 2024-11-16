@@ -139,7 +139,12 @@ public class PlayerEventItens : MonoBehaviour
             else if (hit.tag == "Target")
             {
                 hit.gameObject.GetComponent<Interaction>().textActivate();
+                hit.gameObject.GetComponent<Interaction>().InteracaText();
                 hit.gameObject.GetComponent<Interaction>().seeObject();
+            }
+            else if(hit.tag == "book")
+            {
+                hit.gameObject.GetComponent<Book>().openbook();
             }
             else if (gameObject.GetComponent<PlayerMovement>().isCrouching)
             {
@@ -149,6 +154,7 @@ public class PlayerEventItens : MonoBehaviour
                     gameObject.GetComponent<PlayerMovement>().stealthAttack();
                 }
             }
+           
     }
 
     public void DeactivateSword(GameObject inventory)

@@ -18,9 +18,7 @@ public class PlayerAttack : MonoBehaviour
     public Transform handTransform;
     public PlayerMovement player;
 
-    public TMP_Text textSword;
-
-    void Start()
+    void Awake()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         handTransform = player.handTransform;
@@ -43,6 +41,7 @@ public class PlayerAttack : MonoBehaviour
     {
         swordCollider.enabled = false;
     }
+
     void OnTriggerEnter(Collider other)
     {
         // Ignora as colis�es com os pr�prios colliders do personagem
@@ -75,25 +74,6 @@ public class PlayerAttack : MonoBehaviour
     }
 
 
-    public void textActivate()
-    {
-        textSword.text = "(E) Grab Weapon";
-        textSword.gameObject.SetActive(true);
-    }
-
-    public void textClear()
-    {
-        textSword.gameObject.SetActive(false);
-    }
-
-
-    public void grabSword()
-    {
-        GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
-        inventory.GetComponent<Inventory>().AddItem(gameObject.name, 1);
-        this.gameObject.SetActive(false);
-
-    }
     public void EquipSword()
     {
         this.gameObject.SetActive(true);
@@ -104,9 +84,7 @@ public class PlayerAttack : MonoBehaviour
         transform.localRotation = Quaternion.identity;
         player.isSwordEquipped = true;
         player.swordColider = swordCollider;
-        player.playerAttack = this;
-        textClear();
-        
+        player.playerAttack = this;   
     }
     public void IgnoreMyOwnColliders()
     {

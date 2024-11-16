@@ -38,6 +38,7 @@ public class BestSword : Item
     {
         return () =>
         {
+            Debug.Log("AAAA");
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEventItens>().InstantiateSword(GiveName());
 
 

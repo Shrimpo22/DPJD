@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void OnDisable(){
-        controls.Gameplay.Disable();
+        //controls.Gameplay.Disable();
     }
 
     public void EnableCollider()

@@ -18,7 +18,7 @@ public class Inventory : MonoBehaviour
     public AudioSource audioSource;
     public GameObject ItemPanelGrid;
     public Mouse mouse;
-    public bool isLookingAtMap = false;
+    public bool isZoomedIn = false;
     public bool isLookingAtCook = false;
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
@@ -77,7 +77,7 @@ public class Inventory : MonoBehaviour
     }
 
     public void OpenIt(){
-        isLookingAtMap = true;
+        isZoomedIn = true;
         wasOpenByOtherEvent = true;
     }
     public void OpenItCozinha(){
@@ -221,6 +221,15 @@ public class Inventory : MonoBehaviour
 
         // Atualiza a UI do inventário
         RefreshInventory();
+    }
+
+    public bool HasItemNamed(string itemName){
+        ItemSlotInfo slotToDrop = items.LastOrDefault(slot => slot.item != null && slot.item.GiveName() == itemName);
+        if (slotToDrop == null)
+        {
+            return false;
+        }
+        return true;
     }
 
     public int AddItem(string itemName, int amount)

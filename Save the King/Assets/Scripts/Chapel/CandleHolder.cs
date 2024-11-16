@@ -77,7 +77,7 @@ public class CandleHolder : MonoBehaviour
             mainCamera.gameObject.SetActive(true);
             myCamera.gameObject.SetActive(false);
             isLooking = false;
-            inventory.GetComponent<Inventory>().isLookingAtMap = false;
+            inventory.GetComponent<Inventory>().isZoomedIn = false;
             inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
 
            

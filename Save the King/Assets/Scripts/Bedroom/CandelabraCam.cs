@@ -53,7 +53,7 @@ public class CandelabraCam : MonoBehaviour
         mainCamera.gameObject.SetActive(true);
         myCamera.gameObject.SetActive(false);
         isLooking = false;
-        inventory.GetComponent<Inventory>().isLookingAtMap = false;
+        inventory.GetComponent<Inventory>().isZoomedIn = false;
     }
 
     public void exitCamAndDisable(){

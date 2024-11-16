@@ -33,7 +33,7 @@ public class GlassShard : Item
     {
         return () =>
         {
-            GameObject.FindGameObjectWithTag("MirrorTable").GetComponent<MirrorTableCam>().addPiece();
+            GameObject.FindGameObjectWithTag("MirrorTable").GetComponent<PuzzleInteractable>().AddPiece();
         };
     }
 }

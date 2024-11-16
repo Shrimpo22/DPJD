@@ -24,7 +24,7 @@ public class PlayerEventItens : MonoBehaviour
     public LayerMask layersForRaycast;
 
     [SerializeField] private Interactable closestInteractable;
-    private float closestDistance = float.MaxValue;
+    public float closestDistance = float.MaxValue;
 
 
 
@@ -38,7 +38,6 @@ public class PlayerEventItens : MonoBehaviour
     public float rayDistance = 3f; 
     public float spacing = 1f; 
     public List<Key.KeyType> listOfKeys;
-    private IDoor door;
     public List<GameObject> weapons;
     private Key key;
     private PlayerControls controls;
@@ -68,18 +67,6 @@ public class PlayerEventItens : MonoBehaviour
 
     public void RemoveKey(Key.KeyType keytype){
         listOfKeys.Remove(keytype);
-    }
-
-     private void OnTriggerEnter(Collider other) {
-        if(other.tag == "Door"){ 
-            Debug.Log("Collided Door");
-            door = other.gameObject.GetComponent<Door>();
-            door = door != null ? door : other.gameObject.GetComponent<DoubleDoor>();
-                if(door.IsClosed){
-                    door.TextActivate();
-                    isNearDoor = true;
-                }       
-        }
     }
     
     // void HandleInteraction()  {
@@ -131,15 +118,16 @@ public class PlayerEventItens : MonoBehaviour
         if(closestInteractable != interactableAux){
             //Debug.Log("Closest Interactable Changed " + closestInteractable?.gameObject.name + " to " + interactableAux?.gameObject.name );
             if(closestInteractable != null) closestInteractable.ExitRange();
-            closestInteractable = interactableAux;
+                closestInteractable = interactableAux;
             if(closestInteractable != null) closestInteractable.EnterRange();
-
+            else closestDistance = float.MaxValue;
         }
         
     }
 
     public void ClearClosestInteractable(){
         closestInteractable = null;
+        closestDistance = float.MaxValue;
     }
 
     Interactable GetClosestInteractable()

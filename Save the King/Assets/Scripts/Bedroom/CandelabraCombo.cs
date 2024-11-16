@@ -11,7 +11,7 @@ public class CandelabraCombo : MonoBehaviour
     public GameObject candle3;
     public GameObject drawer;
     public AudioSource audioSource;
-    public CandelabraCam cam;
+    public CamInteractable cam;
 
     void Start(){
         audioSource = GetComponent<AudioSource>();
@@ -56,7 +56,7 @@ public class CandelabraCombo : MonoBehaviour
 
             yield return new WaitForSeconds(audioSource.clip.length + 1f);
 
-            cam.exitCamAndDisable();
+            cam.ExitCam();
         }
         else
         {

@@ -9,10 +9,6 @@ public interface IDoor{
     bool IsClosed { get; set; }
     float RotationSpeed { get; set; }
 
-    void Start();
-    void OpenDoor(GameObject player);
-    void TextActivate();
-    void TextClear();
-    void OnTriggerExit(Collider other);
+    void OpenDoor(GameObject player, Canvas canvas);
     void Update();
 }

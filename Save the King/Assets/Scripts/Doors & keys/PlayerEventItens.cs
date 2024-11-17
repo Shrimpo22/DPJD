@@ -119,15 +119,14 @@ public class PlayerEventItens : MonoBehaviour
                 hit.gameObject.GetComponent<MapPieceGrab>().grabItem(this.gameObject);
             }
             else if (hit.tag == "Food"){
-                hit.gameObject.GetComponent<Food>().textActivate();
+                
                 hit.gameObject.GetComponent<Food>().grabItem(this.gameObject);
             }
             else if (hit.tag == "Cookitems"){
-                hit.gameObject.GetComponent<CookItems>().textActivate();
+                
                 hit.gameObject.GetComponent<CookItems>().grabItem(this.gameObject);
             }
             else if (hit.tag == "furnalha" && hit.gameObject.GetComponent<CozinharScript>().isLooking==false){
-                hit.gameObject.GetComponent<CozinharScript>().textActivate();
                 hit.gameObject.GetComponent<CozinharScript>().seeObject();
             }
             else if (hit.tag == "Weapon In Ground")
@@ -138,7 +137,7 @@ public class PlayerEventItens : MonoBehaviour
             }
             else if (hit.tag == "Target")
             {
-                hit.gameObject.GetComponent<Interaction>().textActivate();
+                
                 hit.gameObject.GetComponent<Interaction>().InteracaText();
                 hit.gameObject.GetComponent<Interaction>().seeObject();
             }
@@ -146,6 +145,8 @@ public class PlayerEventItens : MonoBehaviour
             {
                 hit.gameObject.GetComponent<Book>().openbook();
             }
+
+            
             else if (gameObject.GetComponent<PlayerMovement>().isCrouching)
             {
                 if(hit.tag == "Target")

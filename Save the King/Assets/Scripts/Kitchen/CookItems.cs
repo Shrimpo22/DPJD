@@ -40,4 +40,7 @@ public class CookItems : MonoBehaviour
     private void OnTriggerExit(Collider other){
         textClear();
     }
+    private void OnTriggerEnter(Collider other){
+            textActivate();
+    }
 }

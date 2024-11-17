@@ -23,7 +23,7 @@ public class Interaction : MonoBehaviour
 
     public GameObject texto;
     public TMP_Text textInteraction;
-    private int textoInteracaoCount=1;
+    public int textoInteracaoCount=1;
     private int count = 0;
 
     void Start()
@@ -121,7 +121,7 @@ public class Interaction : MonoBehaviour
     }
     public void InteracaText(){
         if(textoInteracaoCount == 1){
-            textInteraction.text = "I want you to make me a plate (1) , if you do it successfully you will recive a reward and the key, if you dont good luck ";
+            textInteraction.text = "I want you to make me a dish, go to the book on top of the table do the 3rd recipe, the ingredients are on the vases , if you do it successfully you will receive a reward and the key, if you dont good luck ";
             texto.gameObject.SetActive(true);
             
         }
@@ -135,4 +135,14 @@ public class Interaction : MonoBehaviour
       textEvent.gameObject.SetActive(false);  
       texto.gameObject.SetActive(false);
     }
+
+    private void OnTriggerExit(Collider other){
+        textClear();
+    }
+
+
+    private void OnTriggerEnter(Collider other){
+        textActivate();
+    }
+
 }

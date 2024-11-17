@@ -91,8 +91,9 @@ public class CozinharScript : MonoBehaviour
     }
 
     public void textActivate(){
-      textEvent.text  = "(E) Interact";
-      textEvent.gameObject.SetActive(true);  
+      textEvent.text = "(ESC) Exit";
+      textEvent.gameObject.SetActive(true);
+      textEvent.color  = Color.white;  
     }
 
     public void seeObject() {
@@ -104,7 +105,7 @@ public class CozinharScript : MonoBehaviour
         myCamera.gameObject.SetActive(true);
         textEvent.color = Color.black;
         if(!isComplete){
-            textEvent.text  = "(E) Add ingredient ; (ESC) Exit";
+            textEvent.text  = "(ESC) Exit";
         }else{
         textEvent.text = "(ESC) Exit";}
         
@@ -119,10 +120,18 @@ public class CozinharScript : MonoBehaviour
     }
     
     public void undo(){
-        foreach (string comidas in comidaTentativa)
-                {
-                    inventory.GetComponent<Inventory>().AddItem(comidas,1);
-                }
+        for (int i = comidaTentativa.Count - 1; i >= 0; i--)
+        {
+            inventory.GetComponent<Inventory>().AddItem(comidaTentativa[i], 1);
+        }
         comidaTentativa = new List<string>();
+    }
+
+
+    private void OnTriggerExit(Collider other){
+        textClear();
+    }
+    private void OnTriggerEnter(Collider other){
+            textActivate();
     }
 }

@@ -25,7 +25,6 @@ public class Food : MonoBehaviour
     
     public void textActivate(){
       foodText.text  = "(E) Eat Food";
-      Debug.Log("AAAAAAA");
       foodText.gameObject.SetActive(true);  
     }
 
@@ -69,5 +68,10 @@ public class Food : MonoBehaviour
 
     private void OnTriggerExit(Collider other){
         textClear();
+    }
+
+
+    private void OnTriggerEnter(Collider other){
+            textActivate();
     }
 }

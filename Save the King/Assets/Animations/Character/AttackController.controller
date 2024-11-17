@@ -30,7 +30,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: hit3
-  m_Speed: 1.31
+  m_Speed: 1.86
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -9180146788275425153}
@@ -219,7 +219,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: hit1
-  m_Speed: 1
+  m_Speed: 1.58
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6005025999419003351}
@@ -323,7 +323,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: hit2
-  m_Speed: 1.33
+  m_Speed: 1.62
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3306325031997175932}

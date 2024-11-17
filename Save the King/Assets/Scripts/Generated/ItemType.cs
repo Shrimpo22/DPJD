@@ -17,11 +17,11 @@ public enum ItemType
     KeyOfKitchen,
     KeyOfWardrobe,
     MapPiece,
-    MidSword,
     Potions,
     RedItem,
     SheetMusic,
     Sword,
     Torch,
     YellowItem,
+    ItemX,
 }

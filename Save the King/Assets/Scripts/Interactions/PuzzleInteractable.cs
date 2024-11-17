@@ -44,7 +44,7 @@ public class PuzzleInteractable : CamInteractable
 
     private void SolvePuzzle(){
         isComplete=true;
-        objectNotSolved.SetActive(true);
+        objectNotSolved.SetActive(false);
         objectSolved.SetActive(true);
     }
 

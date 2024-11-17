@@ -475,7 +475,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 934
+  m_VersionIndex: 931
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -699,7 +699,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 925
+  m_VersionIndex: 922
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -49588,7 +49588,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 940
+  m_VersionIndex: 937
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -49651,14 +49651,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2263394737901109344}
-  m_LocalRotation: {x: 0.49999914, y: -0.5000004, z: -0.49999955, w: 0.5000009}
+  m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 442.13498, y: 442.13498, z: 442.1349}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8237682152689209828}
   m_Father: {fileID: 291122293238077225}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: -90, z: -90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -49752,7 +49752,7 @@ Transform:
   m_GameObject: {fileID: 2743961790943666653}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9669905, y: 0.18317986, z: 2.00348}
+  m_LocalPosition: {x: 0.9669905, y: 0.18317986, z: 1.982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -49785,14 +49785,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2940513485138328274}
-  m_LocalRotation: {x: 0.6767527, y: -0.20495234, z: -0.20495072, w: 0.67675376}
+  m_LocalRotation: {x: 0.62345827, y: 0.33361623, z: 0.33361623, w: 0.62345827}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 442.1349, y: 442.13492, z: 442.13474}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1760636751487121990}
   m_Father: {fileID: 1602078667115265356}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 146.303, y: -90, z: -90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -49887,17 +49887,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3072992545978666867}
-  m_LocalRotation: {x: 0.6120638, y: -0.6546753, z: -0.35408744, w: 0.26720825}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.6072842, y: -0.6581829, z: -0.36222407, w: 0.25844732}
+  m_LocalPosition: {x: 0, y: 0, z: 35}
   m_LocalScale: {x: 442.13486, y: 442.13492, z: 442.1346}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5062255441402648886}
   m_Father: {fileID: 2679989136269706215}
-  m_LocalEulerAnglesHint: {x: 187.84698, y: 52.253, z: 90}
+  m_LocalEulerAnglesHint: {x: 189.376, y: 52.253, z: 90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 46, y: -8}
   m_SizeDelta: {x: 1.081, y: 0.6004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3649598462130076551
@@ -50845,7 +50845,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 583
+  m_VersionIndex: 580
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -50886,6 +50886,7 @@ MonoBehaviour:
   interactCanvas: {fileID: 8880014596928831333}
   itemToGive: 5
   amount: 1
+  clickable: 0
   audioSource: {fileID: 0}
   pickupSound: {fileID: 0}
 --- !u!1 &3340604760530451088
@@ -50914,14 +50915,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3340604760530451088}
-  m_LocalRotation: {x: 0.49999914, y: -0.5000004, z: -0.49999958, w: 0.5000009}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 442.13492, y: 442.13495, z: 442.1348}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8477778062191885280}
   m_Father: {fileID: 5732026657369837622}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: -90, z: -90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -52178,7 +52179,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 551
+  m_VersionIndex: 548
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -52219,6 +52220,7 @@ MonoBehaviour:
   interactCanvas: {fileID: 3649598462130076551}
   itemToGive: 5
   amount: 1
+  clickable: 0
   audioSource: {fileID: 0}
   pickupSound: {fileID: 0}
 --- !u!1 &4396282395170021221
@@ -52400,7 +52402,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 928
+  m_VersionIndex: 925
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -52796,7 +52798,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 922
+  m_VersionIndex: 919
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -55122,7 +55124,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 552
+  m_VersionIndex: 549
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -55163,6 +55165,7 @@ MonoBehaviour:
   interactCanvas: {fileID: 8454314914874365791}
   itemToGive: 5
   amount: 1
+  clickable: 0
   audioSource: {fileID: 0}
   pickupSound: {fileID: 0}
 --- !u!1 &7813881632622766924
@@ -55707,7 +55710,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 735
+  m_VersionIndex: 732
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -55748,6 +55751,7 @@ MonoBehaviour:
   interactCanvas: {fileID: 2014735061292962627}
   itemToGive: 5
   amount: 1
+  clickable: 0
   audioSource: {fileID: 0}
   pickupSound: {fileID: 0}
 --- !u!1 &8008242389009556887
@@ -56125,7 +56129,7 @@ GameObject:
   - component: {fileID: 8904373417696815055}
   m_Layer: 0
   m_Name: Mirror Table
-  m_TagString: MirrorTable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56542,6 +56546,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -5609321221556402741, guid: 7d83aefc0e208814b95cf4f53d16f283, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1137203623037982429}
+    - targetCorrespondingSourceObject: {fileID: -5609321221556402741, guid: 7d83aefc0e208814b95cf4f53d16f283, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 928995571689199402}
     - targetCorrespondingSourceObject: {fileID: -4352324314678869646, guid: 7d83aefc0e208814b95cf4f53d16f283, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7258741042500261804}
@@ -104834,7 +104841,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 554
+  m_VersionIndex: 548
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -104885,6 +104892,7 @@ MonoBehaviour:
   interactCanvas: {fileID: 6927774455612387774}
   isLooking: 0
   myCamera: {fileID: 7652759323652415363}
+  isComplete: 0
   objectNotSolved: {fileID: 104099671079872228}
   objectSolved: {fileID: 349515057416152239}
   nrOfPiecesOn: 0
@@ -104894,3 +104902,17 @@ MonoBehaviour:
   - {fileID: 1530655813879257192}
   - {fileID: 4688368202011486991}
   - {fileID: 5016731255313164569}
+--- !u!114 &928995571689199402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7369718610058382839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d47bf16b2b404429fb44797f603b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pi: {fileID: 1137203623037982429}
+  pi2: {fileID: 0}

@@ -35,7 +35,7 @@ public class MapPiece : Item
     {
         return () =>
         {
-           GameObject.FindGameObjectWithTag("Map").GetComponent<Map>().addPiece();
+           GameObject.FindGameObjectWithTag("Map").GetComponent<MapInteractable>().AddPiece();
         };
     }
 }

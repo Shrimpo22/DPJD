@@ -32,14 +32,9 @@ public class PlayerEventItens : MonoBehaviour
     float scanTimer;
     float scanInterval;
     public bool drawRange = false;
-
     public bool isNearDoor = false;
-    public int rayCount = 2; 
-    public float rayDistance = 3f; 
-    public float spacing = 1f; 
+
     public List<Key.KeyType> listOfKeys;
-    public List<GameObject> weapons;
-    private Key key;
     private PlayerControls controls;
 
     public bool hasSwordOn = false;
@@ -68,38 +63,11 @@ public class PlayerEventItens : MonoBehaviour
     public void RemoveKey(Key.KeyType keytype){
         listOfKeys.Remove(keytype);
     }
-    
-    // void HandleInteraction()  {
-    //     if(isNearDoor){ 
-    //         door.OpenDoor(this.gameObject);
-    //     }else{
-    //     // Set the base position for raycasting
-    //     Vector3 basePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        
-    //     for (int x = -rayCount/2; x <= rayCount/2; x++)
-    //     {
-    //         for (int z = -rayCount; z <= rayCount; z++)
-    //         {   
-    //             Vector3 rayOrigin = basePosition + new Vector3(x * spacing, 3f, z * spacing);
-
-                
-    //             RaycastHit hit;
-    //             Debug.DrawRay(rayOrigin, Vector3.down * rayDistance, Color.magenta);
-    //             if (Physics.Raycast(rayOrigin, Vector3.down, out hit, rayDistance))
-    //             {
-    //                 //Debug.Log("Hit: " + hit.collider.tag); // Log what was hit
-    //                 Debug.Log("Hit " + hit.collider.tag + " " + hit.collider.gameObject.name);
-    //                 HandleHit(hit.collider);
-                    
-    //             }
-    //         }
-    //     }
-    //     }
-    // }
     void HandleInteraction(){
         if(closestInteractable != null)
             closestInteractable.Interact(inventory, this);
     }
+    
     void Update()
     {
         scanTimer -= Time.deltaTime;
@@ -110,6 +78,10 @@ public class PlayerEventItens : MonoBehaviour
     }
 
     public void Scan(){
+        if(gameObject.GetComponent<PlayerMovement>().isTrapped){
+            ClearClosestInteractable();
+            return;
+        }
         playerCamera = Camera.main;
         if (playerCamera == null)
             Debug.LogError("No camera tagged as MainCamera found in the scene!");
@@ -188,64 +160,6 @@ public class PlayerEventItens : MonoBehaviour
         }
 
         return false;
-    }
-
-    private void HandleHit(Collider hit){
-
-        //Debug.Log("Hit " + hit.tag);
-
-            if (hit.tag == "Key"){
-                key = hit.gameObject.GetComponent<Key>();
-                key.textActivate();
-                key.grabKey(this.gameObject);
-            }else if(hit.tag== "Chest") {
-                hit.gameObject.GetComponent<OpenChest>().openChest();
-            }else if(hit.tag == "Lock"  &&hit.gameObject.GetComponent<LockCombination>().isLooking==false){
-               hit.gameObject.GetComponent<LockCombination>().textActivate();
-               hit.gameObject.GetComponent<LockCombination>().seeObject();
-            }else if(hit.tag == "MirrorPiece"){
-                MirrorPiece mirrorPiece = hit.gameObject.GetComponent<MirrorPiece>();
-                mirrorPiece.textActivate();
-                mirrorPiece.grabMirrorPiece();
-            }else if(hit.tag == "Candelabra" && hit.gameObject.GetComponent<CandelabraCam>().active && hit.gameObject.GetComponent<CandelabraCam>().isLooking == false){
-                hit.gameObject.GetComponent<CandelabraCam>().textActivate();
-                hit.gameObject.GetComponent<CandelabraCam>().seeObject();
-            }else if(hit.tag == "MirrorTable" && hit.gameObject.GetComponent<MirrorTableCam>().isLooking == false){
-                hit.gameObject.GetComponent<MirrorTableCam>().textActivate();
-                hit.gameObject.GetComponent<MirrorTableCam>().seeObject();
-            }else if (hit.tag == "Painting" && hit.gameObject.GetComponent<PaintingCam>().isLooking==false){
-                hit.gameObject.GetComponent<PaintingCam>().textActivate();
-                hit.gameObject.GetComponent<PaintingCam>().seeObject();
-            }else if(hit.tag == "Map"  &&hit.gameObject.GetComponent<Map>().isLooking==false){
-               hit.gameObject.GetComponent<Map>().textActivate();
-               hit.gameObject.GetComponent<Map>().seeObject();
-            }
-            else if(hit.tag == "MapPiece"){
-                hit.gameObject.GetComponent<MapPieceGrab>().textActivate();
-                hit.gameObject.GetComponent<MapPieceGrab>().grabItem(this.gameObject);
-            }
-            else if (hit.tag == "Food"){
-                hit.gameObject.GetComponent<Food>().textActivate();
-                hit.gameObject.GetComponent<Food>().grabItem(this.gameObject);
-            }
-            else if (hit.tag == "Cookitems"){
-                hit.gameObject.GetComponent<CookItems>().textActivate();
-                hit.gameObject.GetComponent<CookItems>().grabItem(this.gameObject);
-            }
-            else if (hit.tag == "furnalha" && hit.gameObject.GetComponent<CozinharScript>().isLooking==false){
-                hit.gameObject.GetComponent<CozinharScript>().textActivate();
-                hit.gameObject.GetComponent<CozinharScript>().seeObject();
-            }
-            else if (hit.tag == "Weapon In Ground")
-            {
-            }else if (gameObject.GetComponent<PlayerMovement>().isCrouching)
-            {
-                if(hit.tag == "Target")
-                {
-                    Debug.Log("AAAAAAA");
-                    gameObject.GetComponent<PlayerMovement>().stealthAttack();
-                }
-            }
     }
 
     public void DeactivateSword(GameObject inventory)

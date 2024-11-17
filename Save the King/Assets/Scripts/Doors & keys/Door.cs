@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Door : MonoBehaviour, IDoor
+public class Door : MonoBehaviour, IOpenable
 {
     // Implementing the properties from IDoor interface
     [SerializeField] private bool isLocked; // Serialize private field for IsLocked
@@ -50,7 +50,7 @@ public class Door : MonoBehaviour, IDoor
     }
 
     // Method to open the door
-    public void OpenDoor(GameObject player, Canvas canvas)
+    public void Open(GameObject player, Canvas canvas)
     {
         if (!IsLocked && IsClosed)
         {
@@ -68,7 +68,7 @@ public class Door : MonoBehaviour, IDoor
                 IsLocked = false;
                 player.GetComponent<PlayerEventItens>().RemoveKey(GetKeyType());
                 inventory.GetComponent<Inventory>().DropItemByName(GetKeyType().ToString());
-                OpenDoor(player, canvas);
+                Open(player, canvas);
             }
             else
             {
@@ -78,7 +78,14 @@ public class Door : MonoBehaviour, IDoor
             }
         }
     }
-
+    public void ForceOpen(GameObject player, Canvas canvas)
+    {
+        targetRotation = 90f * Angle;
+        audioSource.clip = UnlockedOpenSound;
+        audioSource.Play();
+        canvas.enabled = false;
+        player.GetComponent<PlayerEventItens>().isNearDoor = false;
+    }
     // Update method to handle door rotation
     public void Update()
     {
@@ -96,4 +103,6 @@ public class Door : MonoBehaviour, IDoor
             }
         }
     }
+
+    
 }

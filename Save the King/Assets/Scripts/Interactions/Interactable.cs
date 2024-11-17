@@ -11,6 +11,10 @@ public abstract class Interactable : MonoBehaviour
         interactCanvas.gameObject.SetActive(false);
     }
 
+    public virtual void Awake(){
+        gameObject.layer = LayerMask.NameToLayer("Interactable");
+    }
+
     public virtual void ExitRange(){
         interactCanvas.gameObject.SetActive(false);  
     }

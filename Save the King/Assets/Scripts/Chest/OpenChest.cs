@@ -4,52 +4,32 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OpenChest : MonoBehaviour
+public class OpenChest : MonoBehaviour, IOpenable
 {
     public float rotationAmount = 90f;
     public Vector3 rotationAxis = Vector3.up;
     public float rotationSpeed = 1f;
     public float rayDistance = 5f;
-    public TMP_Text textChest;
     private bool open = false;
 
-    private Camera playerCamera;
     public AudioSource audioSource;
 
     private bool isRotating = false;
 
-    void Start()
-    {
-        playerCamera = Camera.main;
-        textClear();
+    public bool IsClosed 
+    { 
+        get { return open; } 
+        set { open = value; }
     }
 
-    public void openChest(){
-        if(!open && !isRotating){
-        textActivate();
-         if (Input.GetKeyDown(KeyCode.E)){
-            textClear();
-            StartCoroutine(RotateObject());
-            this.GetComponent<Collider>().enabled = false;
-         }
+    public void ForceOpen(GameObject player, Canvas canvas){
+        if(canvas != null){
+            canvas.gameObject.SetActive(false);
         }
-    }
-
-    public void openChestByLock(){
         StartCoroutine(RotateObject());
         this.GetComponent<Collider>().enabled = false;
     }
 
-    public void textActivate(){
-      textChest.text  = "(E) Open Chest";
-      textChest.gameObject.SetActive(true);  
-    }
-    public void textClear(){
-      textChest.gameObject.SetActive(false);  
-    }
-    private void OnTriggerExit(Collider other){
-        textClear();
-    }
     IEnumerator RotateObject()
     {
         isRotating = true;
@@ -77,6 +57,19 @@ public class OpenChest : MonoBehaviour
         isRotating = false;
 
         open = true;
-        this.GetComponent<BoxCollider>().enabled = false;
+        //this.GetComponent<BoxCollider>().enabled = false;
+    }
+
+    public void Open(GameObject player, Canvas canvas)
+    {
+        if(!open && !isRotating){
+            canvas.gameObject.SetActive(false);
+            StartCoroutine(RotateObject());
+            this.GetComponent<Collider>().enabled = false;
+        }
+    }
+
+    public void Update()
+    {
     }
 }

@@ -48,7 +48,7 @@ public class LockCombination : MonoBehaviour
             }
         }
         combinationCorrect = string.Join("", combinationNew);
-        GameObject.FindGameObjectWithTag("Map").GetComponent<Map>().getTextFinalAnswer(combinationCorrect);
+        GameObject.FindGameObjectWithTag("Map").GetComponent<MapInteractable>().getTextFinalAnswer(combinationCorrect);
     }
 
     public void seeObject() {
@@ -76,8 +76,8 @@ public class LockCombination : MonoBehaviour
             mainCamera.gameObject.SetActive(true);
             myCamera.gameObject.SetActive(false);
             gameObject.GetComponent<BoxCollider>().enabled = true;
-            chestLocked.GetComponent<OpenChest>().openChestByLock();
-             Destroy(this.gameObject);
+            chestLocked.GetComponent<OpenableInteractable>().ForceOpen();
+            Destroy(this.gameObject);
             
         }
 
@@ -124,7 +124,6 @@ public class LockCombination : MonoBehaviour
         for(int i =0; i<5;i++){allIndexes[i].canMove = false;}
 
         return true;
-       
-        
+
     }
 }

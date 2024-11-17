@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using Cinemachine;
 public class Organ : MonoBehaviour
 {
     public TMP_Text textEvent;
@@ -17,11 +17,13 @@ public class Organ : MonoBehaviour
     private Camera mainCamera;
 
     public GameObject paperMusic;
-
+    public GameObject freelockCamara;
+    private CinemachineFreeLook freeLookComponent;
     
     void Start()
     {
        paperMusic.SetActive(false);
+       freeLookComponent = freelockCamara.GetComponent<CinemachineFreeLook>();
        player = GameObject.FindGameObjectWithTag("Player");
        inventory = GameObject.FindGameObjectWithTag("Inventory");
        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -72,6 +74,12 @@ public class Organ : MonoBehaviour
 
        if(Input.GetKeyDown(KeyCode.Escape) && isLooking){
             player.SetActive(true);
+            
+            Time.timeScale = 1;
+             if (freeLookComponent != null)
+            {
+                freeLookComponent.enabled = true;
+            }
             textClear();
             mainCamera.tag = "MainCamera";
             myCamera.tag="Untagged";
@@ -80,7 +88,7 @@ public class Organ : MonoBehaviour
             isLooking = false;
             inventory.GetComponent<Inventory>().isLookingAtMap = false;
             inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
-
+           
            
         }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
                 inventory.GetComponent<Inventory>().OpenIt();

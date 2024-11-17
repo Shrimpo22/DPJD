@@ -120,14 +120,14 @@ public class PlayerEventItens : MonoBehaviour
             }
             else if(hit.tag == "Torch"){
                 hit.gameObject.GetComponent<Torches>().textActivate();
-                hit.gameObject.GetComponent<Torches>().grabMirrorPiece();
+                hit.gameObject.GetComponent<Torches>().grabTorch();
             }
             else if(hit.tag == "Chalice"){
                 hit.gameObject.GetComponent<ChaliceObj>().textActivate();
-                hit.gameObject.GetComponent<ChaliceObj>().grabMirrorPiece();
+                hit.gameObject.GetComponent<ChaliceObj>().grabChalice();
             }else if(hit.tag == "Candle"){
                 hit.gameObject.GetComponent<Candles>().textActivate();
-                hit.gameObject.GetComponent<Candles>().grabMirrorPiece();
+                hit.gameObject.GetComponent<Candles>().grabCandle();
             }
             else if (hit.tag == "Statue" && hit.gameObject.GetComponent<Statues>().isLooking==false){
                 hit.gameObject.GetComponent<Statues>().textActivate();
@@ -139,9 +139,9 @@ public class PlayerEventItens : MonoBehaviour
             }
             else if (hit.tag == "MusicSheet"){
                 hit.gameObject.GetComponent<Music>().textActivate();
-                hit.gameObject.GetComponent<Music>().grabMirrorPiece();
+                hit.gameObject.GetComponent<Music>().grabMusicSheet();
             }
-            else if (hit.tag == "CandleHolder" && hit.gameObject.GetComponent<Organ>().isLooking==false){
+            else if (hit.tag == "CandleHolder" && hit.gameObject.GetComponent<CandleHolder>().isLooking==false){
                 hit.gameObject.GetComponent<CandleHolder>().textActivate();
                 hit.gameObject.GetComponent<CandleHolder>().seeObject();
             }

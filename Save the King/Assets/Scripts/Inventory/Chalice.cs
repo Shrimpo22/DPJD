@@ -35,7 +35,7 @@ public class Chalice : Item
     {
         return () =>
         {
-           GameObject.FindGameObjectWithTag("Statues").GetComponent<Statues>().addPiece(GiveName());
+           GameObject.FindGameObjectWithTag("Statue").GetComponent<Statues>().addPiece(GiveName());
         };
     }
 }

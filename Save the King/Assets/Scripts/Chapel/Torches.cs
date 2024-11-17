@@ -6,6 +6,7 @@ using UnityEngine;
 public class Torches : MonoBehaviour
 {
     public TMP_Text text;
+    private bool hasBeenGrabbed;
     public void textActivate()
     {
         text.text = "(E) Grab Torch";
@@ -18,10 +19,13 @@ public class Torches : MonoBehaviour
     }
 
 
-    public void grabMirrorPiece()
+    public void grabTorch()
     {
+        if(!hasBeenGrabbed){
+        hasBeenGrabbed=true;
         GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
-        inventory.GetComponent<Inventory>().AddItem("Torches", 1);
-        gameObject.transform.parent.gameObject.SetActive(false);
+        inventory.GetComponent<Inventory>().AddItem("Torch", 1);
+        Destroy(gameObject);
+    }
     }
 }

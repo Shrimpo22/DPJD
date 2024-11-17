@@ -65,6 +65,12 @@ public class Door : MonoBehaviour, IDoor
     }
 
     // Method to open the door
+    public void OpenDoor(){
+        targetRotation = 90f * Angle;
+        audioSource.clip = UnlockedOpenSound;
+        audioSource.Play();
+    }
+    
     public void OpenDoor(GameObject player)
     {
         if (!IsLocked && IsClosed)

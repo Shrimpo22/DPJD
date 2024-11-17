@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Cinemachine;
 using UnityEngine;
 
 public class CandleHolder : MonoBehaviour
@@ -16,12 +17,16 @@ public class CandleHolder : MonoBehaviour
     GameObject player;
     public Camera myCamera;
     private Camera mainCamera;
+    
+    public GameObject freelockCamara;
+    private CinemachineFreeLook freeLookComponent;
 
     [SerializeField] public GameObject[] allPieces;
     
     void Start()
     {
        nrOfPiecesOn = 0 ;
+       freeLookComponent = freelockCamara.GetComponent<CinemachineFreeLook>();
        player = GameObject.FindGameObjectWithTag("Player");
        inventory = GameObject.FindGameObjectWithTag("Inventory");
        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -71,6 +76,11 @@ public class CandleHolder : MonoBehaviour
 
        if(Input.GetKeyDown(KeyCode.Escape) && isLooking){
             player.SetActive(true);
+            Time.timeScale = 1;
+             if (freeLookComponent != null)
+            {
+                freeLookComponent.enabled = true;
+            }
             textClear();
             mainCamera.tag = "MainCamera";
             myCamera.tag="Untagged";
@@ -79,6 +89,7 @@ public class CandleHolder : MonoBehaviour
             isLooking = false;
             inventory.GetComponent<Inventory>().isLookingAtMap = false;
             inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
+           
 
            
         }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){

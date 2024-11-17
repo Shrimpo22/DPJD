@@ -6,6 +6,8 @@ using UnityEngine;
 public class Candles : MonoBehaviour
 {
     public TMP_Text text;
+    private bool hasBeenGrabbed;
+
     public void textActivate()
     {
         text.text = "(E) Grab Candle";
@@ -18,10 +20,13 @@ public class Candles : MonoBehaviour
     }
 
 
-    public void grabMirrorPiece()
+    public void grabCandle()
     {
+        if(!hasBeenGrabbed){
+        hasBeenGrabbed=true;
         GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
-        inventory.GetComponent<Inventory>().AddItem("Candles", 1);
-        gameObject.transform.parent.gameObject.SetActive(false);
+        inventory.GetComponent<Inventory>().AddItem("Candle", 1);
+        Destroy(gameObject);
+    }
     }
 }

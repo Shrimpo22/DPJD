@@ -5,19 +5,27 @@ using UnityEngine;
 public class OpenSecretDoor : MonoBehaviour
 {
 
-    public int rightPieces;
+    public int rightPieces = 0;
+    GameObject secretDoor;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        secretDoor = this.gameObject;
     }
 
-    // Update is called once per frame
+    public void sum(){
+        rightPieces++;
+    }
+
+    public void subtract(){
+        if(rightPieces>0)
+            rightPieces--;
+    }
     void Update()
     {
         if (rightPieces == 1){
-            Debug.Log("open door");
+            if(secretDoor.GetComponent<Door>()!=null)
+                this.gameObject.GetComponent<Door>().OpenDoor();
         }
     }
 }

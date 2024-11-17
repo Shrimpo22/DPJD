@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using Cinemachine;
 public class Statues : MonoBehaviour
 {
     public TMP_Text textEvent;
@@ -13,21 +13,27 @@ public class Statues : MonoBehaviour
     private bool isEmpty = true;
     private bool isComplete = false;
 
-    OpenSecretDoor secretDoor;
+    public GameObject secretDoor;
 
     public bool isLooking = false;
     GameObject inventory;
 
     GameObject player;
+    private string object_name;
     public Camera myCamera;
     private Camera mainCamera;
 
-    public GameObject torch;
-    public GameObject chalice;
+    public GameObject myObject;
     
+    public GameObject freelockCamara;
+    private CinemachineFreeLook freeLookComponent;
+
     void Start()
     {
+        
+       myObject.SetActive(false);
        player = GameObject.FindGameObjectWithTag("Player");
+       freeLookComponent = freelockCamara.GetComponent<CinemachineFreeLook>();
        inventory = GameObject.FindGameObjectWithTag("Inventory");
        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
@@ -63,12 +69,23 @@ public class Statues : MonoBehaviour
     }
 
     public void addPiece(string name){
-       inventory.GetComponent<Inventory>().DropItemByName(name);
-       if (name == correctPiece){
+       object_name = name;
+       inventory.GetComponent<Inventory>().DropItemByName(object_name);
+       myObject.SetActive(true);
+       if (object_name == correctPiece){
         isRightPiece=true;
-        secretDoor.rightPieces += 1;
+        secretDoor.GetComponent<OpenSecretDoor>().sum();
        }
 
+    }
+
+    public void removePiece(){
+        myObject.SetActive(false);
+        inventory.GetComponent<Inventory>().AddItem(object_name,1);
+        if(isRightPiece){
+            isRightPiece=false;
+            secretDoor.GetComponent<OpenSecretDoor>().subtract();
+        }
     }
     private void OnTriggerExit(Collider other){
         textClear();
@@ -81,6 +98,7 @@ public class Statues : MonoBehaviour
 
        if(Input.GetKeyDown(KeyCode.Escape) && isLooking){
             player.SetActive(true);
+            Time.timeScale=1;
             textClear();
             mainCamera.tag = "MainCamera";
             myCamera.tag="Untagged";
@@ -89,7 +107,10 @@ public class Statues : MonoBehaviour
             isLooking = false;
             inventory.GetComponent<Inventory>().isLookingAtMap = false;
             inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
-
+            if (freeLookComponent != null)
+            {
+                freeLookComponent.enabled = true;
+            }
            
         }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
                 inventory.GetComponent<Inventory>().OpenIt();

@@ -26,7 +26,6 @@ public class CookItems : MonoBehaviour
     public void grabItem(GameObject player) {
             if(!hasBeenGrabed){
               hasBeenGrabed = true;
-              Debug.Log("Adicionei");
               string itemName = this.gameObject.name;
               GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
               inventory.GetComponent<Inventory>().AddItem(itemName,1);

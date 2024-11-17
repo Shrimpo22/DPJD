@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= amount;
 
         if(currentHealth > 0){
-            animator.Play("takingDamage");
+            animator.Play("takingDamage",0,0f);
         }else if(currentHealth <= 0){
             GetComponent<PlayerMovement>().enabled = false;
             animator.Play("Death");

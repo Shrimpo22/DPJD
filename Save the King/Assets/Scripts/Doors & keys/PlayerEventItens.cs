@@ -20,6 +20,7 @@ public class PlayerEventItens : MonoBehaviour
     private Key key;
     private PlayerControls controls;
 
+
     public bool hasSwordOn = false;
 
     public GameObject swordOn = null;
@@ -61,7 +62,6 @@ public class PlayerEventItens : MonoBehaviour
         if(isNearDoor){ 
             door.OpenDoor(this.gameObject);
         }else{
-        // Set the base position for raycasting
         Vector3 basePosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         
         for (int x = -rayCount/2; x <= rayCount/2; x++)

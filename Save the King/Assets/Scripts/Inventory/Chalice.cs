@@ -34,8 +34,8 @@ public class Chalice : Item
     public override Action UseFunc()
     {
         return () =>
-        { // Erro aqui. Sugestºao : Ir ao player(pela tag) e dele chamar o collider da estatua mais proxima dele (GetComponent<Statues>().addPiece(GiveName()))
-           GameObject.FindGameObjectWithTag("Statue").GetComponent<Statues>().addPiece(GiveName());
-        };
+        { 
+            GameObject.FindGameObjectWithTag("Statue").GetComponent<Statues>().findtheStatue(GiveName());
+          };
     }
 }

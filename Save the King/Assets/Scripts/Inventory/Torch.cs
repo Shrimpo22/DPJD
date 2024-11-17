@@ -36,7 +36,7 @@ public class Torch : Item
     {
         return () =>
         {
-           GameObject.FindGameObjectWithTag("Statue").GetComponent<Statues>().addPiece(GiveName());
-        };
+            GameObject.FindGameObjectWithTag("Statue").GetComponent<Statues>().findtheStatue(GiveName());
+         };
     }
 }

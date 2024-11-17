@@ -66,7 +66,11 @@ public class Organ : MonoBehaviour
         audioSource.Play();
         BookOpen.SetActive(true);
         BookClosed.SetActive(false);
+        gameObject.tag="Untagged";
+        exitCam();
     }
+
+
     private void OnTriggerExit(Collider other){
         textClear();
     }
@@ -81,7 +85,17 @@ public class Organ : MonoBehaviour
        }
 
        if(Input.GetKeyDown(KeyCode.Escape) && isLooking){
-            player.SetActive(true);
+            exitCam();
+           
+           
+        }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
+                inventory.GetComponent<Inventory>().OpenIt();
+                
+        }
+    }
+
+    public void exitCam(){
+        player.SetActive(true);
             
             Time.timeScale = 1;
              if (freeLookComponent != null)
@@ -96,22 +110,5 @@ public class Organ : MonoBehaviour
             isLooking = false;
             inventory.GetComponent<Inventory>().isLookingAtMap = false;
             inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
-           
-           
-        }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
-                inventory.GetComponent<Inventory>().OpenIt();
-                
-        }
-    }
-
-    public void exitCam(){
-        player.SetActive(true);
-        textEvent.enabled = false;
-        mainCamera.tag = "MainCamera";
-        myCamera.tag="Untagged";
-        mainCamera.gameObject.SetActive(true);
-        myCamera.gameObject.SetActive(false);
-        isLooking = false;
-        inventory.GetComponent<Inventory>().isLookingAtMap = false;
     }
 }

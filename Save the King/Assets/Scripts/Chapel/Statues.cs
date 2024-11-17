@@ -6,12 +6,14 @@ using Cinemachine;
 public class Statues : MonoBehaviour
 {
     public TMP_Text textEvent;
+    public GameObject button;
 
     [SerializeField]
     public string correctPiece; // Each statue has its correct piece (torch or chalice)
     private bool isRightPiece = false;
     private bool isEmpty = true;
     private bool isComplete = false;
+    private bool hasObject = false;
 
     public GameObject secretDoor;
 
@@ -23,20 +25,28 @@ public class Statues : MonoBehaviour
     public Camera myCamera;
     private Camera mainCamera;
 
-    public GameObject myObject;
+    public GameObject chalice;
+     public GameObject torch;
     
     public GameObject freelockCamara;
     private CinemachineFreeLook freeLookComponent;
 
     void Start()
     {
-        
-       myObject.SetActive(false);
+       button.SetActive(false); 
+       chalice.SetActive(false);
+       torch.SetActive(false);
        player = GameObject.FindGameObjectWithTag("Player");
        freeLookComponent = freelockCamara.GetComponent<CinemachineFreeLook>();
        inventory = GameObject.FindGameObjectWithTag("Inventory");
        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-       Debug.Log(myObject.tag);
+       
+    }
+
+    public void undo(){
+        if(!string.IsNullOrWhiteSpace(object_name)){
+            removePiece();
+        }
     }
 
     public void textActivate(){
@@ -47,7 +57,6 @@ public class Statues : MonoBehaviour
       textEvent.gameObject.SetActive(false);  
     }
     public void seeObject() {
-        Debug.Log(myObject.tag);
         mainCamera.tag="Untagged";
         myCamera.tag="MainCamera";
         player.SetActive(false);
@@ -65,33 +74,46 @@ public class Statues : MonoBehaviour
         isLooking=true;
 
     }
-
-    private void showFinalMap(){
-        isComplete=true;
+    
+    public void findtheStatue(string name){
+        secretDoor.GetComponent<OpenSecretDoor>().AddItemToStatue(name);
     }
 
     public void addPiece(string name){
        object_name = name;
        inventory.GetComponent<Inventory>().DropItemByName(object_name);
-       Debug.Log(object_name + ". this is the object name");
-       Debug.Log(myObject.tag + ". this is the myObject.tag name");
-       myObject.SetActive(true);
-       if (object_name == myObject.tag){
-        Debug.Log("right piece");
+        hasObject = true;
+       if(object_name=="Chalice"){
+        chalice.SetActive(true);}else{
+            torch.SetActive(true);
+        }
+        button.SetActive(true);
+        
+       if (object_name == correctPiece){
         isRightPiece=true;
         secretDoor.GetComponent<OpenSecretDoor>().sum();
+        if(secretDoor.GetComponent<OpenSecretDoor>().rightPieces==secretDoor.GetComponent<OpenSecretDoor>().correctPiecesNeeded){
+            exitCam();
+            secretDoor.GetComponent<OpenSecretDoor>().viewOpening();
+        }
        }
 
     }
 
     public void removePiece(){
-        myObject.SetActive(false);
+        chalice.SetActive(false);
+        torch.SetActive(false);
+        hasObject=false;
         inventory.GetComponent<Inventory>().AddItem(object_name,1);
+        object_name=null;
+        button.SetActive(false);
+        Debug.Log(button.activeSelf);
         if(isRightPiece){
             isRightPiece=false;
             secretDoor.GetComponent<OpenSecretDoor>().subtract();
         }
     }
+
     private void OnTriggerExit(Collider other){
         textClear();
     }
@@ -102,7 +124,19 @@ public class Statues : MonoBehaviour
        }
 
        if(Input.GetKeyDown(KeyCode.Escape) && isLooking){
+            exitCam();
+           
+        }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
+               inventory.GetComponent<Inventory>().OpenIt();
+               if(hasObject) button.SetActive(true);
+               secretDoor.GetComponent<OpenSecretDoor>().NearMe(this.gameObject);
+        }
+    }
+
+    void exitCam(){
+        button.SetActive(false);
             player.SetActive(true);
+            secretDoor.GetComponent<OpenSecretDoor>().NearMe(null);
             Time.timeScale=1;
             textClear();
             mainCamera.tag = "MainCamera";
@@ -116,10 +150,5 @@ public class Statues : MonoBehaviour
             {
                 freeLookComponent.enabled = true;
             }
-           
-        }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
-                inventory.GetComponent<Inventory>().OpenIt();
-                
-        }
     }
 }

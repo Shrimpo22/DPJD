@@ -68,6 +68,7 @@ public class CandleHolder : MonoBehaviour
        allPieces[nrOfPiecesOn].SetActive(true);
        nrOfPiecesOn++;
         if (nrOfPiecesOn == 2) {
+            gameObject.tag="Untagged";
             drawer.transform.position = drawer.transform.position + drawer.transform.forward * 0.3f;
             StartCoroutine(PlaySoundAndExit());
         }
@@ -83,20 +84,7 @@ public class CandleHolder : MonoBehaviour
        }
 
        if(Input.GetKeyDown(KeyCode.Escape) && isLooking){
-            player.SetActive(true);
-            Time.timeScale = 1;
-             if (freeLookComponent != null)
-            {
-                freeLookComponent.enabled = true;
-            }
-            textClear();
-            mainCamera.tag = "MainCamera";
-            myCamera.tag="Untagged";
-            mainCamera.gameObject.SetActive(true);
-            myCamera.gameObject.SetActive(false);
-            isLooking = false;
-            inventory.GetComponent<Inventory>().isLookingAtMap = false;
-            inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
+           exitCam();
            
 
            
@@ -112,10 +100,10 @@ public class CandleHolder : MonoBehaviour
         if (audioSource.clip != null)
         {
             audioSource.Play();
-
-            yield return new WaitForSeconds(audioSource.clip.length + 1f);
-
             exitCam();
+            yield return new WaitForSeconds(audioSource.clip.length + 1f);
+            
+            
         }
         else
         {
@@ -126,13 +114,19 @@ public class CandleHolder : MonoBehaviour
     }
 
     public void exitCam(){
-        player.SetActive(true);
-        textEvent.enabled = false;
-        mainCamera.tag = "MainCamera";
-        myCamera.tag="Untagged";
-        mainCamera.gameObject.SetActive(true);
-        myCamera.gameObject.SetActive(false);
-        isLooking = false;
-        inventory.GetComponent<Inventory>().isLookingAtMap = false;
+         player.SetActive(true);
+            Time.timeScale = 1;
+             if (freeLookComponent != null)
+            {
+                freeLookComponent.enabled = true;
+            }
+            textClear();
+            mainCamera.tag = "MainCamera";
+            myCamera.tag="Untagged";
+            mainCamera.gameObject.SetActive(true);
+            myCamera.gameObject.SetActive(false);
+            isLooking = false;
+            inventory.GetComponent<Inventory>().isLookingAtMap = false;
+            inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
     }
 }

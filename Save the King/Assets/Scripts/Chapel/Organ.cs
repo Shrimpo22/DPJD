@@ -19,6 +19,11 @@ public class Organ : MonoBehaviour
     public GameObject paperMusic;
     public GameObject freelockCamara;
     private CinemachineFreeLook freeLookComponent;
+
+    public GameObject BookOpen;
+    public GameObject BookClosed;
+
+    public AudioSource audioSource;
     
     void Start()
     {
@@ -58,6 +63,9 @@ public class Organ : MonoBehaviour
        inventory.GetComponent<Inventory>().DropItemByName("SheetMusic");
        paperMusic.SetActive(true);
        isComplete = true;
+        audioSource.Play();
+        BookOpen.SetActive(true);
+        BookClosed.SetActive(false);
     }
     private void OnTriggerExit(Collider other){
         textClear();
@@ -94,5 +102,16 @@ public class Organ : MonoBehaviour
                 inventory.GetComponent<Inventory>().OpenIt();
                 
         }
+    }
+
+    public void exitCam(){
+        player.SetActive(true);
+        textEvent.enabled = false;
+        mainCamera.tag = "MainCamera";
+        myCamera.tag="Untagged";
+        mainCamera.gameObject.SetActive(true);
+        myCamera.gameObject.SetActive(false);
+        isLooking = false;
+        inventory.GetComponent<Inventory>().isLookingAtMap = false;
     }
 }

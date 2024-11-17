@@ -35,6 +35,8 @@ TagManager:
   - CandleHolder
   - Statue
   - Organ
+  - BookOpen
+  - BookClose
   layers:
   - Default
   - TransparentFX

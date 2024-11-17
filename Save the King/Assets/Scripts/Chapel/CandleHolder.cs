@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Cinemachine;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class CandleHolder : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class CandleHolder : MonoBehaviour
     
     public GameObject freelockCamara;
     private CinemachineFreeLook freeLookComponent;
+
+    public GameObject drawer;
+    public AudioSource audioSource;
 
     [SerializeField] public GameObject[] allPieces;
     
@@ -60,9 +64,13 @@ public class CandleHolder : MonoBehaviour
     }
 
     public void addPiece(){
-       inventory.GetComponent<Inventory>().DropItemByName("Candles");
-       allPieces[nrOfPiecesOn].SetActive(false);
+       inventory.GetComponent<Inventory>().DropItemByName("Candle");
+       allPieces[nrOfPiecesOn].SetActive(true);
        nrOfPiecesOn++;
+        if (nrOfPiecesOn == 2) {
+            drawer.transform.position = drawer.transform.position + drawer.transform.forward * 0.3f;
+            StartCoroutine(PlaySoundAndExit());
+        }
     }
     private void OnTriggerExit(Collider other){
         textClear();
@@ -96,5 +104,35 @@ public class CandleHolder : MonoBehaviour
                 inventory.GetComponent<Inventory>().OpenIt();
                 
         }
+    }
+
+     IEnumerator PlaySoundAndExit(){
+        Debug.Log("Opening Drawer");
+
+        if (audioSource.clip != null)
+        {
+            audioSource.Play();
+
+            yield return new WaitForSeconds(audioSource.clip.length + 1f);
+
+            exitCam();
+        }
+        else
+        {
+            Debug.LogWarning("No audio clip assigned to AudioSource.");
+        }
+
+        Debug.Log("Finished");
+    }
+
+    public void exitCam(){
+        player.SetActive(true);
+        textEvent.enabled = false;
+        mainCamera.tag = "MainCamera";
+        myCamera.tag="Untagged";
+        mainCamera.gameObject.SetActive(true);
+        myCamera.gameObject.SetActive(false);
+        isLooking = false;
+        inventory.GetComponent<Inventory>().isLookingAtMap = false;
     }
 }

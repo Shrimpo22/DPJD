@@ -36,6 +36,7 @@ public class Statues : MonoBehaviour
        freeLookComponent = freelockCamara.GetComponent<CinemachineFreeLook>();
        inventory = GameObject.FindGameObjectWithTag("Inventory");
        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+       Debug.Log(myObject.tag);
     }
 
     public void textActivate(){
@@ -46,6 +47,7 @@ public class Statues : MonoBehaviour
       textEvent.gameObject.SetActive(false);  
     }
     public void seeObject() {
+        Debug.Log(myObject.tag);
         mainCamera.tag="Untagged";
         myCamera.tag="MainCamera";
         player.SetActive(false);
@@ -71,8 +73,11 @@ public class Statues : MonoBehaviour
     public void addPiece(string name){
        object_name = name;
        inventory.GetComponent<Inventory>().DropItemByName(object_name);
+       Debug.Log(object_name + ". this is the object name");
+       Debug.Log(myObject.tag + ". this is the myObject.tag name");
        myObject.SetActive(true);
-       if (object_name == correctPiece){
+       if (object_name == myObject.tag){
+        Debug.Log("right piece");
         isRightPiece=true;
         secretDoor.GetComponent<OpenSecretDoor>().sum();
        }

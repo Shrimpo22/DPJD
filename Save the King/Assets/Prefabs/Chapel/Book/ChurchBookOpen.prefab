@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChurchBookOpen
       objectReference: {fileID: 0}
+    - target: {fileID: 1576702376698578230, guid: 17688cb221d175d40906798a1ce43837, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3946447896356687490, guid: 17688cb221d175d40906798a1ce43837, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

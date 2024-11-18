@@ -304,6 +304,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (controls.Gameplay.LightAttack.triggered && isSwordEquipped && !isDetected)
         {
+            Debug.Log("Atrás de tiiiiii");
             animator.Play("stabbing");
         }
     }

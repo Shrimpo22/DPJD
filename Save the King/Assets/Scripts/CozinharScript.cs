@@ -15,6 +15,7 @@ public class CozinharScript : MonoBehaviour
 
     GameObject inventory;
 
+    public GameObject aguaFerver;
     public GameObject freelockCamara;
     public GameObject conf;
     public GameObject refazer;
@@ -78,12 +79,14 @@ public class CozinharScript : MonoBehaviour
             }
             conf.SetActive(false);
             refazer.SetActive(false);
+            aguaFerver.SetActive(false);
             isLooking = false;
             inventory.GetComponent<Inventory>().isLookingAtCook = false;
             inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
             
         }
         else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
+                aguaFerver.SetActive(true);
                 inventory.GetComponent<Inventory>().OpenItCozinha();
                 
         }

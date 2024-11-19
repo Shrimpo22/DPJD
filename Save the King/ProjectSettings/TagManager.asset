@@ -37,6 +37,8 @@ TagManager:
   - Organ
   - BookOpen
   - BookClose
+  - NPCVIBES
+  - book
   layers:
   - Default
   - TransparentFX

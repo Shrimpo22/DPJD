@@ -15,6 +15,7 @@ public class Inventory : MonoBehaviour
     private bool wasOpenByOtherEvent = false;
     public GameObject ItemPanel;
     private PlayerControls controls;
+    public GameObject Mouse;
     public AudioSource audioSource;
     public GameObject ItemPanelGrid;
     public Mouse mouse;
@@ -97,6 +98,7 @@ public class Inventory : MonoBehaviour
         audioSource.Play();
         Time.timeScale = 1;
         inInventory = false;
+        Mouse.SetActive(false);
  
     }
 
@@ -110,6 +112,7 @@ public class Inventory : MonoBehaviour
     }
 
     void openInventory(){
+        Mouse.SetActive(true);
         inInventory = true;
         wasOpenByOtherEvent = false;
         InventoryMenu.SetActive(true); 

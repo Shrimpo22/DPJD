@@ -17,7 +17,7 @@ public class Food : MonoBehaviour
           foodText = GetComponentInChildren<TMP_Text>(); 
         }
 
-        foodText.color = Color.black;
+        foodText.color = Color.white;
     
         textClear();
         SetHealingAmount();
@@ -68,5 +68,10 @@ public class Food : MonoBehaviour
 
     private void OnTriggerExit(Collider other){
         textClear();
+    }
+
+
+    private void OnTriggerEnter(Collider other){
+            textActivate();
     }
 }

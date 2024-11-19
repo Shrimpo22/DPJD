@@ -20,7 +20,7 @@ public class BookOpening : MonoBehaviour
    
     void Start()
     {
-        freeLookComponent = freelockCamara.GetComponent<CinemachineFreeLook>();
+       freeLookComponent = freelockCamara.GetComponent<CinemachineFreeLook>();
        player = GameObject.FindGameObjectWithTag("Player");
        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
@@ -33,6 +33,7 @@ public class BookOpening : MonoBehaviour
       textEvent.gameObject.SetActive(false);  
     }
     public void seeObject() {
+        Debug.Log("see me");
         mainCamera.tag="Untagged";
         myCamera.tag="MainCamera";
         player.SetActive(false);

@@ -145,10 +145,10 @@ public class PlayerEventItens : MonoBehaviour
                 hit.gameObject.GetComponent<CandleHolder>().textActivate();
                 hit.gameObject.GetComponent<CandleHolder>().seeObject();
             }
-            //else if (hit.tag == "Book" && hit.gameObject.GetComponent<BookOpening>().isLooking==false){
-            //    hit.gameObject.GetComponent<BookOpening>().textActivate();
-            //    hit.gameObject.GetComponent<BookOpening>().seeObject();
-            //}
+            else if (hit.tag == "BookOpen" && hit.gameObject.GetComponent<BookOpening>().isLooking==false){
+                hit.gameObject.GetComponent<BookOpening>().textActivate();
+                hit.gameObject.GetComponent<BookOpening>().seeObject();
+            }
             else if (hit.tag == "Food"){
                 hit.gameObject.GetComponent<Food>().textActivate();
                 hit.gameObject.GetComponent<Food>().grabItem(this.gameObject);

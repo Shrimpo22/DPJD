@@ -69,6 +69,7 @@ public class CandleHolder : MonoBehaviour
        nrOfPiecesOn++;
         if (nrOfPiecesOn == 2) {
             gameObject.tag="Untagged";
+            this.gameObject.GetComponent<Collider>().enabled=false;
             drawer.transform.position = drawer.transform.position + drawer.transform.forward * 0.3f;
             StartCoroutine(PlaySoundAndExit());
         }
@@ -89,7 +90,7 @@ public class CandleHolder : MonoBehaviour
 
            
         }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
-                inventory.GetComponent<Inventory>().OpenIt();
+                inventory.GetComponent<Inventory>().OpenItCandleHolder();
                 
         }
     }
@@ -126,7 +127,7 @@ public class CandleHolder : MonoBehaviour
             mainCamera.gameObject.SetActive(true);
             myCamera.gameObject.SetActive(false);
             isLooking = false;
-            inventory.GetComponent<Inventory>().isLookingAtMap = false;
+            inventory.GetComponent<Inventory>().isLookingAtCandleHolder = false;
             inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
     }
 }

@@ -89,7 +89,7 @@ public class Organ : MonoBehaviour
            
            
         }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
-                inventory.GetComponent<Inventory>().OpenIt();
+                inventory.GetComponent<Inventory>().OpenItOrgan();
                 
         }
     }
@@ -108,7 +108,7 @@ public class Organ : MonoBehaviour
             mainCamera.gameObject.SetActive(true);
             myCamera.gameObject.SetActive(false);
             isLooking = false;
-            inventory.GetComponent<Inventory>().isLookingAtMap = false;
+            inventory.GetComponent<Inventory>().isLookingAtOrgan = false;
             inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
     }
 }

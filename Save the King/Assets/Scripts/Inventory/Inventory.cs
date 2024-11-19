@@ -12,13 +12,18 @@ public class Inventory : MonoBehaviour
     [Header("Inventory Menu Components")]
 
     public GameObject InventoryMenu;
+    public bool isLookingAtCandleHolder;
+    
+    public bool isLookingAtOrgan;
     private bool wasOpenByOtherEvent = false;
     public GameObject ItemPanel;
+    
     private PlayerControls controls;
     public AudioSource audioSource;
     public GameObject ItemPanelGrid;
     public Mouse mouse;
     public bool isLookingAtMap = false;
+    public bool isLookingAtStatue = false;
     public bool isLookingAtCook = false;
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
@@ -80,11 +85,22 @@ public class Inventory : MonoBehaviour
         isLookingAtMap = true;
         wasOpenByOtherEvent = true;
     }
+    public void OpenItStatues(){
+        isLookingAtStatue = true;
+        wasOpenByOtherEvent = true;
+    }
+    public void OpenItOrgan(){
+        isLookingAtOrgan = true;
+        wasOpenByOtherEvent = true;
+    }
     public void OpenItCozinha(){
         isLookingAtCook = true;
         wasOpenByOtherEvent = true;
     }
-
+    public void OpenItCandleHolder(){
+        isLookingAtCandleHolder = true;
+        wasOpenByOtherEvent = true;
+    }
    void closeInventory(){
         wasOpenByOtherEvent = false;
         InventoryMenu.SetActive(false);

@@ -6,10 +6,11 @@ using Cinemachine;
 public class Statues : MonoBehaviour
 {
     public TMP_Text textEvent;
+    public TMP_Text textWhileLooking;
     public GameObject button;
 
     [SerializeField]
-    public string correctPiece; // Each statue has its correct piece (torch or chalice)
+    public string correctPiece; 
     private bool isRightPiece = false;
     private bool isEmpty = true;
     private bool isComplete = false;
@@ -33,6 +34,8 @@ public class Statues : MonoBehaviour
 
     void Start()
     {
+        textWhileLooking.color = Color.white;
+        textEvent.color = Color.black;
        button.SetActive(false); 
        chalice.SetActive(false);
        torch.SetActive(false);
@@ -54,6 +57,7 @@ public class Statues : MonoBehaviour
       textEvent.gameObject.SetActive(true);  
     }
     public void textClear(){
+      textWhileLooking.gameObject.SetActive(false);
       textEvent.gameObject.SetActive(false);  
     }
     public void seeObject() {
@@ -63,14 +67,15 @@ public class Statues : MonoBehaviour
         isLooking = true;
         mainCamera.gameObject.SetActive(false);
         myCamera.gameObject.SetActive(true);
-        textEvent.color = Color.black;
+        textEvent.gameObject.SetActive(false);
         if(isEmpty){
-            textEvent.text  = "(E) Add Piece ; (ESC) Exit";
+            textWhileLooking.text  = "(E) Add Piece; (ESC) Exit;";
         } else if(!isRightPiece && !isEmpty) {
-            textEvent.text  = "(E) Remove Piece ; (ESC) Exit";
+            textWhileLooking.text  = "(E) Remove Piece; (ESC) Exit;";
         } else{
-        textEvent.text = "(ESC) Exit";
+        textWhileLooking.text = "(ESC) Exit;";
         }
+        textWhileLooking.gameObject.SetActive(true);
         isLooking=true;
 
     }
@@ -120,14 +125,14 @@ public class Statues : MonoBehaviour
     void Update()
     {
        if(isRightPiece) {
-            textEvent.text = "(ESC) Exit";
+            textWhileLooking.text = "(ESC) Exit";
        }
 
        if(Input.GetKeyDown(KeyCode.Escape) && isLooking){
             exitCam();
            
         }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
-               inventory.GetComponent<Inventory>().OpenIt();
+               inventory.GetComponent<Inventory>().OpenItStatues();
                if(hasObject) button.SetActive(true);
                secretDoor.GetComponent<OpenSecretDoor>().NearMe(this.gameObject);
         }
@@ -144,7 +149,7 @@ public class Statues : MonoBehaviour
             mainCamera.gameObject.SetActive(true);
             myCamera.gameObject.SetActive(false);
             isLooking = false;
-            inventory.GetComponent<Inventory>().isLookingAtMap = false;
+            inventory.GetComponent<Inventory>().isLookingAtStatue = false;
             inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
             if (freeLookComponent != null)
             {

@@ -425,6 +425,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4922298073999697527, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
+      propertyPath: m_CollideAgainst.m_Bits
+      value: 55
+      objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.5701283
@@ -37764,9 +37768,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 450493880383008228, guid: 1f0263f8158038e4ea6ac2be89a47ffa, type: 3}
+      propertyPath: damage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1311435094688368334, guid: 1f0263f8158038e4ea6ac2be89a47ffa, type: 3}
       propertyPath: m_Name
       value: Big Boi (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1311435094688368334, guid: 1f0263f8158038e4ea6ac2be89a47ffa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3736618187185475102, guid: 1f0263f8158038e4ea6ac2be89a47ffa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -37949,6 +37961,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 273189636}
     m_Modifications:
+    - target: {fileID: 8382316870177708448, guid: 491a92814233734429fff5d0e030d1d6, type: 3}
+      propertyPath: damage
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 8554072677537856858, guid: 491a92814233734429fff5d0e030d1d6, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.8425095
@@ -52200,10 +52216,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1037236205777514035, guid: f452a05303b3022409c6a95e1782f3d9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f452a05303b3022409c6a95e1782f3d9, type: 3}
 --- !u!1 &928737303
 GameObject:
@@ -58443,6 +58456,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2327149640808435639, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
+      propertyPath: drawRange
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3844007906995653738, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.18
@@ -58483,13 +58500,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4924553232587399320, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
+      propertyPath: m_Size.x
+      value: 0.2916967
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924553232587399320, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
+      propertyPath: m_Size.y
+      value: 0.052814603
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924553232587399320, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
+      propertyPath: m_Size.z
+      value: 0.8783757
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924553232587399320, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
+      propertyPath: m_Center.x
+      value: 0.0912907
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924553232587399320, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
+      propertyPath: m_Center.y
+      value: -0.058148745
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924553232587399320, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
+      propertyPath: m_Center.z
+      value: 0.509805
+      objectReference: {fileID: 0}
     - target: {fileID: 6435950414050257592, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
       propertyPath: m_Name
       value: Knigh Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6435950414050257592, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

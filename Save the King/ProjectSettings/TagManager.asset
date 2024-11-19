@@ -32,7 +32,11 @@ TagManager:
   - MusicSheet
   - Candle
   - Book
-  - Interactable
+  - CandleHolder
+  - Statue
+  - Organ
+  - BookOpen
+  - BookClose
   layers:
   - Default
   - TransparentFX
@@ -41,7 +45,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - Interactable
+  - 
   - 
   - 
   - 

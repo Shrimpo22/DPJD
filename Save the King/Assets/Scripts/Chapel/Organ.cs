@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using Cinemachine;
 public class Organ : MonoBehaviour
 {
     public TMP_Text textEvent;
@@ -17,11 +17,18 @@ public class Organ : MonoBehaviour
     private Camera mainCamera;
 
     public GameObject paperMusic;
+    public GameObject freelockCamara;
+    private CinemachineFreeLook freeLookComponent;
 
+    public GameObject BookOpen;
+    public GameObject BookClosed;
+
+    public AudioSource audioSource;
     
     void Start()
     {
        paperMusic.SetActive(false);
+       freeLookComponent = freelockCamara.GetComponent<CinemachineFreeLook>();
        player = GameObject.FindGameObjectWithTag("Player");
        inventory = GameObject.FindGameObjectWithTag("Inventory");
        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -56,7 +63,14 @@ public class Organ : MonoBehaviour
        inventory.GetComponent<Inventory>().DropItemByName("SheetMusic");
        paperMusic.SetActive(true);
        isComplete = true;
+        audioSource.Play();
+        BookOpen.SetActive(true);
+        BookClosed.SetActive(false);
+        gameObject.tag="Untagged";
+        exitCam();
     }
+
+
     private void OnTriggerExit(Collider other){
         textClear();
     }
@@ -71,20 +85,30 @@ public class Organ : MonoBehaviour
        }
 
        if(Input.GetKeyDown(KeyCode.Escape) && isLooking){
-            player.SetActive(true);
+            exitCam();
+           
+           
+        }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
+                inventory.GetComponent<Inventory>().OpenItOrgan();
+                
+        }
+    }
+
+    public void exitCam(){
+        player.SetActive(true);
+            
+            Time.timeScale = 1;
+             if (freeLookComponent != null)
+            {
+                freeLookComponent.enabled = true;
+            }
             textClear();
             mainCamera.tag = "MainCamera";
             myCamera.tag="Untagged";
             mainCamera.gameObject.SetActive(true);
             myCamera.gameObject.SetActive(false);
             isLooking = false;
-            inventory.GetComponent<Inventory>().isZoomedIn = false;
+            inventory.GetComponent<Inventory>().isLookingAtOrgan = false;
             inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
-
-           
-        }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
-                inventory.GetComponent<Inventory>().OpenIt();
-                
-        }
     }
 }

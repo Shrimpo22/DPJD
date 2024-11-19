@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Cinemachine;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class CandleHolder : MonoBehaviour
 {
@@ -16,12 +18,19 @@ public class CandleHolder : MonoBehaviour
     GameObject player;
     public Camera myCamera;
     private Camera mainCamera;
+    
+    public GameObject freelockCamara;
+    private CinemachineFreeLook freeLookComponent;
+
+    public GameObject drawer;
+    public AudioSource audioSource;
 
     [SerializeField] public GameObject[] allPieces;
     
     void Start()
     {
        nrOfPiecesOn = 0 ;
+       freeLookComponent = freelockCamara.GetComponent<CinemachineFreeLook>();
        player = GameObject.FindGameObjectWithTag("Player");
        inventory = GameObject.FindGameObjectWithTag("Inventory");
        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -55,9 +64,15 @@ public class CandleHolder : MonoBehaviour
     }
 
     public void addPiece(){
-       inventory.GetComponent<Inventory>().DropItemByName("Candles");
-       allPieces[nrOfPiecesOn].SetActive(false);
+       inventory.GetComponent<Inventory>().DropItemByName("Candle");
+       allPieces[nrOfPiecesOn].SetActive(true);
        nrOfPiecesOn++;
+        if (nrOfPiecesOn == 2) {
+            gameObject.tag="Untagged";
+            this.gameObject.GetComponent<Collider>().enabled=false;
+            drawer.transform.position = drawer.transform.position + drawer.transform.forward * 0.3f;
+            StartCoroutine(PlaySoundAndExit());
+        }
     }
     private void OnTriggerExit(Collider other){
         textClear();
@@ -70,20 +85,49 @@ public class CandleHolder : MonoBehaviour
        }
 
        if(Input.GetKeyDown(KeyCode.Escape) && isLooking){
-            player.SetActive(true);
+           exitCam();
+           
+
+           
+        }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
+                inventory.GetComponent<Inventory>().OpenItCandleHolder();
+                
+        }
+    }
+
+     IEnumerator PlaySoundAndExit(){
+        Debug.Log("Opening Drawer");
+
+        if (audioSource.clip != null)
+        {
+            audioSource.Play();
+            exitCam();
+            yield return new WaitForSeconds(audioSource.clip.length + 1f);
+            
+            
+        }
+        else
+        {
+            Debug.LogWarning("No audio clip assigned to AudioSource.");
+        }
+
+        Debug.Log("Finished");
+    }
+
+    public void exitCam(){
+         player.SetActive(true);
+            Time.timeScale = 1;
+             if (freeLookComponent != null)
+            {
+                freeLookComponent.enabled = true;
+            }
             textClear();
             mainCamera.tag = "MainCamera";
             myCamera.tag="Untagged";
             mainCamera.gameObject.SetActive(true);
             myCamera.gameObject.SetActive(false);
             isLooking = false;
-            inventory.GetComponent<Inventory>().isZoomedIn = false;
+            inventory.GetComponent<Inventory>().isLookingAtCandleHolder = false;
             inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
-
-           
-        }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
-                inventory.GetComponent<Inventory>().OpenIt();
-                
-        }
     }
 }

@@ -28,7 +28,6 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void HandleBack()
     {
-        Debug.Log("Entrei wi?");
         if(!inv.isInInventory()){
             if (GameIsPaused){
                 if (inSettings){

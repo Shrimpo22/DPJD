@@ -4,9 +4,11 @@ using TMPro;
 using UnityEngine;
 
 public class ChaliceObj : MonoBehaviour
-{//aqui 
+{
 
      public TMP_Text text;
+    private bool hasBeenGrabbed;
+
     public void textActivate()
     {
         text.text = "(E) Grab Chalice";
@@ -19,10 +21,13 @@ public class ChaliceObj : MonoBehaviour
     }
 
 
-    public void grabMirrorPiece()
+    public void grabChalice()
     {
+        if(!hasBeenGrabbed){
+        hasBeenGrabbed=true;
         GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
         inventory.GetComponent<Inventory>().AddItem("Chalice", 1);
-        gameObject.transform.parent.gameObject.SetActive(false);
+        Destroy(gameObject);
+    }
     }
 }

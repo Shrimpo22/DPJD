@@ -35,7 +35,7 @@ public class SheetMusic : Item
     {
         return () =>
         {
-           //GameObject.FindGameObjectWithTag("Chalice").GetComponent<Chalice>().addPiece();
+           GameObject.FindGameObjectWithTag("Organ").GetComponent<Organ>().addPiece();
         };
     }
 }

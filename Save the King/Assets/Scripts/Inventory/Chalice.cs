@@ -34,8 +34,8 @@ public class Chalice : Item
     public override Action UseFunc()
     {
         return () =>
-        {
-           GameObject.FindGameObjectWithTag("Statues").GetComponent<Statues>().addPiece(GiveName());
-        };
+        { 
+            GameObject.FindGameObjectWithTag("Statue").GetComponent<Statues>().findtheStatue(GiveName());
+          };
     }
 }

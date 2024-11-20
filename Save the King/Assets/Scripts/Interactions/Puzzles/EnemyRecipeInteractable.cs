@@ -24,7 +24,7 @@ public class EnemyRecipeInteractable : CamInteractable
     public override void Start()
     {
         base.Start();
-        targetObject = GameObject.FindGameObjectWithTag("Target");
+        targetObject = GameObject.FindGameObjectWithTag("NPCVIBES");
     }
 
     void Update()
@@ -36,7 +36,7 @@ public class EnemyRecipeInteractable : CamInteractable
             {
                 inventory.GetComponent<Inventory>().AddItem("Potions", 2);
                 inventory.GetComponent<Inventory>().AddItem("KeyOfKitchen", 1);
-
+                targetObject.tag="Untagged";
                 wrong = true;
             }
 
@@ -73,6 +73,7 @@ public class EnemyRecipeInteractable : CamInteractable
                 fighting = true;
             }
         }
+        targetObject.tag = "Target";
 
     }
 

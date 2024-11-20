@@ -25,7 +25,7 @@ public class Torch : Item
     }
     public override Sprite GiveItemImage()
     {
-        return Resources.Load<Sprite>("UI/Item Images/MapItem");
+        return Resources.Load<Sprite>("UI/Item Images/TorchItem");
     }
 
     public override string GiveDiscresp()

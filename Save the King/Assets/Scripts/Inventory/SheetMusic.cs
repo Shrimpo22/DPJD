@@ -24,7 +24,7 @@ public class SheetMusic : Item
     }
     public override Sprite GiveItemImage()
     {
-        return Resources.Load<Sprite>("UI/Item Images/MapItem");
+        return Resources.Load<Sprite>("UI/Item Images/MusicSheetItem");
     }
 
     public override string GiveDiscresp()

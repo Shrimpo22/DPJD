@@ -330,6 +330,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void StealthAttack(GameObject enemy)
     {
+        if(enemy.tag=="NPCVIBES"){
+            
+        }
         transform.LookAt(enemy.transform.position);
         Debug.Log("Atr�s de tiiiiii");
         animator.Play("stabbing");

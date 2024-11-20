@@ -26,7 +26,7 @@ public class BlackSword : Item
     }
     public override Sprite GiveItemImage()
     {
-        return Resources.Load<Sprite>("UI/Item Images/KeyOfCell");
+        return Resources.Load<Sprite>("UI/Item Images/BlackSwordItem");
     }
 
     public override string GiveDiscresp()

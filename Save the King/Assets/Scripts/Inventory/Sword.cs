@@ -23,7 +23,7 @@ public class Sword : Item
     }
     public override Sprite GiveItemImage()
     {
-        return Resources.Load<Sprite>("UI/Item Images/Sword");
+        return Resources.Load<Sprite>("UI/Item Images/SwordItem");
     }
 
     public override string GiveDiscresp()

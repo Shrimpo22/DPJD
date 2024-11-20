@@ -26,7 +26,7 @@ public class BestSword : Item
     }
     public override Sprite GiveItemImage()
     {
-        return Resources.Load<Sprite>("UI/Item Images/KeyOfChest");
+        return Resources.Load<Sprite>("UI/Item Images/BestSwordItem");
     }
 
     public override string GiveDiscresp()

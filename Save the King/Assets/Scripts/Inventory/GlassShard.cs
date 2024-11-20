@@ -22,7 +22,7 @@ public class GlassShard : Item
     }
     public override Sprite GiveItemImage()
     {
-        return Resources.Load<Sprite>("UI/Item Images/KeyOfKitchen");
+        return Resources.Load<Sprite>("UI/Item Images/GlassItem");
     }
 
     public override string GiveDiscresp()

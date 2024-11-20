@@ -24,7 +24,7 @@ public class Chalice : Item
     }
     public override Sprite GiveItemImage()
     {
-        return Resources.Load<Sprite>("UI/Item Images/MapItem");
+        return Resources.Load<Sprite>("UI/Item Images/ChaliceItem");
     }
 
     public override string GiveDiscresp()

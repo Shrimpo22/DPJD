@@ -25,7 +25,7 @@ public class Candle : Item
     }
     public override Sprite GiveItemImage()
     {
-        return Resources.Load<Sprite>("UI/Item Images/MapItem");
+        return Resources.Load<Sprite>("UI/Item Images/CandleItem");
     }
 
     public override string GiveDiscresp()

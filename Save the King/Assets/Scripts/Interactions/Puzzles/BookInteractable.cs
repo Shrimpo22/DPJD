@@ -13,7 +13,7 @@ public class BookInteractable : CamInteractable
     public override void Start()
     {
         base.Start();
-        GameObject targetObject = GameObject.FindGameObjectWithTag("Target");
+        GameObject targetObject = GameObject.FindGameObjectWithTag("NPCVIBES");
         if (targetObject != null)
         {
             targetInteraction = targetObject.GetComponent<EnemyRecipeInteractable>();

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using TMPro;
 public class MapInteractable : CamInteractable
 {
     public bool isComplete;
@@ -10,7 +10,7 @@ public class MapInteractable : CamInteractable
     public int nrOfPiecesOn;
     public int totalPieces = 5;
     private string finalAnswer;
-
+    public TMP_Text respostaNumero;
 
     [SerializeField] public GameObject[] allPieces;
 
@@ -42,10 +42,18 @@ public class MapInteractable : CamInteractable
             SolvePuzzle();
        }
     }
+    public override void Interact(Inventory inv, PlayerEventItens playerItems)
+    {
+        base.Interact(inv, playerItems);
+        inv.isLookingAtMap = true;
+    }
 
     private void SolvePuzzle(){
         isComplete=true;
         Debug.Log(finalAnswer);
+        respostaNumero.text = finalAnswer;
+        respostaNumero.gameObject.SetActive(true);
+
     }
 
     

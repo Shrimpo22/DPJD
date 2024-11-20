@@ -36,7 +36,7 @@ public class Plate : Item
         return () =>
         {
             GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().DropItemByName(GiveName());
-            GameObject.FindGameObjectWithTag("Target").GetComponent<EnemyRecipeInteractable>().useItem();
+            GameObject.FindGameObjectWithTag("NPCVIBES").GetComponent<EnemyRecipeInteractable>().useItem();
 
         };
     }

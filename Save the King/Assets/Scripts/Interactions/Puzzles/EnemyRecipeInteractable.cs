@@ -15,7 +15,7 @@ public class EnemyRecipeInteractable : CamInteractable
     public bool fighting = false;
     GameObject targetObject;
     private bool wrong = false;
-
+    public GameObject Inimigo;
     public GameObject texto;
     public TMP_Text textInteraction;
     public int textoInteracaoCount = 1;
@@ -24,7 +24,7 @@ public class EnemyRecipeInteractable : CamInteractable
     public override void Start()
     {
         base.Start();
-        targetObject = GameObject.FindGameObjectWithTag("NPCVIBES");
+        targetObject = GameObject.FindGameObjectWithTag("Target");
     }
 
     void Update()
@@ -64,9 +64,9 @@ public class EnemyRecipeInteractable : CamInteractable
         textoInteracaoCount += 1;
         texto.SetActive(false);
 
-        if (usedItem && !wrong && targetObject != null)
+        if (usedItem && !wrong && Inimigo != null)
         {
-            MonoBehaviour[] scripts = targetObject.GetComponents<MonoBehaviour>();
+            MonoBehaviour[] scripts = Inimigo.GetComponents<MonoBehaviour>();
             foreach (MonoBehaviour script in scripts)
             {
                 script.enabled = true;

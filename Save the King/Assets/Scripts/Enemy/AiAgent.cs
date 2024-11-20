@@ -158,13 +158,11 @@ public class AiAgent : MonoBehaviour
             
             Transform lastTransform = patrolPoints[0];
             Vector3 lastPosition = lastTransform.position;
-            lastPosition.y = 0;
             Vector3 initialPosition = lastPosition;
             Gizmos.color = Color.yellow;
             Gizmos.DrawSphere(lastPosition, 0.2f);
             for(int i = 1; i< patrolPoints.Length; i++){
                 Vector3 aux1 = patrolPoints[i].position;
-                aux1.y = 0; 
                 Gizmos.color = Color.black;
                 Gizmos.DrawLine(lastPosition, aux1);
                 

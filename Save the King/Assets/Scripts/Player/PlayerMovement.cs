@@ -140,6 +140,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleCrouch()
     {
+        if (isDetected)
+            return;
         isCrouching = !isCrouching;
         animator.SetBool("isCrouching", isCrouching);
         if (isCrouching)
@@ -337,6 +339,10 @@ public class PlayerMovement : MonoBehaviour
     public void Detected()
     {
         GetComponent<PlayerEventItens>().enabled = false;
+        isCrouching = false;
+        animator.SetBool("isCrouching", isCrouching);
+        controller.height = initialHeight;
+        controller.center = initialCenter;
         isDetected = true;
     }
 

@@ -11,6 +11,9 @@ public class PaintingInteractable : CamInteractable
     public GameObject Key;
     Rigidbody rb;
 
+    public AudioSource audioSource;
+    public AudioClip paintingFallingSound;
+
     public override void Start(){
         active = false;
         interactCanvas.gameObject.SetActive(false);
@@ -21,10 +24,17 @@ public class PaintingInteractable : CamInteractable
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody>();
         isLooking = false;
+
+        if(audioSource == null)
+           audioSource = gameObject.AddComponent<AudioSource>();
+        if(paintingFallingSound == null)
+           paintingFallingSound = Resources.Load<AudioClip>("Sounds/obj_falling");
     }
 
     public void OnMouseDown(){
         if(active && isLooking){
+            audioSource.clip = paintingFallingSound;
+            audioSource.Play();
             rb.isKinematic = false;
             rb.AddExplosionForce(500f, transform.position, 2f, 0f);
             Vector3 forwardForce = Vector3.Cross(transform.forward, transform.right) * 15f;

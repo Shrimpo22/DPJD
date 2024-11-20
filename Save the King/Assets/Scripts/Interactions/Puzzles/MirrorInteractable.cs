@@ -13,6 +13,9 @@ public class MirrorInteractable : CamInteractable
     public int nrOfPiecesOn;
     public int totalPieces = 4;
 
+    public AudioSource audioSource;
+    public AudioClip putItemSound;
+
     [SerializeField] public GameObject[] allPieces;
 
 
@@ -23,6 +26,12 @@ public class MirrorInteractable : CamInteractable
         objectSolved.SetActive(false);
         nrOfPiecesOn = 0;
         isComplete = false;
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+        if (putItemSound == null)
+        {
+            putItemSound = Resources.Load<AudioClip>("Sounds/praaaa");
+        }
     }
 
     public override void Interact(Inventory inv, PlayerEventItens playerItems)
@@ -33,6 +42,8 @@ public class MirrorInteractable : CamInteractable
 
     public void AddPiece()
     {
+        audioSource.clip = putItemSound;
+        audioSource.Play();
         inventory.GetComponent<Inventory>().DropItemByName("GlassShard");
         allPieces[nrOfPiecesOn].SetActive(true);
         nrOfPiecesOn++;

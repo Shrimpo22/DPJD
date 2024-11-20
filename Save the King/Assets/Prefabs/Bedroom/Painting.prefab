@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 5967479787165876041}
   - component: {fileID: 8725379622535289885}
   - component: {fileID: 3315104378130135351}
-  - component: {fileID: 1942088224669156810}
+  - component: {fileID: 4835854236938112611}
   m_Layer: 7
   m_Name: Aljubarrota Painting
   m_TagString: Painting
@@ -1361,7 +1361,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5330
+  m_VersionIndex: 5351
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1493,7 +1493,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1942088224669156810
+--- !u!114 &4835854236938112611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1502,12 +1502,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4717342087742632029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f19f17c5baaba443bc3136dd5ddd4a5, type: 3}
+  m_Script: {fileID: 11500000, guid: dc44dc0d216cae748819b38b56d104b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactCanvas: {fileID: 6653559877986405613}
   isLooking: 0
   myCamera: {fileID: 1277565483039384171}
+  active: 0
+  Key: {fileID: 967242947257879813}
 --- !u!1 &7678350331356365999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,6 +1769,10 @@ PrefabInstance:
       value: 31.597
       objectReference: {fileID: 0}
     - target: {fileID: 6283528610224041820, guid: 2cc6266359c0e1c408fdf707aa5e9aea, type: 3}
+      propertyPath: clickable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6283528610224041820, guid: 2cc6266359c0e1c408fdf707aa5e9aea, type: 3}
       propertyPath: itemToGive
       value: 8
       objectReference: {fileID: 0}
@@ -1787,6 +1793,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cc6266359c0e1c408fdf707aa5e9aea, type: 3}
+--- !u!1 &967242947257879813 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 533516183648238156, guid: 2cc6266359c0e1c408fdf707aa5e9aea, type: 3}
+  m_PrefabInstance: {fileID: 723734225429772105}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5635247819671127414 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4917742194804290111, guid: 2cc6266359c0e1c408fdf707aa5e9aea, type: 3}

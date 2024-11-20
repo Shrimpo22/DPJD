@@ -13,6 +13,8 @@ public class CandelabraCombo : MonoBehaviour
     public AudioSource audioSource;
     public CamInteractable cam;
 
+    public bool solved = false;
+
     void Start(){
         audioSource = GetComponent<AudioSource>();
     }
@@ -28,7 +30,10 @@ public class CandelabraCombo : MonoBehaviour
         {
             Debug.Log("The objects are in the target combination: " + targetCombination[0] + ", " + targetCombination[1] + ", " + targetCombination[2]);
             drawer.transform.position = drawer.transform.position + drawer.transform.forward * 0.3f;
-            StartCoroutine(PlaySoundAndExit());
+            candle1.GetComponent<CandelabraLights>().solved = true;
+            candle2.GetComponent<CandelabraLights>().solved = true;
+            candle3.GetComponent<CandelabraLights>().solved = true;
+            StartCoroutine(PlaySoundAndExit());   
         }
 
     }

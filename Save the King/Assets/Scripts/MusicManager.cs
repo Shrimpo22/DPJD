@@ -8,11 +8,12 @@ public class MusicManager : MonoBehaviour
     public AudioSource puzzleMusic;
     public AudioSource combatMusic;
     public AudioSource explorationMusic;
+    public AudioSource chapelMusic;
     
     private AudioSource currentMusic;
     private Coroutine transitionCoroutine;
     
-    public enum GameState { Puzzle, Combat, Exploration, Capel, Boss, Dungeon, Menu }
+    public enum GameState { Puzzle, Combat, Exploration, Chapel, Boss, Dungeon, Menu }
     public GameState currentState;
     public GameState auxState;
 
@@ -58,6 +59,9 @@ public class MusicManager : MonoBehaviour
                 break;
             case GameState.Exploration:
                 PlayMusic(explorationMusic);
+                break;
+            case GameState.Chapel:
+                PlayMusic(chapelMusic);
                 break;
         }
     }

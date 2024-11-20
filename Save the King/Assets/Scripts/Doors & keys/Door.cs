@@ -22,6 +22,13 @@ public class Door : MonoBehaviour, IOpenable
         set { isClosed = value; }
     }
 
+    public void Open(float rotationWanted){
+        RotationSpeed = rotationWanted;
+        targetRotation = 90f * Angle;
+        audioSource.clip = UnlockedOpenSound;
+        audioSource.Play();
+    }
+
     public int Angle = 1;
     public float RotationSpeed { get; set; } = 90f;
     public AudioClip LockedSound;

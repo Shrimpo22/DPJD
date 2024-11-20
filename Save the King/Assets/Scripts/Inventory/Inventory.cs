@@ -21,27 +21,33 @@ public class Inventory : MonoBehaviour
     public Mouse mouse;
     public bool isZoomedIn = false;
     public bool isLookingAtCook = false;
+    public bool isLookingAtOrgan = false;
+    public bool isLookingAtCandle = false;
+    public bool isLookingAtStatue = false;
+    public bool isLookingAtCandleHolder = false;
+    public bool isLookingAtMap = false;
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
-    
+
     private CinemachineFreeLook freeLookCamera;
     [Space]
 
     public int InventorySize = 12;
     public bool inInventory = false;
 
-    public bool isInInventory(){
+    public bool isInInventory()
+    {
         return inInventory;
     }
 
     void Start()
     {
-        if(InventoryMenu.activeSelf)
+        if (InventoryMenu.activeSelf)
         {
             InventoryMenu.SetActive(false);
         }
         freeLookCamera = FindObjectOfType<CinemachineFreeLook>();
-        
+
         for (int i = 0; i < InventorySize; i++)
         {
             items.Add(new ItemSlotInfo(null, 0));
@@ -49,7 +55,7 @@ public class Inventory : MonoBehaviour
 
         List<Item> allItems = GetAllItems().ToList();
         string itemsInDictionary = "Items in Dictionary: ";
-        foreach(Item i in allItems)
+        foreach (Item i in allItems)
         {
             if (!allItemsDictionary.ContainsKey(i.GiveName()))
             {
@@ -63,12 +69,12 @@ public class Inventory : MonoBehaviour
         }
         itemsInDictionary += ".";
         Debug.Log(itemsInDictionary);
-        
-        AddItem("Potions",3);
+
+        AddItem("Potions", 3);
         //AddItem("GlassShard",4);
         RefreshInventory();
-        
-        
+
+
     }
 
     void Awake()
@@ -78,49 +84,50 @@ public class Inventory : MonoBehaviour
         controls.Gameplay.Back.performed += ctx => HandleClosing();
     }
 
-    public void OpenIt(){
+    public void OpenIt()
+    {
         isZoomedIn = true;
         wasOpenByOtherEvent = true;
     }
-    public void OpenItCozinha(){
-        isLookingAtCook = true;
-        wasOpenByOtherEvent = true;
-    }
 
-   void closeInventory(){
+    public void closeInventory()
+    {
         wasOpenByOtherEvent = false;
         InventoryMenu.SetActive(false);
-        Cursor.visible = false; 
+        Cursor.visible = false;
         if (freeLookCamera != null)
         {
-            freeLookCamera.enabled = true; 
+            freeLookCamera.enabled = true;
         }
         audioSource.Play();
         Time.timeScale = 1;
         inInventory = false;
         Mouse.SetActive(false);
- 
+
     }
 
-    void HandleClosing(){
-        if(!PauseMenu.isPaused()){
-            if(InventoryMenu.activeSelf)
+    void HandleClosing()
+    {
+        if (!PauseMenu.isPaused())
+        {
+            if (InventoryMenu.activeSelf)
             {
                 closeInventory();
             }
         }
     }
 
-    void openInventory(){
+    void openInventory()
+    {
         Mouse.SetActive(true);
         inInventory = true;
         wasOpenByOtherEvent = false;
-        InventoryMenu.SetActive(true); 
-        Cursor.lockState = CursorLockMode.None; 
-        Cursor.visible = true; 
+        InventoryMenu.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         if (freeLookCamera != null)
         {
-            freeLookCamera.enabled = false; 
+            freeLookCamera.enabled = false;
         }
         // controls.Gameplay.Camera.Disable();
         Time.timeScale = 0;
@@ -130,8 +137,9 @@ public class Inventory : MonoBehaviour
     void HandleInventory()
     {
 
-        if(!PauseMenu.isPaused()){
-            if(InventoryMenu.activeSelf)
+        if (!PauseMenu.isPaused())
+        {
+            if (InventoryMenu.activeSelf)
             {
                 closeInventory();
 
@@ -142,40 +150,44 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-    void Update(){
-        if(InventoryMenu.activeSelf){
-            if(wasOpenByOtherEvent){
+
+    void Update()
+    {
+        if (InventoryMenu.activeSelf)
+        {
+            if (wasOpenByOtherEvent)
+            {
                 closeInventory();
             }
-        }else{
-            if(wasOpenByOtherEvent){
+        }
+        else
+        {
+            if (wasOpenByOtherEvent)
+            {
                 openInventory();
             }
         }
-        
     }
-        
-    
 
     public void RefreshInventory()
     {
         existingPanels = ItemPanelGrid.GetComponentsInChildren<ItemPanel>().ToList();
 
-        if(existingPanels.Count < InventorySize)
+        if (existingPanels.Count < InventorySize)
         {
             int amoutToCount = InventorySize - existingPanels.Count;
-            for(int  i = 0; i < amoutToCount; i++)
+            for (int i = 0; i < amoutToCount; i++)
             {
                 GameObject newPanel = Instantiate(ItemPanel, ItemPanelGrid.transform);
                 existingPanels.Add(newPanel.GetComponent<ItemPanel>());
             }
         }
 
-        int index= 0;
-        foreach(ItemSlotInfo i in items)
+        int index = 0;
+        foreach (ItemSlotInfo i in items)
         {
-            i.name = "" + (index+1);
-            if(i.item != null) i.name += ": " + i.item.GiveName();
+            i.name = "" + (index + 1);
+            if (i.item != null) i.name += ": " + i.item.GiveName();
             else i.name += ": -";
 
             //Update our Panels
@@ -201,12 +213,10 @@ public class Inventory : MonoBehaviour
             }
             index++;
         }
-        
-        
+
+
     }
-    
-    
-    
+
     public void DropItemByName(string itemName)
     {
         // Procura o último slot que contém o item com o nome fornecido
@@ -227,7 +237,8 @@ public class Inventory : MonoBehaviour
         RefreshInventory();
     }
 
-    public bool HasItemNamed(string itemName){
+    public bool HasItemNamed(string itemName)
+    {
         ItemSlotInfo slotToDrop = items.LastOrDefault(slot => slot.item != null && slot.item.GiveName() == itemName);
         if (slotToDrop == null)
         {
@@ -250,7 +261,7 @@ public class Inventory : MonoBehaviour
         }
 
         //Check for open spaces in existing slots
-        foreach(ItemSlotInfo i in items)
+        foreach (ItemSlotInfo i in items)
         {
             if (i.item != null)
             {
@@ -263,17 +274,17 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        
+
                         i.stacks += amount;
                         //if (InventoryMenu.activeSelf)
-                         RefreshInventory();
+                        RefreshInventory();
                         return 0;
                     }
                 }
             }
         }
         //Fill empty slots with leftover items
-        foreach(ItemSlotInfo i in items)
+        foreach (ItemSlotInfo i in items)
         {
             if (i.item == null)
             {
@@ -285,7 +296,7 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    
+
                     i.item = item;
                     i.stacks = amount;
                     //if (InventoryMenu.activeSelf) 
@@ -299,14 +310,17 @@ public class Inventory : MonoBehaviour
         if (InventoryMenu.activeSelf) RefreshInventory();
         return amount;
     }
-   
+
     public void ClearSlot(ItemSlotInfo slot)
     {
-        if(slot.stacks>1){
-        slot.stacks = slot.stacks - 1;
-        }else{
-        slot.item = null;
-        slot.stacks = 0;
+        if (slot.stacks > 1)
+        {
+            slot.stacks = slot.stacks - 1;
+        }
+        else
+        {
+            slot.item = null;
+            slot.stacks = 0;
         }
     }
 

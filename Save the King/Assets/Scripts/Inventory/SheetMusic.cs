@@ -35,7 +35,7 @@ public class SheetMusic : Item
     {
         return () =>
         {
-           GameObject.FindGameObjectWithTag("Organ").GetComponent<Organ>().addPiece();
+           GameObject.FindGameObjectWithTag("Organ").GetComponent<OrganInteractable>().AddPiece();
         };
     }
 }

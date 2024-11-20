@@ -36,7 +36,7 @@ public class Candle : Item
     {
         return () =>
         {
-           GameObject.FindGameObjectWithTag("CandleHolder").GetComponent<CandleHolder>().addPiece();
+           GameObject.FindGameObjectWithTag("CandleHolder").GetComponent<CandleHolderInteractable>().AddPiece();
         };
     }
 }

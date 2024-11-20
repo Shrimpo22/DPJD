@@ -132,7 +132,7 @@ public class Statues : MonoBehaviour
             exitCam();
            
         }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
-               inventory.GetComponent<Inventory>().OpenItStatues();
+               inventory.GetComponent<Inventory>().OpenIt();
                if(hasObject) button.SetActive(true);
                secretDoor.GetComponent<OpenSecretDoor>().NearMe(this.gameObject);
         }

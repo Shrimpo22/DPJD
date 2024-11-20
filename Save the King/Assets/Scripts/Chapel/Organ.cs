@@ -89,7 +89,7 @@ public class Organ : MonoBehaviour
            
            
         }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
-                inventory.GetComponent<Inventory>().OpenItOrgan();
+                inventory.GetComponent<Inventory>().OpenIt();
                 
         }
     }

@@ -86,7 +86,7 @@ public class Interaction : MonoBehaviour
         if(textoInteracaoCount != 1){
             Debug.Log("Entrei");
             if(Input.GetKeyDown(KeyCode.E) && isTalkingToNpc){
-                inventory.GetComponent<Inventory>().OpenItCozinha();
+                inventory.GetComponent<Inventory>().OpenIt();
                             
             }
         }

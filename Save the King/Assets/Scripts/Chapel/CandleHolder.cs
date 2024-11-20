@@ -90,7 +90,7 @@ public class CandleHolder : MonoBehaviour
 
            
         }else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
-                inventory.GetComponent<Inventory>().OpenItCandleHolder();
+                inventory.GetComponent<Inventory>().OpenIt();
                 
         }
     }

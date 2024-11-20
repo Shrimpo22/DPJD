@@ -40,7 +40,7 @@ public class CamInteractable : Interactable
 
     }
 
-    public void ExitCam(){
+    public virtual void ExitCam(){
         player.SetActive(true);
         mainCamera.tag = "MainCamera";
         myCamera.tag="Untagged";
@@ -49,6 +49,8 @@ public class CamInteractable : Interactable
         isLooking = false;
         inventory.GetComponent<Inventory>().isZoomedIn = false;
         interactCanvas.gameObject.SetActive(true);  
+        inventory.GetComponent<Inventory>().closeInventory();
+        Time.timeScale = 1;
     }
 
     void HandleBack(){

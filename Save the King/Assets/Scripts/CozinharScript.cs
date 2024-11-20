@@ -87,7 +87,7 @@ public class CozinharScript : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.E) && isLooking && !isComplete){
                 aguaFerver.SetActive(true);
-                inventory.GetComponent<Inventory>().OpenItCozinha();
+                inventory.GetComponent<Inventory>().OpenIt();
                 
         }
     

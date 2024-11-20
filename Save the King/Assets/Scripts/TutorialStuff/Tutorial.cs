@@ -16,22 +16,16 @@
             if(other.tag == "Player"){
             canvas.gameObject.SetActive(true); 
             GetComponent<Collider>().enabled = false; 
-            StartCoroutine(DisplayImageForSeconds(8));
+            Time.timeScale = 0;
             }
         }
 
-        IEnumerator DisplayImageForSeconds(float duration)
-        {
-            
-            
-            Time.timeScale = 0;
-            yield return new WaitForSecondsRealtime(duration); 
-
+        public void closeTutorial(){
             canvas.gameObject.SetActive(false); 
             Time.timeScale = 1;
             if(enableSword) sword.SetActive(true);
             gameObject.SetActive(false); 
-            
         }
+
 
     }

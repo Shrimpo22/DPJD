@@ -1602,6 +1602,82 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 15, y: 90, z: 0}
+--- !u!1 &192167476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 192167479}
+  - component: {fileID: 192167478}
+  - component: {fileID: 192167477}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: NPCVIBES
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &192167477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192167476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6dbe3c6e7e65694f91e33616e4a006e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactCanvas: {fileID: 536286527}
+  isLooking: 0
+  myCamera: {fileID: 173271533}
+  isTalkingToNpc: 0
+  usedItem: 0
+  fighting: 0
+  Inimigo: {fileID: 1361997939}
+  texto: {fileID: 5228229592113096149}
+  textInteraction: {fileID: 5228229592113096150}
+  textoInteracaoCount: 1
+--- !u!65 &192167478
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192167476}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.3824697, y: 1, z: 1.4262562}
+  m_Center: {x: -0.19123483, y: 0, z: -0.035260677}
+--- !u!4 &192167479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192167476}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.049, y: 0.872, z: -5.838}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &196364355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4421,19 +4497,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.64939916
+      value: 0.6493992
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.27875748
+      value: -0.27875754
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.65014637
+      value: -0.6501463
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.27907827
+      value: -0.27907825
       objectReference: {fileID: 0}
     - target: {fileID: 169741066844414161, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_Name
@@ -4469,7 +4545,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1170781045556153076, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.29371423
+      value: -0.29371426
       objectReference: {fileID: 0}
     - target: {fileID: 1170781045556153076, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.y
@@ -6828,27 +6904,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3844007906995653738, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
   m_PrefabInstance: {fileID: 1955243418}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1361997950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1361997939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6dbe3c6e7e65694f91e33616e4a006e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactCanvas: {fileID: 536286527}
-  isLooking: 0
-  myCamera: {fileID: 173271533}
-  isTalkingToNpc: 0
-  usedItem: 0
-  fighting: 0
-  texto: {fileID: 5228229592113096149}
-  textInteraction: {fileID: 5228229592113096150}
-  textoInteracaoCount: 1
 --- !u!1001 &1364697513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8467,7 +8522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6435950414050257592, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
       propertyPath: m_TagString
-      value: NPCVIBES
+      value: Target
       objectReference: {fileID: 0}
     - target: {fileID: 7331927437471405335, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
       propertyPath: m_Enabled
@@ -8495,10 +8550,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3844007906995653738, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5228229592113096151}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6435950414050257592, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1361997950}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
 --- !u!4 &1955918562 stripped
 Transform:
@@ -9604,3 +9656,4 @@ SceneRoots:
   - {fileID: 203014950}
   - {fileID: 1955243418}
   - {fileID: 1520248027}
+  - {fileID: 192167479}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PuzzleInteractable : CamInteractable
+public class MirrorInteractable : CamInteractable
 {
     public bool isComplete;
 
@@ -18,19 +18,17 @@ public class PuzzleInteractable : CamInteractable
 
     public override void Start()
     {
+        base.Start();
         objectNotSolved.SetActive(true);
         objectSolved.SetActive(false);
         nrOfPiecesOn = 0;
-
-        interactCanvas.gameObject.SetActive(false);
-        myCamera.gameObject.SetActive(false);
-
-        player = GameObject.FindGameObjectWithTag("Player");
-        inventory = GameObject.FindGameObjectWithTag("Inventory");
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-
-        isLooking = false;
         isComplete = false;
+    }
+
+    public override void Interact(Inventory inv, PlayerEventItens playerItems)
+    {
+        base.Interact(inv, playerItems);
+        inv.isLookingAtMirror = true;
     }
 
     public void AddPiece()

@@ -50,7 +50,6 @@ public class Key : MonoBehaviour
             hasBeenGrabbed=true;
             audioSource.clip = grabSound;
             audioSource.Play();
-            player.GetComponent<PlayerEventItens>().AddKey(keyType);
             GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
             inventory.GetComponent<Inventory>().AddItem(keyType.ToString(),1);
             Destroy(transform.parent.gameObject,grabSound.length);

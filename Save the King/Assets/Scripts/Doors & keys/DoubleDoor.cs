@@ -84,9 +84,7 @@ public class DoubleDoor : MonoBehaviour, IOpenable
             GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
             if (inventory.GetComponent<Inventory>().HasItemNamed(GetKeyType().ToString()))
             {
-                Debug.Log("A");
                 IsLocked = false;
-                player.GetComponent<PlayerEventItens>().RemoveKey(GetKeyType());
                 inventory.GetComponent<Inventory>().DropItemByName(GetKeyType().ToString());
                 Open(player, canvas);
             }

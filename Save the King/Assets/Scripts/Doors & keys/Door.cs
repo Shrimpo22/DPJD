@@ -73,7 +73,6 @@ public class Door : MonoBehaviour, IOpenable
             if (inventory.GetComponent<Inventory>().HasItemNamed(GetKeyType().ToString()))
             {
                 IsLocked = false;
-                player.GetComponent<PlayerEventItens>().RemoveKey(GetKeyType());
                 inventory.GetComponent<Inventory>().DropItemByName(GetKeyType().ToString());
                 Open(player, canvas);
             }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActivatePainting : MonoBehaviour
 {
-    public PuzzleInteractable pi;
+    public MirrorInteractable pi;
     public PaintingInteractable pi2;
     // Update is called once per frame
     void Update()

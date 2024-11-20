@@ -34,7 +34,6 @@ public class PlayerEventItens : MonoBehaviour
     public bool drawRange = false;
     public bool isNearDoor = false;
 
-    public List<Key.KeyType> listOfKeys;
     private PlayerControls controls;
 
     public bool hasSwordOn = false;
@@ -56,13 +55,6 @@ public class PlayerEventItens : MonoBehaviour
         inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
     }
 
-    public void AddKey(Key.KeyType keytype){
-        listOfKeys.Add(keytype);
-    }
-
-    public void RemoveKey(Key.KeyType keytype){
-        listOfKeys.Remove(keytype);
-    }
     void HandleInteraction(){
         if(closestInteractable != null)
             closestInteractable.Interact(inventory, this);

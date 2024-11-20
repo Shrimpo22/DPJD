@@ -26,6 +26,8 @@ public class Inventory : MonoBehaviour
     public bool isLookingAtStatue = false;
     public bool isLookingAtCandleHolder = false;
     public bool isLookingAtMap = false;
+    public bool isLookingAtMirror = false; 
+    
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
 

@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
     private float targetSpeed;
     private bool isSprinting;
     private bool isDetected;
-    
+
     public Transform handTransform;
 
 
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = controller.isGrounded;
         initialHeight = controller.height;
         initialCenter = controller.center;
-        
+
     }
 
     void Awake()
@@ -84,16 +84,18 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Gameplay.Movement.canceled += ctx => moveInput = Vector2.zero;
         controls.Gameplay.Crouch.performed += ctx => HandleCrouch();
-        controls.Gameplay.Sprint.performed += ctx => { isSprinting = true; targetSpeed = 6f;};
-        controls.Gameplay.Sprint.canceled += ctx => { isSprinting = false; targetSpeed = 4.25f;};
+        controls.Gameplay.Sprint.performed += ctx => { isSprinting = true; targetSpeed = 6f; };
+        controls.Gameplay.Sprint.canceled += ctx => { isSprinting = false; targetSpeed = 4.25f; };
         controls.Gameplay.Dodging.performed += ctx => animator.SetTrigger("Dodge");
     }
 
-    void OnEnable(){
+    void OnEnable()
+    {
         controls.Gameplay.Enable();
     }
 
-    void OnDisable(){
+    void OnDisable()
+    {
         //controls.Gameplay.Disable();
     }
 
@@ -119,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         handleInteraction();
-        if(!isTrapped)
+        if (!isTrapped)
             handleMovement();
     }
 
@@ -136,16 +138,34 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Sprint.Disable();
     }
 
-    private void HandleCrouch(){
-        isCrouching = !isCrouching; 
+    private void HandleCrouch()
+    {
+        isCrouching = !isCrouching;
         animator.SetBool("isCrouching", isCrouching);
-        if(isCrouching){
-           controller.height /=2;
-           controller.center /=2;
-        }else{
-           controller.height = initialHeight; 
-           controller.center = initialCenter; 
+        if (isCrouching)
+        {
+            controller.height /= 2;
+            controller.center /= 2;
         }
+        else
+        {
+            controller.height = initialHeight;
+            controller.center = initialCenter;
+        }
+    }
+
+    Transform GetChildWithTag(string tag)
+    {
+        // Loop through all child objects
+        foreach (Transform child in transform)
+        {
+            if (child.CompareTag(tag))
+            {
+                return child; // Return the first match
+            }
+        }
+
+        return null; // Return null if no match found
     }
 
     private void handleInteraction()
@@ -228,20 +248,23 @@ public class PlayerMovement : MonoBehaviour
         interactionText.gameObject.SetActive(false);
     }
 
-    void handleMovement(){
+    void handleMovement()
+    {
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        if ((stateInfo.IsName("hit1") || stateInfo.IsName("hit2") || stateInfo.IsName("hit3") || stateInfo.IsName("heavy1") || stateInfo.IsName("heavy2") && stateInfo.normalizedTime <= 1f)){
-            targetSpeed = 0f;    
-        }else if (!isSprinting && !isCrouching)
+        if ((stateInfo.IsName("hit1") || stateInfo.IsName("hit2") || stateInfo.IsName("hit3") || stateInfo.IsName("heavy1") || stateInfo.IsName("heavy2") && stateInfo.normalizedTime <= 1f))
+        {
+            targetSpeed = 0f;
+        }
+        else if (!isSprinting && !isCrouching)
             targetSpeed = 4.25f;
         else if (isCrouching)
             targetSpeed = 2f;
 
         if (!isGrounded && velocity.y < 0)
         {
-            velocity.y = -9.81f;  
+            velocity.y = -9.81f;
         }
         else velocity.y += gravity * Time.deltaTime;
 
@@ -260,8 +283,11 @@ public class PlayerMovement : MonoBehaviour
             // Move direction relative to the camera
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move((moveDir.normalized * speed + velocity) * Time.deltaTime);
-        }else{
-            if(!stateInfo.IsName("hit1")){
+        }
+        else
+        {
+            if (!stateInfo.IsName("hit1"))
+            {
                 targetSpeed = 0f;
                 controller.Move(velocity * Time.deltaTime);
             }
@@ -269,7 +295,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (controls.Gameplay.LightAttack.triggered && controller.isGrounded && isSwordEquipped && !isCrouching)
         {
-            
+
             animator.SetTrigger("attack");
             animator.SetBool("isCrouching", isCrouching);
 
@@ -295,61 +321,63 @@ public class PlayerMovement : MonoBehaviour
 
         speed = Mathf.Lerp(speed, targetSpeed, Time.deltaTime * 4f);
         animator.SetFloat("movementSpeed", speed);
-        
+
         animator.SetBool("isMoving", direction.magnitude > 0f);
     }
 
 
-    public void stealthAttack()
+    public void StealthAttack(GameObject enemy)
     {
-        if (controls.Gameplay.LightAttack.triggered && isSwordEquipped && !isDetected)
-        {
-            Debug.Log("Atrás de tiiiiii");
-            animator.Play("stabbing");
-        }
+        transform.LookAt(enemy.transform.position);
+        Debug.Log("Atrï¿½s de tiiiiii");
+        animator.Play("stabbing");
+
     }
 
     public void Detected()
     {
-        Debug.Log("Nahh fui visto");
+        GetComponent<PlayerEventItens>().enabled = false;
         isDetected = true;
     }
 
     public void NotDetected()
     {
-        Debug.Log("Estou no escuro");
+        GetComponent<PlayerEventItens>().enabled = true;
         isDetected = false;
     }
 
-    public bool IsDetected() {
+    public bool IsDetected()
+    {
         return isDetected;
     }
-    void OnDrawGizmos(){
-        if(drawGizmos){
-        Vector3 forward = camTransform.forward;
-        Vector3 right = camTransform.right;
-        forward.y = 0;
-        right.y = 0;
+    void OnDrawGizmos()
+    {
+        if (drawGizmos)
+        {
+            Vector3 forward = camTransform.forward;
+            Vector3 right = camTransform.right;
+            forward.y = 0;
+            right.y = 0;
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + forward);
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + right);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(transform.position, transform.position + forward);
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, transform.position + right);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward);
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + transform.right);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, transform.position + transform.forward);
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, transform.position + transform.right);
 
-        Vector3 forwardRelative = moveInput.y * forward;
-        Vector3 rightRelative = moveInput.x * right;
+            Vector3 forwardRelative = moveInput.y * forward;
+            Vector3 rightRelative = moveInput.x * right;
 
-        Vector3 movement = forwardRelative + rightRelative;
-        Gizmos.color = Color.gray;
-        Gizmos.DrawLine(transform.position, transform.position + movement);
+            Vector3 movement = forwardRelative + rightRelative;
+            Gizmos.color = Color.gray;
+            Gizmos.DrawLine(transform.position, transform.position + movement);
 
-        Gizmos.color = Color.black;
-        Gizmos.DrawLine(transform.position,transform.position + currentMovement);
+            Gizmos.color = Color.black;
+            Gizmos.DrawLine(transform.position, transform.position + currentMovement);
         }
     }
 }

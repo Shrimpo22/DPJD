@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using Cinemachine;
 public class Map : MonoBehaviour
 {
 
@@ -20,6 +20,9 @@ public class Map : MonoBehaviour
     private Camera mainCamera;
     private string finalAnswer;
 
+    public GameObject freelockCamara;
+    private CinemachineFreeLook freeLookComponent;
+
     [SerializeField] public GameObject[] allPieces;
     
     void Start()
@@ -28,6 +31,7 @@ public class Map : MonoBehaviour
        player = GameObject.FindGameObjectWithTag("Player");
        inventory = GameObject.FindGameObjectWithTag("Inventory");
        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+       freeLookComponent = freelockCamara.GetComponent<CinemachineFreeLook>();
     }
 
     public void getTextFinalAnswer (string number){
@@ -78,13 +82,18 @@ public class Map : MonoBehaviour
 
        if(Input.GetKeyDown(KeyCode.Escape) && isLooking){
             player.SetActive(true);
+            Time.timeScale = 1;
             textClear();
             mainCamera.tag = "MainCamera";
             myCamera.tag="Untagged";
             mainCamera.gameObject.SetActive(true);
             myCamera.gameObject.SetActive(false);
+            if (freeLookComponent != null)
+            {
+                freeLookComponent.enabled = true;
+            }
             isLooking = false;
-            inventory.GetComponent<Inventory>().isLookingAtMap = false;
+            inventory.GetComponent<Inventory>().isZoomedIn = false;
             inventory.GetComponent<Inventory>().InventoryMenu.SetActive(false);
 
            

@@ -15,10 +15,11 @@ public class Inventory : MonoBehaviour
     private bool wasOpenByOtherEvent = false;
     public GameObject ItemPanel;
     private PlayerControls controls;
+    public GameObject Mouse;
     public AudioSource audioSource;
     public GameObject ItemPanelGrid;
     public Mouse mouse;
-    public bool isLookingAtMap = false;
+    public bool isZoomedIn = false;
     public bool isLookingAtCook = false;
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
@@ -26,10 +27,15 @@ public class Inventory : MonoBehaviour
     private CinemachineFreeLook freeLookCamera;
     [Space]
 
-        public int InventorySize = 12;
+    public int InventorySize = 12;
+    public bool inInventory = false;
+
+    public bool isInInventory(){
+        return inInventory;
+    }
+
     void Start()
     {
-        controls = new PlayerControls();
         if(InventoryMenu.activeSelf)
         {
             InventoryMenu.SetActive(false);
@@ -59,13 +65,21 @@ public class Inventory : MonoBehaviour
         Debug.Log(itemsInDictionary);
         
         AddItem("Potions",3);
-        
+        //AddItem("GlassShard",4);
         RefreshInventory();
         
         
     }
+
+    void Awake()
+    {
+        controls = InputManager.inputActions;
+        controls.Gameplay.Inventory.performed += ctx => HandleInventory();
+        controls.Gameplay.Back.performed += ctx => HandleClosing();
+    }
+
     public void OpenIt(){
-        isLookingAtMap = true;
+        isZoomedIn = true;
         wasOpenByOtherEvent = true;
     }
     public void OpenItCozinha(){
@@ -73,57 +87,72 @@ public class Inventory : MonoBehaviour
         wasOpenByOtherEvent = true;
     }
 
-   
-    void Update()
+   void closeInventory(){
+        wasOpenByOtherEvent = false;
+        InventoryMenu.SetActive(false);
+        Cursor.visible = false; 
+        if (freeLookCamera != null)
+        {
+            freeLookCamera.enabled = true; 
+        }
+        audioSource.Play();
+        Time.timeScale = 1;
+        inInventory = false;
+        Mouse.SetActive(false);
+ 
+    }
+
+    void HandleClosing(){
+        if(!PauseMenu.isPaused()){
+            if(InventoryMenu.activeSelf)
+            {
+                closeInventory();
+            }
+        }
+    }
+
+    void openInventory(){
+        Mouse.SetActive(true);
+        inInventory = true;
+        wasOpenByOtherEvent = false;
+        InventoryMenu.SetActive(true); 
+        Cursor.lockState = CursorLockMode.None; 
+        Cursor.visible = true; 
+        if (freeLookCamera != null)
+        {
+            freeLookCamera.enabled = false; 
+        }
+        // controls.Gameplay.Camera.Disable();
+        Time.timeScale = 0;
+        audioSource.Play();
+    }
+
+    void HandleInventory()
     {
 
-       
-        if(InventoryMenu.activeSelf)
-        {
-                if(Input.GetKeyDown(KeyCode.I)  || Input.GetKeyDown(KeyCode.Escape) || wasOpenByOtherEvent )
-                {
-                    wasOpenByOtherEvent = false;
+        if(!PauseMenu.isPaused()){
+            if(InventoryMenu.activeSelf)
+            {
+                closeInventory();
 
-                    InventoryMenu.SetActive(false);
-                    Cursor.visible = false; 
-                    if (freeLookCamera != null)
-                    {
-                        freeLookCamera.enabled = true; 
-                    }
-
-
-                    audioSource.Play();
-                    Time.timeScale = 1; 
-                    //controls.Gameplay.Camera.Enable();
-                    if (mouse != null)
-                    {
-                        mouse.optionsDisplayed = false;
-                        mouse.opcoes.SetActive(false); // Assegura que o menu é fechado
-                    }
-                }
-
+            }
+            else
+            {
+                openInventory();
+            }
         }
-        else
-        {
-
-            if(Input.GetKeyDown(KeyCode.I) || wasOpenByOtherEvent )
-                {
-                    wasOpenByOtherEvent = false;
-                    InventoryMenu.SetActive(true); 
-                    Cursor.lockState = CursorLockMode.None; 
-                    Cursor.visible = true; 
-                    if (freeLookCamera != null)
-                    {
-                        freeLookCamera.enabled = false; 
-                    }
-                    // controls.Gameplay.Camera.Disable();
-                    Time.timeScale = 0;
-                    audioSource.Play();
-                }
-
-
+    }
+    void Update(){
+        if(InventoryMenu.activeSelf){
+            if(wasOpenByOtherEvent){
+                closeInventory();
+            }
+        }else{
+            if(wasOpenByOtherEvent){
+                openInventory();
+            }
         }
-
+        
     }
         
     
@@ -196,6 +225,15 @@ public class Inventory : MonoBehaviour
 
         // Atualiza a UI do inventário
         RefreshInventory();
+    }
+
+    public bool HasItemNamed(string itemName){
+        ItemSlotInfo slotToDrop = items.LastOrDefault(slot => slot.item != null && slot.item.GiveName() == itemName);
+        if (slotToDrop == null)
+        {
+            return false;
+        }
+        return true;
     }
 
     public int AddItem(string itemName, int amount)

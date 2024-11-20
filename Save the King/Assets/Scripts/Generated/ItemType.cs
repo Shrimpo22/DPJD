@@ -1,0 +1,27 @@
+// This file is auto-generated. Do not edit manually.
+public enum ItemType
+{
+    BestSword,
+    BlackSword,
+    BlueItem,
+    Candle,
+    Chalice,
+    GlassShard,
+    GreenItem,
+    KeyOfCell,
+    KeyOfChest,
+    KeyOfDungeon,
+    KeyOfFeastRoom,
+    KeyOfGeneralRoom2,
+    KeyOfKingThrone,
+    KeyOfKitchen,
+    KeyOfWardrobe,
+    MapPiece,
+    Potions,
+    RedItem,
+    SheetMusic,
+    Sword,
+    Torch,
+    YellowItem,
+    ItemX,
+}

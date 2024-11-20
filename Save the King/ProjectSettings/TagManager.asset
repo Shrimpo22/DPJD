@@ -23,15 +23,30 @@ TagManager:
   - Cookitems
   - CozinhaCamara
   - furnalha
-
+  - Painting
+  - Inventory
+  - Player Collider
+  - Weapon In Ground
+  - Chalice
+  - Torch
+  - MusicSheet
+  - Candle
+  - Book
+  - CandleHolder
+  - Statue
+  - Organ
+  - BookOpen
+  - BookClose
+  - NPCVIBES
+  - book
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - Occlusion
   - Water
   - UI
-  - Occlusion
+  - Player
   - 
   - 
   - 

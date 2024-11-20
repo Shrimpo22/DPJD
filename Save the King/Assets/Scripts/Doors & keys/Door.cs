@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Door : MonoBehaviour, IDoor
+public class Door : MonoBehaviour, IOpenable
 {
     // Implementing the properties from IDoor interface
     [SerializeField] private bool isLocked; // Serialize private field for IsLocked
@@ -22,12 +22,11 @@ public class Door : MonoBehaviour, IDoor
         set { isClosed = value; }
     }
 
-    public TMP_Text TextDoor;
     public int Angle = 1;
     public float RotationSpeed { get; set; } = 90f;
-    public AudioClip LockedSound { get; set; }
-    public AudioClip UnlockedOpenSound { get; set; }
-    public Key.KeyType KeyType { get; set; }
+    public AudioClip LockedSound;
+    public AudioClip UnlockedOpenSound;
+    public Key.KeyType KeyType;
 
     // Additional private fields for internal use
     private float currentRotation = 0f;
@@ -38,7 +37,6 @@ public class Door : MonoBehaviour, IDoor
     public void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        if (TextDoor != null) TextDoor.color = Color.white;
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
@@ -51,57 +49,43 @@ public class Door : MonoBehaviour, IDoor
         return KeyType;
     }
 
-    // Method to activate the door text
-    public void TextActivate()
-    {
-        TextDoor.text = "(E) Open Door";
-        TextDoor.gameObject.SetActive(true);
-    }
-
-    // Method to clear the door text
-    public void TextClear()
-    {
-        TextDoor.gameObject.SetActive(false);
-    }
-
     // Method to open the door
-    public void OpenDoor(GameObject player)
+    public void Open(GameObject player, Canvas canvas)
     {
         if (!IsLocked && IsClosed)
         {
             targetRotation = 90f * Angle;
             audioSource.clip = UnlockedOpenSound;
             audioSource.Play();
-            TextClear();
+            canvas.enabled = false;
             player.GetComponent<PlayerEventItens>().isNearDoor = false;
         }
         else if (IsLocked)
         {
             GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
-            if (player.GetComponent<PlayerEventItens>().listOfKeys.Count > 0 && player.GetComponent<PlayerEventItens>().listOfKeys.Contains(GetKeyType()))
+            if (inventory.GetComponent<Inventory>().HasItemNamed(GetKeyType().ToString()))
             {
                 IsLocked = false;
                 player.GetComponent<PlayerEventItens>().RemoveKey(GetKeyType());
                 inventory.GetComponent<Inventory>().DropItemByName(GetKeyType().ToString());
-                OpenDoor(player);
+                Open(player, canvas);
             }
             else
             {
                 audioSource.clip = LockedSound;
                 audioSource.Play();
-                TextDoor.text = "Locked";
+                canvas.GetComponentInChildren<TMP_Text>().text = "Locked";
             }
         }
     }
-
-    // Method called when the player exits the trigger area
-    public void OnTriggerExit(Collider other)
+    public void ForceOpen(GameObject player, Canvas canvas)
     {
-        TextClear();
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        targetRotation = 90f * Angle;
+        audioSource.clip = UnlockedOpenSound;
+        audioSource.Play();
+        canvas.enabled = false;
         player.GetComponent<PlayerEventItens>().isNearDoor = false;
     }
-
     // Update method to handle door rotation
     public void Update()
     {
@@ -119,4 +103,6 @@ public class Door : MonoBehaviour, IDoor
             }
         }
     }
+
+    
 }

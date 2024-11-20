@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DoubleDoor : MonoBehaviour, IDoor
+public class DoubleDoor : MonoBehaviour, IOpenable
 {
     // Implementing the properties from IDoor interface
     [SerializeField] private bool isLocked; // Serialize private field for IsLocked
@@ -21,7 +21,6 @@ public class DoubleDoor : MonoBehaviour, IDoor
         set { isClosed = value; }
     }
 
-    public TMP_Text TextDoor;
     public int Angle = 1;
     public float RotationSpeed { get; set; } = 90f;
     public AudioClip LockedSound;
@@ -40,7 +39,6 @@ public class DoubleDoor : MonoBehaviour, IDoor
     public void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        TextDoor.color = Color.white;
 
         if (audioSource == null)
         {
@@ -61,19 +59,6 @@ public class DoubleDoor : MonoBehaviour, IDoor
         return KeyType;
     }
 
-    // IDoor method implementations
-
-    public void TextActivate()
-    {
-        TextDoor.text = "(E) Open Door";
-        TextDoor.gameObject.SetActive(true);
-    }
-
-    public void TextClear()
-    {
-        TextDoor.gameObject.SetActive(false);
-    }
-
     // Double-door specific method
     private void OpenDoors()
     {
@@ -84,46 +69,45 @@ public class DoubleDoor : MonoBehaviour, IDoor
         IsClosed = false;
     }
 
-    public void OpenDoor(GameObject player)
+    public void Open(GameObject player, Canvas canvas)
     {
         if (!IsLocked && IsClosed)
         {
             audioSource.clip = UnlockedOpenSound;
             audioSource.Play();
-            TextClear();
+            canvas.enabled = false;
             player.GetComponent<PlayerEventItens>().isNearDoor = false;
             OpenDoors();
         }
         else if (IsLocked)
         {
             GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
-            if (player.GetComponent<PlayerEventItens>().listOfKeys.Count > 0 &&
-                player.GetComponent<PlayerEventItens>().listOfKeys.Contains(GetKeyType()))
+            if (inventory.GetComponent<Inventory>().HasItemNamed(GetKeyType().ToString()))
             {
                 Debug.Log("A");
                 IsLocked = false;
                 player.GetComponent<PlayerEventItens>().RemoveKey(GetKeyType());
                 inventory.GetComponent<Inventory>().DropItemByName(GetKeyType().ToString());
-                OpenDoor(player);
+                Open(player, canvas);
             }
             else
             {
                 audioSource.clip = LockedSound;
                 audioSource.Play();
-                TextDoor.text = "Locked";
+                canvas.GetComponentInChildren<TMP_Text>().text = "Locked";
             }
         }
     }
-
-    public void OnTriggerExit(Collider other)
-    {
-        TextClear();
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+    
+    public void ForceOpen(GameObject player, Canvas canvas){
+        audioSource.clip = UnlockedOpenSound;
+        audioSource.Play();
+        canvas.enabled = false;
         player.GetComponent<PlayerEventItens>().isNearDoor = false;
+        OpenDoors();
     }
-
+    
     public void Update()
     {
     }
-
 }

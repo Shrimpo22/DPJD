@@ -62,5 +62,7 @@ public class Key : MonoBehaviour
         textClear();
     }
 
-
+    public void OnMouseDown(){
+        grabKey(GameObject.FindGameObjectWithTag("Player"));
+    }
 }

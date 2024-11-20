@@ -59,7 +59,7 @@ public class CamInteractable : Interactable
         }
     }
 
-    void HandleInv(){
+    public virtual void HandleInv(){
         if(isLooking){
             inventory.GetComponent<Inventory>().OpenIt();
         }

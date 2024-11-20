@@ -14,6 +14,9 @@ public class FoodInteractable : Interactable
         interactCanvas.gameObject.SetActive(false);
         if(audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
+        if(eatSound == null){
+            eatSound = Resources.Load<AudioClip>("Sounds/Gato");
+        }
     }
     
     public override void Interact(Inventory inv, PlayerEventItens playerItems)

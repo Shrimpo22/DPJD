@@ -35,7 +35,7 @@ public class YellowItem : Item
     {
         return () =>
         {
-            CozinharScript cozinharScript = GameObject.FindGameObjectWithTag("furnalha").GetComponent<CozinharScript>();
+            FurnaceInteractable cozinharScript = GameObject.FindGameObjectWithTag("furnalha").GetComponent<FurnaceInteractable>();
             GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().DropItemByName(GiveName());
             if (cozinharScript != null)
             {

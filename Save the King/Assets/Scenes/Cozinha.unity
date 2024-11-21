@@ -1504,7 +1504,7 @@ Transform:
   m_GameObject: {fileID: 173271531}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 3.97, y: 1.674, z: -5.51}
+  m_LocalPosition: {x: 3.567, y: 1.674, z: -5.798}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4497,19 +4497,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6493992
+      value: 0.64939916
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.27875754
+      value: -0.27875748
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6501463
+      value: -0.65014637
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.27907825
+      value: -0.27907827
       objectReference: {fileID: 0}
     - target: {fileID: 169741066844414161, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_Name
@@ -4545,7 +4545,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1170781045556153076, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.29371426
+      value: -0.29371423
       objectReference: {fileID: 0}
     - target: {fileID: 1170781045556153076, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.y
@@ -4649,19 +4649,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6557037
+      value: 0.6557038
       objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.26358625
+      value: -0.26358622
       objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6564582
+      value: -0.65645814
       objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.26388955
+      value: -0.2638895
       objectReference: {fileID: 0}
     - target: {fileID: 6473281512777178405, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8516,6 +8516,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3876053580113098879, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6435950414050257592, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
       propertyPath: m_Name
       value: Knigh Enemy (1)
@@ -8543,6 +8547,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6088905252168206828, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
+    - {fileID: 1966282246236886571, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3844007906995653738, guid: a18f67653f53e2741b65c673fa55e908, type: 3}
       insertIndex: -1

@@ -39,6 +39,7 @@ TagManager:
   - BookClose
   - NPCVIBES
   - book
+  - Wood
   layers:
   - Default
   - TransparentFX

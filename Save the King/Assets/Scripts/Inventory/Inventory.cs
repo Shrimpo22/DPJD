@@ -24,6 +24,8 @@ public class Inventory : MonoBehaviour
     public bool isLookingAtOrgan = false;
     public bool isLookingAtCandle = false;
     public bool isLookingAtStatue = false;
+    public bool isLookingAtWood = false;
+    
     public bool isLookingAtCandleHolder = false;
     public bool isLookingAtMap = false;
     public bool isLookingAtMirror = false; 
@@ -73,7 +75,6 @@ public class Inventory : MonoBehaviour
         Debug.Log(itemsInDictionary);
 
         AddItem("Potions", 3);
-        //AddItem("GlassShard",4);
         RefreshInventory();
 
 

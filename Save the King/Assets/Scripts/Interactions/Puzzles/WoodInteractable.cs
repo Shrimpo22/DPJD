@@ -11,8 +11,6 @@ public class WoodInteractable : CamInteractable
     private float fadeSpeed = 1/2f;
         public AudioSource audioSource;
 
-    [SerializeField] public GameObject[] allPieces;
-
     public override void Start()
     {
         base.Start();
@@ -33,18 +31,12 @@ public class WoodInteractable : CamInteractable
             Destroy(wood);
         }
         ExitCam();
+        ClearAndDestroy(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEventItens>());
     }
 
      IEnumerator Wait()
     {
         yield return new WaitForSecondsRealtime(4); 
-    }
-
-    public override void ExitCam()
-    {
-        this.gameObject.GetComponent<Collider>().enabled=false;
-        base.ExitCam();
-       
     }
 
 }

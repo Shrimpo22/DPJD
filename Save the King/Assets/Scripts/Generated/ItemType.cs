@@ -4,9 +4,8 @@ public enum ItemType
     BestSword,
     BlackSword,
     BlueItem,
-    Candle,     
+    Candle,
     Chalice,
-    Crowbar,
     GlassShard,
     GreenItem,
     KeyOfCell,
@@ -25,4 +24,6 @@ public enum ItemType
     Torch,
     YellowItem,
     ItemX,
+    Crowbar,
+    Plate,
 }

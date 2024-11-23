@@ -178,6 +178,11 @@ public class PlayerEventItens : MonoBehaviour
         }
         GameObject obj = Instantiate(prefab);
         obj.GetComponent<PlayerAttack>().EquipSword();
+        if (obj.GetComponent<Interactable>() != null) {
+            Destroy(obj.GetComponent<Interactable>().interactCanvas.gameObject);
+            Destroy(obj.GetComponent<Interactable>());
+        }
+
         string originalName = obj.name;
         obj.name = originalName.Replace("(Clone)", "").Trim();
         hasSwordOn = true;

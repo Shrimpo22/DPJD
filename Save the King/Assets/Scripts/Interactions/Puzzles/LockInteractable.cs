@@ -82,13 +82,18 @@ public class LockInteractable : CamInteractable
         for(int i =0; i<5;i++){allIndexes[i].canMove = true;}
     }
 
+    public override void ExitCam()
+    {
+        base.ExitCam();
+        gameObject.GetComponent<BoxCollider>().enabled = true;
+    }
+
     void Update()
     {
         if(VerifyCombination()){
             //Add sound
             StartCoroutine(OpenLock());  
-            base.ExitCam();
-            gameObject.GetComponent<BoxCollider>().enabled = true;
+            ExitCam();
             chestLocked.GetComponent<OpenableInteractable>().ForceOpen();
             Destroy(this.gameObject);
         }

@@ -20,6 +20,7 @@ public abstract class Interactable : MonoBehaviour
     }
 
     public virtual void EnterRange(){
+        Debug.Log("Pickups Here!");
         interactCanvas.gameObject.SetActive(true);  
     }
 

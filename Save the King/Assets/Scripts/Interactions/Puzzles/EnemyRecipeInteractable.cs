@@ -22,6 +22,7 @@ public class EnemyRecipeInteractable : CamInteractable
     private int count = 0;
     public GameObject icon;
     public GameObject interact;
+    private bool chave = false; 
     public override void Start()
     {
         base.Start();
@@ -44,17 +45,20 @@ public class EnemyRecipeInteractable : CamInteractable
             Onetime += 1;
 
         }
-
-        if (fighting == true && mainCamera.gameObject.activeSelf)
-        {
-            AiAgent aiAgent = Inimigo.GetComponent<AiAgent>();
-            if (aiAgent != null && aiAgent.currentHealth == 0 && OnetimeV2 == 0)
+        if(chave == true){
+            
+            if (fighting == true && mainCamera.gameObject.activeSelf)
             {
-                inventory.GetComponent<Inventory>().AddItem("KeyOfKitchen", 1);
-                OnetimeV2 += 1;
-            }
+                AiAgent aiAgent = Inimigo.GetComponent<AiAgent>();
+                if (aiAgent != null && aiAgent.currentHealth == 0 && OnetimeV2 == 0)
+                {
+                    inventory.GetComponent<Inventory>().AddItem("KeyOfKitchen", 1);
+                    OnetimeV2 += 1;
+                }
 
+            }  
         }
+        
     }
 
     public override void ExitCam()
@@ -73,8 +77,11 @@ public class EnemyRecipeInteractable : CamInteractable
                 script.enabled = true;
                 fighting = true;
                 interact.SetActive(false);
+                
             }
+            chave = true;
         }
+        
         targetObject.tag = "Target";
 
     }

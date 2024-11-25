@@ -20,7 +20,8 @@ public class EnemyRecipeInteractable : CamInteractable
     public TMP_Text textInteraction;
     public int textoInteracaoCount = 1;
     private int count = 0;
-
+    public GameObject icon;
+    public GameObject interact;
     public override void Start()
     {
         base.Start();
@@ -46,7 +47,7 @@ public class EnemyRecipeInteractable : CamInteractable
 
         if (fighting == true && mainCamera.gameObject.activeSelf)
         {
-            AiAgent aiAgent = targetObject.GetComponent<AiAgent>();
+            AiAgent aiAgent = Inimigo.GetComponent<AiAgent>();
             if (aiAgent != null && aiAgent.currentHealth == 0 && OnetimeV2 == 0)
             {
                 inventory.GetComponent<Inventory>().AddItem("KeyOfKitchen", 1);
@@ -71,6 +72,7 @@ public class EnemyRecipeInteractable : CamInteractable
             {
                 script.enabled = true;
                 fighting = true;
+                interact.SetActive(false);
             }
         }
         targetObject.tag = "Target";
@@ -86,6 +88,7 @@ public class EnemyRecipeInteractable : CamInteractable
         {
             textInteraction.text = "I want you to make me a dish, go to the book on top of the table do the 3rd recipe, the ingredients are on the vases , if you do it successfully you will receive a reward and the key, if you dont good luck ";
             texto.gameObject.SetActive(true);
+            icon.SetActive(false);
 
         }
     }

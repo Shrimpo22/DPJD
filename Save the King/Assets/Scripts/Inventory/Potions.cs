@@ -21,8 +21,8 @@ public class Potions : Item
 
     public override int Stats()
     {   
-        //Adicionar o que se quer aumentar na vida
-        return 10;
+       
+        return 50;
     }
     public override Sprite GiveItemImage()
     {
@@ -46,8 +46,27 @@ public class Potions : Item
                 audioSource.Play();
                 GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
                 inventory.GetComponent<Inventory>().DropItemByName(GiveName());
-                
-                
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+
+                if (playerHealth != null)
+                {
+                    if (playerHealth.currentHealth < playerHealth.maxHealth)
+                    {
+                        
+                        playerHealth.currentHealth = Mathf.Min(
+                            playerHealth.currentHealth + Stats(), 
+                            playerHealth.maxHealth
+                        );
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("PlayerHealth component not found on the player!");
+                }
+
+                Debug.Log("Potions used");
+                    
                
             }
             Debug.Log("Potions");

@@ -15,16 +15,18 @@ public class EnemyRecipeInteractable : CamInteractable
     public bool fighting = false;
     GameObject targetObject;
     private bool wrong = false;
-
+    public GameObject Inimigo;
     public GameObject texto;
     public TMP_Text textInteraction;
     public int textoInteracaoCount = 1;
     private int count = 0;
-
+    public GameObject icon;
+    public GameObject interact;
+    private bool chave = false; 
     public override void Start()
     {
         base.Start();
-        targetObject = GameObject.FindGameObjectWithTag("NPCVIBES");
+        targetObject = GameObject.FindGameObjectWithTag("Target");
     }
 
     void Update()
@@ -43,17 +45,20 @@ public class EnemyRecipeInteractable : CamInteractable
             Onetime += 1;
 
         }
-
-        if (fighting == true && mainCamera.gameObject.activeSelf)
-        {
-            AiAgent aiAgent = targetObject.GetComponent<AiAgent>();
-            if (aiAgent != null && aiAgent.currentHealth == 0 && OnetimeV2 == 0)
+        if(Time.timeScale==1){
+            
+            if (fighting == true && mainCamera.gameObject.activeSelf)
             {
-                inventory.GetComponent<Inventory>().AddItem("KeyOfKitchen", 1);
-                OnetimeV2 += 1;
-            }
+                AiAgent aiAgent = Inimigo.GetComponent<AiAgent>();
+                if (aiAgent != null && aiAgent.currentHealth == 0 && OnetimeV2 == 0)
+                {
+                    inventory.GetComponent<Inventory>().AddItem("KeyOfKitchen", 1);
+                    OnetimeV2 += 1;
+                }
 
+            }  
         }
+        
     }
 
     public override void ExitCam()
@@ -64,15 +69,19 @@ public class EnemyRecipeInteractable : CamInteractable
         textoInteracaoCount += 1;
         texto.SetActive(false);
 
-        if (usedItem && !wrong && targetObject != null)
+        if (usedItem && !wrong && Inimigo != null)
         {
-            MonoBehaviour[] scripts = targetObject.GetComponents<MonoBehaviour>();
+            MonoBehaviour[] scripts = Inimigo.GetComponents<MonoBehaviour>();
             foreach (MonoBehaviour script in scripts)
             {
                 script.enabled = true;
                 fighting = true;
+                interact.SetActive(false);
+                
             }
+            chave = true;
         }
+        
         targetObject.tag = "Target";
 
     }
@@ -86,6 +95,7 @@ public class EnemyRecipeInteractable : CamInteractable
         {
             textInteraction.text = "I want you to make me a dish, go to the book on top of the table do the 3rd recipe, the ingredients are on the vases , if you do it successfully you will receive a reward and the key, if you dont good luck ";
             texto.gameObject.SetActive(true);
+            icon.SetActive(false);
 
         }
     }

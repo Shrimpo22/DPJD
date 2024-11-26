@@ -22,7 +22,7 @@ public class KeyOfDungeon : Item
     }
     public override Sprite GiveItemImage()
     {
-        return Resources.Load<Sprite>("UI/Item Images/KeyOfKitchen");
+        return Resources.Load<Sprite>("UI/Item Images/KeyOfDungeon");
     }
 
     public override string GiveDiscresp()

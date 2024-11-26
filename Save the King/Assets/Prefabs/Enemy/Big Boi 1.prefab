@@ -377,7 +377,7 @@ MonoBehaviour:
   enemyTarget: {fileID: 3715055259580296379}
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 247
 --- !u!1 &1756233012578990825
 GameObject:
   m_ObjectHideFlags: 0
@@ -1632,6 +1632,7 @@ MonoBehaviour:
   angle: 80
   height: 2
   meshColor: {r: 0.94509804, g: 0.08627451, b: 0.015686275, a: 0.6862745}
+  drawSight: 0
   scanFrequency: 30
   layers:
     serializedVersion: 2

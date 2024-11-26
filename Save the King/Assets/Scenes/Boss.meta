@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Save the King/Assets/Scenes/Boss.meta
 guid: 55bda10e883be484d896a4bf0fbabafb
+========
+guid: 13166c149f69a144cb6198ee6adcb779
+>>>>>>>> MasmorraComTutorial:Save the King/Assets/Prefabs/Masmorra/lowpoly-crowbar-game-model/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -24,4 +24,6 @@ public enum ItemType
     Torch,
     YellowItem,
     ItemX,
+    Crowbar,
+    Plate,
 }

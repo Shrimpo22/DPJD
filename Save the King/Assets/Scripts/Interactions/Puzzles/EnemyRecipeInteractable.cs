@@ -45,7 +45,7 @@ public class EnemyRecipeInteractable : CamInteractable
             Onetime += 1;
 
         }
-        if(chave == true){
+        if(Time.timeScale==1){
             
             if (fighting == true && mainCamera.gameObject.activeSelf)
             {

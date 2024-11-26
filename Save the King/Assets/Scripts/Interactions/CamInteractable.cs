@@ -37,6 +37,7 @@ public class CamInteractable : Interactable
         myCamera.gameObject.SetActive(true);
         isLooking=true;
         interactCanvas.gameObject.SetActive(false);  
+        
 
     }
 

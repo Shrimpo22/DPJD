@@ -76,6 +76,7 @@ public class FurnaceInteractable : CamInteractable
     public override void Interact(Inventory inv, PlayerEventItens playerItems)  {
         base.Interact(inv, playerItems);
         inv.isLookingAtCook=true;
+        inv.OpenIt();
     }
     
     public void confirmado(){

@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 33811909571648190}
   - component: {fileID: 23570467610790492}
   - component: {fileID: 64366760170344356}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Doorway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 33671272596714768}
   - component: {fileID: 23708213354328486}
   - component: {fileID: 64621484449061768}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WallDoorway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -495,6 +495,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLocked: 0
   isClosed: 1
-  TextDoor: {fileID: 0}
   Angle: 1
+  LockedSound: {fileID: 0}
+  UnlockedOpenSound: {fileID: 0}
+  KeyType: 0
   targetRotation: 0

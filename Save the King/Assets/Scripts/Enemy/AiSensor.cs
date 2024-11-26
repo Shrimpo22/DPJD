@@ -13,6 +13,7 @@ public class AiSensor : MonoBehaviour
     public float angle = 0;
     public float height = 0;
     public Color meshColor;
+    public bool drawSight = false;
 
     public int scanFrequency = 30;
     public LayerMask layers;   
@@ -116,7 +117,8 @@ public class AiSensor : MonoBehaviour
         bool isVisible = !Physics.Linecast(origin, point, occlusionLayers);
 
         // Draw the line with a color indicating visibility (green = visible, red = obstructed)
-        //Debug.DrawLine(origin, point, isVisible ? Color.green : Color.red);
+        if(drawSight)
+            Debug.DrawLine(origin, point, isVisible ? Color.green : Color.red);
 
         // If any of the points is visible, set the flag to true
         if (isVisible) {

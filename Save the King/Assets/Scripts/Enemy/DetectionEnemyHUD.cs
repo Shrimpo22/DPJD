@@ -31,6 +31,7 @@ public class EnemyDetection : MonoBehaviour
             OnLosePlayer?.Invoke(this);  // Enemy stops detecting the player
         }
         if (agent.currentState != previousState) {
+            Debug.Log("AI " + agent.currentState + " " + previousState);
             // State has changed, check which event to trigger
             if (agent.currentState == AiStateId.ChasePlayer) {
                 OnChasePlayer?.Invoke(this);
@@ -38,9 +39,7 @@ public class EnemyDetection : MonoBehaviour
             else if (agent.currentState == AiStateId.LookForPlayer) {
                 OnLook4Player?.Invoke(this);
             }else if(agent.currentState == AiStateId.Death){
-                OnLosePlayer?.Invoke(this);
-            }else if(agent.currentState == AiStateId.Death)
-            {
+                Debug.Log("AI OwO");
                 OnLosePlayer?.Invoke(this);
             }
 

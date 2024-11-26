@@ -24,8 +24,7 @@ public class Crowbar : Item
     }
     public override Sprite GiveItemImage()
     {
-        return Resources.Load<Sprite>("UI/Item Images/CandleItem");
-        //return Resources.Load<Sprite>("UI/Item Images/CrowbarItem");
+        return Resources.Load<Sprite>("UI/Item Images/CrowbarItem");
     }
 
     public override string GiveDiscresp()

@@ -17,9 +17,12 @@ public class FurnaceInteractable : CamInteractable
     public GameObject refazer;
     public List<string> comidaCorreta = new List<string>();
     public List<string> comidaTentativa = new List<string>();
+    private Inventory i;
+    private EnemyRecipeInteractable interacao;
     public override void Start()
     {
         base.Start();
+        i = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         comidaCorreta.Add("BlueItem");
         comidaCorreta.Add("RedItem");
         comidaCorreta.Add("BlueItem");
@@ -30,17 +33,24 @@ public class FurnaceInteractable : CamInteractable
 
     void Update()
     {
-        if(comidaTentativa.Count > 0 && !isComplete){
-            refazer.SetActive(true);
-        }
-        else if(comidaTentativa.Count == 0 && !isComplete){
-            refazer.SetActive(false);
-        }
 
-        if(comidaTentativa.Count == 5 && !isComplete)
+
+        if (i.isLookingAtCook == true)
         {
-            conf.SetActive(true);
+            if (comidaTentativa.Count > 0 && !isComplete)
+            {
+                refazer.SetActive(true);
+            }
+            else if (comidaTentativa.Count == 0 && !isComplete)
+            {
+                refazer.SetActive(false);
+            }
+            if (comidaTentativa.Count == 5 && !isComplete)
+            {
+                conf.SetActive(true);
+            }
         }
+        
 
         if(comidaCorreta.Count == comidaTentativa.Count && !isComplete && confirmd) {
             
@@ -81,6 +91,8 @@ public class FurnaceInteractable : CamInteractable
     
     public void confirmado(){
         confirmd = true;
+        interacao = GameObject.FindGameObjectWithTag("NPCVIBES").GetComponent<EnemyRecipeInteractable>();
+        interacao.textoInteracaoCount +=1;
     }
     
     public void undo(){
@@ -92,3 +104,4 @@ public class FurnaceInteractable : CamInteractable
     }
 
 }
+ 

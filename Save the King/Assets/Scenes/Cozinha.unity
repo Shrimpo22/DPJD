@@ -373,7 +373,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f236b1e60c30f3b4cbf0c192e7a1c274, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.15
+  m_Volume: 0.273
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3832,8 +3832,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -328.58}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 64.80151, y: -311.8658}
+  m_SizeDelta: {x: 254.9656, y: 39.4209}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &627240678
 MonoBehaviour:
@@ -4604,7 +4604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.2787575
+      value: -0.27875748
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.y
@@ -4612,7 +4612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.27907825
+      value: -0.27907827
       objectReference: {fileID: 0}
     - target: {fileID: 169741066844414161, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_Name
@@ -4752,19 +4752,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6557038
+      value: 0.6557037
       objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.26358622
+      value: -0.26358625
       objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.65645814
+      value: -0.6564582
       objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.2638895
+      value: -0.26388955
       objectReference: {fileID: 0}
     - target: {fileID: 6473281512777178405, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5174,6 +5174,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1790192424403126315, guid: 9711f67ffa3ad704c9d784be69381649, type: 3}
+      propertyPath: m_TagString
+      value: mousse
+      objectReference: {fileID: 0}
     - target: {fileID: 6018020654515597229, guid: 9711f67ffa3ad704c9d784be69381649, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5186,6 +5190,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 233202417}
+    - target: {fileID: 7939924325074656379, guid: 9711f67ffa3ad704c9d784be69381649, type: 3}
+      propertyPath: m_TagString
+      value: TaskManager
+      objectReference: {fileID: 0}
     - target: {fileID: 8987832766243674968, guid: 9711f67ffa3ad704c9d784be69381649, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -5265,6 +5273,10 @@ PrefabInstance:
     - target: {fileID: 8987832766243674968, guid: 9711f67ffa3ad704c9d784be69381649, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018920986126696111, guid: 9711f67ffa3ad704c9d784be69381649, type: 3}
+      propertyPath: m_TagString
+      value: opcoes
       objectReference: {fileID: 0}
     - target: {fileID: 9206734059574114366, guid: 9711f67ffa3ad704c9d784be69381649, type: 3}
       propertyPath: m_Name
@@ -5550,7 +5562,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8349476719714158804, guid: cb2f8f94eef9b384e88731a1c8120c80, type: 3}
       propertyPath: m_text
-      value: Grab Fries
+      value: Grab Potatoes
       objectReference: {fileID: 0}
     - target: {fileID: 8349476719714158804, guid: cb2f8f94eef9b384e88731a1c8120c80, type: 3}
       propertyPath: m_fontSize
@@ -7245,7 +7257,7 @@ Transform:
   m_GameObject: {fileID: 1377969056}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.451, y: 1.7071006, z: -0.561}
+  m_LocalPosition: {x: 0.621, y: 1.452, z: -0.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8084,7 +8096,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1235223085094231267, guid: 207722634823cc148a9cc2c91cbf3d72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.44
+      value: 3.22
       objectReference: {fileID: 0}
     - target: {fileID: 1235223085094231267, guid: 207722634823cc148a9cc2c91cbf3d72, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8092,7 +8104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1235223085094231267, guid: 207722634823cc148a9cc2c91cbf3d72, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.623
+      value: 2.57
       objectReference: {fileID: 0}
     - target: {fileID: 1235223085094231267, guid: 207722634823cc148a9cc2c91cbf3d72, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8214,7 +8226,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1886213099}
   m_LocalRotation: {x: 0.50032276, y: 0.49967703, z: -0.49967703, w: 0.50032276}
-  m_LocalPosition: {x: 0, y: 0, z: 0.273}
+  m_LocalPosition: {x: 0, y: 0, z: 0.242}
   m_LocalScale: {x: 0.24035913, y: 0.24035923, z: 0.24035929}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8247,20 +8259,20 @@ MonoBehaviour:
       m_Calls: []
   m_text: '1st Recipe:
 
-    Eggs,Meat,Salt,Fries,Salt
+    Eggs,Meat,Salt,Potatoes,Salt
 
 
 
     2nd Recipe:
 
-    Salt,Fries,Meat,Eggs,Salt
+    Salt,Potatoes,Meat,Eggs,Salt
 
 
 
     3rt
     Recipe:
 
-    Salt,Meat,Salt,Eggs,Fries '
+    Salt,Meat,Salt,Eggs,Potatoes '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8967,8 +8979,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -220.42}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 64.80151, y: -169.7405}
+  m_SizeDelta: {x: 254.9656, y: 39.4209}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2004945231
 MonoBehaviour:

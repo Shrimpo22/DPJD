@@ -40,7 +40,7 @@ public class BookInteractable : CamInteractable
     public override void Interact(Inventory inv, PlayerEventItens playerItems)
     {
         base.Interact(inv, playerItems);
-        if (x > 1)
+        if (x >= 0)
         {
             player.SetActive(false);
             bookClose.SetActive(false);

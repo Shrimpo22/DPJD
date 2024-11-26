@@ -10,7 +10,7 @@ public class YellowItem : Item
 
     public override string getNameWithSpaces()
     {
-        return "Yellow Item";
+        return "Eggs";
     }
     public override int MaxStacks()
     {
@@ -28,7 +28,7 @@ public class YellowItem : Item
 
     public override string GiveDiscresp()
     {
-        return "Yellow Item";
+        return "Freshly laid eggs, perfect for any recipe requiring a touch of nature's simplicity.";
     }
 
     public override Action UseFunc()

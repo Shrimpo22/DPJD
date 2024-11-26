@@ -28,11 +28,7 @@ public class Mouse : MonoBehaviour
     {
         mouseCursor.transform.position = Input.mousePosition;
 
-       if (!inventory.activeSelf)
-        {
-            opcoes.gameObject.SetActive(false);
-            InspectManager.gameObject.SetActive(false);
-        }
+        
         
         if (item != null && !InspectManager.activeSelf && !optionsDisplayed)
         {
@@ -71,7 +67,8 @@ public class Mouse : MonoBehaviour
         (item.GiveName().StartsWith("MapPiece") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtMap == false) ||
         (item.GiveName().Contains("Item") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtCook == false) ||
         (item.GiveName().StartsWith("Plate") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtCook == false) ||
-        (item.GiveName().StartsWith("Glass") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtMirror == false)
+        (item.GiveName().StartsWith("Glass") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtMirror == false) ||
+        (item.GiveName().StartsWith("Plate") && GameObject.FindGameObjectWithTag("NPCVIBES").GetComponent<EnemyRecipeInteractable>().isTalkingToNpc == false)
         )
         {
             

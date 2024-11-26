@@ -66,7 +66,6 @@ public class EnemyRecipeInteractable : CamInteractable
         base.ExitCam();
         isTalkingToNpc = false;
         inventory.GetComponent<Inventory>().isLookingAtCook = false;
-        textoInteracaoCount += 1;
         texto.SetActive(false);
 
         if (usedItem && !wrong && Inimigo != null)

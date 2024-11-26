@@ -39,6 +39,9 @@ TagManager:
   - BookClose
   - NPCVIBES
   - book
+  - opcoes
+  - TaskManager
+  - mousse
   layers:
   - Default
   - TransparentFX

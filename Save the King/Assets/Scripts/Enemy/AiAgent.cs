@@ -172,7 +172,7 @@ public class AiAgent : MonoBehaviour
 
             }
 
-            Gizmos.color = Color.black;
+            Gizmos.color = Color.yellow;
             Gizmos.DrawLine(initialPosition, lastPosition);
             
 

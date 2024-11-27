@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -187,6 +187,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grande Meio (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5908999519184768823, guid: ac102ce85c2a0f946a7a2ce134fb604b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20e57543ab535844ca584f2560e3b95b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -646,6 +650,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grande Meio (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5908999519184768823, guid: ac102ce85c2a0f946a7a2ce134fb604b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20e57543ab535844ca584f2560e3b95b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3672,6 +3680,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grande Meio
       objectReference: {fileID: 0}
+    - target: {fileID: 5908999519184768823, guid: ac102ce85c2a0f946a7a2ce134fb604b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20e57543ab535844ca584f2560e3b95b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4528,6 +4540,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grande Meio
       objectReference: {fileID: 0}
+    - target: {fileID: 5908999519184768823, guid: ac102ce85c2a0f946a7a2ce134fb604b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20e57543ab535844ca584f2560e3b95b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4863,6 +4879,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grande Meio (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5908999519184768823, guid: ac102ce85c2a0f946a7a2ce134fb604b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20e57543ab535844ca584f2560e3b95b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10593,6 +10613,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grande Meio (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5908999519184768823, guid: ac102ce85c2a0f946a7a2ce134fb604b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20e57543ab535844ca584f2560e3b95b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10714,6 +10738,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grande Meio (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5908999519184768823, guid: ac102ce85c2a0f946a7a2ce134fb604b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20e57543ab535844ca584f2560e3b95b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -28972,6 +29000,10 @@ PrefabInstance:
       propertyPath: isClosed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8362755105142923488, guid: 12aa1cdf961b30f41a21133f4d70bb5a, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -31044,6 +31076,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1597379678}
     m_Modifications:
+    - target: {fileID: 1614343401374977607, guid: d8c7cabc4a354f84587d9b39b35466c4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20e57543ab535844ca584f2560e3b95b, type: 2}
+    - target: {fileID: 1755645965349327996, guid: d8c7cabc4a354f84587d9b39b35466c4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20e57543ab535844ca584f2560e3b95b, type: 2}
+    - target: {fileID: 2534418033200486912, guid: d8c7cabc4a354f84587d9b39b35466c4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20e57543ab535844ca584f2560e3b95b, type: 2}
+    - target: {fileID: 3868623111045975048, guid: d8c7cabc4a354f84587d9b39b35466c4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20e57543ab535844ca584f2560e3b95b, type: 2}
     - target: {fileID: 4777148352714880088, guid: d8c7cabc4a354f84587d9b39b35466c4, type: 3}
       propertyPath: m_LocalScale.x
       value: 20
@@ -31096,6 +31144,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4868456445551528520, guid: d8c7cabc4a354f84587d9b39b35466c4, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20e57543ab535844ca584f2560e3b95b, type: 2}
     - target: {fileID: 5260212822907416290, guid: d8c7cabc4a354f84587d9b39b35466c4, type: 3}
       propertyPath: m_Name
       value: Virtral
@@ -31104,6 +31156,10 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5908999519184768823, guid: d8c7cabc4a354f84587d9b39b35466c4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20e57543ab535844ca584f2560e3b95b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33026,6 +33082,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grande Meio (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5908999519184768823, guid: ac102ce85c2a0f946a7a2ce134fb604b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20e57543ab535844ca584f2560e3b95b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

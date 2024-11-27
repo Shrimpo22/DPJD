@@ -75,7 +75,6 @@ public class Inventory : MonoBehaviour
         Debug.Log(itemsInDictionary);
 
         AddItem("Potions", 3);
-        AddItem("Candle", 2);
         RefreshInventory();
 
 

@@ -34,6 +34,7 @@ public class StatuesInteractable : CamInteractable
 
     public override void Interact(Inventory inv, PlayerEventItens playerItems)
     {
+        inv.isLookingAtStatue = true;
         base.Interact(inv, playerItems);
         if (hasObject)
             button.SetActive(true);

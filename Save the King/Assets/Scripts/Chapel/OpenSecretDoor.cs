@@ -66,13 +66,13 @@ public class OpenSecretDoor : MonoBehaviour
 
         if (secretDoor.GetComponent<Door>() != null)
             secretDoorOpen = true;
-        seeObject();
-        this.gameObject.GetComponent<Door>().Open(30);
-        GameObject[] allStatues = GameObject.FindGameObjectsWithTag("Statue");
-        foreach (GameObject statue in allStatues)
-        {
-            statue.tag = "Untagged";
-        }
+            seeObject();
+            this.gameObject.GetComponent<Door>().Open(30);
+            GameObject[] allStatues = GameObject.FindGameObjectsWithTag("Statue");
+            foreach (GameObject statue in allStatues)
+            {
+                statue.tag = "Untagged";
+            }
 
 
 

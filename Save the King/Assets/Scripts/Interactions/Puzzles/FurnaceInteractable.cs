@@ -87,6 +87,7 @@ public class FurnaceInteractable : CamInteractable
         base.Interact(inv, playerItems);
         inv.isLookingAtCook=true;
         inv.OpenIt();
+        aguaFerver.SetActive(true);
     }
     
     public void confirmado(){

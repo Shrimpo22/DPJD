@@ -36,6 +36,13 @@ public class FoodInteractable : Interactable
                 audioSource.Play();
                 ClearAndDestroy(playerItems, eatSound.length);
             }
+            else{
+                inv.AddItem("Potions",1);
+                pickedUp = true;
+                audioSource.clip = eatSound;
+                audioSource.Play();
+                ClearAndDestroy(playerItems, eatSound.length);
+            }
         }
     }
 }

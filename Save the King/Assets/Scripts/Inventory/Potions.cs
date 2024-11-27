@@ -22,7 +22,7 @@ public class Potions : Item
     public override int Stats()
     {   
        
-        return 50;
+        return 20;
     }
     public override Sprite GiveItemImage()
     {

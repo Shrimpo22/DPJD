@@ -1223,7 +1223,7 @@ MonoBehaviour:
   amount: 1
   clickable: 0
   audioSource: {fileID: 0}
-  pickupSound: {fileID: 0}
+  pickupSound: {fileID: 8300000, guid: ebb6b392500f145458d8c256052e0ccc, type: 3}
 --- !u!1001 &95744133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3292,7 +3292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b903633cb540e2a45af5232d4b211ae3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.52732486
+      value: -0.56
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b903633cb540e2a45af5232d4b211ae3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4593,15 +4593,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.64939916
+      value: 0.6493992
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.2787575
+      value: -0.27875754
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.65014637
+      value: -0.6501463
       objectReference: {fileID: 0}
     - target: {fileID: 20159076154072605, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.z
@@ -4641,7 +4641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1170781045556153076, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.29371423
+      value: -0.29371426
       objectReference: {fileID: 0}
     - target: {fileID: 1170781045556153076, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.y
@@ -4745,19 +4745,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6557037
+      value: 0.6557038
       objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.26358625
+      value: -0.26358622
       objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6564582
+      value: -0.65645814
       objectReference: {fileID: 0}
     - target: {fileID: 6294282001428518394, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.26388955
+      value: -0.2638895
       objectReference: {fileID: 0}
     - target: {fileID: 6473281512777178405, guid: 4b1b39fbf27c26841addb79003543b88, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5316,7 +5316,7 @@ MonoBehaviour:
   interactCanvas: {fileID: 1008033587}
   healingAmount: 10
   audioSource: {fileID: 0}
-  eatSound: {fileID: 0}
+  eatSound: {fileID: 8300000, guid: b80e738401f71e346b587dd67409fb5f, type: 3}
 --- !u!1001 &954738198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5669,7 +5669,7 @@ MonoBehaviour:
   amount: 1
   clickable: 0
   audioSource: {fileID: 0}
-  pickupSound: {fileID: 0}
+  pickupSound: {fileID: 8300000, guid: ebb6b392500f145458d8c256052e0ccc, type: 3}
 --- !u!1001 &1008033585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6478,7 +6478,7 @@ MonoBehaviour:
   amount: 1
   clickable: 0
   audioSource: {fileID: 0}
-  pickupSound: {fileID: 0}
+  pickupSound: {fileID: 8300000, guid: ebb6b392500f145458d8c256052e0ccc, type: 3}
 --- !u!1 &1234934398
 GameObject:
   m_ObjectHideFlags: 0
@@ -6550,7 +6550,7 @@ MonoBehaviour:
   interactCanvas: {fileID: 851972582}
   healingAmount: 20
   audioSource: {fileID: 0}
-  eatSound: {fileID: 0}
+  eatSound: {fileID: 8300000, guid: b80e738401f71e346b587dd67409fb5f, type: 3}
 --- !u!1001 &1236855186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6955,7 +6955,7 @@ MonoBehaviour:
   amount: 1
   clickable: 0
   audioSource: {fileID: 0}
-  pickupSound: {fileID: 0}
+  pickupSound: {fileID: 8300000, guid: ebb6b392500f145458d8c256052e0ccc, type: 3}
 --- !u!4 &1349206436 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4177046354630628, guid: 9d012b73caba62246906034d78994c42, type: 3}
@@ -6987,7 +6987,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 70a21ce7f57f5a8449e403688646a962, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.48135823
+      value: -0.564
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 70a21ce7f57f5a8449e403688646a962, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7230,7 +7230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 70a21ce7f57f5a8449e403688646a962, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.49040878
+      value: -0.557
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 70a21ce7f57f5a8449e403688646a962, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7516,7 +7516,7 @@ MonoBehaviour:
   interactCanvas: {fileID: 1969311951}
   healingAmount: 20
   audioSource: {fileID: 0}
-  eatSound: {fileID: 0}
+  eatSound: {fileID: 8300000, guid: b80e738401f71e346b587dd67409fb5f, type: 3}
 --- !u!1001 &1702854844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8540,7 +8540,7 @@ MonoBehaviour:
   interactCanvas: {fileID: 1236886748}
   healingAmount: 10
   audioSource: {fileID: 0}
-  eatSound: {fileID: 0}
+  eatSound: {fileID: 8300000, guid: b80e738401f71e346b587dd67409fb5f, type: 3}
 --- !u!4 &1915034787 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 268a7338e7f6cce4bb03dfe56d15a52b, type: 3}
@@ -9293,7 +9293,7 @@ MonoBehaviour:
   amount: 1
   clickable: 0
   audioSource: {fileID: 0}
-  pickupSound: {fileID: 0}
+  pickupSound: {fileID: 8300000, guid: ebb6b392500f145458d8c256052e0ccc, type: 3}
 --- !u!1 &2058712218
 GameObject:
   m_ObjectHideFlags: 0

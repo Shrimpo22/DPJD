@@ -93,7 +93,7 @@ public class CandleHolderInteractable : CamInteractable
         {
                 audioSource.Play();
 
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(2);
 
                 drawerCamera.tag="Untagged";
                 mainCamera.tag="MainCamera";

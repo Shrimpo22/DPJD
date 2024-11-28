@@ -7,6 +7,7 @@ using UnityEngine.AI;
 
 public class AiAgent : MonoBehaviour
 {
+    public bool isNpc = false;
     public bool drawAlertState;
     public AiStateMachine stateMachine;
     public AiStateId initialState;
@@ -69,11 +70,7 @@ public class AiAgent : MonoBehaviour
 
     void Update()
     {
-        // if(animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyGetHit"))
-        //     Debug.Log("Hit");
-        // if(animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-        //     Debug.Log("Attack");
-
+        if(isNpc) return;
         stateMachine.Update();
         if(navMeshAgent.hasPath){
             targetSpeed = navMeshAgent.speed;
@@ -115,6 +112,7 @@ public class AiAgent : MonoBehaviour
             alertState = 0;
     }
     public void TakeDamage(float amount){
+        if(isNpc) return;
         currentHealth -= amount;
         healthBar.SetHealthBarPercentage(currentHealth/maxHealth);
 

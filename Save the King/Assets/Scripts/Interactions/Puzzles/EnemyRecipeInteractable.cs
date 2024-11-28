@@ -70,6 +70,7 @@ public class EnemyRecipeInteractable : CamInteractable
             MonoBehaviour[] scripts = Inimigo.GetComponents<MonoBehaviour>();
             foreach (MonoBehaviour script in scripts)
             {
+                if(script is AiAgent aiAgent) aiAgent.isNpc = false;
                 script.enabled = true;
                 fighting = true;
                 interact.SetActive(false);

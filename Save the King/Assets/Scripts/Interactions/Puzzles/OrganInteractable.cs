@@ -53,15 +53,16 @@ public class OrganInteractable : CamInteractable
 
     IEnumerator PlaySoundAndExit()
     {
-        Debug.Log("Opening Drawer");
 
         if (bookSource.clip != null)
         {
+                yield return new WaitForSeconds(1); // waits before opening
+
                 bookSource.Play();
                 BookOpen.SetActive(true);
                 BookClosed.SetActive(false);
 
-                yield return new WaitForSeconds(5);
+                yield return new WaitForSeconds(5); // waits before leaving camera
 
                 mainCamera.tag="MainCamera";
                 bookCamera.tag="Untagged";

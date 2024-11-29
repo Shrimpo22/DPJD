@@ -41,7 +41,6 @@ public class CamInteractable : Interactable
 
     }
 
-
     public virtual void ExitCam(){
         player.SetActive(true);
         mainCamera.tag = "MainCamera";

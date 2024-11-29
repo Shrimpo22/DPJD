@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c38acebd0518ca469ca47fffb748da8, type: 3}
+  m_Name: KnightSounds
+  m_EditorClassIdentifier: 
+  walkSound: {fileID: 8300000, guid: 0912a19aa98c6e34d94ea7ec7255e9b8, type: 3}
+  hitSound: {fileID: 8300000, guid: d050474d4d0ba5348ae5d51e565f28cc, type: 3}
+  deathSound: {fileID: 8300000, guid: 1035d50ffa2fd5e45a4ecb86b0844b9f, type: 3}
+  swingSound: {fileID: 8300000, guid: 6db840a1d9faf4f48a8897ffb2584331, type: 3}
+  attack1: {fileID: 8300000, guid: fc8cf5c94fca0f54c85e557e1f7adce5, type: 3}
+  attack2: {fileID: 0}
+  attack3: {fileID: 0}
+  playerSwordGrunt: {fileID: 8300000, guid: 6f0291e7b4c8be74f84b96ecde02400f, type: 3}

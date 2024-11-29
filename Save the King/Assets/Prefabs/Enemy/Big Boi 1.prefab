@@ -1446,6 +1446,8 @@ GameObject:
   - component: {fileID: 4623715486582675389}
   - component: {fileID: 6061644962624085384}
   - component: {fileID: 9010718584374767033}
+  - component: {fileID: 4091794514824251210}
+  - component: {fileID: 8084745619858206520}
   m_Layer: 0
   m_Name: Big Boi 1
   m_TagString: Target
@@ -1737,6 +1739,121 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactCanvas: {fileID: 785908243593968911}
+--- !u!114 &4091794514824251210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6161055025377200477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e0ccdd7ad2e75d47b87d94413e282dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSwordGrunt: {fileID: 8300000, guid: 6f0291e7b4c8be74f84b96ecde02400f, type: 3}
+  enemyAttackSound: {fileID: 8300000, guid: ca114f606b5b4da4c82b5735cea9ce22, type: 3}
+  enemyAttackSound2: {fileID: 8300000, guid: ea5e63e4f816c824babf15f49e87d59f, type: 3}
+  walk: {fileID: 8300000, guid: 0912a19aa98c6e34d94ea7ec7255e9b8, type: 3}
+  bigboiGetHit: {fileID: 8300000, guid: 294f1ffe3d3bc8042a4e0aa4b7dbb1d9, type: 3}
+  death: {fileID: 8300000, guid: 08d7ba4c7c1383847ac345bc6fe37688, type: 3}
+  enemySwing: {fileID: 8300000, guid: 6db840a1d9faf4f48a8897ffb2584331, type: 3}
+--- !u!82 &8084745619858206520
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6161055025377200477}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6375890514682819487
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,6 +2447,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5949581425843577622}
     m_Modifications:
+    - target: {fileID: 8382316870177708448, guid: 491a92814233734429fff5d0e030d1d6, type: 3}
+      propertyPath: damage
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8554072677537856858, guid: 491a92814233734429fff5d0e030d1d6, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.8425095

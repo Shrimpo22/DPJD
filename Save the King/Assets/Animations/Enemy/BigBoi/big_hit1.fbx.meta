@@ -64,6 +64,20 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.24612737
+        functionName: EnemyAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.27366602
+        functionName: EnemyAttackSwing
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.32115668
         functionName: EnableCollider
         data: 
@@ -78,8 +92,29 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.51053476
+        functionName: ClearHits
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5352839
+        functionName: EnemyAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.54033476
         functionName: EnableCollider
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.56937975
+        functionName: EnemyAttackSwing
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -93,13 +128,6 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.74733615
-        functionName: ClearHits
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.51053476
         functionName: ClearHits
         data: 
         objectReferenceParameter: {instanceID: 0}

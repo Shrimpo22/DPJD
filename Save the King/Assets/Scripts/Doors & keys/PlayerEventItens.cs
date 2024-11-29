@@ -53,13 +53,20 @@ public class PlayerEventItens : MonoBehaviour
     {
         controls = InputManager.inputActions;
         controls.Gameplay.Interaction.performed += ctx => HandleInteraction();
+        controls.Gameplay.LightAttack.performed += ctx => HandleLightAttack();
         scanInterval = 1.0f / scanFrequency;
         inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
     }
 
     void HandleInteraction()
     {
-        if (closestInteractable != null)
+        if (closestInteractable != null && closestInteractable.tag != "Target")
+            closestInteractable.Interact(inventory, this);
+    }
+
+    void HandleLightAttack()
+    {
+        if (closestInteractable != null && closestInteractable.tag == "Target")
             closestInteractable.Interact(inventory, this);
     }
 
@@ -115,9 +122,10 @@ public class PlayerEventItens : MonoBehaviour
 
             Collider collider = colliders[i];
             GameObject obj = collider.gameObject;
-            Debug.Log("Range Collided with" + obj.name + " and obj " + (IsInView(obj)?"in":"not in") + "view" );
+            Debug.Log("Range Collided with" + obj.name + " and obj " + (IsInView(obj) ? "in" : "not in") + "view");
 
-            if(obj.tag == "Target" && (gameObject.GetComponent<PlayerMovement>().IsDetected() || !gameObject.GetComponent<PlayerMovement>().isSwordEquipped)){
+            if (obj.tag == "Target" && (gameObject.GetComponent<PlayerMovement>().IsDetected() || !gameObject.GetComponent<PlayerMovement>().isSwordEquipped))
+            {
                 continue;
             }
 

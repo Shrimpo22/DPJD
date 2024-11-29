@@ -26,6 +26,7 @@ public class AiAgent : MonoBehaviour
     public float targetSpeed;
     public float currentSpeed;
 
+    public bool hasResetted = false;
 
     CinemachineImpulseSource screenShake;
     float powerAmount;
@@ -118,7 +119,7 @@ public class AiAgent : MonoBehaviour
         currentHealth -= amount;
         healthBar.SetHealthBarPercentage(currentHealth/maxHealth);
 
-        if(currentHealth > 0){
+        if(currentHealth > 0 && !hasResetted){
             animator.Play("EnemyGetHit",0,0f);
             SetAlertState(1.2f);
             stateMachine.ChangeState(AiStateId.ChasePlayer);
@@ -130,6 +131,22 @@ public class AiAgent : MonoBehaviour
             sensor.enabled = false;
             stateMachine.ChangeState(AiStateId.Death);
         }
+    }
+
+    public void Reset() {
+        hasResetted = true;
+        Debug.Log("enemies reset...");
+        currentHealth = maxHealth;
+        healthBar.gameObject.SetActive(true);
+        if (healthBar) {
+            healthBar.SetHealthBarPercentage(1);
+        }
+        collid.enabled = true;
+        sensor.enabled = true;
+        SetAlertState(0);
+        stateMachine.ChangeState(AiStateId.Idle);
+        animator.Play("Movement");
+        hasResetted = false;
     }
     
     public void EnableCollider(){

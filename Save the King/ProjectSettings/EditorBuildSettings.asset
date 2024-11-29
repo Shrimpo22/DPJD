@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Masmorra_Hi-Fi.unity
     guid: e6946e28edabe4448bb183dbb7e779e7
+  - enabled: 1
+    path: Assets/Scenes/Banquet.unity
+    guid: e51f23ab8cef1d941818c6f02ef93cbd
+  - enabled: 1
+    path: Assets/Scenes/Cozinha.unity
+    guid: 7352597f5a9ffd949a49b2019d4e6888
   m_configObjects: {}

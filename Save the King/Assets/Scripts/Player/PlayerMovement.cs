@@ -168,6 +168,7 @@ public class PlayerMovement : MonoBehaviour
         return null; // Return null if no match found
     }
 
+    
     private void handleInteraction()
     {
         if (isTrapped)

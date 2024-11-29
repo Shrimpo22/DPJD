@@ -40,6 +40,7 @@ TagManager:
   - NPCVIBES
   - book
   - Wood
+  - NextScene
   layers:
   - Default
   - TransparentFX

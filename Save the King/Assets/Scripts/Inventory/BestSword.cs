@@ -39,9 +39,6 @@ public class BestSword : Item
         return () =>
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEventItens>().InstantiateSword(GiveName());
-
-
-
         };
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 
 [ExecuteInEditMode]
 public class AiSensor : MonoBehaviour
@@ -38,7 +39,7 @@ public class AiSensor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<AiAgent>();
+        agent = transform.parent.gameObject.GetComponent<AiAgent>();
         maxSightDistance = agent.config.maxSightDistance;
         angle = agent.config.angle;
         height = agent.config.height;

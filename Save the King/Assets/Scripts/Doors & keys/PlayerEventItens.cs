@@ -45,6 +45,7 @@ public class PlayerEventItens : MonoBehaviour
 
     public LayerMask interactableLayer;
     private Inventory inventory;
+  
 
 
     void Awake()

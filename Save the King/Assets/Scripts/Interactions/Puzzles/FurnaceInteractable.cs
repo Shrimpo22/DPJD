@@ -19,6 +19,7 @@ public class FurnaceInteractable : CamInteractable
     public List<string> comidaTentativa = new List<string>();
     private Inventory i;
     private EnemyRecipeInteractable interacao;
+    private CamInteractable aaa;
     public override void Start()
     {
         base.Start();
@@ -48,6 +49,8 @@ public class FurnaceInteractable : CamInteractable
             if (comidaTentativa.Count == 5 && !isComplete)
             {
                 conf.SetActive(true);
+            }else{
+                conf.SetActive(false);
             }
         }
         
@@ -84,16 +87,18 @@ public class FurnaceInteractable : CamInteractable
     }
 
     public override void Interact(Inventory inv, PlayerEventItens playerItems)  {
+        
         base.Interact(inv, playerItems);
         inv.isLookingAtCook=true;
-        inv.OpenIt();
         aguaFerver.SetActive(true);
+        inv.OpenIt();
     }
     
     public void confirmado(){
         confirmd = true;
         interacao = GameObject.FindGameObjectWithTag("NPCVIBES").GetComponent<EnemyRecipeInteractable>();
         interacao.textoInteracaoCount +=1;
+        
     }
     
     public void undo(){

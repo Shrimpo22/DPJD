@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.EventSystems;
 using Cinemachine;
+using Unity.VisualScripting;
 public class Inventory : MonoBehaviour
 {
     [SerializeReference] public List<ItemSlotInfo> items = new List<ItemSlotInfo>();
@@ -73,7 +74,7 @@ public class Inventory : MonoBehaviour
         Debug.Log(itemsInDictionary);
 
         AddItem("Potions", 3);
-        //AddItem("GlassShard",4);
+      
         RefreshInventory();
 
 
@@ -91,7 +92,6 @@ public class Inventory : MonoBehaviour
         isZoomedIn = true;
         wasOpenByOtherEvent = true;
     }
-
     public void closeInventory()
     {
         GameObject m = GameObject.FindGameObjectWithTag("mousse");
@@ -169,6 +169,7 @@ public class Inventory : MonoBehaviour
             }
             else
             {
+                
                 openInventory();
             }
         }
@@ -187,7 +188,13 @@ public class Inventory : MonoBehaviour
         {
             if (wasOpenByOtherEvent)
             {
+                
+                
                 openInventory();
+            }
+            else
+            {
+                closeInventory();
             }
         }
     }

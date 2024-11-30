@@ -19,18 +19,18 @@ public class EnemyRecipeInteractable : CamInteractable
     public GameObject texto;
     public TMP_Text textInteraction;
     public int textoInteracaoCount = 1;
-    private int count = 0;
     public GameObject icon;
     public GameObject interact;
     
     public override void Start()
     {
         base.Start();
-        targetObject = GameObject.FindGameObjectWithTag("Target");
+        targetObject = GameObject.FindGameObjectWithTag("NPCVIBES");
     }
 
     void Update()
     {
+        
         if (isTalkingToNpc && Onetime == 0 && usedItem)
         {
             FurnaceInteractable cozinharScript = GameObject.FindGameObjectWithTag("furnalha").GetComponent<FurnaceInteractable>();
@@ -38,6 +38,7 @@ public class EnemyRecipeInteractable : CamInteractable
             {
                 inventory.GetComponent<Inventory>().AddItem("Potions", 2);
                 inventory.GetComponent<Inventory>().AddItem("KeyOfKitchen", 1);
+                
                 targetObject.tag="Untagged";
                 wrong = true;
             }
@@ -53,8 +54,13 @@ public class EnemyRecipeInteractable : CamInteractable
             {
                 inventory.GetComponent<Inventory>().AddItem("KeyOfKitchen", 1);
                 OnetimeV2 += 1;
+                Destroy(this);
             }
         }
+        if(usedItem == true){
+            icon.SetActive(false);
+        }
+        
         
     }
 
@@ -76,11 +82,12 @@ public class EnemyRecipeInteractable : CamInteractable
                 interact.SetActive(false);
                 
             }
+            targetObject.tag = "Target";
+            Destroy(interact);
             
         }
         
-        targetObject.tag = "Target";
-
+        
     }
 
     public override void Interact(Inventory inv, PlayerEventItens playerItems)
@@ -95,6 +102,7 @@ public class EnemyRecipeInteractable : CamInteractable
             icon.SetActive(false);
 
         }
+       
     }
 
     public void useItem()

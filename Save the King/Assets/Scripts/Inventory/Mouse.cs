@@ -68,7 +68,9 @@ public class Mouse : MonoBehaviour
         (item.GiveName().Contains("Item") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtCook == false) ||
         (item.GiveName().StartsWith("Plate") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtCook == false) ||
         (item.GiveName().StartsWith("Glass") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtMirror == false) ||
-        (item.GiveName().StartsWith("Plate") && GameObject.FindGameObjectWithTag("NPCVIBES").GetComponent<EnemyRecipeInteractable>().isTalkingToNpc == false)
+        (item.GiveName().StartsWith("Plate") && GameObject.FindGameObjectWithTag("NPCVIBES").GetComponent<EnemyRecipeInteractable>().isTalkingToNpc == false) ||
+        (item.GiveName().StartsWith("Potions") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtCook == true)||
+        (item.GiveName().Contains("Sword") && GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>().isLookingAtCook == true)
         )
         {
             

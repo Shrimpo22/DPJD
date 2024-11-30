@@ -10,6 +10,7 @@ public class BookInteractable : CamInteractable
     public GameObject textToRead;
     private EnemyRecipeInteractable targetInteraction;
     private int x;
+    
     public override void Start()
     {
         base.Start();
@@ -31,6 +32,7 @@ public class BookInteractable : CamInteractable
 
     public override void ExitCam()
     {
+        
         base.ExitCam();
         bookClose.SetActive(true);
         bookOpen.SetActive(false);
@@ -51,13 +53,21 @@ public class BookInteractable : CamInteractable
             myCamera.gameObject.SetActive(true);
             isLooking = true;
             textToRead.SetActive(true);
+           
         }
+        inv.closeInventory();
+        
     }
     void Update()
     {
+        
+        Inventory inven = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         if (targetInteraction != null)
         {
             x = targetInteraction.textoInteracaoCount;
+        }
+        if(isLooking){
+            inven.closeInventory();
         }
     }
 }

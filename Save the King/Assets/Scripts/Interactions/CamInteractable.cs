@@ -11,7 +11,8 @@ public class CamInteractable : Interactable
     protected GameObject player;
     public Camera myCamera;
     protected Camera mainCamera;
-
+    
+    
     public override void Start(){
         interactCanvas.gameObject.SetActive(false);
         myCamera.gameObject.SetActive(false);
@@ -27,8 +28,12 @@ public class CamInteractable : Interactable
     {
         controls = InputManager.inputActions;
         controls.Gameplay.Back.performed += ctx => HandleBack();
+        
+            
         controls.Gameplay.Inventory.performed += ctx => HandleInv();
-        controls.Gameplay.Interaction.performed += ctx => HandleInv();
+        controls.Gameplay.Interaction.performed += ctx => HandleInv(); 
+        
+        
 
         mainCamera.tag="Untagged";
         myCamera.tag="MainCamera";

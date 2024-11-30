@@ -9,6 +9,8 @@ public class FoodInteractable : Interactable
     private bool pickedUp = false;
     public AudioSource audioSource;
     public AudioClip eatSound;
+    public AudioClip grabSound;
+    public AudioSource audioSourcev2;
 
     public override void Start(){
         interactCanvas.gameObject.SetActive(false);
@@ -16,6 +18,11 @@ public class FoodInteractable : Interactable
             audioSource = gameObject.AddComponent<AudioSource>();
         if(eatSound == null){
             eatSound = Resources.Load<AudioClip>("Sounds/Gato");
+        }
+        if(audioSourcev2 == null)
+            audioSourcev2 = gameObject.AddComponent<AudioSource>();
+        if(eatSound == null){
+            grabSound = Resources.Load<AudioClip>("Sounds/Gato");
         }
     }
     
@@ -39,9 +46,9 @@ public class FoodInteractable : Interactable
             else{
                 inv.AddItem("Potions",1);
                 pickedUp = true;
-                audioSource.clip = eatSound;
-                audioSource.Play();
-                ClearAndDestroy(playerItems, eatSound.length);
+                audioSourcev2.clip = grabSound;
+                audioSourcev2.Play();
+                ClearAndDestroy(playerItems, grabSound.length);
             }
         }
     }

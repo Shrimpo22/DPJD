@@ -12,6 +12,9 @@ public class SceneState
     
     public List<GameObject> enemyStates;
 
+    public GameObject playerHUD;
+    public GameObject playerGO;
+
     public Inventory inv;
 }
 

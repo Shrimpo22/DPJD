@@ -57,53 +57,56 @@ public class DetectionArrow : MonoBehaviour
         {
             EnemyDetection enemy = entry.Key;
             GameObject arrow = entry.Value;
-
-            // Only update the arrow if the enemy is within detection distance
-            float distanceToPlayer = Vector3.Distance(player.position, enemy.enemyCenter.position);
-            if (distanceToPlayer <= detectionDistance)
-            {
-                arrow.SetActive(true);
-
-                // Calculate direction from camera to the enemy
-                Vector3 direction = (enemy.enemyCenter.position - Camera.main.transform.position).normalized;
-
-                // Get the camera's forward direction (ignoring Y-axis to maintain horizontal direction)
-                Vector3 cameraForward = Camera.main.transform.forward;
-                Vector3 cameraRight = Camera.main.transform.right;
-                cameraForward.y = 0; 
-                cameraRight.y = 0; 
-
-                Vector3 forwardDir = direction.x * cameraForward;
-                Vector3 rightDir = direction.z * cameraRight;
-
-                finalDir = forwardDir + rightDir;
-
-                arrowRectTransform = arrow.GetComponent<RectTransform>();
-
-                // Rotate the arrow to point towards the enemy
-                float angle = Mathf.Atan2(finalDir.x, finalDir.z) * Mathf.Rad2Deg;
-                Quaternion targetRotation = Quaternion.Euler(0, 0, angle - 90);
-
-                // Smooth the rotation of the arrow
-                arrowRectTransform.rotation = Quaternion.Slerp(arrowRectTransform.rotation, targetRotation, Time.deltaTime * smoothingFactor);
-
-                Transform childTransform = arrow.transform.Find("DetectionArrow"); // Replace "ChildName" with the actual name of the child
-                if (childTransform != null)
+            if (enemy != null) {
+                // Only update the arrow if the enemy is within detection distance
+                float distanceToPlayer = Vector3.Distance(player.position, enemy.enemyCenter.position) ;
+                if (distanceToPlayer <= detectionDistance)
                 {
-                    Image img = childTransform.GetComponent<Image>();
-                    if (img != null)
-                    {
-                        img.fillAmount = enemy.agent.alertState;
-                    }
+                    arrow.SetActive(true);
 
-                    if(img.fillAmount < 1f){
-                        img.color = Color.white;
+                    // Calculate direction from camera to the enemy
+                    Vector3 direction = (enemy.enemyCenter.position - Camera.main.transform.position).normalized;
+
+                    // Get the camera's forward direction (ignoring Y-axis to maintain horizontal direction)
+                    Vector3 cameraForward = Camera.main.transform.forward;
+                    Vector3 cameraRight = Camera.main.transform.right;
+                    cameraForward.y = 0; 
+                    cameraRight.y = 0; 
+
+                    Vector3 forwardDir = direction.x * cameraForward;
+                    Vector3 rightDir = direction.z * cameraRight;
+
+                    finalDir = forwardDir + rightDir;
+
+                    arrowRectTransform = arrow.GetComponent<RectTransform>();
+
+                    // Rotate the arrow to point towards the enemy
+                    float angle = Mathf.Atan2(finalDir.x, finalDir.z) * Mathf.Rad2Deg;
+                    Quaternion targetRotation = Quaternion.Euler(0, 0, angle - 90);
+
+                    // Smooth the rotation of the arrow
+                    arrowRectTransform.rotation = Quaternion.Slerp(arrowRectTransform.rotation, targetRotation, Time.deltaTime * smoothingFactor);
+
+                    Transform childTransform = arrow.transform.Find("DetectionArrow"); // Replace "ChildName" with the actual name of the child
+                    if (childTransform != null)
+                    {
+                        Image img = childTransform.GetComponent<Image>();
+                        if (img != null)
+                        {
+                            img.fillAmount = enemy.agent.alertState;
+                        }
+
+                        if(img.fillAmount < 1f){
+                            img.color = Color.white;
+                        }
                     }
                 }
-            }
-            else
-            {
-                arrow.SetActive(false);  // Hide the arrow if the enemy is too far
+                else
+                {
+                    arrow.SetActive(false);  // Hide the arrow if the enemy is too far
+                }
+            } else {
+                arrow.SetActive(false);
             }
         }
     }

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public GameObject player;
-    public GameObject inventory;
+    public GameObject playerHUD;
     
     // Store player data like position and scene state
     public Dictionary<string, SceneState> sceneStates = new();
@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject); // Make sure this persists between scenes
             DontDestroyOnLoad(player);
+            DontDestroyOnLoad(playerHUD);
    
         }
         else
@@ -34,8 +35,9 @@ public class GameManager : MonoBehaviour
         string currentScene = SceneManager.GetActiveScene().name;
         SceneState state = new()
         {
-            playerLastPosition = player.transform
+            playerLastPosition = player.transform,
             // Add more state data as needed
+            //playerGO = player, // save player gameobject;
             // inventory
             // enemies dead
             // puzzles done
@@ -50,9 +52,13 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
-
+        GameObject spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
         // After scene load, position the player at the spawn point
-        transform.position = playerSpawnPosition;
+        CharacterController controller = GetComponent<CharacterController>();
+        controller.enabled = false; // Disable temporarily to prevent conflicts
+        player.transform.position = spawnPoint.transform.position;
+        controller.enabled = true;
+        Debug.Log("spawned at : " + player.transform.position);
 
         // If this scene was visited before, restore its state
         if (Instance.sceneStates.ContainsKey(sceneName))

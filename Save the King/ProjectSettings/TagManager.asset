@@ -41,6 +41,7 @@ TagManager:
   - book
   - Wood
   - NextScene
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

@@ -42,6 +42,10 @@ TagManager:
   - Wood
   - NextScene
   - SpawnPoint
+  - SpawnPointBanquet
+  - SpawnPointCozinha
+  - SpawnPointLibrary
+  - SpawnPointMasmorra_Hi-Fi
   layers:
   - Default
   - TransparentFX

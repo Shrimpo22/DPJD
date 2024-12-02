@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cozinha.unity
     guid: 7352597f5a9ffd949a49b2019d4e6888
+  - enabled: 1
+    path: Assets/Scenes/Library.unity
+    guid: d85c4db235a68bc4abab47ec9268044c
+  - enabled: 1
+    path: Assets/Scenes/Chapel.unity
+    guid: 20bb93af0177a3f4984337f0bdf0a443
   m_configObjects: {}

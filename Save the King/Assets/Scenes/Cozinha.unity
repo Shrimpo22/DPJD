@@ -5115,7 +5115,7 @@ GameObject:
   - component: {fileID: 946995133}
   - component: {fileID: 946995132}
   m_Layer: 0
-  m_Name: DOOR
+  m_Name: DoorToLibrary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5148,8 +5148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c42601c6ddc7994abf6e10ea17ce0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetScene: Banquet
-  targetPosition: {x: 2, y: 2, z: 1}
+  targetScene: Library
 --- !u!65 &946995133
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7166,6 +7165,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f452a05303b3022409c6a95e1782f3d9, type: 3}
+--- !u!1 &1531821047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1531821048}
+  m_Layer: 0
+  m_Name: Respawn
+  m_TagString: SpawnPointCozinha
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1531821048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531821047}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.79, y: 0.19, z: 3.986}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1611004031 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4278033525732127015, guid: 2173768536198da41894fcce55d04b8f, type: 3}
@@ -9262,37 +9292,6 @@ MonoBehaviour:
   soundClip: {fileID: 8300000, guid: 9829d1927bad73c418650cbc12c8c965, type: 3}
   minInterval: 3
   maxInterval: 8
---- !u!1 &2138150210
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2138150211}
-  m_Layer: 0
-  m_Name: SpawnPoint
-  m_TagString: SpawnPoint
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2138150211
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138150210}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.239, y: 0.424, z: -4.107672}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2140352714 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 888ce82c0af2ab0499d39c93fb0f4ce4, type: 3}
@@ -9543,4 +9542,4 @@ SceneRoots:
   - {fileID: 1520248027}
   - {fileID: 192167479}
   - {fileID: 155965502}
-  - {fileID: 2138150211}
+  - {fileID: 1531821048}

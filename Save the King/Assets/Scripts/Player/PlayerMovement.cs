@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Crouch.performed += ctx => HandleCrouch();
         controls.Gameplay.Sprint.performed += ctx => { isSprinting = true; targetSpeed = 6f; };
         controls.Gameplay.Sprint.canceled += ctx => { isSprinting = false; targetSpeed = 4.25f; };
-        controls.Gameplay.Dodging.performed += ctx => animator.SetTrigger("Dodge");
+        controls.Gameplay.Dodging.performed += ctx => { if(CanDodge()) animator.SetTrigger("Dodge"); };
     }
 
     void OnEnable()
@@ -97,6 +97,13 @@ public class PlayerMovement : MonoBehaviour
     void OnDisable()
     {
         //controls.Gameplay.Disable();
+    }
+
+    public bool CanDodge()
+    {
+        Debug.Log("POSSO DODGEAR??");
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0); 
+        return stateInfo.IsName("Movement");
     }
 
     public void EnableCollider()

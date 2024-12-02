@@ -13,6 +13,7 @@ public class BookInteractable : CamInteractable
     
     public override void Start()
     {
+        InvToOpen = false;
         base.Start();
         GameObject targetObject = GameObject.FindGameObjectWithTag("NPCVIBES");
         if (targetObject != null)
@@ -55,7 +56,8 @@ public class BookInteractable : CamInteractable
             textToRead.SetActive(true);
            
         }
-        inv.closeInventory();
+        
+        
         
     }
     void Update()

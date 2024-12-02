@@ -22,6 +22,7 @@ public class FurnaceInteractable : CamInteractable
     private CamInteractable aaa;
     public override void Start()
     {
+        InvToOpen = true;
         base.Start();
         i = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         comidaCorreta.Add("BlueItem");
@@ -91,14 +92,14 @@ public class FurnaceInteractable : CamInteractable
         base.Interact(inv, playerItems);
         inv.isLookingAtCook=true;
         aguaFerver.SetActive(true);
-        inv.OpenIt();
+        
     }
     
     public void confirmado(){
         confirmd = true;
         interacao = GameObject.FindGameObjectWithTag("NPCVIBES").GetComponent<EnemyRecipeInteractable>();
         interacao.textoInteracaoCount +=1;
-        
+        interacao.InvToOpen = true;
     }
     
     public void undo(){

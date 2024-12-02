@@ -24,6 +24,7 @@ public class EnemyRecipeInteractable : CamInteractable
     
     public override void Start()
     {
+        InvToOpen = false;
         base.Start();
         targetObject = GameObject.FindGameObjectWithTag("NPCVIBES");
     }
@@ -41,6 +42,7 @@ public class EnemyRecipeInteractable : CamInteractable
                 
                 targetObject.tag="Untagged";
                 wrong = true;
+                
             }
 
             Onetime += 1;
@@ -54,7 +56,7 @@ public class EnemyRecipeInteractable : CamInteractable
             {
                 inventory.GetComponent<Inventory>().AddItem("KeyOfKitchen", 1);
                 OnetimeV2 += 1;
-                Destroy(this);
+                
             }
         }
         if(usedItem == true){
@@ -79,11 +81,11 @@ public class EnemyRecipeInteractable : CamInteractable
                 if(script is AiAgent aiAgent) aiAgent.isNpc = false;
                 script.enabled = true;
                 fighting = true;
-                interact.SetActive(false);
+                
                 
             }
             targetObject.tag = "Target";
-            Destroy(interact);
+            
             
         }
         
@@ -92,6 +94,7 @@ public class EnemyRecipeInteractable : CamInteractable
 
     public override void Interact(Inventory inv, PlayerEventItens playerItems)
     {
+
         base.Interact(inv, playerItems);
         inv.isLookingAtCook = true;
         isTalkingToNpc = true;
@@ -108,5 +111,6 @@ public class EnemyRecipeInteractable : CamInteractable
     public void useItem()
     {
         usedItem = true;
+        gameObject.layer=0;
     }
 }

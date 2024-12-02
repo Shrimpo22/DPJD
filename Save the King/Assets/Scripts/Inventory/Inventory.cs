@@ -140,7 +140,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void openInventory()
+    public void openInventory()
     {
         Mouse.SetActive(true);
         inInventory = true;

@@ -12,7 +12,7 @@ public class CamInteractable : Interactable
     public Camera myCamera;
     protected Camera mainCamera;
     
-    
+    public bool InvToOpen = true;
     public override void Start(){
         interactCanvas.gameObject.SetActive(false);
         myCamera.gameObject.SetActive(false);
@@ -29,12 +29,11 @@ public class CamInteractable : Interactable
         controls = InputManager.inputActions;
         controls.Gameplay.Back.performed += ctx => HandleBack();
         
-            
-        controls.Gameplay.Inventory.performed += ctx => HandleInv();
-        controls.Gameplay.Interaction.performed += ctx => HandleInv(); 
-        
-        
-
+        if(InvToOpen == true){
+            inv.openInventory();
+        }else{
+            inv.closeInventory();
+        }
         mainCamera.tag="Untagged";
         myCamera.tag="MainCamera";
         player.SetActive(false);
@@ -42,8 +41,6 @@ public class CamInteractable : Interactable
         myCamera.gameObject.SetActive(true);
         isLooking=true;
         interactCanvas.gameObject.SetActive(false);  
-        
-
     }
 
     public virtual void ExitCam(){

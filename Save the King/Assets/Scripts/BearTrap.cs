@@ -25,8 +25,9 @@ public class BearTrap : MonoBehaviour
 
         Debug.Log("collided " + other.tag);
         // Check if the player enters the collider (assuming the player has a "Player" tag)
-        if (other.CompareTag("Player") && !isTriggered)
+        if (other.CompareTag("Player") && !isTriggered && this.transform.position.y <0.3f)
         {
+
             // Trigger the "CloseTrap" animation
             trapAnimator.SetTrigger("CloseTrap");
 

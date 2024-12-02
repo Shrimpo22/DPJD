@@ -31,11 +31,12 @@ public class AiAttackState : AiState
         if(stateInfo.IsName("Attack") && distanceToPlayer < agent.config.stoppingDistance)
         {
             agent.navMeshAgent.speed = 0f;
-            animator.SetTrigger("Attack");
+            ChooseAttack();
+            
         }
         if(!(stateInfo.IsName("EnemyGetHit") || stateInfo.IsName("Attack")) && !(stateInfoNext.IsName("EnemyGetHit") || stateInfoNext.IsName("Attack") || stateInfo.IsName("Attack2"))){
             animator.ResetTrigger("Attack");
-            animator.ResetTrigger("Attack2");
+            animator.ResetTrigger("Throw");
 
             if(distanceToPlayer > agent.config.stoppingDistance && !(stateInfo.IsName("EnemyGetHit") || stateInfo.IsName("Attack") || stateInfo.IsName("Attack2"))){
                 agent.navMeshAgent.speed = agent.config.speed;
@@ -45,11 +46,23 @@ public class AiAttackState : AiState
                     agent.stateMachine.ChangeState(AiStateId.LookForPlayer); 
             }else{
                 agent.navMeshAgent.speed = 0;
-                animator.SetTrigger("Attack");
+                ChooseAttack();
             }       
         }else{
             agent.navMeshAgent.speed = 0;
         }
+    }
 
+    public void ChooseAttack()
+    {
+        float random = Random.Range(0f, 1f);
+        if (random < 0.7)
+        {
+            animator.SetTrigger("Attack");
+        }
+        else
+        {
+            animator.SetTrigger("Throw");
+        }
     }
 }

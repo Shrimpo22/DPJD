@@ -84,7 +84,7 @@ public class Inventory : MonoBehaviour
     {
         controls = InputManager.inputActions;
         controls.Gameplay.Inventory.performed += ctx => HandleInventory();
-        controls.Gameplay.Back.performed += ctx => HandleClosing();
+        controls.Gameplay.Back.canceled += ctx => HandleClosing();
     }
 
     public void OpenIt()

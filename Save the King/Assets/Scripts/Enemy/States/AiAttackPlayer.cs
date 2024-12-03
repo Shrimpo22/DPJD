@@ -34,11 +34,11 @@ public class AiAttackState : AiState
             ChooseAttack();
             
         }
-        if(!(stateInfo.IsName("EnemyGetHit") || stateInfo.IsName("Attack")) && !(stateInfoNext.IsName("EnemyGetHit") || stateInfoNext.IsName("Attack") || stateInfo.IsName("Attack2"))){
+        if(!(stateInfo.IsName("EnemyGetHit") || stateInfo.IsName("Attack")) && !(stateInfoNext.IsName("EnemyGetHit") || stateInfoNext.IsName("Attack"))){
             animator.ResetTrigger("Attack");
             animator.ResetTrigger("Throw");
 
-            if(distanceToPlayer > agent.config.stoppingDistance && !(stateInfo.IsName("EnemyGetHit") || stateInfo.IsName("Attack") || stateInfo.IsName("Attack2"))){
+            if(distanceToPlayer > agent.config.stoppingDistance && !(stateInfo.IsName("EnemyGetHit") || stateInfo.IsName("Attack"))){
                 agent.navMeshAgent.speed = agent.config.speed;
                 if(agent.sensor.Objects.Count > 0)
                     agent.stateMachine.ChangeState(AiStateId.ChasePlayer);
@@ -56,7 +56,7 @@ public class AiAttackState : AiState
     public void ChooseAttack()
     {
         float random = Random.Range(0f, 1f);
-        if (random < 0.7)
+        if (random < 0.1)
         {
             animator.SetTrigger("Attack");
         }

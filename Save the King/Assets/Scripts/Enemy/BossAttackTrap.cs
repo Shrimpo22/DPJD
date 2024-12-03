@@ -7,7 +7,7 @@ public class BossAttackTrap : MonoBehaviour
     public GameObject bearTrap;
     public Transform trapSpawnPoint;
     public Transform groundTarget;
-    public float launchForce = 10f;
+    public float launchForce = 5f;
     public Rigidbody rb;
     private GameObject currentTrap; 
 
@@ -35,19 +35,22 @@ public class BossAttackTrap : MonoBehaviour
         currentTrap.SetActive(true);
         currentTrap.transform.position = trapSpawnPoint.position;
         currentTrap.transform.rotation = trapSpawnPoint.rotation;
-        currentTrap.GetComponentInChildren<Collider>().enabled = false;
+        currentTrap.transform.parent = trapSpawnPoint;
+        currentTrap.transform.Find("beartrappainted/Cylinder").GetComponent<Collider>().enabled = false;
+        currentTrap.GetComponent<Collider>().enabled = false;
     }
 
     public void LaunchTrap()
     {
         currentTrap.transform.parent = null;
-        currentTrap.GetComponentInChildren<Collider>().enabled = true;
+        currentTrap.transform.Find("beartrappainted/Cylinder").GetComponent<Collider>().enabled = true;
+        currentTrap.GetComponent<Collider>().enabled = true;
 
         rb.isKinematic = false;
 
         // Calcula a direção do lançamento
         Vector3 direction = (groundTarget.position - trapSpawnPoint.position).normalized;
-        Vector3 launchDirection = direction + Vector3.up * 0.5f;
+        Vector3 launchDirection = direction + Vector3.up * 0.3f;
         rb.AddForce(launchDirection * launchForce, ForceMode.Impulse);
 
     }

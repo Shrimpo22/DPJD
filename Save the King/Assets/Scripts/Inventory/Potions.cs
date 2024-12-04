@@ -45,7 +45,7 @@ public class Potions : Item
                 audioSource.clip = clip;
                 audioSource.Play();
                 GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
-                inventory.GetComponent<Inventory>().DropItemByName(GiveName());
+                
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
 
@@ -58,6 +58,7 @@ public class Potions : Item
                             playerHealth.currentHealth + Stats(), 
                             playerHealth.maxHealth
                         );
+                        inventory.GetComponent<Inventory>().DropItemByName(GiveName());
                     }
                 }
                 else

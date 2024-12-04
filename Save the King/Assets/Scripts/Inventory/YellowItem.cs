@@ -40,6 +40,7 @@ public class YellowItem : Item
             if (cozinharScript != null)
             {
                 cozinharScript.comidaTentativa.Add(GiveName());
+                cozinharScript.AddItemToImage("YellowItem");
                 Debug.Log(GiveName() + " added to tentativa list.");
             }
             else

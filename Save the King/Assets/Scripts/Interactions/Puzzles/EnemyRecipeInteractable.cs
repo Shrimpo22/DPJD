@@ -51,7 +51,6 @@ public class EnemyRecipeInteractable : CamInteractable
         if (fighting && mainCamera.gameObject.activeSelf)
         {
             AiAgent aiAgent = Inimigo.GetComponent<AiAgent>();
-            // Verifica se o componente AiAgent está ativo antes de entrar no if
             if (aiAgent != null && aiAgent.enabled && aiAgent.currentHealth <= 0 && OnetimeV2 == 0 && aiAgent.maxHealth == 60)
             {
                 inventory.GetComponent<Inventory>().AddItem("KeyOfKitchen", 1);
@@ -59,9 +58,7 @@ public class EnemyRecipeInteractable : CamInteractable
                 
             }
         }
-        if(usedItem == true){
-            icon.SetActive(false);
-        }
+        
         
         
     }
@@ -70,7 +67,7 @@ public class EnemyRecipeInteractable : CamInteractable
     {
         base.ExitCam();
         isTalkingToNpc = false;
-        inventory.GetComponent<Inventory>().isLookingAtCook = false;
+    
         texto.SetActive(false);
 
         if (usedItem && !wrong && Inimigo != null)
@@ -96,7 +93,7 @@ public class EnemyRecipeInteractable : CamInteractable
     {
 
         base.Interact(inv, playerItems);
-        inv.isLookingAtCook = true;
+    
         isTalkingToNpc = true;
         if (textoInteracaoCount == 1)
         {
@@ -112,5 +109,6 @@ public class EnemyRecipeInteractable : CamInteractable
     {
         usedItem = true;
         gameObject.layer=0;
+        icon.SetActive(false);
     }
 }

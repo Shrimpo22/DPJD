@@ -41,6 +41,7 @@ public class RedItem : Item
             if (cozinharScript != null)
             {
                 cozinharScript.comidaTentativa.Add(GiveName());
+                cozinharScript.AddItemToImage("RedItem");
                 Debug.Log(GiveName() + " added to tentativa list.");
             }
             else

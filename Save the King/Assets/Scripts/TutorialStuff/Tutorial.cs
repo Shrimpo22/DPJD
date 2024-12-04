@@ -10,13 +10,15 @@ public class Tutorial : MonoBehaviour
         public GameObject text; 
         public AudioSource audioSource;
         public bool hasPlayed=false;
+        public float time = 5f;
         
         public AudioClip soundquest;  
         void Start(){
         if(audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
-        if(soundquest == null)
-            soundquest = Resources.Load<AudioClip>("Sounds/Puma");
+        if(time<3) {
+            time = 5;
+        }
         }
        
         private void OnTriggerEnter(Collider other) {
@@ -29,15 +31,22 @@ public class Tutorial : MonoBehaviour
         }
 
         private IEnumerator Quest_start(){
-            audioSource.clip = soundquest;
-            audioSource.Play();
+        if(!hasPlayed)
+        {
+            if(soundquest != null){
+                audioSource.clip = soundquest;
+                audioSource.Play();
+            }
             quest.SetActive(true);
-            quest.GetComponent<Animation>().Play("ObjectiveDisplayAnimation");
-            text.GetComponent<Text>().text = "Leave the Cell";
-            yield return new WaitForSeconds(5f);
+            quest.GetComponent<Animation>().Play();
+            hasPlayed = true;
+        }
+            yield return new WaitForSeconds(time);
             
             text.GetComponent<Text>().text = "";
             quest.SetActive(false);
             quest.SetActive(false );
-        }
+            Destroy(quest.gameObject);
+            Destroy(gameObject);
+        }   
     }

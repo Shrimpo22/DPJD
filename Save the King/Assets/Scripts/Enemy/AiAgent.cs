@@ -33,6 +33,7 @@ public class AiAgent : MonoBehaviour
     Collider collid;
 
     public bool canChangeState = true;
+    public bool isDead = false;
 
     [SerializeField]UIHealthBar healthBar;
 
@@ -123,7 +124,8 @@ public class AiAgent : MonoBehaviour
             SetAlertState(1.2f);
             stateMachine.ChangeState(AiStateId.ChasePlayer);
         }
-        if(currentHealth <= 0.0f){
+        if(currentHealth <= 0.0f){ 
+            isDead = true;
             animator.Play("FallingDeath");
             healthBar.gameObject.SetActive(false);
             collid.enabled = false;
@@ -131,6 +133,45 @@ public class AiAgent : MonoBehaviour
             stateMachine.ChangeState(AiStateId.Death);
         }
     }
+
+    public void Reset() {
+        currentHealth = maxHealth;
+        healthBar.gameObject.SetActive(true);
+        if (healthBar) {
+            healthBar.SetHealthBarPercentage(1);
+        }
+        collid.enabled = true;
+        sensor.enabled = true;
+        SetAlertState(0);
+        stateMachine.ChangeState(AiStateId.Idle);
+        animator.Play("Movement");
+    }
+
+    public void RestoreState(Vector3 savedPosition, Quaternion savedRotation, bool dead)
+{
+    navMeshAgent.Warp(savedPosition);
+    transform.rotation = savedRotation;
+
+    currentHealth = maxHealth;
+    healthBar.SetHealthBarPercentage(1);
+    alertState = 0;
+    canChangeState = true;
+
+    stateMachine.ChangeState(initialState);
+    if (dead)
+    {
+        healthBar.gameObject.SetActive(false);
+    }
+    else 
+    {
+        healthBar.gameObject.SetActive(true);
+    }
+    healthBar.gameObject.SetActive(true);     
+    collid.enabled = true;
+    sensor.enabled = true;
+
+    Debug.Log($"{gameObject.name} restored to position {savedPosition} and rotation {savedRotation}");
+}
     
     public void EnableCollider(){
         weapon.EnableCollider();

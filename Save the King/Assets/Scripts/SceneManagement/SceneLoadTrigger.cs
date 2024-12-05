@@ -44,6 +44,7 @@ public class SceneLoadTrigger : MonoBehaviour
             if (!isSceneLoaded)
             {
                 SceneManager.LoadSceneAsync(_scenesToLoad[i], LoadSceneMode.Additive);
+                RestoreSceneState(_scenesToLoad[i]);
             }
         }
     }
@@ -57,6 +58,7 @@ public class SceneLoadTrigger : MonoBehaviour
                 Scene loadedScene = SceneManager.GetSceneAt(j);
                 if (loadedScene.name == _scenesToUnload[i].SceneName)
                 {
+                    Debug.Log("unnloading " + loadedScene.name);
                     SceneManager.UnloadSceneAsync(_scenesToUnload[i]);
                 }
             }
@@ -81,13 +83,16 @@ public class SceneLoadTrigger : MonoBehaviour
             {
                     EnemyDataState enemyState = new()
                     {
-                        enemyName = enemyData.enemyPrefab.name,
                         position = enemyData.enemyPrefab.transform.position,
                         rotation = enemyData.enemyPrefab.transform.rotation,
-                        isDead = enemyData.enemyPrefab.GetComponent<AiAgent>().isDead  // Assuming the AiAgent has an isDead property
+                        enemyObject = enemyData.enemyPrefab // Save reference to the actual GameObject
                     };
                     sceneState.enemyDataStates.Add(enemyState);
             }
+        }
+        else
+        {
+            Debug.Log("There is no Enemy Manager...");
         }
 
     // Save the state of all interactable objects by position
@@ -118,19 +123,14 @@ public class SceneLoadTrigger : MonoBehaviour
         EnemyManager enemyManager = FindObjectOfType<EnemyManager>();
         if (enemyManager != null)
         {
-            foreach (EnemyDataState enemyState in sceneState.enemyDataStates)
+            for (int i = 0; i < enemyManager.enemies.Count; i++)
             {
-                foreach (var enemyData in enemyManager.enemies)
-                {
-                    if (enemyData.enemyPrefab.name == enemyState.enemyName)
-                    {
-                        enemyData.navMeshAgent.Warp(enemyState.position);  // Restore position
-                        enemyData.enemyPrefab.transform.rotation = enemyState.rotation;  // Restore rotation
+                var enemyData = enemyManager.enemies[i];
+                var enemyState = sceneState.enemyDataStates[i];
 
-                        // Restore other enemy states, like health or dead state
-                        enemyData.enemyPrefab.GetComponent<AiAgent>().isDead = enemyState.isDead;
-                    }
-                }
+                // Invoke a method in the AiAgent to restore its internal state
+                enemyData.enemyPrefab.GetComponent<AiAgent>().RestoreState(enemyState.position, enemyState.rotation, enemyData.enemyPrefab.GetComponent<AiAgent>().isDead);
+
             }
         }
 

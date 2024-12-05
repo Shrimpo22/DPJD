@@ -3,10 +3,9 @@ using UnityEngine;
 
 public class EnemyDataState
 {
-    public string enemyName;
-    public Vector3 position;
-    public Quaternion rotation;
-    public bool isDead;   // Store if the enemy is dead or not (if applicable)
+    public Vector3 position;          // Current position of the enemy
+    public Quaternion rotation;       // Current rotation of the enemy
+    public GameObject enemyObject;    // Reference to the actual enemy GameObject
 }
 
 public class GameObjectState

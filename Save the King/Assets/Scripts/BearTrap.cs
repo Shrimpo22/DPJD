@@ -25,8 +25,9 @@ public class BearTrap : MonoBehaviour
 
         Debug.Log("collided " + other.tag);
         // Check if the player enters the collider (assuming the player has a "Player" tag)
-        if (other.CompareTag("Player") && !isTriggered)
+        if (other.CompareTag("Player") && !isTriggered && this.transform.position.y <0.3f)
         {
+
             // Trigger the "CloseTrap" animation
             trapAnimator.SetTrigger("CloseTrap");
 
@@ -60,13 +61,19 @@ public class BearTrap : MonoBehaviour
     {
         Debug.Log("is trapped? " + playerMovement.isTrapped);
         // Aplica dano enquanto o jogador estiver preso
-        while (playerMovement.isTrapped == true)
+        while (playerMovement.isTrapped == true && playerHealth.currentHealth > 0)
         {
             Debug.Log("taking damage");
             playerHealth.currentHealth -= bleedingDamage; // Caso nao queiramos animacao de takedamage()
+            if (playerHealth.currentHealth <= 0)
+            {
+                playerHealth.TakeDamage(bleedingDamage);
+            }
             //playerHealth.TakeDamage(bleedingDamage); // Causa dano de sangramento
             yield return new WaitForSeconds(bleedingInterval); // Espera pelo próximo tic de sangramento
         }
+
+        
 
     } 
 }

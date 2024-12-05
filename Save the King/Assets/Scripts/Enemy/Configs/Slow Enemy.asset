@@ -20,6 +20,6 @@ MonoBehaviour:
   stoppingDistance: 2
   alertRate: 0.2
   powerAmount: 0.3
-  maxHealth: 100
+  maxHealth: 10000
   patrolInterval: 10
   patrolSpeed: 2

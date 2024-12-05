@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c38acebd0518ca469ca47fffb748da8, type: 3}
+  m_Name: BossSounds
+  m_EditorClassIdentifier: 
+  walkSound: {fileID: 8300000, guid: 0912a19aa98c6e34d94ea7ec7255e9b8, type: 3}
+  hitSound: {fileID: 8300000, guid: 3143f34320e8cb4489743fc1c2a24057, type: 3}
+  deathSound: {fileID: 8300000, guid: b8416baa60a29c34ebe08cf92ddb94da, type: 3}
+  swingSound: {fileID: 8300000, guid: f109366db772f7941b104264516c054b, type: 3}
+  swingSound2: {fileID: 8300000, guid: ed710b8e3b55d6245a9ce651d85bd983, type: 3}
+  attack1: {fileID: 8300000, guid: 6b5ecfc324dc6344686481b1ddc14d89, type: 3}
+  attack2: {fileID: 8300000, guid: 5e3771bfac0fe71468ecfe2b6947c0f2, type: 3}
+  attack3: {fileID: 8300000, guid: 49cbd7fd238166640909d38aa35e0118, type: 3}
+  playerSwordGrunt: {fileID: 8300000, guid: 6f0291e7b4c8be74f84b96ecde02400f, type: 3}
+  throwGruntSound: {fileID: 8300000, guid: 2b40ff2db3a2c974baf7eff72008a259, type: 3}

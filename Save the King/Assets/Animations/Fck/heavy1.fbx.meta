@@ -60,6 +60,13 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.23616236
+        functionName: PlayM2Sound
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.26636222
         functionName: EnableCollider
         data: 
@@ -69,6 +76,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.44901058
         functionName: DisableCollider
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.21348311
+        functionName: PlayPlayerAttackGruntSoundM2
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

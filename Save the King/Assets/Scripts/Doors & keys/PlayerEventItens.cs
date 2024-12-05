@@ -68,7 +68,7 @@ public class PlayerEventItens : MonoBehaviour
                 Debug.Log("Alo");
                 aux.ExitCam();
             }
-            else if(closestInteractable.tag != "Target")
+            else if (closestInteractable.tag != "Target")
             {
                 closestInteractable.Interact(inventory, this);
             }

@@ -6444,7 +6444,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5716834513086444402
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8554,6 +8554,7 @@ MonoBehaviour:
   normalizedDirection: {x: 0, y: 0, z: 0}
   finalDir: {x: 0, y: 0, z: 0}
   arrowRectTransform: {fileID: 0}
+  counter: 0
 --- !u!114 &7248407239116058505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8569,8 +8570,7 @@ MonoBehaviour:
   _inputActions: {fileID: -944628639613478452, guid: 73a67d875e4ec474f9af9f675e97ae0b, type: 3}
   pauseMenuUI: {fileID: 1341205261529077988}
   settingsMenuUI: {fileID: 6294674626513386350}
-  xAxis: {fileID: 0}
-  yAxis: {fileID: 0}
+  mouseSlider: {fileID: 0}
   cam: {fileID: 0}
   inv: {fileID: 3393511406575772429}
   myMixer: {fileID: 24100000, guid: 2c9415e2863c0c94fb7c438071f3c24c, type: 2}

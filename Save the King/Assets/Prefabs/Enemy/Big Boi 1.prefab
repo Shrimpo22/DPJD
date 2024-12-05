@@ -1573,6 +1573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64990a8d15ab514dafdcc33710b1a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isNpc: 0
   drawAlertState: 0
   initialState: 2
   navMeshAgent: {fileID: 0}
@@ -1725,13 +1726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e0ccdd7ad2e75d47b87d94413e282dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSwordGrunt: {fileID: 8300000, guid: 6f0291e7b4c8be74f84b96ecde02400f, type: 3}
-  enemyAttackSound: {fileID: 8300000, guid: ca114f606b5b4da4c82b5735cea9ce22, type: 3}
-  enemyAttackSound2: {fileID: 8300000, guid: ea5e63e4f816c824babf15f49e87d59f, type: 3}
-  walk: {fileID: 8300000, guid: 0912a19aa98c6e34d94ea7ec7255e9b8, type: 3}
-  bigboiGetHit: {fileID: 8300000, guid: 294f1ffe3d3bc8042a4e0aa4b7dbb1d9, type: 3}
-  death: {fileID: 8300000, guid: 08d7ba4c7c1383847ac345bc6fe37688, type: 3}
-  enemySwing: {fileID: 8300000, guid: 6db840a1d9faf4f48a8897ffb2584331, type: 3}
+  audioConfig: {fileID: 11400000, guid: 408865a4d574382419b46f2411bc3a03, type: 2}
 --- !u!82 &8084745619858206520
 AudioSource:
   m_ObjectHideFlags: 0

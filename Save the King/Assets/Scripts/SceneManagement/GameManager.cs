@@ -4,18 +4,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager instance;
     public GameObject player;
     public GameObject playerHUD;
+    public Transform respawnPoint;
+    public EnemyManager currentEnemyManager;
 
-    // Store player data like position and scene state
-    public Dictionary<string, SceneState> savedSceneStates  = new();
 
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
             DontDestroyOnLoad(player);
             DontDestroyOnLoad(playerHUD);
@@ -27,19 +27,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SaveSceneState(string sceneName, SceneState sceneState)
-    {
-        savedSceneStates[sceneName] = sceneState;
-    }
 
-    public SceneState LoadSceneState(string sceneName)
-    {
-        if (savedSceneStates.ContainsKey(sceneName))
-        {
-            return savedSceneStates[sceneName];
-        }
-        return null;
-    }
 
 }
 

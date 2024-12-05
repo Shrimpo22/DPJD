@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     public class EnemyData
     {
-        public GameObject enemyPrefab;      // Prefab reference
+        public GameObject enemyObject;      // Prefab reference
         public Vector3 initialPosition;     // Initial position of the enemy
         public Quaternion initialRotation;  // Initial rotation
         public NavMeshAgent navMeshAgent;   // Reference to the NavMeshAgent
@@ -26,7 +26,7 @@ public class EnemyManager : MonoBehaviour
 
             EnemyData data = new()
             {
-                enemyPrefab = enemy.gameObject,
+                enemyObject = enemy.gameObject,
                 initialPosition = enemy.position,    // Save the initial position
                 initialRotation = enemy.rotation,    // Save the initial rotation
                 navMeshAgent = agent
@@ -42,10 +42,10 @@ public class EnemyManager : MonoBehaviour
         {
             // Reset the position and rotation of each enemy
             data.navMeshAgent.Warp(data.initialPosition);
-            data.enemyPrefab.transform.rotation = data.initialRotation;
+            data.enemyObject.transform.rotation = data.initialRotation;
 
             // Reset any other components (e.g., AI state, health, etc.)
-            data.enemyPrefab.GetComponent<AiAgent>().Reset();
+            data.enemyObject.GetComponent<AiAgent>().Reset();
         }
     }
 }

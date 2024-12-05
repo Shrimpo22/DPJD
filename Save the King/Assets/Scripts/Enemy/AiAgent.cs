@@ -146,32 +146,6 @@ public class AiAgent : MonoBehaviour
         stateMachine.ChangeState(AiStateId.Idle);
         animator.Play("Movement");
     }
-
-    public void RestoreState(Vector3 savedPosition, Quaternion savedRotation, bool dead)
-{
-    navMeshAgent.Warp(savedPosition);
-    transform.rotation = savedRotation;
-
-    currentHealth = maxHealth;
-    healthBar.SetHealthBarPercentage(1);
-    alertState = 0;
-    canChangeState = true;
-
-    stateMachine.ChangeState(initialState);
-    if (dead)
-    {
-        healthBar.gameObject.SetActive(false);
-    }
-    else 
-    {
-        healthBar.gameObject.SetActive(true);
-    }
-    healthBar.gameObject.SetActive(true);     
-    collid.enabled = true;
-    sensor.enabled = true;
-
-    Debug.Log($"{gameObject.name} restored to position {savedPosition} and rotation {savedRotation}");
-}
     
     public void EnableCollider(){
         weapon.EnableCollider();

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
 using UnityEngine.InputSystem;
+using UnityEngine.Audio;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -14,12 +15,30 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject settingsMenuUI;
 
-    public Slider xAxis, yAxis;
+    public Slider mouseSlider;
     public CinemachineFreeLook cam;
 
     private PlayerControls controls;
     public Inventory inv;
     
+    [SerializeField] private AudioMixer myMixer;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+
+    public void SetMusicVolume(){
+        float volume = musicSlider.value;
+        myMixer.SetFloat("Music", Mathf.Log10(volume)*20);
+    }
+
+    public void SetSFXVolume(){
+        float volume = sfxSlider.value;
+        myMixer.SetFloat("SFX", Mathf.Log10(volume)*20);
+    }
+
+    private void Start(){
+        SetMusicVolume();
+        SetSFXVolume();
+    }
 
     public static bool isPaused(){
         return GameIsPaused;
@@ -68,12 +87,9 @@ public class PauseMenu : MonoBehaviour
         inSettings = true;
     }
 
-    public void ChangeXAxis(){
-        cam.m_XAxis.m_MaxSpeed = xAxis.value;
-    }
-
-    public void ChangeYAxis(){
-        cam.m_YAxis.m_MaxSpeed = yAxis.value;
+    public void ChangeSensitivity(){
+        cam.m_XAxis.m_MaxSpeed = mouseSlider.value;
+        cam.m_YAxis.m_MaxSpeed = mouseSlider.value/200;
     }
 
     public void ExitGame (){
@@ -83,8 +99,7 @@ public class PauseMenu : MonoBehaviour
     public void ResetAllBindings()
     {
         cam.m_XAxis.m_MaxSpeed = 300f;
-        xAxis.value = 300f;
         cam.m_YAxis.m_MaxSpeed = 2f;
-        yAxis.value = 2f;
+        mouseSlider.value = 300f;
     }
 }

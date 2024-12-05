@@ -4,17 +4,8 @@ using UnityEngine;
 
 public class SceneState
 {
-    public Transform PlayerNextSceneSpawnPoint;
+    public List<EnemyDataState> enemyDataStates = new();
+    public List<GameObjectState> interactableObjects = new();
 
-    public Transform playerLastPosition;
-
-    public Dictionary<string, bool> doorStates; // Save door open/closed states
-    
-    public List<GameObject> enemyStates;
-
-    public GameObject playerHUD;
-    public GameObject playerGO;
-
-    public Inventory inv;
 }
 

@@ -1,0 +1,51 @@
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class EnemyManager : MonoBehaviour
+{
+    public class EnemyData
+    {
+        public GameObject enemyPrefab;      // Prefab reference
+        public Vector3 initialPosition;     // Initial position of the enemy
+        public Quaternion initialRotation;  // Initial rotation
+        public NavMeshAgent navMeshAgent;   // Reference to the NavMeshAgent
+    }
+
+    public List<EnemyData> enemies = new();
+
+    // Reference to the parent object containing all enemies
+    public Transform enemiesParent;
+
+    void Start()
+    {
+        // Find all enemies within the enemies parent and save their initial state
+        foreach (Transform enemy in enemiesParent)
+        {
+            NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
+
+            EnemyData data = new()
+            {
+                enemyPrefab = enemy.gameObject,
+                initialPosition = enemy.position,    // Save the initial position
+                initialRotation = enemy.rotation,    // Save the initial rotation
+                navMeshAgent = agent
+            };
+            enemies.Add(data);
+        }
+    }
+
+    // Reset all enemies to their initial state
+    public void ResetEnemies()
+    {
+        foreach (EnemyData data in enemies)
+        {
+            // Reset the position and rotation of each enemy
+            data.navMeshAgent.Warp(data.initialPosition);
+            data.enemyPrefab.transform.rotation = data.initialRotation;
+
+            // Reset any other components (e.g., AI state, health, etc.)
+            data.enemyPrefab.GetComponent<AiAgent>().Reset();
+        }
+    }
+}

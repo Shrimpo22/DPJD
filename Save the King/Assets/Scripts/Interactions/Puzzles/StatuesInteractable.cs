@@ -34,6 +34,7 @@ public class StatuesInteractable : CamInteractable
 
     public override void Interact(Inventory inv, PlayerEventItens playerItems)
     {
+        inv.isLookingAtStatue = true;
         base.Interact(inv, playerItems);
         if (hasObject)
             button.SetActive(true);
@@ -84,6 +85,7 @@ public class StatuesInteractable : CamInteractable
     public override void ExitCam()
     {
         base.ExitCam();
+        inventory.GetComponent<Inventory>().isLookingAtStatue = false;
         button.SetActive(false);
     }
 

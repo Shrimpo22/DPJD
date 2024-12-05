@@ -54,6 +54,7 @@ public class PlayerEventItens : MonoBehaviour
     {
         controls = InputManager.inputActions;
         controls.Gameplay.Interaction.performed += ctx => HandleInteraction();
+        controls.Gameplay.LightAttack.performed += ctx => HandleLightAttack();
         scanInterval = 1.0f / scanFrequency;
         inventory = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
     }
@@ -67,11 +68,17 @@ public class PlayerEventItens : MonoBehaviour
                 Debug.Log("Alo");
                 aux.ExitCam();
             }
-            else
+            else if(closestInteractable.tag != "Target")
             {
                 closestInteractable.Interact(inventory, this);
             }
         }
+    }
+
+    void HandleLightAttack()
+    {
+        if (closestInteractable != null && closestInteractable.tag == "Target")
+            closestInteractable.Interact(inventory, this);
     }
 
     void Update()
@@ -91,6 +98,7 @@ public class PlayerEventItens : MonoBehaviour
             ClearClosestInteractable();
             return;
         }
+
         playerCamera = Camera.main;
         if (playerCamera == null)
             Debug.LogError("No camera tagged as MainCamera found in the scene!");
@@ -125,12 +133,17 @@ public class PlayerEventItens : MonoBehaviour
 
             Collider collider = colliders[i];
             GameObject obj = collider.gameObject;
-            // Debug.Log("Collided with" + obj.name + " and obj " + (IsInView(obj)?"in":"not in") + "view" );
+            Debug.Log("Range Collided with" + obj.name + " and obj " + (IsInView(obj) ? "in" : "not in") + "view");
+
+            if (obj.tag == "Target" && (gameObject.GetComponent<PlayerMovement>().IsDetected() || !gameObject.GetComponent<PlayerMovement>().isSwordEquipped))
+            {
+                continue;
+            }
 
             objects.Add(obj);
 
             Interactable interactable = obj.GetComponent<Interactable>();
-            // Debug.Log("Wha? " + IsInView(obj));
+            Debug.Log("Range Wha? " + IsInView(obj));
             if (interactable != null && IsInView(obj))
             {
                 // Debug.Log("Wha?2 ");
@@ -199,7 +212,8 @@ public class PlayerEventItens : MonoBehaviour
         }
         GameObject obj = Instantiate(prefab);
         obj.GetComponent<PlayerAttack>().EquipSword();
-        if (obj.GetComponent<Interactable>() != null) {
+        if (obj.GetComponent<Interactable>() != null)
+        {
             Destroy(obj.GetComponent<Interactable>().interactCanvas.gameObject);
             Destroy(obj.GetComponent<Interactable>());
         }
@@ -226,7 +240,7 @@ public class PlayerEventItens : MonoBehaviour
             {
                 if (obj == null) continue;
                 Gizmos.color = IsInView(obj) ? Color.green : Color.red;
-                Renderer objRenderer = obj.GetComponent<Renderer>();
+                Collider objRenderer = obj.GetComponent<Collider>();
                 if (objRenderer != null)
                 {
                     Gizmos.DrawWireCube(objRenderer.bounds.center, objRenderer.bounds.size + new Vector3(0.2f, 0.2f, 0.2f)); // Draw wireframe based on bounds

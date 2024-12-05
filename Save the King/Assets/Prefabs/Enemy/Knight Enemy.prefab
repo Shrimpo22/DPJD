@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 59238806037298448}
   serializedVersion: 2
   m_LocalRotation: {x: -4.419666e-15, y: -0.0000000048471085, z: -0.00000071926604, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.867, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1495,6 +1495,88 @@ Transform:
   - {fileID: 9156709143419356167}
   m_Father: {fileID: 6397660345334686242}
   m_LocalEulerAnglesHint: {x: 36.466953, y: 11.325215, z: 9.457995}
+--- !u!1 &5493177145662232027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1790345774608269632}
+  - component: {fileID: 104492542422807953}
+  - component: {fileID: 3774845631356705303}
+  m_Layer: 0
+  m_Name: Sensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1790345774608269632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5493177145662232027}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3844007906995653738}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &104492542422807953
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5493177145662232027}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!114 &3774845631356705303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5493177145662232027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20fec5b30acf64c4fb84f358e9362ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawSensor: 0
+  agent: {fileID: 7331927437471405335}
+  maxSightDistance: 10
+  angle: 80
+  height: 1.5
+  verticalAngle: 30
+  meshColor: {r: 0.94509804, g: 0.08627451, b: 0.015686275, a: 0.6862745}
+  drawSight: 0
+  scanFrequency: 30
+  layers:
+    serializedVersion: 2
+    m_Bits: 64
+  occlusionLayers:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &5907477818336778845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1638,7 +1720,6 @@ GameObject:
   - component: {fileID: 7593199539324855140}
   - component: {fileID: 7331927437471405335}
   - component: {fileID: 1716146390763503249}
-  - component: {fileID: 2327149640808435639}
   - component: {fileID: 3386710028735054804}
   - component: {fileID: 2388547733141261606}
   - component: {fileID: 603032318716235524}
@@ -1671,6 +1752,7 @@ Transform:
   - {fileID: 3289875890200919593}
   - {fileID: 1487168621412803728}
   - {fileID: 4545704395107818565}
+  - {fileID: 1790345774608269632}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 2.838, z: 0}
 --- !u!136 &7201910640603553533
@@ -1692,10 +1774,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.963405
+  m_Radius: 0.2389324
+  m_Height: 1.7616922
   m_Direction: 1
-  m_Center: {x: 0, y: 0.83466166, z: 0}
+  m_Center: {x: 8.5189085e-11, y: 0.81415385, z: -0.018469065}
 --- !u!54 &948552764069922277
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1771,7 +1853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64990a8d15ab514dafdcc33710b1a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawAlertState: 1
+  drawAlertState: 0
   initialState: 2
   navMeshAgent: {fileID: 0}
   config: {fileID: 11400000, guid: 5cb65e5f4f555f8419c117135cd247d0, type: 2}
@@ -1810,36 +1892,9 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 0.07
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
---- !u!114 &2327149640808435639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6435950414050257592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20fec5b30acf64c4fb84f358e9362ef5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drawSensor: 0
-  drawRange: 0
-  agent: {fileID: 7331927437471405335}
-  maxSightDistance: 10
-  angle: 80
-  height: 2
-  meshColor: {r: 0.94509804, g: 0.08627451, b: 0.015686275, a: 0.6862745}
-  drawSight: 0
-  scanFrequency: 30
-  layers:
-    serializedVersion: 2
-    m_Bits: 64
-  occlusionLayers:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &3386710028735054804
 MonoBehaviour:
   m_ObjectHideFlags: 0

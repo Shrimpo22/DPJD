@@ -20,15 +20,16 @@ public class DetectionArrow : MonoBehaviour
 
     public float smoothingFactor = 5f;  // Factor to control smoothing of arrow movement
 
-    public Vector3 normalizedDirection;    
-    public Vector3 finalDir;    
+    public Vector3 normalizedDirection;
+    public Vector3 finalDir;
     public RectTransform arrowRectTransform;
 
-    private int counter;
+    public int counter;
     // Dictionary to keep track of arrows associated with each detecting enemy
     private Dictionary<EnemyDetection, GameObject> activeArrows = new Dictionary<EnemyDetection, GameObject>();
 
-    void Start(){
+    void Start()
+    {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         arrowParent = this.transform;
@@ -41,6 +42,26 @@ public class DetectionArrow : MonoBehaviour
         EnemyDetection.OnLosePlayer += HandleEnemyLostPlayer;
         EnemyDetection.OnChasePlayer += HandleEnemyChasePlayer;
         EnemyDetection.OnLook4Player += HandleEnemyLookForPlayer;
+        EnemyDetection.OnIncreaseCounter += ctx =>
+        {
+            Debug.Log("EnemyDetect" + ctx);
+            if (activeArrows.ContainsKey(ctx))
+            {
+                if (activeArrows[ctx].transform.Find("DetectionArrow").GetComponent<Image>().color == Color.red)
+                    return;
+            };
+            counter++;
+            if (!playerMovement.IsDetected())
+                playerMovement.Detected();
+        };
+        EnemyDetection.OnDecreaseCounter += ctx =>
+        {
+            Debug.Log("EnemyDetect2" + ctx);
+            if (!activeArrows.ContainsKey(ctx)) return;
+            counter--;
+            if (counter <= 0)
+                playerMovement.NotDetected();
+        };
     }
 
     void OnDisable()
@@ -70,8 +91,8 @@ public class DetectionArrow : MonoBehaviour
                 // Get the camera's forward direction (ignoring Y-axis to maintain horizontal direction)
                 Vector3 cameraForward = Camera.main.transform.forward;
                 Vector3 cameraRight = Camera.main.transform.right;
-                cameraForward.y = 0; 
-                cameraRight.y = 0; 
+                cameraForward.y = 0;
+                cameraRight.y = 0;
 
                 Vector3 forwardDir = direction.x * cameraForward;
                 Vector3 rightDir = direction.z * cameraRight;
@@ -96,7 +117,8 @@ public class DetectionArrow : MonoBehaviour
                         img.fillAmount = enemy.agent.alertState;
                     }
 
-                    if(img.fillAmount < 1f){
+                    if (img.fillAmount < 1f)
+                    {
                         img.color = Color.white;
                     }
                 }
@@ -130,39 +152,31 @@ public class DetectionArrow : MonoBehaviour
         }
     }
 
-    private void HandleEnemyChasePlayer(EnemyDetection enemy){
+    private void HandleEnemyChasePlayer(EnemyDetection enemy)
+    {
         if (activeArrows.ContainsKey(enemy))
         {
             Transform childTransform = activeArrows[enemy].transform.Find("DetectionArrow"); // Replace "ChildName" with the actual name of the child
             if (childTransform != null)
             {
                 Image img = childTransform.GetComponent<Image>();
-                
-                if (!playerMovement.IsDetected())
-                    playerMovement.Detected();
                 if (img != null)
                 {
-                    if (img.color != Color.red)
-                        counter++;
-                    Debug.Log("Counter Enemy chase ->" + counter);
                     img.color = Color.red;
                 }
             }
-   
+
         }
     }
 
-    private void HandleEnemyLookForPlayer(EnemyDetection enemy){
+    private void HandleEnemyLookForPlayer(EnemyDetection enemy)
+    {
         if (activeArrows.ContainsKey(enemy))
         {
             Transform childTransform = activeArrows[enemy].transform.Find("DetectionArrow"); // Replace "ChildName" with the actual name of the child
             if (childTransform != null)
             {
                 Image img = childTransform.GetComponent<Image>();
-                counter--;
-                Debug.Log("Counter Look For player ->" +  counter);
-                if(counter <= 0)
-                    playerMovement.NotDetected();
                 if (img != null)
                 {
                     img.color = Color.yellow;

@@ -260,9 +260,10 @@ public class PlayerMovement : MonoBehaviour
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        if ((stateInfo.IsName("hit1") || stateInfo.IsName("hit2") || stateInfo.IsName("hit3") || stateInfo.IsName("heavy1") || stateInfo.IsName("heavy2") && stateInfo.normalizedTime <= 1f))
+        if ((stateInfo.IsName("hit1") || stateInfo.IsName("hit2") || stateInfo.IsName("hit3") || stateInfo.IsName("heavy1") || stateInfo.IsName("heavy2") || stateInfo.IsName("stabbing") && stateInfo.normalizedTime <= 1f))
         {
-            targetSpeed = 0f;
+            speed = 0f;
+            return;
         }
         else if (!isSprinting && !isCrouching)
             targetSpeed = 4.25f;
@@ -335,10 +336,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void StealthAttack(GameObject enemy)
     {
-        if(enemy.tag=="NPCVIBES"){
-            
-        }
         transform.LookAt(enemy.transform.position);
+        Debug.DrawLine(transform.position, enemy.transform.position);
         Debug.Log("Atr�s de tiiiiii");
         animator.Play("stabbing");
 
@@ -346,24 +345,23 @@ public class PlayerMovement : MonoBehaviour
 
     public void Detected()
     {
-        GetComponent<PlayerEventItens>().enabled = false;
         isCrouching = false;
         animator.SetBool("isCrouching", isCrouching);
         controller.height = initialHeight;
         controller.center = initialCenter;
-        //isDetected = true;
+        isDetected = true;
     }
 
     public void NotDetected()
     {
-        GetComponent<PlayerEventItens>().enabled = true;
-        //isDetected = false;
+        isDetected = false;
     }
 
     public bool IsDetected()
     {
         return isDetected;
     }
+
     void OnDrawGizmos()
     {
         if (drawGizmos)

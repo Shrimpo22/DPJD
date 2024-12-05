@@ -45,7 +45,7 @@ public class AiAgent : MonoBehaviour
         currentHealth = maxHealth;
         healthBar = GetComponentInChildren<UIHealthBar>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        sensor = GetComponent<AiSensor>();
+        sensor = GetComponentInChildren<AiSensor>();
         animator = GetComponent<Animator>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         navMeshAgent.speed = config.speed;
@@ -170,7 +170,7 @@ public class AiAgent : MonoBehaviour
 
             }
 
-            Gizmos.color = Color.black;
+            Gizmos.color = Color.yellow;
             Gizmos.DrawLine(initialPosition, lastPosition);
             
 

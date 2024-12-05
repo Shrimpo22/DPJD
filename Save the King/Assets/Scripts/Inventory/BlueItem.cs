@@ -10,7 +10,7 @@ public class BlueItem : Item
 
     public override string getNameWithSpaces()
     {
-        return "Blue Item";
+        return "Salt";
     }
     public override int MaxStacks()
     {
@@ -28,7 +28,7 @@ public class BlueItem : Item
 
     public override string GiveDiscresp()
     {
-        return "Blue Item";
+        return "Essential seasoning that enhances the taste of every dish.";
     }
 
     public override Action UseFunc()
@@ -40,6 +40,7 @@ public class BlueItem : Item
             if (cozinharScript != null)
             {
                 cozinharScript.comidaTentativa.Add(GiveName());
+                cozinharScript.AddItemToImage("BlueItem");
                 Debug.Log(GiveName() + " added to tentativa list.");
             }
             else

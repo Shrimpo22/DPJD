@@ -11,7 +11,7 @@ public class GreenItem : Item
 
     public override string getNameWithSpaces()
     {
-        return "Green Item";
+        return "Potatoes";
     }
     public override int MaxStacks()
     {
@@ -29,7 +29,7 @@ public class GreenItem : Item
 
     public override string GiveDiscresp()
     {
-        return "Green Item";
+        return "Versatile and hearty, these potatoes are ready to be boiled, mashed, or fried.";
     }
 
     public override Action UseFunc()
@@ -41,6 +41,7 @@ public class GreenItem : Item
             if (cozinharScript != null)
             {
                 cozinharScript.comidaTentativa.Add(GiveName());
+                cozinharScript.AddItemToImage("GreenItem");
                 Debug.Log(GiveName() + " added to tentativa list.");
             }
             else

@@ -19,18 +19,19 @@ public class EnemyRecipeInteractable : CamInteractable
     public GameObject texto;
     public TMP_Text textInteraction;
     public int textoInteracaoCount = 1;
-    private int count = 0;
     public GameObject icon;
     public GameObject interact;
-    private bool chave = false; 
+    
     public override void Start()
     {
+        InvToOpen = false;
         base.Start();
-        targetObject = GameObject.FindGameObjectWithTag("Target");
+        targetObject = GameObject.FindGameObjectWithTag("NPCVIBES");
     }
 
     void Update()
     {
+        
         if (isTalkingToNpc && Onetime == 0 && usedItem)
         {
             FurnaceInteractable cozinharScript = GameObject.FindGameObjectWithTag("furnalha").GetComponent<FurnaceInteractable>();
@@ -38,26 +39,27 @@ public class EnemyRecipeInteractable : CamInteractable
             {
                 inventory.GetComponent<Inventory>().AddItem("Potions", 2);
                 inventory.GetComponent<Inventory>().AddItem("KeyOfKitchen", 1);
+                
                 targetObject.tag="Untagged";
                 wrong = true;
+                
             }
 
             Onetime += 1;
 
         }
-        if(Time.timeScale==1){
-            
-            if (fighting == true && mainCamera.gameObject.activeSelf)
+        if (fighting && mainCamera.gameObject.activeSelf)
+        {
+            AiAgent aiAgent = Inimigo.GetComponent<AiAgent>();
+            if (aiAgent != null && aiAgent.enabled && aiAgent.currentHealth <= 0 && OnetimeV2 == 0 && aiAgent.maxHealth == 60)
             {
-                AiAgent aiAgent = Inimigo.GetComponent<AiAgent>();
-                if (aiAgent != null && aiAgent.currentHealth == 0 && OnetimeV2 == 0)
-                {
-                    inventory.GetComponent<Inventory>().AddItem("KeyOfKitchen", 1);
-                    OnetimeV2 += 1;
-                }
-
-            }  
+                inventory.GetComponent<Inventory>().AddItem("KeyOfKitchen", 1);
+                OnetimeV2 += 1;
+                
+            }
         }
+        
+        
         
     }
 
@@ -65,8 +67,7 @@ public class EnemyRecipeInteractable : CamInteractable
     {
         base.ExitCam();
         isTalkingToNpc = false;
-        inventory.GetComponent<Inventory>().isLookingAtCook = false;
-        textoInteracaoCount += 1;
+    
         texto.SetActive(false);
 
         if (usedItem && !wrong && Inimigo != null)
@@ -74,22 +75,25 @@ public class EnemyRecipeInteractable : CamInteractable
             MonoBehaviour[] scripts = Inimigo.GetComponents<MonoBehaviour>();
             foreach (MonoBehaviour script in scripts)
             {
+                if(script is AiAgent aiAgent) aiAgent.isNpc = false;
                 script.enabled = true;
                 fighting = true;
-                interact.SetActive(false);
+                
                 
             }
-            chave = true;
+            targetObject.tag = "Target";
+            
+            
         }
         
-        targetObject.tag = "Target";
-
+        
     }
 
     public override void Interact(Inventory inv, PlayerEventItens playerItems)
     {
+
         base.Interact(inv, playerItems);
-        inv.isLookingAtCook = true;
+    
         isTalkingToNpc = true;
         if (textoInteracaoCount == 1)
         {
@@ -98,10 +102,13 @@ public class EnemyRecipeInteractable : CamInteractable
             icon.SetActive(false);
 
         }
+       
     }
 
     public void useItem()
     {
         usedItem = true;
+        gameObject.layer=0;
+        icon.SetActive(false);
     }
 }

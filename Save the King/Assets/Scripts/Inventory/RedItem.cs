@@ -11,7 +11,7 @@ public class RedItem : Item
 
     public override string getNameWithSpaces()
     {
-        return "Red Item";
+        return "Meat";
     }
     public override int MaxStacks()
     {
@@ -29,7 +29,7 @@ public class RedItem : Item
 
     public override string GiveDiscresp()
     {
-        return "Red Item";
+        return "A prime cut of meat, full of flavor and ideal for hearty meals.";
     }
 
     public override Action UseFunc()
@@ -41,6 +41,7 @@ public class RedItem : Item
             if (cozinharScript != null)
             {
                 cozinharScript.comidaTentativa.Add(GiveName());
+                cozinharScript.AddItemToImage("RedItem");
                 Debug.Log(GiveName() + " added to tentativa list.");
             }
             else

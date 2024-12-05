@@ -10,8 +10,10 @@ public class BookInteractable : CamInteractable
     public GameObject textToRead;
     private EnemyRecipeInteractable targetInteraction;
     private int x;
+    
     public override void Start()
     {
+        InvToOpen = false;
         base.Start();
         GameObject targetObject = GameObject.FindGameObjectWithTag("NPCVIBES");
         if (targetObject != null)
@@ -31,6 +33,7 @@ public class BookInteractable : CamInteractable
 
     public override void ExitCam()
     {
+        
         base.ExitCam();
         bookClose.SetActive(true);
         bookOpen.SetActive(false);
@@ -40,7 +43,7 @@ public class BookInteractable : CamInteractable
     public override void Interact(Inventory inv, PlayerEventItens playerItems)
     {
         base.Interact(inv, playerItems);
-        if (x > 1)
+        if (x >= 0)
         {
             player.SetActive(false);
             bookClose.SetActive(false);
@@ -51,13 +54,22 @@ public class BookInteractable : CamInteractable
             myCamera.gameObject.SetActive(true);
             isLooking = true;
             textToRead.SetActive(true);
+           
         }
+        
+        
+        
     }
     void Update()
     {
+        
+        Inventory inven = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         if (targetInteraction != null)
         {
             x = targetInteraction.textoInteracaoCount;
+        }
+        if(isLooking){
+            inven.closeInventory();
         }
     }
 }

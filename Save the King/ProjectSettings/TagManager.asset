@@ -40,6 +40,9 @@ TagManager:
   - NPCVIBES
   - book
   - Wood
+  - opcoes
+  - TaskManager
+  - mousse
   layers:
   - Default
   - TransparentFX

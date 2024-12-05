@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.EventSystems;
 using Cinemachine;
+using Unity.VisualScripting;
 public class Inventory : MonoBehaviour
 {
     [SerializeReference] public List<ItemSlotInfo> items = new List<ItemSlotInfo>();
@@ -29,7 +30,7 @@ public class Inventory : MonoBehaviour
     public bool isLookingAtCandleHolder = false;
     public bool isLookingAtMap = false;
     public bool isLookingAtMirror = false; 
-    
+    private Mouse mousse;
     Dictionary<string, Item> allItemsDictionary = new Dictionary<string, Item>();
     private List<ItemPanel> existingPanels = new List<ItemPanel>();
 
@@ -75,6 +76,7 @@ public class Inventory : MonoBehaviour
         Debug.Log(itemsInDictionary);
 
         AddItem("Potions", 3);
+      
         RefreshInventory();
 
 
@@ -92,9 +94,29 @@ public class Inventory : MonoBehaviour
         isZoomedIn = true;
         wasOpenByOtherEvent = true;
     }
-
     public void closeInventory()
     {
+        GameObject m = GameObject.FindGameObjectWithTag("mousse");
+        
+        if(m != null ){
+            mousse = m.GetComponent<Mouse>();
+            mousse.optionsDisplayed = false;
+            mousse.item = null;
+        }
+
+        GameObject opcoes = GameObject.FindGameObjectWithTag("opcoes");
+        if (opcoes != null)
+        {
+            opcoes.SetActive(false);
+        }
+        
+
+        GameObject taskmanager = GameObject.FindGameObjectWithTag("TaskManager");
+        if (taskmanager != null)
+        {
+            taskmanager.SetActive(false);
+        }
+       
         wasOpenByOtherEvent = false;
         InventoryMenu.SetActive(false);
         Cursor.visible = false;
@@ -106,7 +128,7 @@ public class Inventory : MonoBehaviour
         Time.timeScale = 1;
         inInventory = false;
         Mouse.SetActive(false);
-
+        
     }
 
     void HandleClosing()
@@ -120,7 +142,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void openInventory()
+    public void openInventory()
     {
         Mouse.SetActive(true);
         inInventory = true;
@@ -149,6 +171,7 @@ public class Inventory : MonoBehaviour
             }
             else
             {
+                
                 openInventory();
             }
         }
@@ -167,7 +190,13 @@ public class Inventory : MonoBehaviour
         {
             if (wasOpenByOtherEvent)
             {
+                
+                
                 openInventory();
+            }
+            else
+            {
+                closeInventory();
             }
         }
     }

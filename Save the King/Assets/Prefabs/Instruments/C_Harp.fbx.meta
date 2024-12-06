@@ -3,7 +3,32 @@ guid: 74ca173a329718842a85d8630229b34a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Harp
+    second: {fileID: 2100000, guid: 6634bfe7e9ff33f4a804e29bf000d038, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Harp stock
+    second: {fileID: 2100000, guid: 6634bfe7e9ff33f4a804e29bf000d038, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal_Dark_Gold
+    second: {fileID: 2100000, guid: 6634bfe7e9ff33f4a804e29bf000d038, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Soundboard
+    second: {fileID: 2100000, guid: 6634bfe7e9ff33f4a804e29bf000d038, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stand
+    second: {fileID: 2100000, guid: 6634bfe7e9ff33f4a804e29bf000d038, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

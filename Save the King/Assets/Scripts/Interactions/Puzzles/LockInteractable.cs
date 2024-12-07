@@ -65,6 +65,7 @@ public class LockInteractable : CamInteractable
     }
 
     public override void Start(){
+        base.Start();
         interactCanvas.gameObject.SetActive(false);
         myCamera.gameObject.SetActive(false);
         

@@ -65,7 +65,6 @@ public class PlayerEventItens : MonoBehaviour
         {
             if (inventory.isZoomedIn == true && closestInteractable is CamInteractable aux)
             {
-                Debug.Log("Alo");
                 aux.ExitCam();
             }
             else if (closestInteractable.tag != "Target")

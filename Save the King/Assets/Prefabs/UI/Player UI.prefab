@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 5330453976504818887}
   m_Layer: 5
   m_Name: Mouse
-  m_TagString: Untagged
+  m_TagString: mousse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -908,8 +908,15 @@ MonoBehaviour:
   audioSource: {fileID: 5043447425193855576}
   ItemPanelGrid: {fileID: 7826443382663147690}
   mouse: {fileID: 5330453976504818887}
-  isLookingAtMap: 0
+  isZoomedIn: 0
   isLookingAtCook: 0
+  isLookingAtOrgan: 0
+  isLookingAtCandle: 0
+  isLookingAtStatue: 0
+  isLookingAtWood: 0
+  isLookingAtCandleHolder: 0
+  isLookingAtMap: 0
+  isLookingAtMirror: 0
   InventorySize: 12
   inInventory: 0
   references:

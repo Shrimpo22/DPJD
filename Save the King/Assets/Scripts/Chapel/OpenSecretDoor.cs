@@ -80,6 +80,7 @@ public class OpenSecretDoor : MonoBehaviour
 
     public void exitCam()
     {
+        Debug.Log("[TimeScale] Resuming time in OpenSecret");
         player.SetActive(true);
         Time.timeScale = 1;
         if (freeLookComponent != null)

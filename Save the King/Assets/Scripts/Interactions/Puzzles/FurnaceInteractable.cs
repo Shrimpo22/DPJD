@@ -33,6 +33,7 @@ public class FurnaceInteractable : CamInteractable
     {
         InvToOpen = true;
         base.Start();
+        aguaFerver.SetActive(true);
         i = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         comidaCorreta.Add("BlueItem");
         comidaCorreta.Add("RedItem");
@@ -97,13 +98,6 @@ public class FurnaceInteractable : CamInteractable
             
         }    
     
-    }
-
-    public override void HandleInv(){
-        if(isLooking){
-            aguaFerver.SetActive(true);
-            inventory.GetComponent<Inventory>().OpenIt();
-        }
     }
 
     public override void ExitCam()

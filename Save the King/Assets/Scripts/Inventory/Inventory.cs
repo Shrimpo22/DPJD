@@ -92,13 +92,14 @@ public class Inventory : MonoBehaviour
     public void OpenIt()
     {
         isZoomedIn = true;
-        wasOpenByOtherEvent = true;
     }
+    
     public void closeInventory()
     {
         GameObject m = GameObject.FindGameObjectWithTag("mousse");
         
         if(m != null ){
+            Debug.Log("[Mouse] Mouse being hidden by Inv");
             mousse = m.GetComponent<Mouse>();
             mousse.optionsDisplayed = false;
             mousse.item = null;
@@ -125,6 +126,7 @@ public class Inventory : MonoBehaviour
             freeLookCamera.enabled = true;
         }
         audioSource.Play();
+        Debug.Log("[TimeScale] Resuming time in Inv");
         Time.timeScale = 1;
         inInventory = false;
         Mouse.SetActive(false);
@@ -144,6 +146,7 @@ public class Inventory : MonoBehaviour
 
     public void openInventory()
     {
+        Debug.Log("[Mouse] Mouse being showned by Inv");
         Mouse.SetActive(true);
         inInventory = true;
         wasOpenByOtherEvent = false;
@@ -155,6 +158,7 @@ public class Inventory : MonoBehaviour
             freeLookCamera.enabled = false;
         }
         // controls.Gameplay.Camera.Disable();
+        Debug.Log("[TimeScale] Pausing time in Inv");
         Time.timeScale = 0;
         audioSource.Play();
     }
@@ -162,7 +166,7 @@ public class Inventory : MonoBehaviour
     void HandleInventory()
     {
 
-        if (!PauseMenu.isPaused())
+        if (!PauseMenu.isPaused() && !isZoomedIn)
         {
             if (InventoryMenu.activeSelf)
             {
@@ -173,30 +177,6 @@ public class Inventory : MonoBehaviour
             {
                 
                 openInventory();
-            }
-        }
-    }
-
-    void Update()
-    {
-        if (InventoryMenu.activeSelf)
-        {
-            if (wasOpenByOtherEvent)
-            {
-                closeInventory();
-            }
-        }
-        else
-        {
-            if (wasOpenByOtherEvent)
-            {
-                
-                
-                openInventory();
-            }
-            else
-            {
-                closeInventory();
             }
         }
     }

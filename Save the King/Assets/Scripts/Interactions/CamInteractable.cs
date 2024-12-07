@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CamInteractable : Interactable
 {
+    protected Mouse mouse;
+
     private PlayerControls controls;
     public bool isLooking;
     protected GameObject inventory;
@@ -14,11 +16,26 @@ public class CamInteractable : Interactable
     
     public bool InvToOpen = true;
     public override void Start(){
+        
+
         interactCanvas.gameObject.SetActive(false);
         myCamera.gameObject.SetActive(false);
         
         player = GameObject.FindGameObjectWithTag("Player");
         inventory = GameObject.FindGameObjectWithTag("Inventory");
+
+        if(!InvToOpen){
+            Debug.Log("Here");
+            GameObject m = inventory.GetComponent<Inventory>().Mouse;
+        
+            if(m != null ){
+                Debug.Log("Here 2");
+                mouse = m.GetComponent<Mouse>();
+                mouse.optionsDisplayed = false;
+                mouse.item = null;
+            }
+        }
+
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
         isLooking = false;
@@ -26,6 +43,8 @@ public class CamInteractable : Interactable
     
     public override void Interact(Inventory inv, PlayerEventItens playerItems)
     {
+        Debug.Log("[TimeScale] Pausing time in CamInteract");
+        Time.timeScale = 0;
         controls = InputManager.inputActions;
         controls.Gameplay.Back.performed += ctx => HandleBack();
         
@@ -34,16 +53,32 @@ public class CamInteractable : Interactable
         }else{
             inv.closeInventory();
         }
+
+        if(!InvToOpen){
+            Debug.Log("[Mouse] Mouse being showned by Cam");
+            mouse.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         mainCamera.tag="Untagged";
         myCamera.tag="MainCamera";
         player.SetActive(false);
         mainCamera.gameObject.SetActive(false);
         myCamera.gameObject.SetActive(true);
-        isLooking=true;
+        inv.isZoomedIn=true;
+        isLooking = true;
         interactCanvas.gameObject.SetActive(false);  
     }
 
     public virtual void ExitCam(){
+        if(!InvToOpen){
+            Debug.Log("[Mouse] Mouse being hidden by Cam");
+            mouse.gameObject.SetActive(false);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = false;
+        }
+
         player.SetActive(true);
         mainCamera.tag = "MainCamera";
         myCamera.tag="Untagged";
@@ -53,18 +88,13 @@ public class CamInteractable : Interactable
         inventory.GetComponent<Inventory>().isZoomedIn = false;
         interactCanvas.gameObject.SetActive(true);  
         inventory.GetComponent<Inventory>().closeInventory();
+        Debug.Log("[TimeScale] Resuming time in CamInteract");
         Time.timeScale = 1;
     }
 
     void HandleBack(){
         if(isLooking){
             ExitCam();
-        }
-    }
-
-    public virtual void HandleInv(){
-        if(isLooking){
-            inventory.GetComponent<Inventory>().OpenIt();
         }
     }
 }

@@ -67,6 +67,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Resume (){
+        Debug.Log("[TimeScale] Resuming time in PauseMenu");
+        AudioListener.pause = false;
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -74,6 +76,8 @@ public class PauseMenu : MonoBehaviour
 
 
     public void Pause (){
+        Debug.Log("[TimeScale] Pausing time in PauseMenu");
+        AudioListener.pause = true;
         pauseMenuUI.SetActive(true);
         settingsMenuUI.SetActive(false);
         Time.timeScale = 0f;

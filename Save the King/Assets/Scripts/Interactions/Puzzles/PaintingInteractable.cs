@@ -15,6 +15,7 @@ public class PaintingInteractable : CamInteractable
     public AudioClip paintingFallingSound;
 
     public override void Start(){
+        base.Start();
         active = false;
         interactCanvas.gameObject.SetActive(false);
         myCamera.gameObject.SetActive(false);

@@ -9,6 +9,11 @@ public class PlayerHealth : MonoBehaviour
     Animator animator;
     public bool isInvulnerable = false;
 
+    void Start(){
+        animator = GetComponent<Animator>();
+        currentHealth = maxHealth;
+    }
+
     public void TakeDamage(float amount){
         if (!isInvulnerable) {
             currentHealth -= amount;

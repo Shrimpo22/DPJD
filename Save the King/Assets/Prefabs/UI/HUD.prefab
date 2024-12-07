@@ -8452,10 +8452,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5247616537049539089}
   - {fileID: 3597550616406967734}
-  - {fileID: 4640811022142192361}
   - {fileID: 577456117238702697}
+  - {fileID: 5247616537049539089}
+  - {fileID: 4640811022142192361}
   - {fileID: 5716834513086444402}
   - {fileID: 8357574938334736224}
   - {fileID: 1965709351001266878}
@@ -8572,6 +8572,7 @@ MonoBehaviour:
   settingsMenuUI: {fileID: 6294674626513386350}
   mouseSlider: {fileID: 0}
   cam: {fileID: 0}
+  mouseGameObject: {fileID: 1790192424403126315}
   inv: {fileID: 3393511406575772429}
   myMixer: {fileID: 24100000, guid: 2c9415e2863c0c94fb7c438071f3c24c, type: 2}
   musicSlider: {fileID: 9004959735205845697}
@@ -8990,6 +8991,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9587f879ff496c84691b3a67e48ab492, type: 3}
+--- !u!1 &1790192424403126315 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 931951601767791010, guid: 9587f879ff496c84691b3a67e48ab492, type: 3}
+  m_PrefabInstance: {fileID: 1456632511548191113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3393511406575772429 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4264578066743956100, guid: 9587f879ff496c84691b3a67e48ab492, type: 3}

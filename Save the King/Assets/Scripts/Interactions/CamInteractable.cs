@@ -25,11 +25,9 @@ public class CamInteractable : Interactable
         inventory = GameObject.FindGameObjectWithTag("Inventory");
 
         if(!InvToOpen){
-            Debug.Log("Here");
             GameObject m = inventory.GetComponent<Inventory>().Mouse;
         
             if(m != null ){
-                Debug.Log("Here 2");
                 mouse = m.GetComponent<Mouse>();
                 mouse.optionsDisplayed = false;
                 mouse.item = null;
@@ -40,7 +38,7 @@ public class CamInteractable : Interactable
 
         isLooking = false;
     }
-    
+
     public override void Interact(Inventory inv, PlayerEventItens playerItems)
     {
         Debug.Log("[TimeScale] Pausing time in CamInteract");

@@ -106,4 +106,5 @@ public class PauseMenu : MonoBehaviour
         cam.m_YAxis.m_MaxSpeed = 2f;
         mouseSlider.value = 300f;
     }
+    
 }

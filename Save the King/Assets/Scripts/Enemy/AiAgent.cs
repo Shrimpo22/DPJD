@@ -129,6 +129,19 @@ public class AiAgent : MonoBehaviour
             stateMachine.ChangeState(AiStateId.Death);
         }
     }
+
+    public void Reset() {
+        currentHealth = maxHealth;
+        healthBar.gameObject.SetActive(true);
+        if (healthBar) {
+            healthBar.SetHealthBarPercentage(1);
+        }
+        collid.enabled = true;
+        sensor.enabled = true;
+        SetAlertState(0);
+        stateMachine.ChangeState(AiStateId.Idle);
+        animator.Play("Movement");
+    }
     
     public void EnableCollider(){
         weapon.EnableCollider();

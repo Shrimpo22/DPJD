@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
     public GameObject canvas;
     public GameObject Menu;
     public void PlayGame(){
-        SceneManager.LoadSceneAsync("Masmorra_HI-FI");
+        SceneManager.LoadSceneAsync("Banquet");
     }
     public void QuitGame(){
         Application.Quit();
@@ -15,5 +15,9 @@ public class MainMenu : MonoBehaviour
     public void Settings(){
         canvas.SetActive(false);
         Menu.SetActive(true);
+    }
+    public void closeSettings(){
+        canvas.SetActive(true);
+        Menu.SetActive(false);
     }
 }

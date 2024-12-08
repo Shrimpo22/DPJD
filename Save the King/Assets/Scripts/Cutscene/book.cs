@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class book : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class book : MonoBehaviour
     bool rotate = false;
     [SerializeField] GameObject backButton;
     [SerializeField] GameObject forwardButton;
+    public GameObject start;
 
     private void Start()
     {
@@ -47,6 +49,7 @@ public class book : MonoBehaviour
         if (index == pages.Count - 1)
         {
             forwardButton.SetActive(false); //if the page is last then we turn off the forward button
+            start.SetActive(true);
         }
     }
 
@@ -96,6 +99,9 @@ public class book : MonoBehaviour
         }
     }
 
+    public void startGame(){
+        SceneManager.LoadSceneAsync("Banquet");
+    }
 
 
 }

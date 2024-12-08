@@ -92,6 +92,11 @@ public class PlayerEventItens : MonoBehaviour
 
     public void Scan()
     {
+        if (closestInteractable == null)
+        {
+            closestDistance = float.MaxValue;
+        }
+
         if (gameObject.GetComponent<PlayerMovement>().isTrapped)
         {
             ClearClosestInteractable();

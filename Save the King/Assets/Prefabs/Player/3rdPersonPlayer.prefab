@@ -1411,6 +1411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  isInvulnerable: 0
 --- !u!114 &5396624338936476590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3478,7 +3479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 31
   m_IgnoreTag: Player
   m_TransparentLayers:
     serializedVersion: 2

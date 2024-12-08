@@ -6,6 +6,7 @@ using Cinemachine;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -126,7 +127,8 @@ public class PauseMenu : MonoBehaviour
 
 
     public void ExitGame (){
-        Debug.Log("Exitting Game...");
+        //SceneManager.LoadSceneAsync("Main Menu");
+        Debug.Log("Alterar Exit");
     }
 
     public void ResetAllBindings()

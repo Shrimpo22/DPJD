@@ -100,7 +100,7 @@ public class book : MonoBehaviour
     }
 
     public void startGame(){
-        SceneManager.LoadSceneAsync("Banquet");
+        SceneManager.LoadSceneAsync("Cozinha");
     }
 
 

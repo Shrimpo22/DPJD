@@ -111,7 +111,7 @@ public class Inventory : MonoBehaviour
             opcoes.SetActive(false);
         }
         
-
+        
         GameObject taskmanager = GameObject.FindGameObjectWithTag("TaskManager");
         if (taskmanager != null)
         {

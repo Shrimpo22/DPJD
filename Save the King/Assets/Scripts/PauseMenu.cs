@@ -76,6 +76,8 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void HandleBack()
     {
+        if (this == null || pauseMenuUI == null) return;
+        
         if(!inv.isInInventory()){
             if (GameIsPaused){
                 if (inSettings){
@@ -107,12 +109,8 @@ public class PauseMenu : MonoBehaviour
     public void Pause (){
         Debug.Log("[TimeScale] Pausing time in PauseMenu");
         AudioListener.pause = true;
-        if (pauseMenuUI != null){
-            pauseMenuUI.SetActive(true);
-        }
-        if(settingsMenuUI != null){
-            settingsMenuUI.SetActive(false);
-        }
+        pauseMenuUI.SetActive(true);
+        settingsMenuUI.SetActive(false);
         Time.timeScale = 0f;
         GameIsPaused = true;
         inSettings = false;
@@ -142,5 +140,5 @@ public class PauseMenu : MonoBehaviour
         sfxSlider.value = 0.75f;
         SetSFXVolume();
     }
-    
+
 }

@@ -433,6 +433,7 @@ MonoBehaviour:
   textoInteracaoCount: 1
   icon: {fileID: 0}
   interact: {fileID: 2887067522979637074}
+  healthBar: {fileID: 0}
 --- !u!4 &6390540901301922918 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3844007906995653738, guid: a18f67653f53e2741b65c673fa55e908, type: 3}

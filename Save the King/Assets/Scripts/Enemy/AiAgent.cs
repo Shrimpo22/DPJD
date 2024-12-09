@@ -86,7 +86,12 @@ public class AiAgent : MonoBehaviour
     public void IncreaseAlertState(){
         if(alertState < 1){
             float distanceToPlayer = Vector3.Distance(playerTransform.position, transform.position);
-            float distanceFactor = Mathf.Log(1/distanceToPlayer + 1) * 8;
+            float distanceFactor;
+            if (distanceToPlayer < 3f){
+                distanceFactor = Mathf.Exp(-0.3f*distanceToPlayer)*20;
+            }else{
+                distanceFactor = Mathf.Exp(-0.3f*distanceToPlayer)*8;
+            }
             if(playerTransform.GetComponent<PlayerMovement>().isCrouching)
                 distanceFactor /= 2;
             alertState += alertRate * Time.deltaTime * distanceFactor;

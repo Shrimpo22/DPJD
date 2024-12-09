@@ -6,16 +6,20 @@ public class MusicManager : MonoBehaviour
     public static MusicManager instance;
 
     public AudioSource puzzleMusic;
-    public AudioSource combatMusic;
+    public AudioSource[] combatMusics;
     public AudioSource explorationMusic;
     public AudioSource chapelMusic;
-    
+    public AudioSource firstBossMusic;
+    public AudioSource secondBossMusic;
+
     private AudioSource currentMusic;
+    private GameState previousState;
     private Coroutine transitionCoroutine;
-    
-    public enum GameState { Puzzle, Combat, Exploration, Chapel, Boss, Dungeon, Menu }
+
+    public enum GameState { Puzzle, Combat, Exploration, Chapel, Boss, Dungeon, Menu, Boss1, Boss2 }
     public GameState currentState;
     public GameState auxState;
+    private PlayerMovement player;
 
     void Awake()
     {
@@ -32,11 +36,26 @@ public class MusicManager : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         SetGameState(GameState.Exploration); // Start with exploration music by default
     }
 
-    public void Update(){
-        if(auxState != currentState){
+    public void Update()
+    {
+        if (player.IsDetected())
+        {
+            if (currentState != GameState.Combat)
+            {
+                SetGameState(GameState.Combat);
+            }
+        }
+        else if (currentState == GameState.Combat)
+        {
+            SetGameState(previousState);
+        }
+
+        if (auxState != currentState)
+        {
             SetGameState(auxState);
         }
     }
@@ -44,10 +63,10 @@ public class MusicManager : MonoBehaviour
     public void SetGameState(GameState newState)
     {
         if (newState == currentState) return;
-
+        previousState = currentState;
         currentState = newState;
         auxState = currentState;
-        
+
         // Choose the appropriate music track
         switch (currentState)
         {
@@ -55,13 +74,21 @@ public class MusicManager : MonoBehaviour
                 PlayMusic(puzzleMusic);
                 break;
             case GameState.Combat:
-                PlayMusic(combatMusic);
+                Debug.Log(combatMusics.Length);
+                int rand = Random.Range(0, combatMusics.Length);
+                PlayMusic(combatMusics[rand]);
                 break;
             case GameState.Exploration:
                 PlayMusic(explorationMusic);
                 break;
             case GameState.Chapel:
                 PlayMusic(chapelMusic);
+                break;
+            case GameState.Boss1:
+                PlayMusic(firstBossMusic);
+                break;
+            case GameState.Boss2:
+                PlayMusic(secondBossMusic);
                 break;
         }
     }
@@ -85,7 +112,7 @@ public class MusicManager : MonoBehaviour
             // for (float t = 0; t < fadeOutDuration; t += Time.deltaTime)
             // {
             //     currentMusic.volume = Mathf.Lerp(1, 0, t / fadeOutDuration);
-                 yield return null;
+            yield return null;
             // }
             currentMusic.Stop();
             currentMusic.volume = 0.05f;
@@ -98,7 +125,7 @@ public class MusicManager : MonoBehaviour
         // for (float t = 0; t < fadeInDuration; t += Time.deltaTime)
         // {
         //     currentMusic.volume = Mathf.Lerp(0, 0.05f, t / fadeInDuration);
-            yield return null;
+        yield return null;
         // }
     }
 }

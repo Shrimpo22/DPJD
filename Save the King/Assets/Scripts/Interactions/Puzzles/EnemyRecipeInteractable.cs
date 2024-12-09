@@ -21,9 +21,12 @@ public class EnemyRecipeInteractable : CamInteractable
     public int textoInteracaoCount = 1;
     public GameObject icon;
     public GameObject interact;
+
+    public GameObject healthBar;
     
     public override void Start()
     {
+        healthBar.SetActive(false);
         InvToOpen = false;
         base.Start();
         targetObject = GameObject.FindGameObjectWithTag("NPCVIBES");
@@ -81,6 +84,7 @@ public class EnemyRecipeInteractable : CamInteractable
                 
                 
             }
+            healthBar.SetActive(true);
             targetObject.tag = "Target";
             
             

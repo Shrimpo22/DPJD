@@ -96,18 +96,18 @@ public class Door : MonoBehaviour, IOpenable
     // Update method to handle door rotation
     public void Update()
     {
-        if (!IsLocked && IsClosed && Math.Abs(currentRotation) <= Math.Abs(targetRotation - 5f))
+        if (!IsLocked && IsClosed && currentRotation < targetRotation * Angle)
         {
             float rotationThisFrame = RotationSpeed * Time.deltaTime;
             transform.Rotate(new Vector3(0, -rotationThisFrame * Angle, 0), Space.Self);
             currentRotation += rotationThisFrame;
 
-            /*if (currentRotation >= targetRotation * Angle)
+            if (currentRotation >= targetRotation * Angle)
             {
                 targetRotation = 0f;
                 currentRotation = 0f;
                 IsClosed = false;
-            }*/
+            }
         }
     }
 

@@ -5,24 +5,63 @@ using UnityEngine.UI;
 
 public class UIHealthBar : MonoBehaviour
 {
-    public Transform target;
+    public Transform target; // The current target
     public Image foregroundImage;
     public Image backgroundImage;
-    public Vector3 offset;
+    public Vector3 offset; // Offset for non-boss health bars
     public Transform headTarget;
     public Transform enemyTarget;
     public LayerMask ignoreLayer;
+    public bool isBoss; // Flag to check if the target is a boss
 
-    // Update is called once per frame
     void LateUpdate()
     {
-        Vector3 direction = (target.position - Camera.main.transform.position).normalized;
-        foregroundImage.enabled = IsEnemyVisible() && !IsEnemyOccluded();
-        backgroundImage.enabled = IsEnemyVisible() && !IsEnemyOccluded();
-        transform.position = Camera.main.WorldToScreenPoint(target.position + offset);
+        if (isBoss)
+        {
+            PositionBossHealthBar();
+        }
+        else
+        {
+            PositionEnemyHealthBar();
+        }
     }
 
-    public void SetHealthBarPercentage(float percentage){
+    void PositionEnemyHealthBar()
+    {
+        Vector3 direction = (target.position - Camera.main.transform.position).normalized;
+        bool isVisible = IsEnemyVisible() && !IsEnemyOccluded();
+        foregroundImage.enabled = isVisible;
+        backgroundImage.enabled = isVisible;
+        GetComponent<RectTransform>().localScale = Vector3.one;
+
+
+        if (isVisible)
+        {
+            transform.position = Camera.main.WorldToScreenPoint(target.position + offset);
+        }
+    }
+
+    void PositionBossHealthBar()
+    {
+        // Always display the boss health bar at the top-center of the screen
+        foregroundImage.enabled = true;
+        backgroundImage.enabled = true;
+        RectTransform rectTransform = GetComponent<RectTransform>();
+
+        // Set the anchor to the bottom-center
+        rectTransform.anchorMin = new Vector2(0.5f, 0f); // Bottom-left corner of the anchor
+        rectTransform.anchorMax = new Vector2(0.5f, 0f); // Top-right corner of the anchor
+
+        // Set the pivot to the bottom-center
+        rectTransform.pivot = new Vector2(0.5f, 0f); // Centered horizontally and at the bottom vertically
+
+        // Optional: Adjust position relative to the anchor
+        rectTransform.anchoredPosition = new Vector2(0f, 50f);
+        rectTransform.localScale = new Vector3(5.08892584f,1.7593323f,1.82787776f);
+    }
+
+    public void SetHealthBarPercentage(float percentage)
+    {
         Debug.Log("Percentage: " + percentage);
         float parentWidth = GetComponent<RectTransform>().rect.width;
         float width = parentWidth * percentage;
@@ -39,11 +78,10 @@ public class UIHealthBar : MonoBehaviour
                 viewportPoint.z >= 0);  // Z must be positive, in front of the camera
     }
 
-    // Check if there's an obstacle between the camera and the enemy
     bool IsEnemyOccluded()
     {
-        Vector3 directionToEnemy = enemyTarget.position -  Camera.main.transform.position;
-        float distanceToEnemy = Vector3.Distance( Camera.main.transform.position, enemyTarget.position);
+        Vector3 directionToEnemy = enemyTarget.position - Camera.main.transform.position;
+        float distanceToEnemy = Vector3.Distance(Camera.main.transform.position, enemyTarget.position);
 
         // Cast a ray from the camera to the enemy
         RaycastHit hit;
@@ -58,10 +96,10 @@ public class UIHealthBar : MonoBehaviour
         return false;
     }
 
-    void OnDrawGizmos(){
+    void OnDrawGizmos()
+    {
         Vector3 a = target.position - Camera.main.transform.position.normalized;
         Gizmos.color = Color.cyan;
         Gizmos.DrawLine(Camera.main.transform.position, a);
-
     }
 }

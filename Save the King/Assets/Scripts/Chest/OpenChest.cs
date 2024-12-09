@@ -6,11 +6,16 @@ using UnityEngine.UI;
 
 public class OpenChest : MonoBehaviour, IOpenable
 {
+    public bool isLocked = false;
     public float rotationAmount = 90f;
     public Vector3 rotationAxis = Vector3.up;
     public float rotationSpeed = 1f;
     public float rayDistance = 5f;
     private bool open = false;
+
+    public AudioClip LockedSound;
+    public AudioClip UnlockedOpenSound;
+    public Key.KeyType KeyType;
 
     public AudioSource audioSource;
 
@@ -36,6 +41,7 @@ public class OpenChest : MonoBehaviour, IOpenable
 
         if (audioSource != null)
         {
+            audioSource.clip = UnlockedOpenSound;
             audioSource.Play();
         }
 
@@ -59,12 +65,28 @@ public class OpenChest : MonoBehaviour, IOpenable
         open = true;
         //this.GetComponent<BoxCollider>().enabled = false;
     }
+
     public void Open(GameObject player, Canvas canvas)
     {
-        if(!open && !isRotating){
+        if(!isLocked && !open && !isRotating){
             canvas.gameObject.SetActive(false);
             StartCoroutine(RotateObject());
             this.GetComponent<Collider>().enabled = false;
+        }else if(isLocked){
+             GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
+            if (inventory.GetComponent<Inventory>().HasItemNamed(KeyType.ToString()))
+            {
+                isLocked = false;
+                inventory.GetComponent<Inventory>().DropItemByName(KeyType.ToString());
+                Open(player, canvas);
+            }
+            else
+            {
+                audioSource.clip = LockedSound;
+                audioSource.Play();
+                IsClosed = true;
+                canvas.GetComponentInChildren<TMP_Text>().text = "Locked";
+            }
         }
     }
 

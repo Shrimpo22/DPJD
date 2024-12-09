@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using Cinemachine;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -15,59 +17,76 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject settingsMenuUI;
 
-    public Slider mouseSlider;
+    [SerializeField] private Slider mouseSlider;
     public CinemachineFreeLook cam;
-
-    public GameObject mouseGameObject;
 
     private PlayerControls controls;
     public Inventory inv;
-
+    
     [SerializeField] private AudioMixer myMixer;
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
 
-    public void SetMusicVolume()
-    {
+    public void SetMusicVolume(){
         float volume = musicSlider.value;
-        myMixer.SetFloat("Music", Mathf.Log10(volume) * 20);
+        myMixer.SetFloat("Music", Mathf.Log10(volume)*20);
+        PlayerPrefs.SetFloat("musicVolume", volume);
     }
 
-    public void SetSFXVolume()
-    {
+    public void SetSFXVolume(){
         float volume = sfxSlider.value;
-        myMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+        myMixer.SetFloat("SFX", Mathf.Log10(volume)*20);
+        PlayerPrefs.SetFloat("SFXVolume", volume);
     }
 
-    private void Start()
-    {
+    private void LoadSettings(){
+        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+        mouseSlider.value = PlayerPrefs.GetFloat("cameraSensitivity");
+
         SetMusicVolume();
         SetSFXVolume();
+        ChangeSensitivity();
     }
 
-    public static bool isPaused()
-    {
+    public void ChangeSensitivity(){
+        float sensitivity = mouseSlider.value;
+        PlayerPrefs.SetFloat("cameraSensitivity", sensitivity);
+        if(cam != null){
+            cam.m_XAxis.m_MaxSpeed = sensitivity;
+            cam.m_YAxis.m_MaxSpeed = sensitivity/200;
+        }
+    }
+
+
+    private void Start(){
+        Debug.Log("ENTROU");
+        if(PlayerPrefs.HasKey("musicVolume")){
+            LoadSettings();
+        }else{
+            SetMusicVolume();
+            SetSFXVolume();
+            ChangeSensitivity();
+        }
+    }
+
+    public static bool isPaused(){
         return GameIsPaused;
     }
 
     // Update is called once per frame
     void HandleBack()
     {
-        if (!inv.isInInventory())
-        {
-            if (GameIsPaused)
-            {
-                if (inSettings)
-                {
+        if (this == null || pauseMenuUI == null) return;
+        
+        if(!inv.isInInventory()){
+            if (GameIsPaused){
+                if (inSettings){
                     Pause();
-                }
-                else
-                {
+                } else {
                     Resume();
                 }
-            }
-            else
-            {
+            } else {
                 Pause();
             }
         }
@@ -79,11 +98,7 @@ public class PauseMenu : MonoBehaviour
         controls.Gameplay.Back.performed += ctx => HandleBack();
     }
 
-    public void Resume()
-    {
-        mouseGameObject.SetActive(false);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = false;
+    public void Resume (){
         Debug.Log("[TimeScale] Resuming time in PauseMenu");
         AudioListener.pause = false;
         pauseMenuUI.SetActive(false);
@@ -92,20 +107,7 @@ public class PauseMenu : MonoBehaviour
     }
 
 
-    public void Pause()
-    {
-        if (mouseGameObject != null)
-        {
-            Mouse mouse = mouseGameObject.GetComponent<Mouse>();
-            mouse.optionsDisplayed = false;
-            mouse.item = null;
-        }
-
-        mouseGameObject.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-        
+    public void Pause (){
         Debug.Log("[TimeScale] Pausing time in PauseMenu");
         AudioListener.pause = true;
         pauseMenuUI.SetActive(true);
@@ -113,31 +115,33 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         GameIsPaused = true;
         inSettings = false;
+        
     }
 
-    public void Settings()
-    {
+    public void Settings (){
         pauseMenuUI.SetActive(false);
         settingsMenuUI.SetActive(true);
         inSettings = true;
     }
 
-    public void ChangeSensitivity()
-    {
-        cam.m_XAxis.m_MaxSpeed = mouseSlider.value;
-        cam.m_YAxis.m_MaxSpeed = mouseSlider.value / 200;
-    }
 
-    public void ExitGame()
-    {
-        Debug.Log("Exitting Game...");
+
+    public void ExitGame (){
+        SceneManager.LoadSceneAsync("Main Menu");
+        Time.timeScale = 1f;
+        
     }
 
     public void ResetAllBindings()
     {
-        cam.m_XAxis.m_MaxSpeed = 300f;
-        cam.m_YAxis.m_MaxSpeed = 2f;
         mouseSlider.value = 300f;
+        ChangeSensitivity();
+
+        musicSlider.value = 0.75f;
+        SetMusicVolume();
+
+        sfxSlider.value = 0.75f;
+        SetSFXVolume();
     }
-    
+
 }

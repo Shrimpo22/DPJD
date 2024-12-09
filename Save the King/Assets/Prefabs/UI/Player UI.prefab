@@ -1468,7 +1468,7 @@ GameObject:
   - component: {fileID: 543503661019760539}
   m_Layer: 5
   m_Name: opcoes
-  m_TagString: Untagged
+  m_TagString: opcoes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1846,7 +1846,7 @@ GameObject:
   - component: {fileID: 1887904814577751256}
   m_Layer: 5
   m_Name: Descricao Manager
-  m_TagString: Untagged
+  m_TagString: TaskManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

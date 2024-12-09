@@ -69,6 +69,15 @@ public class DoubleDoor : MonoBehaviour, IOpenable
         IsClosed = false;
     }
 
+        public void reverseOpenDoors()
+    {
+        leftDoorComp.Angle = 1; // Left door opens in the opposite direction
+        rightDoorComp.Angle = -1; // Right door opens in the opposite direction
+        leftDoorComp.targetRotation = 90f;
+        rightDoorComp.targetRotation = -90f;
+        IsClosed = true;
+    }
+
     public void Open(GameObject player, Canvas canvas)
     {
         if (!IsLocked && IsClosed)

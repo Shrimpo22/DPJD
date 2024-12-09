@@ -14,7 +14,7 @@ public class OpenChest : MonoBehaviour, IOpenable
 
     public AudioSource audioSource;
 
-    private bool isRotating = false;
+    public bool isRotating = false;
 
     public bool IsClosed 
     { 
@@ -59,7 +59,6 @@ public class OpenChest : MonoBehaviour, IOpenable
         open = true;
         //this.GetComponent<BoxCollider>().enabled = false;
     }
-
     public void Open(GameObject player, Canvas canvas)
     {
         if(!open && !isRotating){

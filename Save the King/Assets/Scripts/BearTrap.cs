@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -25,9 +26,8 @@ public class BearTrap : MonoBehaviour
 
         Debug.Log("collided " + other.tag);
         // Check if the player enters the collider (assuming the player has a "Player" tag)
-        if (other.CompareTag("Player") && !isTriggered && this.transform.position.y <0.3f)
+        if (other.CompareTag("Player") && !isTriggered && Math.Abs(this.transform.rotation.x) < 1f)
         {
-
             // Trigger the "CloseTrap" animation
             trapAnimator.SetTrigger("CloseTrap");
 

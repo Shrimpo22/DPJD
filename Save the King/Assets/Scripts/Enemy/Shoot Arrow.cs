@@ -10,6 +10,10 @@ public class ArrowShooter : MonoBehaviour
 
     public float arrowSpeed = 20f; // Speed of the arrow
 
+    public void Start(){
+        targetDirection = FindChildRecursive(GameObject.FindGameObjectWithTag("Player").transform, "mixamorig:Spine2");
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.J))
@@ -51,6 +55,20 @@ public class ArrowShooter : MonoBehaviour
             Gizmos.color = Color.blue;
             Gizmos.DrawLine(arrowProjectile.transform.position, targetDirection.transform.position);
         }
+    }
+
+    Transform FindChildRecursive(Transform parent, string childName)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.name == childName)
+                return child;
+
+            Transform result = FindChildRecursive(child, childName);
+            if (result != null)
+                return result;
+        }
+        return null;
     }
 
     IEnumerator activateCollider(){

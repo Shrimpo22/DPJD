@@ -17,11 +17,18 @@ public class PlayerAnimSoundEvents : MonoBehaviour
     public AudioClip dodge;
     public AudioClip walk;
     public AudioClip die;
+    public AudioClip stealtAttackSound;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+    }
+
+    public void PlayStealthAttackSound()
+    {
+        if(die != null)
+            audioSource.PlayOneShot(stealtAttackSound);
     }
 
     public void PlayM1Sound()

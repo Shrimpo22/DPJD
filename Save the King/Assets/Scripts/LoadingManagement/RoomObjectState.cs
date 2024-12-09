@@ -39,7 +39,7 @@ public class RoomObjectState : MonoBehaviour
     // Reset the object to its initial state
     public void ResetToInitialState()
     {
-        // For non-pickup items, just reset the position, rotation, and active state
+        Debug.Log("object name : " + gameObject.name);
         Door door = gameObject.GetComponent<Door>();
         if (door != null)
         {
@@ -67,7 +67,7 @@ public class RoomObjectState : MonoBehaviour
         if (dd != null)
         {
             Debug.Log("im inside doouble door");
-            dd.IsClosed = true;
+            //dd.IsClosed = true;
             dd.reverseOpenDoors();
             dd.IsLocked = isLocked;
         }

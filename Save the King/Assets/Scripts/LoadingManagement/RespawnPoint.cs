@@ -21,9 +21,15 @@ public class RespawnPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {   
-        if (collision.gameObject == _player)
+        if (collision.gameObject == _player && GameManager.instance.respawnPoint != gameObject.transform)
         {
+            if ( GameManager.instance.respawnPoint != null)
+            {
+                Debug.Log("Before respawn point : " + GameManager.instance.respawnPoint);
+                Destroy(GameManager.instance.respawnPoint.gameObject);
+            }
             GameManager.instance.respawnPoint = gameObject.transform;
+            Debug.Log("After respawn point : " + GameManager.instance.respawnPoint);
             EnemyManager currentEnemyManager = gameObject.transform.root.GetComponentInChildren<EnemyManager>();
             GameManager.instance.currentEnemyManager = currentEnemyManager;
 

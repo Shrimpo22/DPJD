@@ -127,8 +127,9 @@ public class PauseMenu : MonoBehaviour
 
 
     public void ExitGame (){
-        //SceneManager.LoadSceneAsync("Main Menu");
-        Debug.Log("Alterar Exit");
+        SceneManager.LoadSceneAsync("Main Menu");
+        Time.timeScale = 1f;
+        
     }
 
     public void ResetAllBindings()

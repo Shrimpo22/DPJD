@@ -124,6 +124,7 @@ public class book : MonoBehaviour
             {
                 backTexts[indice-1].SetActive(false);
                 frontTexts[indice].SetActive(false);
+                
                 backTexts[indice].SetActive(true);
             }
             else if(indice == 0){
@@ -132,10 +133,13 @@ public class book : MonoBehaviour
                 frontTexts[indice].SetActive(false);
 
             }else{
-                backTexts[indice].SetActive(true);
+                
                 backTexts[indice-1].SetActive(false);
+                
                 frontTexts[indice+1].SetActive(true);
                 frontTexts[indice].SetActive(false);
+                
+                backTexts[indice].SetActive(true);
 
             }
             

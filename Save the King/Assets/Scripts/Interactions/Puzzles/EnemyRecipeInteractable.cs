@@ -101,7 +101,7 @@ public class EnemyRecipeInteractable : CamInteractable
         isTalkingToNpc = true;
         if (textoInteracaoCount == 1)
         {
-            textInteraction.text = "I want you to make me a dish, go to the book on top of the table do the 3rd recipe, the ingredients are on the vases , if you do it successfully you will receive a reward and the key, if you dont good luck ";
+            textInteraction.text = "I want you to make me a dish, go to the book on top of the table do the 3rd recipe, the ingredients are on the top of the tabels , if you do it successfully you will receive a reward and the key, if you dont good luck ";
             texto.gameObject.SetActive(true);
             icon.SetActive(false);
 

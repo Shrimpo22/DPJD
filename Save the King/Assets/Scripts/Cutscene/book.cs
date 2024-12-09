@@ -176,7 +176,7 @@ public class book : MonoBehaviour
 
 
     public void startGame(){
-        SceneManager.LoadSceneAsync("Cozinha");
+        SceneManager.LoadSceneAsync("FullGame");
     }
 
 

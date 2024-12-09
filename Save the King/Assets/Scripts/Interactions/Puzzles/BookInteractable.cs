@@ -54,6 +54,12 @@ public class BookInteractable : CamInteractable
             myCamera.gameObject.SetActive(true);
             isLooking = true;
             textToRead.SetActive(true);
+            if (TryGetComponent(out AudioSource audioSource) && audioSource.clip != null)
+            {
+                audioSource.enabled = true;
+                audioSource.volume = 0.3f; // Ajuste o volume se necessário
+                audioSource.Play();
+            }
            
         }
         

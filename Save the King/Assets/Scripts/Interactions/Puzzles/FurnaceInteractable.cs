@@ -33,7 +33,7 @@ public class FurnaceInteractable : CamInteractable
     {
         InvToOpen = true;
         base.Start();
-        aguaFerver.SetActive(true);
+        
         i = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
         comidaCorreta.Add("BlueItem");
         comidaCorreta.Add("RedItem");
@@ -61,6 +61,7 @@ public class FurnaceInteractable : CamInteractable
 
         if (i.isLookingAtCook == true)
         {
+
             if (comidaTentativa.Count > 0 && !isComplete)
             {
                 refazer.SetActive(true);

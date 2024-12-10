@@ -39,12 +39,6 @@ public class OpenChest : MonoBehaviour, IOpenable
     {
         isRotating = true;
 
-        if (audioSource != null)
-        {
-            audioSource.clip = UnlockedOpenSound;
-            audioSource.Play();
-        }
-
         Quaternion startRotation = transform.rotation;
         Quaternion endRotation = transform.rotation * Quaternion.Euler(rotationAxis * rotationAmount);
 
@@ -71,6 +65,8 @@ public class OpenChest : MonoBehaviour, IOpenable
         if(!isLocked && !open && !isRotating){
             canvas.gameObject.SetActive(false);
             StartCoroutine(RotateObject());
+            audioSource.clip = UnlockedOpenSound;
+            audioSource.Play();
             this.GetComponent<Collider>().enabled = false;
         }else if(isLocked){
              GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");

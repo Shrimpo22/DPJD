@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CandelabraLights : MonoBehaviour
 {
-    AudioSource audiosource;
+    public AudioSource audiosource;
     public AudioClip burning;
     public AudioClip ignite;
     public AudioClip blow;
@@ -12,7 +12,6 @@ public class CandelabraLights : MonoBehaviour
     public bool solved = false;
 
     void Start(){
-        audiosource = gameObject.AddComponent<AudioSource>();
         audiosource.maxDistance = 5.0f;
         audiosource.volume = 0.5f;
     }

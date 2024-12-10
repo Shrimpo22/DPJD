@@ -8,21 +8,14 @@ public class AudioAgua : MonoBehaviour
     public float minInterval = 3f; // Tempo mínimo entre reproduções
     public float maxInterval = 8f; // Tempo máximo entre reproduções
 
-     private AudioSource audioSource;
+    public AudioSource audioSource;
 
     void Start()
     {
-        // Adiciona um componente AudioSource ao GameObject (se ainda não existir)
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
 
         // Configura o AudioSource
         audioSource.clip = soundClip;
         audioSource.playOnAwake = false;
-        audioSource.volume = 0.25f; // Define o volume para 0.25
 
         // Inicia a reprodução aleatória
         StartCoroutine(PlaySoundRandomly());

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.Audio;
 
 public class Potions : Item
 {
@@ -41,7 +42,12 @@ public class Potions : Item
             AudioClip clip = Resources.Load<AudioClip>("Sounds/PotionAudio");
             if (clip != null)
             {
+                AudioMixer audioMixer = Resources.Load<AudioMixer>("Sounds/AudioMixer");
+                string groupName = "SFX"; 
+                AudioMixerGroup[] groups = audioMixer.FindMatchingGroups(groupName);
                 AudioSource audioSource = new GameObject("PotionAudioSource").AddComponent<AudioSource>();
+                audioSource.outputAudioMixerGroup = groups[0];
+                audioSource.volume = 0.5f;
                 audioSource.clip = clip;
                 audioSource.Play();
                 GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
@@ -68,7 +74,6 @@ public class Potions : Item
 
                 Debug.Log("Potions used");
                     
-               
             }
             Debug.Log("Potions");
         };

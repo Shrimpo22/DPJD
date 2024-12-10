@@ -233,11 +233,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94cc1630b1db3fa448a90505cfb78221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLocked: 0
   rotationAmount: -90
   rotationAxis: {x: 1, y: 0, z: 0}
   rotationSpeed: 0.5
   rayDistance: 5
+  LockedSound: {fileID: 8300000, guid: adc167781fee79d4692734f82554a0b8, type: 3}
+  UnlockedOpenSound: {fileID: 8300000, guid: 2299cbb9c2d964f4d806cf5d9de65664, type: 3}
+  KeyType: 0
   audioSource: {fileID: 5853078484542749328}
+  isRotating: 0
 --- !u!82 &5853078484542749328
 AudioSource:
   m_ObjectHideFlags: 0
@@ -247,10 +252,10 @@ AudioSource:
   m_GameObject: {fileID: 194870}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2299cbb9c2d964f4d806cf5d9de65664, type: 3}
+  OutputAudioMixerGroup: {fileID: 5850483010614593750, guid: 2c9415e2863c0c94fb7c438071f3c24c, type: 2}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -294,7 +299,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

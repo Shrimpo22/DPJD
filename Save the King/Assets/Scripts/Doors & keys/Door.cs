@@ -31,7 +31,7 @@ public class Door : MonoBehaviour, IOpenable
     }
 
     public int Angle = 1;
-    public float RotationSpeed { get; set; } = 90f;
+    public float RotationSpeed { get; set; } = 45f;
     public AudioClip LockedSound;
     public AudioClip UnlockedOpenSound;
     public Key.KeyType KeyType;
@@ -39,7 +39,7 @@ public class Door : MonoBehaviour, IOpenable
     // Additional private fields for internal use
     private float currentRotation = 0f;
     public float targetRotation = 0f;
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     // Start method
     public void Start()

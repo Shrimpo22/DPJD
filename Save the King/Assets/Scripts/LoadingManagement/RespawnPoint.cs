@@ -10,20 +10,20 @@ public class RespawnPoint : MonoBehaviour
     public List<GameObject> pickablesToSpawn;
     public List<GameObject> pickablesToSpawn2;
     public bool canBringSword = true;
-    public bool firstCollision;
+    public bool firstCollision = true;
+    public bool initialDone = false;
 
 
     void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        firstCollision = true;
     }
 
     private void OnTriggerEnter(Collider collision)
     {   
-        if (collision.gameObject == _player && GameManager.instance.respawnPoint != gameObject.transform)
+        if (collision.gameObject == _player)
         {
-            if ( GameManager.instance.respawnPoint != null)
+            if ( GameManager.instance.respawnPoint != null && GameManager.instance.respawnPoint != gameObject.transform)
             {
                 Debug.Log("Before respawn point : " + GameManager.instance.respawnPoint);
                 Destroy(GameManager.instance.respawnPoint.gameObject);
@@ -59,15 +59,13 @@ public class RespawnPoint : MonoBehaviour
                 }
             }
         }
-        if (firstCollision){
-            SavePickablesInitial();
-            SavePickablesRecursive();
-        }
-        else
+        Debug.Log("first collision ? : " + firstCollision);
+        if (!initialDone)
         {
-            pickablesToSpawn2.RemoveAll(item => true);
-            SavePickablesRecursive();
+            SavePickablesInitial(); 
         }
+        pickablesToSpawn2.RemoveAll(item => true);
+        SavePickablesRecursive();
 
     }
 
@@ -91,6 +89,7 @@ public class RespawnPoint : MonoBehaviour
                 pickablesToSpawn.Add(pickable);
             }
         }
+        initialDone = true;
     }
     
 }

@@ -72,13 +72,13 @@ public class RoomObjectState : MonoBehaviour
             dd.IsLocked = isLocked;
         }
 
-        /*BearTrap bt = gameObject.GetComponent<BearTrap>();
+        BearTrap bt = gameObject.GetComponent<BearTrap>();
         if(bt != null)
         {
-            Instantiate(gameObject, gameObject.transform.position,gameObject.transform.rotation);
-            this.gameObject.SetActive(false);
+            bt.trapAnimator.SetTrigger("OpenTrap");
+            bt.isTriggered = false     ;
 
-        }*/
+        }
 
         OpenChest chest = gameObject.GetComponent<OpenChest>();
         if ( chest != null)

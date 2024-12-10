@@ -137,9 +137,16 @@ public class AiAgent : MonoBehaviour
 
     public void Reset() {
         currentHealth = maxHealth;
-        healthBar.gameObject.SetActive(true);
-        if (healthBar) {
+        if (healthBar != null)
+        {
+            healthBar.gameObject.SetActive(true);
             healthBar.SetHealthBarPercentage(1);
+        }
+        EnemyRecipeInteractable npc = gameObject.GetComponent<EnemyRecipeInteractable>();
+        if (npc != null)
+        {
+            npc.usedItem = false;
+            npc.fighting = false;
         }
         collid.enabled = true;
         sensor.enabled = true;

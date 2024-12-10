@@ -21,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
                 animator.Play("takingDamage",0,0f);
             }else if(currentHealth <= 0){
                 GetComponent<PlayerMovement>().enabled = false;
+                GetComponent<CharacterController>().enabled = false;
                 animator.Play("Death");
                 //respawns after 3 seconds
                 StartCoroutine(Respawn());
@@ -65,10 +66,11 @@ public class PlayerHealth : MonoBehaviour
                 }
             }
         }
-
+        //List<GameObject> pickablesToCompareMissing = GameManager.instance.respawnPoint.GetComponent<RespawnPoint>().pickablesToSave;
         List<GameObject> pickablesToSave = GameManager.instance.respawnPoint.GetComponent<RespawnPoint>().pickablesToSpawn;
         List<GameObject> pickablesToSpawn = GameManager.instance.respawnPoint.GetComponent<RespawnPoint>().pickablesToSpawn2;
         GameManager.instance.RespawnNewPickables(pickablesToSpawn, pickablesToSave);
+        //GameManager.instance.RespawnNewPickablesActivate(pickablesToSpawn, pickablesToSave);
         ResetInventory(pickablesToSave);
     }
 
@@ -77,12 +79,18 @@ public class PlayerHealth : MonoBehaviour
         Inventory inventory = FindObjectOfType<Inventory>();
         foreach (var obj in objectsToRemove)
         {
-            PickupInteractable pickable = obj.GetComponentInChildren<PickupInteractable>();
+            PickupInteractable pickable = obj.GetComponentInChildren<PickupInteractable>(); 
                 if (pickable != null && inventory.HasItemNamed(pickable.itemToGive.ToString())) 
             {
                 Debug.Log("removing " + pickable.itemToGive.ToString() + " from inventory.");
                 inventory.DropItemByName(pickable.itemToGive.ToString());
             }
+            FoodInteractable potion = obj.GetComponentInChildren<FoodInteractable>();
+            if (potion != null && inventory.HasItemNamed("Potions"))
+            {
+                inventory.DropItemByName("Potions");
+            }
+            
         }
     }
     public GameObject GetItemByName(List<GameObject> objects, string targetName)
@@ -110,7 +118,7 @@ public class PlayerHealth : MonoBehaviour
         player.transform.rotation = Quaternion.Euler(0, 90, 0); // Set the player's rotation
 
         controller.enabled = true;  // Re-enable the controller
-        
+        GetComponent<PlayerMovement>().NotDetected();
         GetComponent<PlayerMovement>().enabled = true;
         currentHealth = maxHealth; // Resets HealthBar
         

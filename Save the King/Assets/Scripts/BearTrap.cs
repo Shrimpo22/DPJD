@@ -8,7 +8,7 @@ public class BearTrap : MonoBehaviour
 {
     public Animator trapAnimator;  // Reference to the Animator component
     public AudioSource trapSound;  // Reference to the AudioSource component
-    private bool isTriggered = false;  // Prevents the trap from being triggered multiple times
+    public bool isTriggered = false;  // Prevents the trap from being triggered multiple times
     public int trapDamage = 20;  // Initial damage dealt by the trap
     public int bleedingDamage = 3;  // Damage dealt per tick while bleeding
     public float bleedingInterval = 1.0f;  // Time interval between each bleed tick (in seconds)
@@ -26,7 +26,7 @@ public class BearTrap : MonoBehaviour
 
         Debug.Log("collided " + other.tag);
         // Check if the player enters the collider (assuming the player has a "Player" tag)
-        if (other.CompareTag("Player") && !isTriggered && Math.Abs(this.transform.rotation.x) < 1f)
+        if (other.CompareTag("Player") && !isTriggered)
         {
             // Trigger the "CloseTrap" animation
             trapAnimator.SetTrigger("CloseTrap");
@@ -34,7 +34,7 @@ public class BearTrap : MonoBehaviour
             // Play the sound
             trapSound.Play();
 
-             // Access the player's health and apply trap damage
+            // Access the player's health and apply trap damage
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             PlayerMovement playerMovement = other.gameObject.GetComponent<PlayerMovement>();
 
@@ -52,7 +52,6 @@ public class BearTrap : MonoBehaviour
                 // Start bleeding effect
                 StartCoroutine(ApplyBleeding(playerHealth, playerMovement));
             }
-
         }
     }
 

@@ -40,8 +40,11 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (EnemyData data in enemies)
         {
+            Debug.Log("Resetting " + data.enemyObject.name);
             // Reset the position and rotation of each enemy
             data.navMeshAgent.Warp(data.initialPosition);
+            data.enemyObject.GetComponent<Animator>().ResetTrigger("Attack");
+            data.enemyObject.GetComponent<Animator>().ResetTrigger("Throw");
             data.enemyObject.transform.rotation = data.initialRotation;
 
             // Reset any other components (e.g., AI state, health, etc.)

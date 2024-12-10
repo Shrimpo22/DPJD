@@ -10,7 +10,7 @@ public class changeMusic : MonoBehaviour
         musicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
     }
     void OnTriggerEnter(Collider other){
-        if(other.CompareTag("Player") && musicManager.currentState != gameState && musicManager.currentState != MusicManager.GameState.Combat){
+        if(other.CompareTag("Player") && musicManager.currentState != gameState){
             musicManager.SetGameState(gameState);
         }
     }

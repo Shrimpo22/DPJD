@@ -4,6 +4,8 @@ using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class AiAgent : MonoBehaviour
 {
@@ -34,8 +36,9 @@ public class AiAgent : MonoBehaviour
     Collider collid;
 
     public bool canChangeState = true;
+    public bool isBoss = false;
 
-    [SerializeField]UIHealthBar healthBar;
+    [SerializeField] UIHealthBar healthBar;
 
 
     // Start is called before the first frame update
@@ -57,7 +60,7 @@ public class AiAgent : MonoBehaviour
         screenShake = GetComponent<CinemachineImpulseSource>();
         collid = GetComponent<Collider>();
 
-        
+
         stateMachine = new AiStateMachine(this);
         stateMachine.RegisterState(new AiChasePlayerState());
         stateMachine.RegisterState(new AiDeathState());
@@ -65,79 +68,122 @@ public class AiAgent : MonoBehaviour
         stateMachine.RegisterState(new AiLookForPlayerState());
         stateMachine.RegisterState(new AiAttackState());
         stateMachine.ChangeState(initialState);
-        
+
     }
 
     void Update()
     {
-        if(isNpc) return;
+        if (isNpc) return;
         stateMachine.Update();
-        if(navMeshAgent.hasPath){
+        if (navMeshAgent.hasPath)
+        {
             targetSpeed = navMeshAgent.speed;
-        }else{
+        }
+        else
+        {
             targetSpeed = 0;
         }
-        
+
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * 4f);
 
         animator.SetFloat("speed", currentSpeed);
     }
-    
-    public void IncreaseAlertState(){
-        if(alertState < 1){
+
+    public void IncreaseAlertState()
+    {
+        if (alertState < 1)
+        {
             float distanceToPlayer = Vector3.Distance(playerTransform.position, transform.position);
             float distanceFactor;
-            if (distanceToPlayer < 3f){
-                distanceFactor = Mathf.Exp(-0.3f*distanceToPlayer)*20;
-            }else{
-                distanceFactor = Mathf.Exp(-0.3f*distanceToPlayer)*8;
+            if (distanceToPlayer < 3f)
+            {
+                distanceFactor = Mathf.Exp(-0.3f * distanceToPlayer) * 20;
             }
-            if(playerTransform.GetComponent<PlayerMovement>().isCrouching)
+            else
+            {
+                distanceFactor = Mathf.Exp(-0.3f * distanceToPlayer) * 8;
+            }
+            if (playerTransform.GetComponent<PlayerMovement>().isCrouching)
                 distanceFactor /= 2;
             alertState += alertRate * Time.deltaTime * distanceFactor;
-        }else{
-            if(canChangeState){
-                ScreenShake((transform.position - sensor.Objects[0].transform.position).normalized);    
+        }
+        else
+        {
+            if (canChangeState)
+            {
+                ScreenShake((transform.position - sensor.Objects[0].transform.position).normalized);
                 stateMachine.ChangeState(AiStateId.ChasePlayer);
             }
         }
     }
 
-    public void SetAlertState(float amount){
+    public void SetAlertState(float amount)
+    {
         alertState = amount;
     }
-    public void ScreenShake(Vector3 dir){
+    public void ScreenShake(Vector3 dir)
+    {
         Debug.Log("ScreenShake made?");
         screenShake.GenerateImpulseWithVelocity(dir);
     }
-    public void DecreaseAlertState(){
-        if(alertState > 0)
+    public void DecreaseAlertState()
+    {
+        if (alertState > 0)
             alertState -= alertRate * Time.deltaTime;
-        if(alertState < alertRate)
+        if (alertState < alertRate)
             alertState = 0;
     }
-    public void TakeDamage(float amount){
-        if(isNpc) return;
+    public void TakeDamage(float amount)
+    {
+        if (isNpc) return;
         currentHealth -= amount;
-        healthBar.SetHealthBarPercentage(currentHealth/maxHealth);
+        healthBar.SetHealthBarPercentage(currentHealth / maxHealth);
 
-        if(currentHealth > 0){
-            animator.Play("EnemyGetHit",0,0f);
-            SetAlertState(1.2f);
-            stateMachine.ChangeState(AiStateId.ChasePlayer);
+        if (currentHealth > 0)
+        {
+            if (isBoss && currentHealth <= maxHealth / 2)
+            {
+                GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>().SetGameState(MusicManager.GameState.Boss2);
+                gameObject.GetComponent<EnemyAnimSoundEvents>().EnemyGetHit();
+                animator.Play("EnemyGetHit", 0, 0.6f);
+                SetAlertState(1.2f);
+                stateMachine.ChangeState(AiStateId.ChasePlayer);
+            }
+            else
+            {
+                animator.Play("EnemyGetHit", 0, 0f);
+                SetAlertState(1.2f);
+                stateMachine.ChangeState(AiStateId.ChasePlayer);
+            }
         }
-        if(currentHealth <= 0.0f){
+        if (currentHealth <= 0.0f)
+        {
             animator.Play("FallingDeath");
             healthBar.gameObject.SetActive(false);
             collid.enabled = false;
-            sensor.enabled = false;
+            if (sensor != null)
+                sensor.enabled = false;
             stateMachine.ChangeState(AiStateId.Death);
+            if (isBoss)
+            {
+                StartCoroutine(FinalCutscene());
+            }
         }
     }
+    private IEnumerator FinalCutscene()
+    {
+        yield return new WaitForSeconds(2f);
+        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("DestroyAtEnd")){
+            Destroy(obj);
+        }
+        GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>().SetGameState(MusicManager.GameState.Ending);
+        SceneManager.LoadScene("FinalCutscene");
+    }
 
-    public void Reset() {
+    public void Reset()
+    {
         currentHealth = maxHealth;
-        
+
         if (healthBar != null)
         {
             healthBar.gameObject.SetActive(true);
@@ -146,50 +192,69 @@ public class AiAgent : MonoBehaviour
         EnemyRecipeInteractable npc = gameObject.GetComponent<EnemyRecipeInteractable>();
         if (npc != null)
         {
+            isNpc = true;
             npc.usedItem = false;
             npc.fighting = false;
         }
         collid.enabled = true;
-        sensor.enabled = true;
+        if (sensor != null)
+            sensor.enabled = true;
         SetAlertState(0);
-        stateMachine.ChangeState(AiStateId.Idle);
+        stateMachine.ChangeState(initialState);
         animator.Play("Movement");
     }
-    
-    public void EnableCollider(){
+
+    public void EnableCollider()
+    {
         weapon.EnableCollider();
     }
-    public void DisableCollider(){
+    public void DisableCollider()
+    {
         weapon.DisableCollider();
     }
 
-    public void ClearHits(){
+    public void ClearHits()
+    {
         weapon.RemoveHitTargets();
     }
 
-    void OnDrawGizmos(){
-        if(drawAlertState){
+    public void EnableInvulnerability()
+    {
+        this.tag = "Untagged";
+    }
+
+    public void DisableInvulnerability()
+    {
+        this.tag = "Target";
+    }
+
+    void OnDrawGizmos()
+    {
+        if (drawAlertState)
+        {
             Gizmos.color = Color.white;
-            if(alertState > 0 && alertState <= 0.25)
+            if (alertState > 0 && alertState <= 0.25)
                 Gizmos.color = Color.yellow;
-            if(alertState > 0.25 && alertState < 0.75)
+            if (alertState > 0.25 && alertState < 0.75)
                 Gizmos.color = Color.magenta;
-            if(alertState > 0.75 && alertState <= 1)
-                Gizmos.color = Color.red;  
-            Gizmos.DrawSphere(transform.position, 0.5f);      
+            if (alertState > 0.75 && alertState <= 1)
+                Gizmos.color = Color.red;
+            Gizmos.DrawSphere(transform.position, 0.5f);
         }
-        if(drawPatrol && patrolPoints.Length > 0){
-            
+        if (drawPatrol && patrolPoints.Length > 0)
+        {
+
             Transform lastTransform = patrolPoints[0];
             Vector3 lastPosition = lastTransform.position;
             Vector3 initialPosition = lastPosition;
             Gizmos.color = Color.yellow;
             Gizmos.DrawSphere(lastPosition, 0.2f);
-            for(int i = 1; i< patrolPoints.Length; i++){
+            for (int i = 1; i < patrolPoints.Length; i++)
+            {
                 Vector3 aux1 = patrolPoints[i].position;
                 Gizmos.color = Color.black;
                 Gizmos.DrawLine(lastPosition, aux1);
-                
+
                 lastPosition = aux1;
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawSphere(aux1, 0.2f);
@@ -198,7 +263,7 @@ public class AiAgent : MonoBehaviour
 
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(initialPosition, lastPosition);
-            
+
 
         }
     }

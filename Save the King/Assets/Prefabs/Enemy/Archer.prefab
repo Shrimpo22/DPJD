@@ -1379,6 +1379,7 @@ MonoBehaviour:
   currentSpeed: 0
   animator: {fileID: 0}
   canChangeState: 1
+  isBoss: 0
   healthBar: {fileID: 0}
 --- !u!195 &5010491809163922080
 NavMeshAgent:

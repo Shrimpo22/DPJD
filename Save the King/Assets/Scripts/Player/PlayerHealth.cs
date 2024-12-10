@@ -43,6 +43,7 @@ public class PlayerHealth : MonoBehaviour
         EnemyManager enemyManager = GameManager.instance.currentEnemyManager;
         if (GameManager.instance != null && GameManager.instance.respawnPoint != null)
         {
+            //GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>().SetGameState(GameManager.instance.respawnPoint.GetComponent<RespawnPoint>().musicToChangeTo);
             ResetPlayer();
             if (enemyManager != null)
             {
@@ -119,7 +120,8 @@ public class PlayerHealth : MonoBehaviour
         CharacterController controller = player.GetComponent<CharacterController>();
         controller.enabled = false; // Disable temporarily to prevent conflicts
         GetComponent<PlayerMovement>().NotDetected();
-        GetComponent<PlayerMovement>().animator.SetBool("isHurt", false);
+        GetComponent<PlayerMovement>().ResetInteraction();
+        GetComponent<PlayerMovement>().isTrapped = false;
         animator.Play("Movement"); // Plays normal animations
         player.transform.position = GameManager.instance.respawnPoint.position; // Moves player to respawn point position
         player.transform.rotation = Quaternion.Euler(0, 90, 0); // Set the player's rotation

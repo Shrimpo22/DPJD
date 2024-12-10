@@ -28,6 +28,16 @@ public class DetectionArrow : MonoBehaviour
     // Dictionary to keep track of arrows associated with each detecting enemy
     private Dictionary<EnemyDetection, GameObject> activeArrows = new Dictionary<EnemyDetection, GameObject>();
 
+    public void ClearActiveArrows()
+    {
+        foreach (var arrow in activeArrows)
+        {
+            // Destroy the GameObject associated with each key
+            Destroy(arrow.Value);
+            arrow.Key.gameObject.SetActive(false);
+        }
+        activeArrows.Clear();
+    }
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;

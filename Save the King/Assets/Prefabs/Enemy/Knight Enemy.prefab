@@ -922,7 +922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92fd3101530fd046bff468eedb4fa81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 30
   attackSpeed: 0
 --- !u!1 &3174857520377167367
 GameObject:
@@ -1874,6 +1874,7 @@ MonoBehaviour:
   currentSpeed: 0
   animator: {fileID: 0}
   canChangeState: 1
+  isBoss: 0
   healthBar: {fileID: 0}
 --- !u!195 &1716146390763503249
 NavMeshAgent:

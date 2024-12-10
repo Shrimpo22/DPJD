@@ -23,7 +23,7 @@ public class DoubleDoor : MonoBehaviour, IOpenable
     }
 
     public int Angle = 1;
-    public float RotationSpeed { get; set; } = 90f;
+    public float RotationSpeed = 90f;
     public AudioClip LockedSound;
     public AudioClip UnlockedOpenSound;
     public Key.KeyType KeyType;
@@ -73,6 +73,8 @@ public class DoubleDoor : MonoBehaviour, IOpenable
         rightDoorComp.Angle = 1; // Right door opens in the opposite direction
         leftDoorComp.targetRotation = -90f;
         rightDoorComp.targetRotation = 90f;
+        leftDoorComp.RotationSpeed = RotationSpeed;
+        rightDoorComp.RotationSpeed = RotationSpeed;
         IsClosed = false;
     }
 

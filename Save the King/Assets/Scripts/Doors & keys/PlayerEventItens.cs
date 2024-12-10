@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Data.Common;
 using TMPro;
 using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Video;

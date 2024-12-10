@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RespawnPoint : MonoBehaviour
 {
+    public MusicManager.GameState musicToChangeTo = MusicManager.GameState.Exploration;
     private GameObject _player;
     [SerializeField] public List<GameObject> roomObjects; // List of objects in the room to track
     [SerializeField] public List<GameObject> pickablesToSave; // List of objects in the room to track

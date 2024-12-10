@@ -26,4 +26,5 @@ public enum ItemType
     ItemX,
     Crowbar,
     Plate,
+    GreatSword,
 }

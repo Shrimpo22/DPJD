@@ -17,18 +17,18 @@ public class book : MonoBehaviour
     [SerializeField] GameObject forwardButton;
     public GameObject start;
 
-    
+
     private void Start()
     {
         InitialState();
-        
+
     }
 
     public void InitialState()
     {
-        for (int i=0; i<pages.Count; i++)
+        for (int i = 0; i < pages.Count; i++)
         {
-            pages[i].transform.rotation=Quaternion.identity;
+            pages[i].transform.rotation = Quaternion.identity;
         }
         pages[0].SetAsLastSibling();
         backButton.SetActive(false);
@@ -39,7 +39,7 @@ public class book : MonoBehaviour
     {
         if (rotate == true) { return; }
         index++;
-        float angle = 180; 
+        float angle = 180;
         ForwardButtonActions();
         pages[index].SetAsLastSibling();
         StartCoroutine(Rotate(angle, true));
@@ -55,7 +55,8 @@ public class book : MonoBehaviour
         if (index == pages.Count - 1)
         {
             forwardButton.SetActive(false); //if the page is last then we turn off the forward button
-            start.SetActive(true);
+            if (start != null)
+                start.SetActive(true);
         }
     }
 
@@ -91,26 +92,26 @@ public class book : MonoBehaviour
         UpdateTextVisibility(forward);
         while (true)
         {
-            
+
             rotate = true;
             Quaternion targetRotation = Quaternion.Euler(0, angle, 0);
             value += Time.deltaTime * pageSpeed;
             pages[index].rotation = Quaternion.Slerp(pages[index].rotation, targetRotation, value); //smoothly turn the page
             float angle1 = Quaternion.Angle(pages[index].rotation, targetRotation); //calculate the angle between the given angle of rotation and the current angle of rotation
-                       
+
             if (angle1 < 0.1f)
             {
                 if (forward == false)
                 {
                     index--;
                 }
-                
-                
+
+
                 rotate = false;
                 break;
 
             }
-            
+
             yield return null;
 
         }
@@ -119,51 +120,57 @@ public class book : MonoBehaviour
     {
         if (x)
         {
-            
-            if( indice+1 == backTexts.Count )
+
+            if (indice + 1 == backTexts.Count)
             {
-                backTexts[indice-1].SetActive(false);
-                frontTexts[indice].SetActive(false);
-                
-                backTexts[indice].SetActive(true);
-            }
-            else if(indice == 0){
-                backTexts[indice].SetActive(true);
-                frontTexts[indice+1].SetActive(true);
+                backTexts[indice - 1].SetActive(false);
                 frontTexts[indice].SetActive(false);
 
-            }else{
-                
-                backTexts[indice-1].SetActive(false);
-                
-                frontTexts[indice+1].SetActive(true);
+                backTexts[indice].SetActive(true);
+            }
+            else if (indice == 0)
+            {
+                backTexts[indice].SetActive(true);
+                frontTexts[indice + 1].SetActive(true);
                 frontTexts[indice].SetActive(false);
-                
+
+            }
+            else
+            {
+
+                backTexts[indice - 1].SetActive(false);
+
+                frontTexts[indice + 1].SetActive(true);
+                frontTexts[indice].SetActive(false);
+
                 backTexts[indice].SetActive(true);
 
             }
-            
+
             indice++;
-                
+
         }
         else
         {
-            if( indice == backTexts.Count )
+            if (indice == backTexts.Count)
             {
-                backTexts[indice-1].SetActive(false);
-                frontTexts[indice-1].SetActive(true);
-                backTexts[indice-2].SetActive(true);
+                backTexts[indice - 1].SetActive(false);
+                frontTexts[indice - 1].SetActive(true);
+                backTexts[indice - 2].SetActive(true);
             }
-            else if(indice - 1 == 0){
-                
-                backTexts[indice-1].SetActive(false);
-                frontTexts[indice-1].SetActive(true);
+            else if (indice - 1 == 0)
+            {
+
+                backTexts[indice - 1].SetActive(false);
+                frontTexts[indice - 1].SetActive(true);
                 frontTexts[indice].SetActive(false);
 
-            }else{
+            }
+            else
+            {
                 frontTexts[indice].SetActive(false);
-                frontTexts[indice-1].SetActive(true);
-                if (indice - 2 >= 0)  
+                frontTexts[indice - 1].SetActive(true);
+                if (indice - 2 >= 0)
                 {
                     backTexts[indice - 1].SetActive(false);
                     backTexts[indice - 2].SetActive(true);
@@ -175,7 +182,8 @@ public class book : MonoBehaviour
 
 
 
-    public void startGame(){
+    public void startGame()
+    {
         SceneManager.LoadSceneAsync("FullGame");
     }
 

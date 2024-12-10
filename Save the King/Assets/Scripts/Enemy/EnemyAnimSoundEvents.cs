@@ -71,9 +71,26 @@ public class EnemyAnimSoundEvents : MonoBehaviour
         if(audioConfig.swingSound2 != null)
             audioSource.PlayOneShot(audioConfig.swingSound2);
     }
+      public void EnemyAttackSwing3()
+    {
+        if(audioConfig.swingSound3 != null)
+            audioSource.PlayOneShot(audioConfig.swingSound3);
+    }
+      public void EnemyAttackSwing4()
+    {
+        if(audioConfig.swingSound4 != null)
+            audioSource.PlayOneShot(audioConfig.swingSound4);
+    }
     public void ThrowGruntSound()
     {
         if(audioConfig.throwGruntSound != null)
             audioSource.PlayOneShot(audioConfig.throwGruntSound);
     }
+
+    public void BossGrunt()
+    {
+        if(audioConfig.bossGrunt != null)
+            audioSource.PlayOneShot(audioConfig.bossGrunt);
+    }
+
 }

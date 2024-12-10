@@ -368,8 +368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordCollider: {fileID: 2505264413858257931}
-  lightAttack: 10
-  heavyAttack: 20
+  lightAttack: 35
+  heavyAttack: 50
   stealthAttack: 10000
   handTransform: {fileID: 0}
   player: {fileID: 0}
@@ -388,8 +388,10 @@ MonoBehaviour:
   interactCanvas: {fileID: 6663636200277079770}
   itemToGive: 1
   amount: 1
+  pickedUp: 0
+  clickable: 0
   audioSource: {fileID: 0}
-  pickupSound: {fileID: 8300000, guid: f31242e1beb927541bb2aedcbe41a194, type: 3}
+  pickupSound: {fileID: 8300000, guid: 216141ea5ebe9ea448b3c819b737d48f, type: 3}
 --- !u!4 &7893059293610084299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c88ee603210cc094aa637aa8819b4d64, type: 3}

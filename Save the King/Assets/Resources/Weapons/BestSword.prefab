@@ -652,8 +652,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordCollider: {fileID: 0}
-  lightAttack: 30
-  heavyAttack: 55
+  lightAttack: 200
+  heavyAttack: 65
   stealthAttack: 10000
   handTransform: {fileID: 0}
   player: {fileID: 0}
@@ -691,7 +691,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactCanvas: {fileID: 2542740002411865617}
-  itemToGive: BestSword
+  itemToGive: 0
   amount: 1
+  pickedUp: 0
+  clickable: 0
   audioSource: {fileID: 0}
-  pickupSound: {fileID: 8300000, guid: 4daaf434b6a774f4988fa2b96db77ae4, type: 3}
+  pickupSound: {fileID: 8300000, guid: 216141ea5ebe9ea448b3c819b737d48f, type: 3}

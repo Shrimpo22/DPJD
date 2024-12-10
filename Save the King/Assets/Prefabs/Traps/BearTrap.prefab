@@ -133,7 +133,7 @@ Animator:
   m_GameObject: {fileID: 1124985932061391982}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d471e1231cd3c6c468eab10a32b3d12d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 63bb91eaee011604d80ec244640b841a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -168,8 +168,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.11546997, y: 0.14773391, z: 0.0077160853}
-  m_Center: {x: 0.032888237, y: 0.0056639826, z: -0.00007078915}
+  m_Size: {x: 0.11546997, y: 0.18924691, z: 0.012731567}
+  m_Center: {x: 0.032888237, y: 0.00015622722, z: 0.00005654363}
 --- !u!114 &215004880575482373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,37 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trapAnimator: {fileID: 5699152455815826932}
   trapSound: {fileID: 167880215686598097}
-  radialProgressImage: {fileID: 0}
-  colorGradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
-    m_NumAlphaKeys: 2
+  isTriggered: 0
   trapDamage: 20
   bleedingDamage: 3
   bleedingInterval: 1
@@ -227,7 +197,7 @@ AudioSource:
   m_GameObject: {fileID: 3595142396692827967}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 5850483010614593750, guid: 2c9415e2863c0c94fb7c438071f3c24c, type: 2}
   m_audioClip: {fileID: 8300000, guid: 9cf54102785d8d94b880cf1e19443054, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

@@ -39,9 +39,9 @@ public class GameManager : MonoBehaviour
 
                 foreach (GameObject objB in listB)
                 {
-                     if(objB != null)
+                    if(objB != null)
                     {
-                        if (objA.name == objB.name) // Comparar os nomes dos objetos
+                        if (objA.gameObject.name == objB.gameObject.name) // Comparar os nomes dos objetos
                         {
                             existsInB = true;
                             break;
@@ -59,5 +59,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void RespawnNewPickablesActivate(List<GameObject> listToSpawn, List<GameObject> listWithMissingObjects)
+    {
+        List<GameObject> toSpawn = getMissingObjects(listToSpawn, listWithMissingObjects);  // Copy the list to avoid modifying the original
+        // Activate remaining objects in the list
+        foreach (GameObject objToSpawn in toSpawn)
+        {
+            objToSpawn.SetActive(true);
+        }
+    }
+    public List<GameObject> getMissingObjects(List<GameObject> listToSpawn, List<GameObject> listWithMissingObjects)
+    {
+         List<GameObject> toSpawn = new(listToSpawn);  // Copy the list to avoid modifying the original
+        // Iterate in reverse to safely remove elements from the list
+        for (int i = toSpawn.Count - 1; i >= 0; i--)
+        {
+            GameObject objToSpawn = toSpawn[i];
+            if (objToSpawn != null)
+            {
+                foreach (GameObject missingObject in listWithMissingObjects)
+                {
+                    if (missingObject != null)
+                    {
+                        if (objToSpawn.transform.position == missingObject.transform.position)
+                        {
+                            toSpawn.RemoveAt(i);  // Safely remove by index
+                            break;  // Exit the inner loop after removing
+                        }
+                    }
+                }
+            }
+        }
+        return toSpawn;
+    }
 }
 

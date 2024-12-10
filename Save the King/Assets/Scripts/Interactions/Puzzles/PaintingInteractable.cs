@@ -13,40 +13,56 @@ public class PaintingInteractable : CamInteractable
 
     public AudioSource audioSource;
     public AudioClip paintingFallingSound;
+    private bool keySpawned = false;
 
-    public override void Start(){
+    public override void Start()
+    {
         base.Start();
         active = false;
         interactCanvas.gameObject.SetActive(false);
         myCamera.gameObject.SetActive(false);
-        
+
         player = GameObject.FindGameObjectWithTag("Player");
         inventory = GameObject.FindGameObjectWithTag("Inventory");
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody>();
         isLooking = false;
 
-        if(audioSource == null)
-           audioSource = gameObject.AddComponent<AudioSource>();
-        if(paintingFallingSound == null)
-           paintingFallingSound = Resources.Load<AudioClip>("Sounds/obj_falling");
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+        if (paintingFallingSound == null)
+            paintingFallingSound = Resources.Load<AudioClip>("Sounds/obj_falling");
     }
 
-    public void OnMouseDown(){
-        if(active && isLooking){
+    public override void ExitCam()
+    {
+        if (keySpawned && Key != null)
+        {
+            if(!Key.GetComponentInChildren<PickupInteractable>().pickedUp){
+                return;
+            }
+        }
+        else
+            base.ExitCam();
+    }
+    public void OnMouseDown()
+    {
+        if (active && isLooking)
+        {
             audioSource.clip = paintingFallingSound;
             audioSource.Play();
             rb.isKinematic = false;
             rb.AddExplosionForce(500f, transform.position, 2f, 0f);
             Vector3 forwardForce = Vector3.Cross(transform.forward, transform.right) * 15f;
-        
+
             // Apply the force in the forward direction of the rigid body~
-            Vector3 bottomRightCorner = transform.position + transform.right * 0.5f - transform.up * 0.5f; 
+            Vector3 bottomRightCorner = transform.position + transform.right * 0.5f - transform.up * 0.5f;
             rb.AddForceAtPosition(forwardForce, bottomRightCorner, ForceMode.Force);
             interactCanvas.enabled = false;
             active = false;
+            keySpawned = true;
             Key.SetActive(true);
         }
     }
-    
+
 }

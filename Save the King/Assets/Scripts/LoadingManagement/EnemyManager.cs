@@ -46,6 +46,8 @@ public class EnemyManager : MonoBehaviour
 
             // Reset any other components (e.g., AI state, health, etc.)
             data.enemyObject.GetComponent<AiAgent>().Reset();
+            if (data.enemyObject.GetComponent<AudioSource>() != null)
+                data.enemyObject.GetComponent<AudioSource>().Stop();
         }
     }
 }

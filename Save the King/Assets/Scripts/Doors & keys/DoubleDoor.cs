@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class DoubleDoor : MonoBehaviour, IOpenable
 {
@@ -9,15 +10,15 @@ public class DoubleDoor : MonoBehaviour, IOpenable
     [SerializeField] private bool isLocked; // Serialize private field for IsLocked
     [SerializeField] private bool isClosed = true; // Serialize private field for IsClosed
 
-    public bool IsLocked 
-    { 
-        get { return isLocked; } 
+    public bool IsLocked
+    {
+        get { return isLocked; }
         set { isLocked = value; }
     }
 
-    public bool IsClosed 
-    { 
-        get { return isClosed; } 
+    public bool IsClosed
+    {
+        get { return isClosed; }
         set { isClosed = value; }
     }
 
@@ -42,7 +43,13 @@ public class DoubleDoor : MonoBehaviour, IOpenable
 
         if (audioSource == null)
         {
+            AudioMixer audioMixer = Resources.Load<AudioMixer>("Sounds/AudioMixer");
+            string groupName = "SFX";
+            AudioMixerGroup[] groups = audioMixer.FindMatchingGroups(groupName);
             audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.outputAudioMixerGroup = groups[0];
+            audioSource.volume = 0.8f;
+
         }
 
         AddDoorComps();
@@ -69,8 +76,8 @@ public class DoubleDoor : MonoBehaviour, IOpenable
         IsClosed = false;
     }
 
-        public void reverseOpenDoors()
-    {   
+    public void reverseOpenDoors()
+    {
         leftDoorComp.Angle = -1; // Left door opens in the opposite direction
         rightDoorComp.Angle = 1; // Right door opens in the opposite direction
         leftDoorComp.targetRotation = 90f;
@@ -105,15 +112,16 @@ public class DoubleDoor : MonoBehaviour, IOpenable
             }
         }
     }
-    
-    public void ForceOpen(GameObject player, Canvas canvas){
+
+    public void ForceOpen(GameObject player, Canvas canvas)
+    {
         audioSource.clip = UnlockedOpenSound;
         audioSource.Play();
         canvas.enabled = false;
         player.GetComponent<PlayerEventItens>().isNearDoor = false;
         OpenDoors();
     }
-    
+
     public void Update()
     {
     }

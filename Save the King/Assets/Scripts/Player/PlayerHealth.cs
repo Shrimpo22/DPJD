@@ -9,18 +9,25 @@ public class PlayerHealth : MonoBehaviour
     Animator animator;
     public bool isInvulnerable = false;
 
-    void Start(){
+    void Start()
+    {
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(float amount){
-        if (!isInvulnerable) {
+    public void TakeDamage(float amount)
+    {
+        if (!isInvulnerable)
+        {
             currentHealth -= amount;
-            if(currentHealth > 0){
-                animator.Play("takingDamage",0,0f);
-            }else if(currentHealth <= 0){
+            if (currentHealth > 0)
+            {
+                animator.Play("takingDamage", 0, 0f);
+            }
+            else if (currentHealth <= 0)
+            {
                 GetComponent<PlayerMovement>().enabled = false;
+                GetComponent<CharacterController>().enabled = false;
                 animator.Play("Death");
                 //respawns after 3 seconds
                 StartCoroutine(Respawn());
@@ -28,7 +35,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-     IEnumerator Respawn()
+    IEnumerator Respawn()
     {
         isInvulnerable = true;
         yield return new WaitForSeconds(5);
@@ -55,7 +62,7 @@ public class PlayerHealth : MonoBehaviour
         // Reset each room object to its initial state
         foreach (var obj in GameManager.instance.respawnPoint.GetComponent<RespawnPoint>().roomObjects)
         {
-            if (obj != null) 
+            if (obj != null)
             {
                 RoomObjectState roomObjectState = obj.GetComponent<RoomObjectState>();
                 if (roomObjectState != null)
@@ -78,10 +85,16 @@ public class PlayerHealth : MonoBehaviour
         foreach (var obj in objectsToRemove)
         {
             PickupInteractable pickable = obj.GetComponentInChildren<PickupInteractable>();
-                if (pickable != null && inventory.HasItemNamed(pickable.itemToGive.ToString())) 
+            if (pickable != null && inventory.HasItemNamed(pickable.itemToGive.ToString()))
             {
                 Debug.Log("removing " + pickable.itemToGive.ToString() + " from inventory.");
                 inventory.DropItemByName(pickable.itemToGive.ToString());
+            }
+
+            FoodInteractable potion = obj.GetComponentInChildren<FoodInteractable>();
+            if (potion != null && inventory.HasItemNamed("Potions"))
+            {
+                inventory.DropItemByName("Potions");
             }
         }
     }
@@ -98,22 +111,24 @@ public class PlayerHealth : MonoBehaviour
         return null; // Return null if no object with the target name is found
     }
 
-     void ResetPlayer() {
+    void ResetPlayer()
+    {
         bool canBringSword = GameManager.instance.respawnPoint.GetComponent<RespawnPoint>().canBringSword;
 
         GameObject player = gameObject;
         CharacterController controller = player.GetComponent<CharacterController>();
         controller.enabled = false; // Disable temporarily to prevent conflicts
-
+        GetComponent<PlayerMovement>().NotDetected();
+        GetComponent<PlayerMovement>().animator.SetBool("isHurt", false);
         animator.Play("Movement"); // Plays normal animations
         player.transform.position = GameManager.instance.respawnPoint.position; // Moves player to respawn point position
         player.transform.rotation = Quaternion.Euler(0, 90, 0); // Set the player's rotation
 
         controller.enabled = true;  // Re-enable the controller
-        
+
         GetComponent<PlayerMovement>().enabled = true;
         currentHealth = maxHealth; // Resets HealthBar
-        
+
 
         GameObject weaponLocation = GameManager.instance.weaponLocation;
         if (weaponLocation != null && !canBringSword)

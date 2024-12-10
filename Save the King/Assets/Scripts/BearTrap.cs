@@ -8,7 +8,7 @@ public class BearTrap : MonoBehaviour
 {
     public Animator trapAnimator;  // Reference to the Animator component
     public AudioSource trapSound;  // Reference to the AudioSource component
-    private bool isTriggered = false;  // Prevents the trap from being triggered multiple times
+    public bool isTriggered = false;  // Prevents the trap from being triggered multiple times
     public int trapDamage = 20;  // Initial damage dealt by the trap
     public int bleedingDamage = 3;  // Damage dealt per tick while bleeding
     public float bleedingInterval = 1.0f;  // Time interval between each bleed tick (in seconds)

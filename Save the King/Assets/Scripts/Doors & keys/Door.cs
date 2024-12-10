@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Door : MonoBehaviour, IOpenable
 {
@@ -10,20 +11,21 @@ public class Door : MonoBehaviour, IOpenable
     [SerializeField] private bool isLocked; // Serialize private field for IsLocked
     [SerializeField] private bool isClosed = true; // Serialize private field for IsClosed
 
-    
-    public bool IsLocked 
-    { 
-        get { return isLocked; } 
+
+    public bool IsLocked
+    {
+        get { return isLocked; }
         set { isLocked = value; }
     }
 
-    public bool IsClosed 
-    { 
-        get { return isClosed; } 
+    public bool IsClosed
+    {
+        get { return isClosed; }
         set { isClosed = value; }
     }
 
-    public void Open(float rotationWanted){
+    public void Open(float rotationWanted)
+    {
         RotationSpeed = rotationWanted;
         targetRotation = 90f * Angle;
         audioSource.clip = UnlockedOpenSound;
@@ -47,7 +49,12 @@ public class Door : MonoBehaviour, IOpenable
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
+            AudioMixer audioMixer = Resources.Load<AudioMixer>("Sounds/AudioMixer");
+            string groupName = "SFX";
+            AudioMixerGroup[] groups = audioMixer.FindMatchingGroups(groupName);
             audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.outputAudioMixerGroup = groups[0];
+            audioSource.volume = 0.8f;
         }
     }
 
@@ -111,5 +118,5 @@ public class Door : MonoBehaviour, IOpenable
         }
     }
 
-    
+
 }

@@ -54,6 +54,11 @@ public class BearTrap : MonoBehaviour
             }
 
         }
+        if (other.CompareTag("Untagged"))
+        {
+            Vector3 trapRotation = transform.eulerAngles;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 
     // Coroutine to apply bleeding damage over time

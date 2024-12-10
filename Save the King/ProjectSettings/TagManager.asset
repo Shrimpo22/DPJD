@@ -44,6 +44,7 @@ TagManager:
   - TaskManager
   - mousse
   - MusicManager
+  - HUD
   layers:
   - Default
   - TransparentFX

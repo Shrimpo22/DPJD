@@ -11,12 +11,13 @@ public class MusicManager : MonoBehaviour
     public AudioSource chapelMusic;
     public AudioSource firstBossMusic;
     public AudioSource secondBossMusic;
+    public AudioSource throneCorridor;
 
     private AudioSource currentMusic;
     private GameState previousState;
     private Coroutine transitionCoroutine;
 
-    public enum GameState { Puzzle, Combat, Exploration, Chapel, Boss, Dungeon, Menu, Boss1, Boss2 }
+    public enum GameState { Puzzle, Combat, Exploration, Chapel, Dungeon, Menu, Boss1, Boss2, throneCorridor }
     public GameState currentState;
     public GameState auxState;
     private PlayerMovement player;
@@ -40,7 +41,7 @@ public class MusicManager : MonoBehaviour
         SetGameState(GameState.Exploration); // Start with exploration music by default
     }
 
-    public void Update()
+    public void LateUpdate()
     {
         if (player.IsDetected())
         {
@@ -85,10 +86,16 @@ public class MusicManager : MonoBehaviour
                 PlayMusic(chapelMusic);
                 break;
             case GameState.Boss1:
+                player.EnterThrone();
                 PlayMusic(firstBossMusic);
                 break;
             case GameState.Boss2:
                 PlayMusic(secondBossMusic);
+                break;
+            case GameState.throneCorridor:
+                Debug.Log("Aqui entro");
+                player.EnterThroneCorridor(2f);
+                PlayMusic(throneCorridor);
                 break;
         }
     }

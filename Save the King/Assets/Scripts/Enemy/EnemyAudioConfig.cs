@@ -11,9 +11,13 @@ public class EnemyAudioConfig : ScriptableObject
     public AudioClip deathSound;
     public AudioClip swingSound;
     public AudioClip swingSound2;
+    public AudioClip swingSound3;
+    public AudioClip swingSound4;
     public AudioClip attack1;
     public AudioClip attack2;
     public AudioClip attack3;
     public AudioClip playerSwordGrunt;
     public AudioClip throwGruntSound;
+    public AudioClip bossGrunt;
+
 }

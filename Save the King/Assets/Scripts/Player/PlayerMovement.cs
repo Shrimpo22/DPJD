@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private float initialHeight;
     private Vector3 initialCenter;
     public bool drawGizmos = false;
+    public float maxSpeed = 4.25f;
     public float speed = 4.25f;
     public float gravity = -9.81f;
     public float jumpHeight = 1.5f;
@@ -57,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private float targetSpeed;
     private bool isSprinting;
-    private bool isDetected;
+    public bool isDetected;
 
     public Transform handTransform;
 
@@ -101,9 +102,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CanDodge()
     {
-        Debug.Log("POSSO DODGEAR??");
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0); 
-        return stateInfo.IsName("Movement");
+        return true;
     }
 
     public void EnableCollider()
@@ -143,6 +142,21 @@ public class PlayerMovement : MonoBehaviour
     {
         controls.Gameplay.Movement.Disable();
         controls.Gameplay.Sprint.Disable();
+    }
+
+    public void EnterThroneCorridor(float value){
+        Debug.Log("Olá???");
+        isDetected = false;
+        GameObject.FindGameObjectWithTag("HUD").GetComponent<DetectionArrow>().ClearActiveArrows();
+        maxSpeed = value;
+        controls.Gameplay.Sprint.Disable();
+    }
+
+    public void EnterThrone(){
+        maxSpeed = 4.25f;
+        controls.Gameplay.Sprint.Enable();
+        gameObject.GetComponent<CharacterController>().stepOffset = 0.1f;
+        gameObject.GetComponent<CharacterController>().slopeLimit = 0;
     }
 
     private void HandleCrouch()
@@ -263,12 +277,11 @@ public class PlayerMovement : MonoBehaviour
         if ((stateInfo.IsName("hit1") || stateInfo.IsName("hit2") || stateInfo.IsName("hit3") || stateInfo.IsName("heavy1") || stateInfo.IsName("heavy2") || stateInfo.IsName("stabbing") && stateInfo.normalizedTime <= 1f))
         {
             speed = 0f;
-            return;
         }
         else if (!isSprinting && !isCrouching)
-            targetSpeed = 4.25f;
+            targetSpeed = maxSpeed;
         else if (isCrouching)
-            targetSpeed = 2f;
+            targetSpeed = maxSpeed/2;
 
         if (!isGrounded && velocity.y < 0)
         {

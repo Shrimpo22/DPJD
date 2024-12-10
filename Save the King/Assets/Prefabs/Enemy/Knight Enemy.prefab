@@ -1875,6 +1875,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   canChangeState: 1
   healthBar: {fileID: 0}
+  isBoss: 0
 --- !u!195 &1716146390763503249
 NavMeshAgent:
   m_ObjectHideFlags: 0

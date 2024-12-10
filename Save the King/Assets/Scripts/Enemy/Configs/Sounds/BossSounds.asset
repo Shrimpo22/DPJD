@@ -15,10 +15,13 @@ MonoBehaviour:
   walkSound: {fileID: 8300000, guid: 0912a19aa98c6e34d94ea7ec7255e9b8, type: 3}
   hitSound: {fileID: 8300000, guid: 3143f34320e8cb4489743fc1c2a24057, type: 3}
   deathSound: {fileID: 8300000, guid: b8416baa60a29c34ebe08cf92ddb94da, type: 3}
-  swingSound: {fileID: 8300000, guid: f109366db772f7941b104264516c054b, type: 3}
+  swingSound: {fileID: 8300000, guid: ec638093edaa44841a8f395a7310031f, type: 3}
   swingSound2: {fileID: 8300000, guid: ed710b8e3b55d6245a9ce651d85bd983, type: 3}
+  swingSound3: {fileID: 8300000, guid: 9ddc4706d25b2b849b51a32902f06e55, type: 3}
+  swingSound4: {fileID: 8300000, guid: b64aa9d95161d3546976130c33e059aa, type: 3}
   attack1: {fileID: 8300000, guid: 6b5ecfc324dc6344686481b1ddc14d89, type: 3}
   attack2: {fileID: 8300000, guid: 5e3771bfac0fe71468ecfe2b6947c0f2, type: 3}
   attack3: {fileID: 8300000, guid: 49cbd7fd238166640909d38aa35e0118, type: 3}
   playerSwordGrunt: {fileID: 8300000, guid: 6f0291e7b4c8be74f84b96ecde02400f, type: 3}
   throwGruntSound: {fileID: 8300000, guid: 2b40ff2db3a2c974baf7eff72008a259, type: 3}
+  bossGrunt: {fileID: 8300000, guid: 0a5e98e8e6d717341bcda36ddad772ff, type: 3}

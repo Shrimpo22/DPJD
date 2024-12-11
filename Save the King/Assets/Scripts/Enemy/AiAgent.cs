@@ -47,7 +47,7 @@ public class AiAgent : MonoBehaviour
     {
         maxHealth = config.maxHealth;
         currentHealth = maxHealth;
-        healthBar = GetComponentInChildren<UIHealthBar>(true);
+        healthBar = GetComponentInChildren<UIHealthBar>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         sensor = GetComponentInChildren<AiSensor>();
         animator = GetComponent<Animator>();
@@ -74,6 +74,10 @@ public class AiAgent : MonoBehaviour
 
     void Update()
     {
+        if(!gameObject.activeSelf){
+            gameObject.SetActive(true);
+        }
+        Debug.Log("[Ghost] where am at " + gameObject.name + " " + gameObject.activeSelf);
 
         if (isNpc) return;
         stateMachine.Update();
@@ -137,6 +141,7 @@ public class AiAgent : MonoBehaviour
     }
     public void TakeDamage(float amount)
     {
+        Debug.Log("[Enemy Ghost] Taking DMG" + gameObject.name + " " + gameObject.activeSelf);
         if (isNpc) return;
         currentHealth -= amount;
         healthBar.SetHealthBarPercentage(currentHealth / maxHealth);
@@ -151,7 +156,7 @@ public class AiAgent : MonoBehaviour
                 gameObject.GetComponent<EnemyAnimSoundEvents>().BossGrunt();
                 return;
             }
-            
+
             if (isBoss && currentHealth <= maxHealth / 2)
             {
                 GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>().SetGameState(MusicManager.GameState.Boss2);
@@ -180,6 +185,8 @@ public class AiAgent : MonoBehaviour
                 StartCoroutine(FinalCutscene());
             }
         }
+        Debug.Log("[Enemy Ghost] Taking DMG 2" + gameObject.name + " " + gameObject.activeSelf);
+
     }
     private IEnumerator FinalCutscene()
     {
@@ -215,11 +222,13 @@ public class AiAgent : MonoBehaviour
 
     public void EnableCollider()
     {
-        weapon.EnableCollider();
+        if (weapon != null)
+            weapon.EnableCollider();
     }
     public void DisableCollider()
     {
-        weapon.DisableCollider();
+        if (weapon != null)
+            weapon.DisableCollider();
     }
 
     public void ClearHits()

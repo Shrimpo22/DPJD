@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine.SceneManagement;
@@ -20,8 +19,8 @@ public class UIHealthBar : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!isBoss && transform.parent != GameObject.FindGameObjectWithTag("HUD").transform)
-            transform.parent = GameObject.FindGameObjectWithTag("HUD").transform;
+        // if (!isBoss && transform.parent != GameObject.FindGameObjectWithTag("HUD").transform)
+        //      transform.parent = GameObject.FindGameObjectWithTag("HUD").transform;
         if (isBoss)
         {
             PositionBossHealthBar();

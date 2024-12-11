@@ -11,9 +11,15 @@ public class ClearDetected : MonoBehaviour
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
 
-    void OnTriggerEnter(){
-        if(playerMovement != null){
-            playerMovement.EnterAndClearArrows();
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("[Ghost] a");
+            if (playerMovement != null)
+            {
+                playerMovement.EnterAndClearArrows();
+            }
         }
     }
 }

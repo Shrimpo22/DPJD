@@ -91,12 +91,6 @@ public class PlayerHealth : MonoBehaviour
                 Debug.Log("removing " + pickable.itemToGive.ToString() + " from inventory.");
                 inventory.DropItemByName(pickable.itemToGive.ToString());
             }
-
-            FoodInteractable potion = obj.GetComponentInChildren<FoodInteractable>();
-            if (potion != null && inventory.HasItemNamed("Potions"))
-            {
-                inventory.DropItemByName("Potions");
-            }
         }
     }
     public GameObject GetItemByName(List<GameObject> objects, string targetName)

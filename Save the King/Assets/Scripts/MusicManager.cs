@@ -138,7 +138,6 @@ public class MusicManager : MonoBehaviour
             yield return null;
             // }
             currentMusic.Stop();
-            currentMusic.volume = 0.05f;
         }
 
         currentMusic = newMusic;

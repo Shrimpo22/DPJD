@@ -64,6 +64,7 @@ public class PauseMenu : MonoBehaviour
             cam.m_YAxis.m_MaxSpeed = sensitivity / 200;
         }
     }
+    
 
 
     private void Start()
@@ -105,7 +106,10 @@ public class PauseMenu : MonoBehaviour
         return GameIsPaused;
     }
 
-    // Update is called once per frame
+    void Update(){
+        SetMusicVolume();
+        SetSFXVolume();
+    }
     void HandleBack()
     {
         if (this == null || pauseMenuUI == null) return;

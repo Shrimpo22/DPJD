@@ -16,6 +16,22 @@ PrefabInstance:
       propertyPath: lightAttack
       value: 65
       objectReference: {fileID: 0}
+    - target: {fileID: 5521439524460000903, guid: f452a05303b3022409c6a95e1782f3d9, type: 3}
+      propertyPath: m_Size.x
+      value: 1.8949063
+      objectReference: {fileID: 0}
+    - target: {fileID: 5521439524460000903, guid: f452a05303b3022409c6a95e1782f3d9, type: 3}
+      propertyPath: m_Size.z
+      value: 0.054880418
+      objectReference: {fileID: 0}
+    - target: {fileID: 5521439524460000903, guid: f452a05303b3022409c6a95e1782f3d9, type: 3}
+      propertyPath: m_Center.x
+      value: -0.9538896
+      objectReference: {fileID: 0}
+    - target: {fileID: 5521439524460000903, guid: f452a05303b3022409c6a95e1782f3d9, type: 3}
+      propertyPath: m_Center.z
+      value: 0.0060050855
+      objectReference: {fileID: 0}
     - target: {fileID: 6002384305841814199, guid: f452a05303b3022409c6a95e1782f3d9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

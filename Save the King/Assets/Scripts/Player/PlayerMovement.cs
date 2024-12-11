@@ -123,6 +123,12 @@ public class PlayerMovement : MonoBehaviour
         maxSpeed = value;
         controls.Gameplay.Sprint.Disable();
     }
+
+    public void EnterAndClearArrows(){
+        isDetected = false;
+        GameObject.FindGameObjectWithTag("HUD").GetComponent<DetectionArrow>().ClearActiveArrows();
+    }
+
     public void EnterThrone()
     {
         maxSpeed = 4.25f;
@@ -365,6 +371,9 @@ public class PlayerMovement : MonoBehaviour
     public void Detected()
     {
         isCrouching = false;
+        if(animator == null){
+            animator = GetComponent<Animator>();
+        }
         animator.SetBool("isCrouching", isCrouching);
         controller.height = initialHeight;
         controller.center = initialCenter;

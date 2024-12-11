@@ -26,13 +26,6 @@ public class AiAttackState : AiState
 
     public void Update(AiAgent agent)
     {
-        if(agent.gameObject.GetComponent<AiAgent>().currentHealth <= agent.gameObject.GetComponent<AiAgent>().maxHealth / 2 && !ishalfLife)
-        {
-            ishalfLife = true;
-            Debug.Log("Perdi metade da vida");
-            animator.Play("SecondPhase");
-            agent.gameObject.GetComponent<EnemyAnimSoundEvents>().BossGrunt();
-        }
         agent.transform.LookAt(agent.playerTransform.position);
         distanceToPlayer = (agent.transform.position - agent.playerTransform.position).magnitude;
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);

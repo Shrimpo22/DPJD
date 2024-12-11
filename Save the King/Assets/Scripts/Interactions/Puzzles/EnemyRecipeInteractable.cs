@@ -50,20 +50,7 @@ public class EnemyRecipeInteractable : CamInteractable
 
             Onetime += 1;
 
-        }
-        if (fighting && mainCamera.gameObject.activeSelf)
-        {
-            AiAgent aiAgent = Inimigo.GetComponent<AiAgent>();
-            if (aiAgent != null && aiAgent.enabled && aiAgent.currentHealth <= 0 && OnetimeV2 == 0 && aiAgent.maxHealth == 60)
-            {
-                inventory.GetComponent<Inventory>().AddItem("KeyOfFeastRoom", 1);
-                OnetimeV2 += 1;
-                
-            }
-        }
-        
-        
-        
+        }                
     }
 
     public override void ExitCam()

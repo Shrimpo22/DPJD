@@ -39,6 +39,7 @@ public class AiAgent : MonoBehaviour
     public bool isBoss = false;
 
     [SerializeField] UIHealthBar healthBar;
+    private bool isHalfLife = false;
 
 
     // Start is called before the first frame update
@@ -46,7 +47,7 @@ public class AiAgent : MonoBehaviour
     {
         maxHealth = config.maxHealth;
         currentHealth = maxHealth;
-        healthBar = GetComponentInChildren<UIHealthBar>();
+        healthBar = GetComponentInChildren<UIHealthBar>(true);
         navMeshAgent = GetComponent<NavMeshAgent>();
         sensor = GetComponentInChildren<AiSensor>();
         animator = GetComponent<Animator>();
@@ -73,6 +74,7 @@ public class AiAgent : MonoBehaviour
 
     void Update()
     {
+
         if (isNpc) return;
         stateMachine.Update();
         if (navMeshAgent.hasPath)
@@ -141,6 +143,15 @@ public class AiAgent : MonoBehaviour
 
         if (currentHealth > 0)
         {
+            if (isBoss && currentHealth <= maxHealth / 2 && !isHalfLife)
+            {
+                GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>().SetGameState(MusicManager.GameState.Boss2);
+                isHalfLife = true;
+                animator.Play("SecondPhase");
+                gameObject.GetComponent<EnemyAnimSoundEvents>().BossGrunt();
+                return;
+            }
+            
             if (isBoss && currentHealth <= maxHealth / 2)
             {
                 GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>().SetGameState(MusicManager.GameState.Boss2);
@@ -179,6 +190,7 @@ public class AiAgent : MonoBehaviour
 
     public void Reset()
     {
+        isHalfLife = false;
         currentHealth = maxHealth;
 
         if (healthBar != null)

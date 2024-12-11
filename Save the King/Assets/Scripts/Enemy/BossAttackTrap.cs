@@ -49,21 +49,29 @@ public class BossAttackTrap : MonoBehaviour
         rb.isKinematic = false;
         rb.mass = 100;
 
-        currentTrap.transform.rotation = Quaternion.Euler(0,0,0);
+        currentTrap.transform.rotation = Quaternion.Euler(0, 0, 0);
         rb.constraints = RigidbodyConstraints.FreezeRotation;
 
         Vector3 launchDirection = gameObject.transform.forward * 30f;
         Debug.DrawLine(trapSpawnPoint.position, trapSpawnPoint.position + launchDirection);
         rb.AddForce(launchDirection * launchForce, ForceMode.Impulse);
-        
+
 
     }
 
-    public void DeactivateTrap(){
-        foreach(GameObject trap in activeTraps){
-            Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            if(trap.transform.parent == trapSpawnPoint)
-                Destroy(trap);
+    public void DeactivateTrap()
+    {
+        List<GameObject> trapsToRemove = new List<GameObject>();
+        foreach (GameObject trap in activeTraps)
+        {
+            if (trap.transform.parent == trapSpawnPoint)
+                trapsToRemove.Add(trap);
+        }
+
+        foreach (GameObject trap in trapsToRemove)
+        {
+            activeTraps.Remove(trap);
+            Destroy(trap);
         }
     }
 
@@ -73,8 +81,8 @@ public class BossAttackTrap : MonoBehaviour
 
         if (activeTraps.Contains(trap))
         {
-            activeTraps.Remove(trap); 
-            Destroy(trap);           
+            activeTraps.Remove(trap);
+            Destroy(trap);
         }
     }
 

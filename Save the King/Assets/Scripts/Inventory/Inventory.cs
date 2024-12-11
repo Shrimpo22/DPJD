@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine.EventSystems;
 using Cinemachine;
 using Unity.VisualScripting;
+using System;
 public class Inventory : MonoBehaviour
 {
     [SerializeReference] public List<ItemSlotInfo> items = new List<ItemSlotInfo>();
@@ -75,6 +76,7 @@ public class Inventory : MonoBehaviour
         itemsInDictionary += ".";
         Debug.Log(itemsInDictionary);
         AddItem("Potions", 2);
+        AddItem("Candle", 2);
         RefreshInventory();
 
 
@@ -133,11 +135,24 @@ public class Inventory : MonoBehaviour
 
     void HandleClosing()
     {
-        if (!PauseMenu.isPaused())
-        {
-            if (InventoryMenu.activeSelf)
+        try{
+            if (!PauseMenu.isPaused())
             {
-                closeInventory();
+                if (InventoryMenu.activeSelf)
+                {
+                    closeInventory();
+                }
+            }
+        }catch(Exception){
+            Debug.Log("Lá excepcion" + InventoryMenu);
+            InventoryMenu = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(obj => obj.name == "Inventroy Menu");
+            Debug.Log("tratando excepcion" + InventoryMenu.name);
+            if (!PauseMenu.isPaused())
+            {
+                if (InventoryMenu.activeSelf)
+                {
+                    closeInventory();
+                }
             }
         }
     }
@@ -145,6 +160,9 @@ public class Inventory : MonoBehaviour
     public void openInventory()
     {
         Debug.Log("[Mouse] Mouse being showned by Inv");
+        if(Mouse == null){
+            Start();
+        }
         Mouse.SetActive(true);
         inInventory = true;
         wasOpenByOtherEvent = false;
@@ -181,6 +199,9 @@ public class Inventory : MonoBehaviour
 
     public void RefreshInventory()
     {
+        if(existingPanels == null){
+            Start();
+        }
         existingPanels = ItemPanelGrid.GetComponentsInChildren<ItemPanel>().ToList();
 
         if (existingPanels.Count < InventorySize)

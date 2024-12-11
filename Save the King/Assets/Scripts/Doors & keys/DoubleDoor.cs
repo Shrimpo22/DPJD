@@ -49,6 +49,7 @@ public class DoubleDoor : MonoBehaviour, IOpenable
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.outputAudioMixerGroup = groups[0];
             audioSource.volume = 0.8f;
+            audioSource.playOnAwake = false;
 
         }
 

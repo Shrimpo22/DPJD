@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIHealthBar : MonoBehaviour
@@ -17,6 +20,8 @@ public class UIHealthBar : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!isBoss && transform.parent != GameObject.FindGameObjectWithTag("HUD").transform)
+            transform.parent = GameObject.FindGameObjectWithTag("HUD").transform;
         if (isBoss)
         {
             PositionBossHealthBar();
@@ -29,22 +34,31 @@ public class UIHealthBar : MonoBehaviour
 
     void PositionEnemyHealthBar()
     {
-        float magnitude = Vector3.Distance(target.position, Camera.main.transform.position);
-        if (magnitude <= 10)
+        try
         {
-            bool isVisible = IsEnemyVisible() && !IsEnemyOccluded();
-            foregroundImage.enabled = isVisible;
-            backgroundImage.enabled = isVisible;
-            GetComponent<RectTransform>().localScale = Vector3.one;
-
-
-            if (isVisible)
+            float magnitude = Vector3.Distance(target.position, Camera.main.transform.position);
+            if (magnitude <= 10)
             {
-                transform.position = Camera.main.WorldToScreenPoint(target.position + offset);
+                bool isVisible = IsEnemyVisible() && !IsEnemyOccluded();
+                foregroundImage.enabled = isVisible;
+                backgroundImage.enabled = isVisible;
+                GetComponent<RectTransform>().localScale = Vector3.one;
+
+
+                if (isVisible)
+                {
+                    transform.position = Camera.main.WorldToScreenPoint(target.position + offset);
+                }
             }
-        }else{
-            foregroundImage.enabled = false;
-            backgroundImage.enabled = false;
+            else
+            {
+                foregroundImage.enabled = false;
+                backgroundImage.enabled = false;
+            }
+        }
+        catch (Exception)
+        {
+            return;
         }
     }
 

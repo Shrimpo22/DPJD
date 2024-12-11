@@ -46,6 +46,7 @@ TagManager:
   - MusicManager
   - HUD
   - DestroyAtEnd
+  - InventoryMenu
   layers:
   - Default
   - TransparentFX

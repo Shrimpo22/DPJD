@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -34,8 +35,8 @@ public class CamInteractable : Interactable
             }
         }
 
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-
+        mainCamera = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(obj => obj.name == "Main Camera").GetComponent<Camera>();
+        Debug.Log(this.name+" Main Camera " + mainCamera.name);
         isLooking = false;
     }
 

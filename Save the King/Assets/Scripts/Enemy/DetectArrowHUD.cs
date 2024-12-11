@@ -61,6 +61,9 @@ public class DetectionArrow : MonoBehaviour
                     return;
             };
             counter++;
+            if(playerMovement == null){
+                playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+            }
             if (!playerMovement.IsDetected())
                 playerMovement.Detected();
         };

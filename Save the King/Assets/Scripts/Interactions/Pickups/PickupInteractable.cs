@@ -23,6 +23,7 @@ public class PickupInteractable : Interactable
             AudioMixerGroup[] groups = audioMixer.FindMatchingGroups(groupName);
             audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.outputAudioMixerGroup = groups[0];
+            audioSource.playOnAwake = false;
 
         }
         if (pickupSound == null)

@@ -43,7 +43,7 @@ public class PlayerHealth : MonoBehaviour
         EnemyManager enemyManager = GameManager.instance.currentEnemyManager;
         if (GameManager.instance != null && GameManager.instance.respawnPoint != null)
         {
-            //GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>().SetGameState(GameManager.instance.respawnPoint.GetComponent<RespawnPoint>().musicToChangeTo);
+            GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>().SetGameState(GameManager.instance.respawnPoint.GetComponent<RespawnPoint>().musicToChangeTo);
             ResetPlayer();
             if (enemyManager != null)
             {

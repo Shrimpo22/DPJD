@@ -10,6 +10,10 @@ public class MainMenu : MonoBehaviour
     public GameObject maincamara;
     public GameObject camara;
     public GameObject book;
+
+    public void Start(){
+        Destroy(GameObject.Find("GameManager"));
+    }
     public void PlayGame(){
         room.SetActive(true);
         maincamara.SetActive(false);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class book : MonoBehaviour
 {
@@ -15,7 +16,12 @@ public class book : MonoBehaviour
     bool rotate = false;
     [SerializeField] GameObject backButton;
     [SerializeField] GameObject forwardButton;
+    [SerializeField] GameObject startButton;
     public GameObject start;
+    private bool loadingScene = false;
+    private AsyncOperation sceneStatus;
+
+    public GameObject loadingText;
 
 
     private void Start()
@@ -34,6 +40,7 @@ public class book : MonoBehaviour
         backButton.SetActive(false);
 
     }
+
 
     public void RotateForward()
     {
@@ -180,12 +187,10 @@ public class book : MonoBehaviour
         }
     }
 
-
-
     public void startGame()
     {
-        SceneManager.LoadSceneAsync("FullGame");
+        startButton.SetActive(false);
+        loadingText.SetActive(true);
+        sceneStatus = SceneManager.LoadSceneAsync("FullGame");
     }
-
-
 }

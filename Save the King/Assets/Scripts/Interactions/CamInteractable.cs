@@ -55,7 +55,6 @@ public class CamInteractable : Interactable
         if(!InvToOpen){
             Debug.Log("[Mouse] Mouse being showned by Cam");
             mouse.gameObject.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
 
@@ -73,7 +72,6 @@ public class CamInteractable : Interactable
         if(!InvToOpen){
             Debug.Log("[Mouse] Mouse being hidden by Cam");
             mouse.gameObject.SetActive(false);
-            Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
         }
 

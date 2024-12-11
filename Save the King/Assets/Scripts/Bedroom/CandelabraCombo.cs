@@ -59,9 +59,7 @@ public class CandelabraCombo : MonoBehaviour
         {
             audioSource.Play();
 
-            yield return new WaitForSeconds(audioSource.clip.length + 1f);
-
-            cam.ExitCam();
+            yield return null;
         }
         else
         {

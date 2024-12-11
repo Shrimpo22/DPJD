@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Crouch.performed += ctx => HandleCrouch();
         controls.Gameplay.Sprint.performed += ctx => { isSprinting = true; targetSpeed = 6f; };
         controls.Gameplay.Sprint.canceled += ctx => { isSprinting = false; targetSpeed = 4.25f; };
-        controls.Gameplay.Dodging.performed += ctx => { if(CanDodge()) animator.SetTrigger("Dodge"); };
+        controls.Gameplay.Dodging.performed += ctx => { if (CanDodge()) animator.SetTrigger("Dodge"); };
     }
 
     void OnEnable()
@@ -115,14 +115,16 @@ public class PlayerMovement : MonoBehaviour
         playerAttack.DisabeSwordCollider();
     }
 
-    public void EnterThroneCorridor(float value){
+    public void EnterThroneCorridor(float value)
+    {
         Debug.Log("Olá???");
         isDetected = false;
         GameObject.FindGameObjectWithTag("HUD").GetComponent<DetectionArrow>().ClearActiveArrows();
         maxSpeed = value;
         controls.Gameplay.Sprint.Disable();
     }
-    public void EnterThrone(){
+    public void EnterThrone()
+    {
         maxSpeed = 4.25f;
         controls.Gameplay.Sprint.Enable();
         gameObject.GetComponent<CharacterController>().stepOffset = 0.1f;
@@ -270,18 +272,20 @@ public class PlayerMovement : MonoBehaviour
 
     void handleMovement()
     {
+        bool ignoreMovement = false;
 
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         if ((stateInfo.IsName("hit1") || stateInfo.IsName("hit2") || stateInfo.IsName("hit3") || stateInfo.IsName("heavy1") || stateInfo.IsName("heavy2") || stateInfo.IsName("stabbing") && stateInfo.normalizedTime <= 1f))
         {
+            ignoreMovement = true;
             speed = 0f;
         }
 
         else if (!isSprinting && !isCrouching)
             targetSpeed = maxSpeed;
         else if (isCrouching)
-            targetSpeed = maxSpeed/2;
+            targetSpeed = maxSpeed / 2;
 
         if (!isGrounded && velocity.y < 0)
         {
@@ -289,7 +293,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else velocity.y += gravity * Time.deltaTime;
 
-        Vector3 direction = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
+        Vector3 direction = Vector3.zero;
+        if (!ignoreMovement)
+            direction = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
+
 
         // Only move if there's input
         if (direction.magnitude > 0f && !stateInfo.IsName("hit1"))
@@ -350,8 +357,7 @@ public class PlayerMovement : MonoBehaviour
     public void StealthAttack(GameObject enemy)
     {
         transform.LookAt(enemy.transform.position);
-        Debug.DrawLine(transform.position, enemy.transform.position);
-        Debug.Log("Atr�s de tiiiiii");
+        enemy.GetComponent<AiAgent>().currentSpeed = 0f;
         animator.Play("stabbing");
 
     }

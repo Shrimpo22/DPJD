@@ -13,12 +13,13 @@ public class MusicManager : MonoBehaviour
     public AudioSource secondBossMusic;
     public AudioSource throneCorridor;
     public AudioSource ending;
+    public AudioSource mainMenu;
 
     private AudioSource currentMusic;
     private GameState previousState;
     private Coroutine transitionCoroutine;
 
-    public enum GameState { Puzzle, Combat, Exploration, Chapel, Dungeon, Menu, Boss1, Boss2, throneCorridor, Ending }
+    public enum GameState { Puzzle, Combat, Exploration, Chapel, Dungeon, Menu, Boss1, Boss2, throneCorridor, Ending, MainMenu }
     public GameState currentState;
     public GameState auxState;
     private PlayerMovement player;
@@ -38,22 +39,27 @@ public class MusicManager : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
-        SetGameState(GameState.Exploration); // Start with exploration music by default
+        GameObject aux = GameObject.FindGameObjectWithTag("Player");
+        if (aux != null)
+            player = aux.GetComponent<PlayerMovement>();
+        SetGameState(currentState); // Start with exploration music by default
     }
 
     public void LateUpdate()
     {
+        if (player != null){
+            
         if (player.IsDetected())
-        {
-            if (currentState != GameState.Combat)
             {
-                SetGameState(GameState.Combat);
+                if (currentState != GameState.Combat)
+                {
+                    SetGameState(GameState.Combat);
+                }
             }
-        }
-        else if (currentState == GameState.Combat)
-        {
-            SetGameState(previousState);
+            else if (currentState == GameState.Combat)
+            {
+                SetGameState(previousState);
+            }
         }
 
         if (auxState != currentState)
@@ -101,6 +107,12 @@ public class MusicManager : MonoBehaviour
             case GameState.Ending:
                 PlayMusic(ending);
                 break;
+
+            case GameState.MainMenu:
+                Debug.Log("AAAAAAAAAA");
+                PlayMusic(mainMenu);
+                break;
+
         }
     }
 

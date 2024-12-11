@@ -21,14 +21,16 @@ public class OpenChest : MonoBehaviour, IOpenable
 
     public bool isRotating = false;
 
-    public bool IsClosed 
-    { 
-        get { return open; } 
+    public bool IsClosed
+    {
+        get { return open; }
         set { open = value; }
     }
 
-    public void ForceOpen(GameObject player, Canvas canvas){
-        if(canvas != null){
+    public void ForceOpen(GameObject player, Canvas canvas)
+    {
+        if (canvas != null)
+        {
             canvas.gameObject.SetActive(false);
         }
         StartCoroutine(RotateObject());
@@ -62,19 +64,27 @@ public class OpenChest : MonoBehaviour, IOpenable
 
     public void Open(GameObject player, Canvas canvas)
     {
-        if(!isLocked && !open && !isRotating){
+        if (!isLocked && !open && !isRotating)
+        {
             canvas.gameObject.SetActive(false);
             StartCoroutine(RotateObject());
             audioSource.clip = UnlockedOpenSound;
             audioSource.Play();
             this.GetComponent<Collider>().enabled = false;
-        }else if(isLocked){
-             GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
+        }
+        else if (isLocked)
+        {
+            GameObject inventory = GameObject.FindGameObjectWithTag("Inventory");
             if (inventory.GetComponent<Inventory>().HasItemNamed(KeyType.ToString()))
             {
                 isLocked = false;
+                open = false;
                 inventory.GetComponent<Inventory>().DropItemByName(KeyType.ToString());
-                Open(player, canvas);
+                canvas.gameObject.SetActive(false);
+                StartCoroutine(RotateObject());
+                audioSource.clip = UnlockedOpenSound;
+                audioSource.Play();
+                this.GetComponent<Collider>().enabled = false;
             }
             else
             {

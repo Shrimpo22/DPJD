@@ -36,14 +36,18 @@ public class PaintingInteractable : CamInteractable
 
     public override void ExitCam()
     {
-        if (keySpawned && Key != null)
+        if (Key != null)
         {
-            if(!Key.GetComponentInChildren<PickupInteractable>().pickedUp){
-                return;
+            if (Key.activeSelf)
+            {
+                if (!Key.GetComponentInChildren<PickupInteractable>().pickedUp)
+                {
+                    return;
+                }
             }
         }
-        else
-            base.ExitCam();
+        
+        base.ExitCam();
     }
     public void OnMouseDown()
     {

@@ -58,14 +58,28 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: PlayEnemyGetHitSound
+        functionName: DeactivateTrap
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.0025316551
+      - time: 0
+        functionName: DisableCollider
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0
         functionName: EnemyGetHit
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0
+        functionName: PlayEnemyGetHitSound
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

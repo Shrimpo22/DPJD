@@ -19,6 +19,7 @@ public class HealthBar : MonoBehaviour
         maxHealth = player.maxHealth;
         health = maxHealth;
         bonusHealthSlider.value = 0f;
+        healthSlider.maxValue = maxHealth;
     }
 
     // Update is called once per frame
@@ -30,16 +31,6 @@ public class HealthBar : MonoBehaviour
             bonusHealthSlider.value = health - maxHealth;
         } else {
             healthSlider.value = health;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            takeDamage(10);
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            healLife(10);
         }
     }
 

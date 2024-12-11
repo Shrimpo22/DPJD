@@ -10,7 +10,7 @@ public class BossAttackTrap : MonoBehaviour
     public GameObject bearTrap;
     public Transform trapSpawnPoint;
     public Transform groundTarget;
-    public float launchForce = 5f;
+    public float launchForce = 2f;
     public Rigidbody rb;
     private GameObject currentTrap;
     public List<GameObject> activeTraps = new List<GameObject>();
@@ -47,11 +47,24 @@ public class BossAttackTrap : MonoBehaviour
         currentTrap.GetComponent<Collider>().enabled = true;
 
         rb.isKinematic = false;
+        rb.mass = 100;
 
-        Vector3 direction = (groundTarget.position - trapSpawnPoint.position).normalized;
-        Vector3 launchDirection = direction + Vector3.up * 0.3f;
+        currentTrap.transform.rotation = Quaternion.Euler(0,0,0);
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+        Vector3 launchDirection = gameObject.transform.forward * 30f;
+        Debug.DrawLine(trapSpawnPoint.position, trapSpawnPoint.position + launchDirection);
         rb.AddForce(launchDirection * launchForce, ForceMode.Impulse);
+        
 
+    }
+
+    public void DeactivateTrap(){
+        foreach(GameObject trap in activeTraps){
+            Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            if(trap.transform.parent == trapSpawnPoint)
+                Destroy(trap);
+        }
     }
 
     private IEnumerator DestroyTrapAfterDelay(GameObject trap, float delay)

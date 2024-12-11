@@ -13,7 +13,7 @@ public class BestSword : Item
 
     public override string getNameWithSpaces()
     {
-        return "Best Sword";
+        return "Sharp Sword";
     }
     public override int MaxStacks()
     {
@@ -31,7 +31,7 @@ public class BestSword : Item
 
     public override string GiveDiscresp()
     {
-        return "Damage -> 20 ; Speed -> 6";
+        return "Light ATK -> 50 DMG ; Heavy ATK -> 65 DMG";
     }
 
     public override Action UseFunc()

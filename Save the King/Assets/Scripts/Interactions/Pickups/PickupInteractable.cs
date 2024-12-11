@@ -54,7 +54,12 @@ public class PickupInteractable : Interactable
     {
         if (clickable)
         {
-            Interact(GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>(), Resources.FindObjectsOfTypeAll<PlayerEventItens>().FirstOrDefault());
+            Inventory inv = GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
+            pickedUp = true;
+            inv.AddItem(itemToGive.ToString(), amount);
+            audioSource.clip = pickupSound;
+            audioSource.Play();
+            Destroy(gameObject, pickupSound.length);
         }
     }
 }

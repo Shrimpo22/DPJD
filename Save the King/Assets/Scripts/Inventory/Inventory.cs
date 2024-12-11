@@ -74,10 +74,7 @@ public class Inventory : MonoBehaviour
         }
         itemsInDictionary += ".";
         Debug.Log(itemsInDictionary);
-
-        AddItem("Potions", 3);
-        AddItem("KeyOfKingThrone", 1);
-      
+        AddItem("Potions", 2);
         RefreshInventory();
 
 

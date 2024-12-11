@@ -14,6 +14,7 @@ public class AltarBookInteractable : CamInteractable
 
     public override void ExitCam()
     {
+        base.ExitCam();
         
         player.SetActive(true);
         playerCam.tag = "MainCamera";

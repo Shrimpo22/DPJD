@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Utilities;
 using UnityEngine.UI;
 
 public class UIHealthBar : MonoBehaviour
@@ -28,16 +29,22 @@ public class UIHealthBar : MonoBehaviour
 
     void PositionEnemyHealthBar()
     {
-        Vector3 direction = (target.position - Camera.main.transform.position).normalized;
-        bool isVisible = IsEnemyVisible() && !IsEnemyOccluded();
-        foregroundImage.enabled = isVisible;
-        backgroundImage.enabled = isVisible;
-        GetComponent<RectTransform>().localScale = Vector3.one;
-
-
-        if (isVisible)
+        float magnitude = Vector3.Distance(target.position, Camera.main.transform.position);
+        if (magnitude <= 10)
         {
-            transform.position = Camera.main.WorldToScreenPoint(target.position + offset);
+            bool isVisible = IsEnemyVisible() && !IsEnemyOccluded();
+            foregroundImage.enabled = isVisible;
+            backgroundImage.enabled = isVisible;
+            GetComponent<RectTransform>().localScale = Vector3.one;
+
+
+            if (isVisible)
+            {
+                transform.position = Camera.main.WorldToScreenPoint(target.position + offset);
+            }
+        }else{
+            foregroundImage.enabled = false;
+            backgroundImage.enabled = false;
         }
     }
 
@@ -57,7 +64,7 @@ public class UIHealthBar : MonoBehaviour
 
         // Optional: Adjust position relative to the anchor
         rectTransform.anchoredPosition = new Vector2(0f, 50f);
-        rectTransform.localScale = new Vector3(5.08892584f,1.7593323f,1.82787776f);
+        rectTransform.localScale = new Vector3(5.08892584f, 1.7593323f, 1.82787776f);
     }
 
     public void SetHealthBarPercentage(float percentage)

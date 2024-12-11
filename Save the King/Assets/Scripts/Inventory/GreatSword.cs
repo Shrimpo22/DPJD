@@ -31,7 +31,7 @@ public class GreatSword : Item
 
     public override string GiveDiscresp()
     {
-        return "Damage -> 10 ; Speed -> 2";
+        return "Light ATK -> 65 DMG ; Heavy ATK -> 80 DMG";
     }
 
     public override Action UseFunc()

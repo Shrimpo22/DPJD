@@ -17,13 +17,13 @@ public class Potions : Item
     }
     public override int MaxStacks()
     {
-        return 10;
+        return 15;
     }
 
     public override int Stats()
     {   
        
-        return 20;
+        return 50;
     }
     public override Sprite GiveItemImage()
     {

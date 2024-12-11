@@ -68,7 +68,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        Cursor.visible = true;
+        Cursor.visible = false;
         GameObject m = null;
         if (GameObject.FindGameObjectWithTag("Inventory") != null)
         {
@@ -80,8 +80,13 @@ public class PauseMenu : MonoBehaviour
             mouse = m.GetComponent<Mouse>();
             mouse.optionsDisplayed = false;
             mouse.item = null;
-            Cursor.visible = false;
         }
+
+        if(SceneManager.GetActiveScene().name == "FinalCutscene" || SceneManager.GetActiveScene().name == "Main Menu"){
+            Cursor.visible = true;
+        }
+
+        Debug.Log("Current scene"+ SceneManager.GetActiveScene().name);
         Cursor.lockState = CursorLockMode.Confined;
         if (PlayerPrefs.HasKey("musicVolume"))
         {

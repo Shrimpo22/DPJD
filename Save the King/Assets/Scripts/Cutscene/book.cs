@@ -26,6 +26,7 @@ public class book : MonoBehaviour
 
     private void Start()
     {
+        UnityEngine.Cursor.visible = true;
         InitialState();
 
     }

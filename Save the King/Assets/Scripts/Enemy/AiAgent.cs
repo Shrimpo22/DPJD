@@ -18,7 +18,7 @@ public class AiAgent : MonoBehaviour
     public Transform playerTransform;
     public AiStateId currentState;
     public AiSensor sensor;
-
+    public GameObject toDestroy;
     public Weapons weapon;
     public float alertState = 0;
     public float alertRate = 0;
@@ -173,10 +173,7 @@ public class AiAgent : MonoBehaviour
     private IEnumerator FinalCutscene()
     {
         yield return new WaitForSeconds(2f);
-        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("DestroyAtEnd")){
-            Destroy(obj);
-        }
-        GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>().SetGameState(MusicManager.GameState.Ending);
+        Destroy(toDestroy);
         SceneManager.LoadScene("FinalCutscene");
     }
 

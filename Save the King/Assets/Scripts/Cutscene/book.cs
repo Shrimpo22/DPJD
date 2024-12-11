@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class book : MonoBehaviour
 {
-    [SerializeField] public List<GameObject> frontTexts; // Referências aos textos FrontText
-    [SerializeField] public List<GameObject> backTexts;  // Referências aos textos BackText
     [SerializeField] float pageSpeed = 0.5f;
     [SerializeField] List<Transform> pages;
     int index = -1;
@@ -97,7 +95,6 @@ public class book : MonoBehaviour
             audioSource.volume = 0.3f; // Ajuste o volume se necessário
             audioSource.Play();
         }
-        UpdateTextVisibility(forward);
         while (true)
         {
 
@@ -122,69 +119,6 @@ public class book : MonoBehaviour
 
             yield return null;
 
-        }
-    }
-    private void UpdateTextVisibility(bool x)
-    {
-        if (x)
-        {
-
-            if (indice + 1 == backTexts.Count)
-            {
-                backTexts[indice - 1].SetActive(false);
-                frontTexts[indice].SetActive(false);
-
-                backTexts[indice].SetActive(true);
-            }
-            else if (indice == 0)
-            {
-                backTexts[indice].SetActive(true);
-                frontTexts[indice + 1].SetActive(true);
-                frontTexts[indice].SetActive(false);
-
-            }
-            else
-            {
-
-                backTexts[indice - 1].SetActive(false);
-
-                frontTexts[indice + 1].SetActive(true);
-                frontTexts[indice].SetActive(false);
-
-                backTexts[indice].SetActive(true);
-
-            }
-
-            indice++;
-
-        }
-        else
-        {
-            if (indice == backTexts.Count)
-            {
-                backTexts[indice - 1].SetActive(false);
-                frontTexts[indice - 1].SetActive(true);
-                backTexts[indice - 2].SetActive(true);
-            }
-            else if (indice - 1 == 0)
-            {
-
-                backTexts[indice - 1].SetActive(false);
-                frontTexts[indice - 1].SetActive(true);
-                frontTexts[indice].SetActive(false);
-
-            }
-            else
-            {
-                frontTexts[indice].SetActive(false);
-                frontTexts[indice - 1].SetActive(true);
-                if (indice - 2 >= 0)
-                {
-                    backTexts[indice - 1].SetActive(false);
-                    backTexts[indice - 2].SetActive(true);
-                }
-            }
-            indice--;
         }
     }
 

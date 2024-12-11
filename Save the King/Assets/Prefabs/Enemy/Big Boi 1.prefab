@@ -1582,6 +1582,7 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   currentState: 0
   sensor: {fileID: 1511982860486659886}
+  toDestroy: {fileID: 0}
   weapon: {fileID: 0}
   alertState: 0
   alertRate: 0.004
